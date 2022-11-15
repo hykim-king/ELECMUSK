@@ -1,0 +1,144 @@
+@charset "UTF-8";
+  body, header, div, footer, ul, li, p, h1 {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  li {
+    list-style-type: none;
+  }
+  
+  header {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    background-color: #fff;
+  }
+  
+  #container {
+    border-bottom: 1px solid;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* 로고 area --------------------------------------------------------------- */
+  .logo-area{
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px;
+  }
+  
+  /* 메뉴 area --------------------------------------------------------------- */
+  #menu-area {
+    height: 30px;
+    margin-bottom: 20px;
+    line-height: 30px;
+    text-align: center;
+  }
+  
+  /* 메뉴 옆 text-logo area --------------------------------------------------- */
+  .text-logo-area{
+    left: 30px;
+    position: absolute;
+    display: none;
+  }
+  
+  .visible {
+    display: block;
+  }
+  
+  /* menu-bar area ---------------------------------------------------------- */
+  #menu-area #menu-bar li {
+    display: inline-block;
+    padding: 10px;
+  }
+  
+  /* login-area ------------------------------------------------------------- */
+  .login-area {
+    position: relative;
+    right: 50px;
+    top: 0;
+    text-align: right;
+  }
+  
+  /* banner ----------------------------------------------------------------- */
+	#imgslide{
+	  height: 800px;
+	}
+	.imgbox{
+	  margin:0 auto;
+	  position:relative;
+	  overflow: hidden;
+	  height: 800px;
+	  width: 1200px;
+	  background-color: #000;
+	}
+	.slide{
+	  width:2400px; /* 이미지 크기 * 이미지 개수 + 여유 */
+	  position:absolute;  
+	}
+	.imgbox .slide li{
+	  display: inline; /* 이미지를 옆으로 나열 시키기 위해*/
+	  margin-right: -5px; /* 이미지 사이의 마진을 없애기 위해 */
+	}
+	
+	.imgbox>img{
+	width:100%;
+	position: absolute;
+	transition: all 2s;
+	}
+
+  /* contents area ---------------------------------------------------------- */
+  #contents {
+    position: relative;
+    border: 1px solid;
+    padding-top: 300px;
+    margin: 0 auto;
+    width: 1200px;
+    height: 100%;
+  }
+  
+  #contents-area {
+    background-color: #eee;
+    border: 1px solid;
+  }
+  
+  #contents-1 {
+    border: 1px solid;  
+    background-color: yellow;
+    margin: 10px;
+  }
+  
+  #contents-2 {
+    border: 1px solid;  
+    background-color: pink;
+    margin: 10px;
+  }
+  
+  #contents-3 {
+    border: 1px solid;  
+    background-color: red;
+    margin: 10px;
+  }
+  
+  #contents-4 {
+    border: 1px solid;
+    background-color: blue;
+    margin: 10px;
+  }
+  
+  /* footer ----------------------------------------------------------------- */
+  footer {
+    border: 1px solid;
+    background-color: #eee;
+    text-align: center;
+  }
