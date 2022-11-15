@@ -1,6 +1,6 @@
 package com.pcwk.ehr;
 
-public class Hello {
+public class Hello11 {
 
 	public static void main(String[] args) {
 		System.out.println("Hello, world!");
