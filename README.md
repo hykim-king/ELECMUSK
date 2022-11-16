@@ -4,7 +4,7 @@
 ![로고](https://github.com/hykim-king/ELECMUSK/blob/main/doc/images/EVerything_logo.png)  
   
 # 0. 목차:link:   
-<H4>:one: ELECMUSK 팀 소개   
+<H4>:one: ELECMUSK 팀 소개
  <br>
 <H4>:two: Project 목 적   
  <br>
@@ -17,10 +17,10 @@
 <H4>:six: Collaboration   
  <br>
 
-# 1. ELECMUSK 팀 소개
+# 1. ELECMUSK 팀 소개:raised_hands:
 ![TEAM](https://github.com/hykim-king/ELECMUSK/blob/main/doc/images/people.PNG)
   
-### 1-1. 담당업무 
+ ### 1-1. 담당업무 
 |이름|담당업무|
 |:-------:|:-------:|
 |강경만| 뉴스 게시판, 댓글, 디자인|
@@ -39,7 +39,7 @@
   
 # 3. Project 기획:seedling:   
  ### 3.1 개발환경
-![tools](https://github.com/hykim-king/ELECMUSK/blob/main/doc/images/use_tools.png)
+![개발환경](https://github.com/hykim-king/ELECMUSK/blob/main/doc/images/use_tools.png)
   
  ### 3.2 진행일정(WBS)
  ![WBS](https://github.com/hykim-king/ELECMUSK/blob/main/doc/images/WBS.png)
@@ -48,7 +48,7 @@
 
 # 4. Project 설계:sunflower:   
   ### 4.1 요구사항정의서
-  ![](https://github.com/hykim-king/ELECMUSK/blob/main/doc/images/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EC%A0%95%EC%9D%98%EC%84%9C.png)
+  ![요구사항정의서](https://github.com/hykim-king/ELECMUSK/blob/main/doc/images/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EC%A0%95%EC%9D%98%EC%84%9C.png)
   
   ### 4.2 EXERD
 ![EXERD](https://github.com/hykim-king/ELECMUSK/blob/main/doc/images/exerd.png)
