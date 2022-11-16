@@ -46,8 +46,10 @@
  
 
 # 4. Project 설계:sunflower:   
+  ### 4.1 요구사항정의서
+  ![](https://github.com/hykim-king/ELECMUSK/blob/main/doc/images/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EC%A0%95%EC%9D%98%EC%84%9C.png)
   
-  ### 4.1 EXERD
+  ### 4.2 EXERD
 ![EXERD](https://github.com/hykim-king/ELECMUSK/blob/main/doc/images/exerd.png)
 
 </div>
