@@ -1,5 +1,6 @@
 <div align=center>
 
+![포스터](https://github.com/hykim-king/ELECMUSK/blob/main/doc/images/Poster.PNG)
 ![로고](https://github.com/hykim-king/ELECMUSK/blob/main/doc/images/EVerything_logo.png)  
   
 # 0. 목차:link:   
@@ -21,11 +22,11 @@
   
 ### 1-1. 담당업무 
 |이름|담당업무|
-|:-------:|:-------|
-|강경만| 뉴스 게시판|
+|:-------:|:-------:|
+|강경만| 뉴스 게시판, 댓글, 디자인|
 |김동주| 로그인, 회원가입, 마이페이지|
 |이규호| 충전소조회, 리뷰게시판|
-|이영관| 게시판|
+|이영관| 게시판, 댓글, 디자인|
 |정창인| 전기차, 보조금, 충전기, 충전요금, 통계정보|
 |허승휘| 충전소조회, 리뷰게시판, 전기차, 보조금, 충전기, 충전요금, 통계정보|
 
