@@ -32,7 +32,7 @@
 # 2. Project 목적:sun_with_face:   
 
 :round_pushpin: 전기차 시장의 급격한 성장에 따라, 운전자들이 필요로 할 다양한 정보들을 제공. :triangular_flag_on_post:   
-:round_pushpin: 커뮤니티 게시판, 전기차, 보조금, 충전기, 충전요금, 통계정보, 충전소 정보 제공, 충전소 리뷰 게시판 구현 :triangular_flag_on_post:   
+:round_pushpin: 게시판, 전기차, 보조금, 충전기, 충전요금, 통계정보, 충전소 정보, 충전소 리뷰 게시판 구현 :triangular_flag_on_post:   
 :round_pushpin: 접근 편의성 향상을 위해 반응형 웹 사이트를 구현. :triangular_flag_on_post:   
 
   
