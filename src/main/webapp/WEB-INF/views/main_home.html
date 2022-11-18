@@ -20,6 +20,23 @@
 <!-- javascript -->
 <script type="text/javascript">
   $(document).ready(function(){
+	  
+	 $(".menu-bar>li>a").on("click",function(){
+		  if($(".sub-menu").hasClass("visible") == false) {
+			   $(".sub-menu").addClass("visible");
+			   $(".sub-menu").css("opacity","1");
+			   $(".sub-menu").css("z-index","1");
+			   $(".sub-menu").slideDown("fast");
+		  } else {
+		     $(".sub-menu").slideUp("fast");
+		     $(".sub-menu").css("opacity","0");
+			   $(".sub-menu").css("z-index","-1");
+		     $(".sub-menu").removeClass("visible");
+		  }
+		  
+		  
+	 });
+	 
    $(function() {
      let didScroll;
      let lastScrollTop = 0;
@@ -44,7 +61,6 @@
 	          } else {
 	              if($(window).scrollTop() < 300) {
 	                  $(".logo-area").slideDown("fast"); // header 보이기
-	                  $(".logo-area").slideDown("fast"); // header 보이기.
 	                  $(".text-logo-area").removeClass("visible");
 	          }
 	       }
@@ -52,10 +68,10 @@
    }
    });
    
-   var idx = 0; // 함수 호출 횟수
-   var i=0; // 이미지 인덱스
-   var imgNum=3; // 이미지 개수
-   var imgSize=1200; // 이미지 크기
+   let idx = 0; // 함수 호출 횟수
+   let i=0; // 이미지 인덱스
+   let imgNum=3; // 이미지 개수
+   let imgSize=1200; // 이미지 크기
    function imgSlide() {
       idx = idx + 1; // 함수 호출 회수 증가
      i=(idx-1)%imgNum; // 이미지는 3개를 돌려 쓸거라서
@@ -85,6 +101,7 @@
 <div id="container">
     <!-- login-area -->
     <div class="login-area">
+      <a href="#">Mypage</a>
       <input type="text" placeholder="아이디" required="required">
       <input type="password" placeholder="비밀번호" required="required">
       <button>로그인</button>
@@ -103,12 +120,39 @@
     </div>
     <!-- menu-area -->
     <div id="menu-area">
-      <ul id="menu-bar">
+      <ul class="menu-bar">
         <li><a href="#">HOME</a></li>
-        <li><a href="#">BOARD</a></li>
-        <li><a href="#">EVCARS</a></li>
-        <li><a href="#">STATION</a></li>
-        <li><a href="#">NEWS</a></li>
+        <li><a href="#">BOARD</a>
+          <ul class="sub-menu">
+            <li><a href="#">Board 1</a></li>
+            <li><a href="#">Board 2</a></li>
+            <li><a href="#">Board 3</a></li>
+          </ul>
+        </li>
+        <li><a href="#">EVCARS</a>
+          <ul class="sub-menu">
+            <li><a href="#">Cars data</a></li>
+            <li><a href="#">Subsidy data</a></li>
+            <li><a href="#">Charger data</a></li>
+            <li><a href="#">Chargingfee data</a></li>
+            <li><a href="#">Statistical info</a></li>
+          </ul>
+         </li>
+         
+        <li><a href="#">STATION</a>
+          <ul class="sub-menu">
+            <li><a href="#">Station</a></li>
+            <li><a href="#">Searchstation</a></li>
+            <li><a href="#">Reviewboard</a></li>
+          </ul>
+         </li>
+         
+        <li><a href="#">NEWS</a>
+          <ul class="sub-menu">
+            <li><a href="#">Menu 1</a></li>
+            <li><a href="#">Menu 2</a></li>
+          </ul>
+        </li>
       </ul>
     </div>
     
@@ -123,9 +167,9 @@
    <div id="imgslide" class="all">
     <div class="imgbox">
       <ul class="slide">
-        <li><img src="/ELECMUSK/asset/imgs/car1.jpg" alt=""></li>
-        <li><img src="/ELECMUSK/asset/imgs/car2.jpg" alt=""></li>
-        <li><img src="/ELECMUSK/asset/imgs/car3.jpg" alt=""></li>
+        <li><img src="/ELECMUSK_WEB/asset/imgs/car1.jpg" alt=""></li>
+        <li><img src="/ELECMUSK_WEB/asset/imgs/car2.jpg" alt=""></li>
+        <li><img src="/ELECMUSK_WEB/asset/imgs/car3.jpg" alt=""></li>
       </ul>
     </div>
   </div>
