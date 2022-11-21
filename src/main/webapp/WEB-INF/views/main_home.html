@@ -8,8 +8,8 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" type="image/x-icon" href="/PC_HTML/favicon.ico">
 <!-- jquery ui -->
-<link rel="stylesheet" href="/assets/css/jquery-ui.css">
-<link rel="stylesheet" href="main_home.css">
+<link rel="stylesheet" href="/PC_HTML/assets/css/jquery-ui.css">
+<link rel="stylesheet" href="/ELECMUSK_WEB/main_home.css">
 <style>
 
 </style>
@@ -85,7 +85,7 @@
        $('.slide').stop().animate({'left' : -imgSize+"px"}, "slow");
      if(idx>1){ //idx>0으로 하면 첫 번째 리스트가 슬라이스되기전에 삭제가 된다.
        $('.slide>li:first').remove(); // 제일 첫 <li> 삭제
-       $('.slide').append('<li><img src="/asset/imgs/car'+i+'.jpg" alt=""> ');
+       $('.slide').append('<li><img src="/ELECMUSK_WEB/asset/imgs/car'+i+'.jpg" alt=""> ');
        //마지막에 <li> 추가
      }
      
@@ -98,68 +98,7 @@
 </head>
 <body>
   <header>
-<div id="container">
-    <!-- login-area -->
-    <div class="login-area">
-      <a href="#">Mypage</a>
-      <input type="text" placeholder="아이디" required="required">
-      <input type="password" placeholder="비밀번호" required="required">
-      <button>로그인</button>
-    </div>
-    <!-- login-area end ------------------------------------------------------->
     
-    <!-- logo-area -->
-    <div class="logo-area"> 
-      <img src="/asset/imgs/EVerything_logo.png" id="logo">
-    </div>
-    <!-- logo-area end--------------------------------------------------------->
-    
-    <div class="header-area">
-    <div class="text-logo-area">
-      <img src="/asset/imgs/EVerything_logo_text.png">
-    </div>
-    <!-- menu-area -->
-    <div id="menu-area">
-      <ul class="menu-bar">
-        <li><a href="#">HOME</a></li>
-        <li><a href="#">BOARD</a>
-          <ul class="sub-menu">
-            <li><a href="#">Board 1</a></li>
-            <li><a href="#">Board 2</a></li>
-            <li><a href="#">Board 3</a></li>
-          </ul>
-        </li>
-        <li><a href="#">EVCARS</a>
-          <ul class="sub-menu">
-            <li><a href="#">Cars data</a></li>
-            <li><a href="#">Subsidy data</a></li>
-            <li><a href="#">Charger data</a></li>
-            <li><a href="#">Chargingfee data</a></li>
-            <li><a href="#">Statistical info</a></li>
-          </ul>
-         </li>
-         
-        <li><a href="#">STATION</a>
-          <ul class="sub-menu">
-            <li><a href="#">Station</a></li>
-            <li><a href="#">Searchstation</a></li>
-            <li><a href="#">Reviewboard</a></li>
-          </ul>
-         </li>
-         
-        <li><a href="#">NEWS</a>
-          <ul class="sub-menu">
-            <li><a href="#">Menu 1</a></li>
-            <li><a href="#">Menu 2</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-    
-    </div>
-    <!-- menu-menu-area end --------------------------------------------------->
-    
-</div>
   </header>
   
   <div id="contents">
@@ -167,9 +106,9 @@
    <div id="imgslide" class="all">
     <div class="imgbox">
       <ul class="slide">
-        <li><img src="/asset/imgs/car1.jpg" alt=""></li>
-        <li><img src="/asset/imgs/car2.jpg" alt=""></li>
-        <li><img src="/asset/imgs/car3.jpg" alt=""></li>
+        <li><img src="/ELECMUSK_WEB/asset/imgs/car1.jpg" alt=""></li>
+        <li><img src="/ELECMUSK_WEB/asset/imgs/car2.jpg" alt=""></li>
+        <li><img src="/ELECMUSK_WEB/asset/imgs/car3.jpg" alt=""></li>
       </ul>
     </div>
   </div>
