@@ -2,8 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="CP" value="${pageContext.request.contextPath}"/>
+<c:set var="resources" value="/resources"/>
+<c:set var="CP_RES"    value="${CP}${resources}" />
+
 <fmt:bundle basename="message">
-<%@include file="/WEB-INF/views/asset/jsp/cache.jsp" %>
+<%@include file="/resources/asset/jsp/cache.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -14,14 +18,14 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" type="image/x-icon" href="/PC_HTML/favicon.ico">
 <!-- jquery ui -->
-<link rel="stylesheet" href="/WEB-INF/views/asset/css/jquery-ui.css">
-<link rel="stylesheet" href="/WEB-INF/views/main_home.css">
+<link rel="stylesheet" href="${CP_RES}/asset/css/jquery-ui.css">
+<link rel="stylesheet" href="${CP_RES}/main_home.css">
 <style>
 
 </style>
 <title>Everything</title>
-<script src="/WEB-INF/views/asset/js/jquery-3.6.1.min.js"></script>
-<script src="/WEB-INF/views/asset/js/jquery-ui.js"></script>
+<script src="${CP_RES}/asset/js/jquery-3.6.1.min.js"></script>
+<script src="${CP_RES}/asset/js/jquery-ui.js"></script>
 <!-- javascript -->
 <script type="text/javascript">
 $(document).ready(function(){
@@ -90,29 +94,29 @@ $(document).ready(function(){
 	       $('.slide').stop().animate({'left' : -imgSize+"px"}, "slow");
 	     if(idx>1){ //idx>0으로 하면 첫 번째 리스트가 슬라이스되기전에 삭제가 된다.
 	       $('.slide>li:first').remove(); // 제일 첫 <li> 삭제
-	       $('.slide').append('<li><img src="/WEB-INF/views/asset/imgs/car'+i+'.jpg" alt=""> ');
+	       $('.slide').append('<li><img src='+${CP_RES}+'/asset/imgs/car'+i+'.jpg" alt="">');
 	       //마지막에 <li> 추가
 	     }
 	     
 	   }
 	   // 3초에 한번 함수를 실행
-	   setInterval(function() { imgSlide() }, 5000);
+	   setInterval(function() { imgSlide() }, 2000);
 	   
 	  });
 </script>
 </head>
 <body>
   <header>
-  <jsp:include page ="/WEB-INF/views/asset/cmn/main_header.jsp" flush="false"/>
+  <jsp:include page ="/resources/asset/cmn/main_header.jsp" flush="false"/>
   </header>
   <div id="contents">
   
    <div id="imgslide" class="all">
     <div class="imgbox">
       <ul class="slide">
-        <li><img src="/WEB-INF/views/asset/imgs/car1.jpg" alt=""></li>
-        <li><img src="/WEB-INF/views/asset/imgs/car2.jpg" alt=""></li>
-        <li><img src="/WEB-INF/views/asset/imgs/car3.jpg" alt=""></li>
+        <li><img src="${CP_RES}/asset/imgs/car1.jpg" alt=""></li>
+        <li><img src="${CP_RES}/asset/imgs/car2.jpg" alt=""></li>
+        <li><img src="${CP_RES}/asset/imgs/car3.jpg" alt=""></li>
       </ul>
     </div>
   </div>
@@ -140,7 +144,7 @@ $(document).ready(function(){
     
   </div>
 <footer>
-<jsp:include page ="/WEB-INF/views/asset/cmn/main_footer.jsp" flush="false"/>
+<jsp:include page ="/resources/asset/cmn/main_footer.jsp" flush="false"/>
 </footer>
 </body>
 </html>

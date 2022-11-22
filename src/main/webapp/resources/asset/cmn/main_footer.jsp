@@ -2,8 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="CP" value="${pageContext.request.contextPath}"/>
+<c:set var="resources" value="/resources"/>
+<c:set var="CP_RES"    value="${CP}${resources}" />
+
 <fmt:bundle basename="message">
-<%@include file="/WEB-INF/views/asset/jsp/cache.jsp" %>
+<%@include file="/resources/asset/jsp/cache.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -14,14 +18,14 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" type="image/x-icon" href="/PC_HTML/favicon.ico">
 <!-- jquery ui -->
-<link rel="stylesheet" href="/WEB-INF/views/asset/css/jquery-ui.css">
-<link rel="stylesheet" href="/WEB-INF/views/main_home.css">
+<link rel="stylesheet" href="${CP_RES}/asset/css/jquery-ui.css">
+<link rel="stylesheet" href="${CP_RES}/main_home.css">
 <style>
 
 </style>
-<title>제목</title>
-<script src="/WEB-INF/views/asset/js/jquery-3.6.1.min.js"></script>
-<script src="/WEB-INF/views/asset/js/jquery-ui.js"></script>
+<title></title>
+<script src="${CP_RES}/asset/js/jquery-3.6.1.min.js"></script>
+<script src="${CP_RES}/asset/js/jquery-ui.js"></script>
 <!-- javascript -->
 <script type="text/javascript">
   $(document).ready(function(){
