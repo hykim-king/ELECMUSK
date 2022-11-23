@@ -16,7 +16,6 @@
 <!-- 키워드 -->
 <meta name="keyword" content="html5, css3, javascript6, jQuery">
 <meta charset="UTF-8">
-<link rel="shortcut icon" type="image/x-icon" href="/PC_HTML/favicon.ico">
 <!-- jquery ui -->
 <link rel="stylesheet" href="${CP_RES}/asset/css/jquery-ui.css">
 <link rel="stylesheet" href="${CP_RES}/main_home.css">
