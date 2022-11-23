@@ -16,7 +16,6 @@
 <!-- 키워드 -->
 <meta name="keyword" content="html5, css3, javascript6, jQuery">
 <meta charset="UTF-8">
-<link rel="shortcut icon" type="image/x-icon" href="/PC_HTML/favicon.ico">
 <!-- jquery ui -->
 <link rel="stylesheet" href="${CP_RES}/asset/css/jquery-ui.css">
 <link rel="stylesheet" href="${CP_RES}/main_home.css">
@@ -46,6 +45,8 @@ $(document).ready(function(){
         
      });
     
+    
+    
 	   $(function() {
 	     let didScroll;
 	     let lastScrollTop = 0;
@@ -68,7 +69,7 @@ $(document).ready(function(){
 	                $(".logo-area").slideUp("fast"); // header 숨기기
 	                $(".text-logo-area").addClass("visible");
 	            } else {
-	                if($(window).scrollTop() < 300) {
+	                if($(window).scrollTop() < 200) {
 	                    $(".logo-area").slideDown("fast"); // header 보이기
 	                    $(".text-logo-area").removeClass("visible");
 	            }
@@ -94,13 +95,13 @@ $(document).ready(function(){
 	       $('.slide').stop().animate({'left' : -imgSize+"px"}, "slow");
 	     if(idx>1){ //idx>0으로 하면 첫 번째 리스트가 슬라이스되기전에 삭제가 된다.
 	       $('.slide>li:first').remove(); // 제일 첫 <li> 삭제
-	       $('.slide').append('<li><img src='+${CP_RES}+'/asset/imgs/car'+i+'.jpg" alt="">');
+	       $('.slide').append('<li><img src="${CP_RES}/asset/imgs/car'+i+'.jpg" alt="">');
 	       //마지막에 <li> 추가
 	     }
 	     
 	   }
 	   // 3초에 한번 함수를 실행
-	   setInterval(function() { imgSlide() }, 2000);
+	   setInterval(function() { imgSlide() }, 5000);
 	   
 	  });
 </script>
