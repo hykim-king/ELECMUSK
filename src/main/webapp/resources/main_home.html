@@ -8,35 +8,35 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" type="image/x-icon" href="/PC_HTML/favicon.ico">
 <!-- jquery ui -->
-<link rel="stylesheet" href="/PC_HTML/assets/css/jquery-ui.css">
+<link rel="stylesheet" href="/src/main/webapp/resources/asset/js/jquery-ui.js>
 <link rel="stylesheet" href="/ELECMUSK_WEB/main_home.css">
 <style>
 
 </style>
 
 <title>제목</title>
-<script src="/PC_HTML/assets/js/jquery-3.6.1.min.js"></script>
-<script src="/PC_HTML/assets/js/jquery-ui.js"></script>
+<script src="/src/main/webapp/resources/asset/js/jquery-3.6.1.min.js"></script>
+<script src="/src/main/webapp/resources/asset/js/jquery-ui.js"></script>
 <!-- javascript -->
 <script type="text/javascript">
   $(document).ready(function(){
-	  
-	 $(".menu-bar>li>a").on("click",function(){
-		  if($(".sub-menu").hasClass("visible") == false) {
-			   $(".sub-menu").addClass("visible");
-			   $(".sub-menu").css("opacity","1");
-			   $(".sub-menu").css("z-index","1");
-			   $(".sub-menu").slideDown("fast");
-		  } else {
-		     $(".sub-menu").slideUp("fast");
-		     $(".sub-menu").css("opacity","0");
-			   $(".sub-menu").css("z-index","-1");
-		     $(".sub-menu").removeClass("visible");
-		  }
-		  
-		  
-	 });
-	 
+    
+   $(".menu-bar>li>a").on("click",function(){
+      if($(".sub-menu").hasClass("visible") == false) {
+         $(".sub-menu").addClass("visible");
+         $(".sub-menu").css("opacity","1");
+         $(".sub-menu").css("z-index","1");
+         $(".sub-menu").slideDown("fast");
+      } else {
+         $(".sub-menu").slideUp("fast");
+         $(".sub-menu").css("opacity","0");
+         $(".sub-menu").css("z-index","-1");
+         $(".sub-menu").removeClass("visible");
+      }
+      
+      
+   });
+   
    $(function() {
      let didScroll;
      let lastScrollTop = 0;
@@ -53,17 +53,17 @@
       },); // 스크롤이 멈춘 후 동작이 실행되기 까지의 딜레이
 
       function hasScrolled() {
-    	  if($(this).width() > 700) {    	  
+        if($(this).width() > 700) {       
         let st = $(this).scrollTop(); // 현재 window의 scrollTop 값
-	          if ($(window).scrollTop() > 50){
-	              $(".logo-area").slideUp("fast"); // header 숨기기
-	              $(".text-logo-area").addClass("visible");
-	          } else {
-	              if($(window).scrollTop() < 300) {
-	                  $(".logo-area").slideDown("fast"); // header 보이기
-	                  $(".text-logo-area").removeClass("visible");
-	          }
-	       }
+            if ($(window).scrollTop() > 50){
+                $(".logo-area").slideUp("fast"); // header 숨기기
+                $(".text-logo-area").addClass("visible");
+            } else {
+                if($(window).scrollTop() < 300) {
+                    $(".logo-area").slideDown("fast"); // header 보이기
+                    $(".text-logo-area").removeClass("visible");
+            }
+         }
       }
    }
    });
@@ -238,3 +238,18 @@
   </body>
   
 </html>
+Footer
+© 2022 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+ELECMUSK/main_home.html at main · hykim-king/ELECMUSK
