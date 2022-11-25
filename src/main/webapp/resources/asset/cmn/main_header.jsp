@@ -77,7 +77,6 @@
         <li><a href="#">STATION</a>
           <ul class="sub-menu">
             <li><a href="#">Station</a></li>
-            <li><a href="#">Searchstation</a></li>
             <li><a href="#">Reviewboard</a></li>
           </ul>
          </li>
