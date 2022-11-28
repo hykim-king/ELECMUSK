@@ -146,7 +146,6 @@
   /* contents area ---------------------------------------------------------- */
   #contents {
     position: relative;
-    border: 1px solid;
     padding-top: 300px;
     margin: 0 auto;
     width: 1200px;
@@ -155,7 +154,6 @@
   
   #contents-area {
     background-color: #eee;
-    border: 1px solid;
   }
   
   #contents-1 {
