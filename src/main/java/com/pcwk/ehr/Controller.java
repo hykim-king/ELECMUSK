@@ -18,7 +18,7 @@ public class Controller {
 		 * InternalResourceVidwresolver
 		 * WEB-INF/views/+'hello'+.jsp
 		 */
-		return "main_home";
+		return "/elecmusk/main_home";
 	}
 	
 }
