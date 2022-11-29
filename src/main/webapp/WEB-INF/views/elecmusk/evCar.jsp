@@ -131,15 +131,55 @@
 		<div>
 		  <a href="#" ">보조금 상세 정보</a>
 		</div>
-  
-    <h2>ddddddddddd</h2>
-    <h2>ddddddddddd</h2>
-    <h2>ddddddddddd</h2>
-    <h2>ddddddddddd</h2>
-    <h2>ddddddddddd</h2>
-    <h2>ddddddddddd</h2>
-    <h2>ddddddddddd</h2>
-    
+    <div class="evcar1">
+      <table>
+        <tr>
+          <td rowspan="10"> 사 진 </td>
+          <td></td>
+          <td><input type="text" id="evName" name="evName"></td>
+        </tr>
+        <tr>
+          <td>자동차명</td>
+          <td><input type="text" id="" name=""></td>
+        </tr>
+        <tr>
+          <td>가격</td>
+          <td><input type="text" id="" name=""></td>
+        </tr>
+        <tr>
+          <td>제조사</td>
+          <td><input type="text" id="" name=""></td>
+        </tr>
+        <tr>
+          <td>연식</td>
+          <td><input type="text" id="" name=""></td>
+        </tr>
+        <tr>
+          <td>차종</td>
+          <td><input type="text" id="" name=""></td>
+        </tr>
+        <tr>
+          <td>모델</td>
+          <td><input type="text" id="" name=""></td>
+        </tr>
+        <tr>
+          <td>배터리 타입</td>
+          <td><input type="text" id="" name=""></td>
+        </tr>
+        <tr>
+          <td>배터리 전압</td>
+          <td><input type="text" id="" name=""></td>
+        </tr>
+        <tr>
+          <td>최대속도</td>
+          <td><input type="text" id="" name=""></td>
+        </tr>
+        <tr>
+          <td>output</td>
+          <td><input type="text" id="" name=""></td>
+        </tr>
+      </table>
+    </div>    
     
     
     
