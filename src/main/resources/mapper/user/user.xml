@@ -27,7 +27,7 @@
 		)
 	</insert>
 
-  <update id="doUpdate" parameterType="UserVO">
+  <update id="doUpdate" parameterType="com.pcwk.ehr.user.domain.UserVO">
     UPDATE member
     SET id = #{userId},
         nickname = #{nickname},
