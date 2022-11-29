@@ -1,6 +1,6 @@
-package com.pcwk.ehr.board.domian;
+package com.pcwk.ehr.board.domain;
 
-public class boardVO {
+public class BoardVO {
 	private int bdSeq;
 	private String nickName;
 	private int category;
@@ -14,9 +14,9 @@ public class boardVO {
 	private String modDt;
 	private String modId;
 	
-	public boardVO() {}
+	public BoardVO() {}
 
-	public boardVO(int bdSeq, String nickName, int category, String title, String contents, int readCnt,
+	public BoardVO(int bdSeq, String nickName, int category, String title, String contents, int readCnt,
 			int recommendation, String csnm, String regDt, String regIt, String modDt, String modId) {
 		super();
 		this.bdSeq = bdSeq;

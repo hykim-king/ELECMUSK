@@ -14,8 +14,7 @@ public class UserVO {
 	private String joinDate; // 가입일
 	private int status; // 상태(회원/비활성화/관리자)
 
-	public UserVO() {
-	};
+	public UserVO() {};
 
 	/**
 	 * 필수정보 4개만 넣고 만드는 생성자. 순서대로 아이디, 닉네임, 비밀번호, 이름
@@ -31,6 +30,30 @@ public class UserVO {
 		this.nickname = nickname;
 		this.userPw = userPw;
 		this.name = name;
+		this.email = "";
+		this.birth = "";
+		this.backupQusetion = "";
+		this.backupAnswer = "";
+		/*this.point = 0;
+		this.joinDate = "";
+		this.status = 1;*/
+	}
+
+	public UserVO(int mSeq, String userId, String nickname, String userPw, String name, String birth, String email,
+			String backupQusetion, String backupAnswer, int point, String joinDate, int status) {
+		super();
+		this.mSeq = mSeq;
+		this.userId = userId;
+		this.nickname = nickname;
+		this.userPw = userPw;
+		this.name = name;
+		this.birth = birth;
+		this.email = email;
+		this.backupQusetion = backupQusetion;
+		this.backupAnswer = backupAnswer;
+		this.point = point;
+		this.joinDate = joinDate;
+		this.status = status;
 	}
 
 	public int getMemberSeq() {

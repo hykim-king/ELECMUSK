@@ -3,6 +3,40 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pcwk.ehr.user">
-  <insert id="doSave"></insert>
+	<insert id="doSave" parameterType="com.pcwk.ehr.user.domain.UserVO">
+		INSERT INTO MEMBER (
+	    member_seq,
+	    id,
+	    nickname,
+	    password,
+	    name,
+	    birth,
+	    email,
+	    backup_question,
+	    backup_answer
+) VALUES (
+			MEMBER_SEQ.nextval,
+			#{userId},
+			#{nickname},
+			#{userPw},
+			#{name},
+			#{birth},
+			#{email},
+			#{backupQusetion},
+			#{backupAnswer}
+		)
+	</insert>
 
+  <update id="doUpdate" parameterType="UserVO">
+    UPDATE member
+    SET id = #{userId},
+        nickname = #{nickname},
+        password = #{userPw},
+        name = #{name},
+        birth = #{birth},
+        email = #{email},
+        backup_question = #{backupQusetion},
+        backup_answer = #{backupAnswer}
+    WHERE member_seq = #{mSeq}
+  </update>
 </mapper>  
