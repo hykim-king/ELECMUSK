@@ -16,29 +16,30 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Handles requests for the application home page.
  */
 @Controller("HomeController")
-@RequestMapping("elecmusk")
 public class HomeController {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(HomeController.class);
 	
+	final String VIEW_NAME = "elecmusk/main_home";
+	
 	public HomeController() {}
 	
-	@RequestMapping(value = "mainhome.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/elecmusk/view.do", method = RequestMethod.GET)
 	public String mainHome() {
 		LOG.debug("┌───────────────────────────────────────────┐");
 		LOG.debug("│                 mainHome                  │");
 		LOG.debug("└───────────────────────────────────────────┘");		
 		
-		return "main_home";
+		return VIEW_NAME;
 	}
 	
-	@RequestMapping(value = "evcar.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/elecmusk/evcar.do", method = RequestMethod.GET)
 	public String evCar() {
 		LOG.debug("┌───────────────────────────────────────────┐");
 		LOG.debug("│                   evCar                   │");
 		LOG.debug("└───────────────────────────────────────────┘");		
 		
-		return "evCar";
+		return "elecmusk/evCar";
 	}
 	
 }
