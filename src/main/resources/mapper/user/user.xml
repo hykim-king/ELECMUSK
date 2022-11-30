@@ -27,7 +27,7 @@
 		)
 	</insert>
 
-  <update id="doUpdate" parameterType="UserVO">
+  <update id="doUpdate" parameterType="com.pcwk.ehr.user.domain.UserVO">
     UPDATE member
     SET id = #{userId},
         nickname = #{nickname},
@@ -39,29 +39,4 @@
         backup_answer = #{backupAnswer}
     WHERE member_seq = #{mSeq}
   </update>
-  
-  <delete id="doDelete" parameterType="UserVO">
-	 DELETE FROM member
-	 WHERE member_seq = #{mSeq}
-  </delete>
-  
-  <!-- as로 이름을 같게하거나, Map만들기 -->
-  <select id="doSelectOne" parameterType="UserVO" resultType="UserVO">
-    SELECT
-    member_seq,
-    id,
-    nickname,
-    password,
-    name,
-    birth,
-    email,
-    backup_question,
-    backup_answer,
-    point,
-    join_date,
-    status
-FROM member
-   WHERE member_seq = #{mSeq}
-  </select>
-  
 </mapper>  
