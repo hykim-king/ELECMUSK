@@ -10,14 +10,14 @@ public class BoardVO {
 	private int recommendation;
 	private String csnm;
 	private String regDt;
-	private String regIt;
+	private String regId;
 	private String modDt;
 	private String modId;
 	
 	public BoardVO() {}
 
 	public BoardVO(int bdSeq, String nickName, int category, String title, String contents, int readCnt,
-			int recommendation, String csnm, String regDt, String regIt, String modDt, String modId) {
+			int recommendation, String csnm, String regDt, String regId, String modDt, String modId) {
 		super();
 		this.bdSeq = bdSeq;
 		this.nickName = nickName;
@@ -28,7 +28,7 @@ public class BoardVO {
 		this.recommendation = recommendation;
 		this.csnm = csnm;
 		this.regDt = regDt;
-		this.regIt = regIt;
+		this.regId = regId;
 		this.modDt = modDt;
 		this.modId = modId;
 	}
@@ -105,12 +105,12 @@ public class BoardVO {
 		this.regDt = regDt;
 	}
 
-	public String getRegIt() {
-		return regIt;
+	public String getRegId() {
+		return regId;
 	}
 
-	public void setRegIt(String regIt) {
-		this.regIt = regIt;
+	public void setRegId(String regIt) {
+		this.regId = regId;
 	}
 
 	public String getModDt() {
@@ -133,9 +133,7 @@ public class BoardVO {
 	public String toString() {
 		return "boardVO [bdSeq=" + bdSeq + ", nickName=" + nickName + ", category=" + category + ", title=" + title
 				+ ", contents=" + contents + ", readCnt=" + readCnt + ", recommendation=" + recommendation + ", csnm="
-				+ csnm + ", regDt=" + regDt + ", regIt=" + regIt + ", modDt=" + modDt + ", modId=" + modId + "]";
+				+ csnm + ", regDt=" + regDt + ", regId=" + regId + ", modDt=" + modDt + ", modId=" + modId + "]";
 	}
-	
-	
 
 }
