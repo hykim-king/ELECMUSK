@@ -10,26 +10,30 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Handles requests for the application home page.
  */
-@Controller
-@RequestMapping("elecmusk")
+@Controller("HomeController")
 public class HomeController {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(HomeController.class);
 	
-	@RequestMapping(value = "/mainhome.do", method = RequestMethod.GET)
+	final String VIEW_NAME = "elecmusk/main_home";
+	
+	public HomeController() {}
+	
+	@RequestMapping(value = "/elecmusk/view.do", method = RequestMethod.GET)
 	public String mainHome() {
 		LOG.debug("┌───────────────────────────────────────────┐");
 		LOG.debug("│                 mainHome                  │");
 		LOG.debug("└───────────────────────────────────────────┘");		
 		
-		return "elecmusk/main_home";
+		return VIEW_NAME;
 	}
 	
-	@RequestMapping(value = "/evcar.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/elecmusk/evcar.do", method = RequestMethod.GET)
 	public String evCar() {
 		LOG.debug("┌───────────────────────────────────────────┐");
 		LOG.debug("│                   evCar                   │");

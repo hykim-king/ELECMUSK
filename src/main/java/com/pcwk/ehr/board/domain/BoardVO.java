@@ -135,7 +135,5 @@ public class BoardVO {
 				+ ", contents=" + contents + ", readCnt=" + readCnt + ", recommendation=" + recommendation + ", csnm="
 				+ csnm + ", regDt=" + regDt + ", regIt=" + regIt + ", modDt=" + modDt + ", modId=" + modId + "]";
 	}
-	
-	
 
 }
