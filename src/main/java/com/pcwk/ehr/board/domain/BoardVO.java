@@ -110,7 +110,7 @@ public class BoardVO {
 	}
 
 	public void setRegId(String regIt) {
-		this.regId = regId;
+		this.regId = regIt;
 	}
 
 	public String getModDt() {
