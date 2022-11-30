@@ -29,6 +29,31 @@
 <script type="text/javascript">
   $(document).ready(function(){
 
+	    $(".menu-bar>li>a").on("mouseenter", function() {
+	      if ($(".sub-menu").hasClass("visible") == false) {
+	        $(".sub-menu").addClass("visible");
+	        $(".sub-menu").css("opacity", "1");
+	        $(".sub-menu").css("z-index", "1");
+	        $(".sub-menu").slideDown("fast");
+	      } else {
+	        $(".sub-menu").slideUp("fast");
+	        $(".sub-menu").css("opacity", "0");
+	        $(".sub-menu").css("z-index", "-1");
+	        $(".sub-menu").removeClass("visible");
+	      }
+	      
+	    });
+	  
+	  $("#subsidyData").on("click",function(){
+		  let link = "${CP}/elecmusk/evcar.do"
+		  location.href= link;
+	  });
+	  
+	  $("#mainhome,#logo").on("click",function(){
+		  let link = "${CP}/elecmusk/view.do"
+		  location.href= link;
+	  });
+	  
   });
 </script>
 </head>
@@ -36,7 +61,7 @@
   <div id="container">
     <!-- login-area -->
     <div class="login-area">
-      <a href="#">Mypage</a>
+      <a href="#">[Mypage]</a>
       <input type="text" placeholder="아이디" required="required">
       <input type="password" placeholder="비밀번호" required="required">
       <button>로그인</button>
@@ -56,7 +81,7 @@
     <!-- menu-area -->
     <div id="menu-area">
       <ul class="menu-bar">
-        <li><a href="#">HOME</a></li>
+        <li><a href="#" id="mainhome" name="mainhome">HOME</a></li>
         <li><a href="#">BOARD</a>
           <ul class="sub-menu">
             <li><a href="#">Board 1</a></li>
@@ -67,7 +92,7 @@
         <li><a href="#">EVCARS</a>
           <ul class="sub-menu">
             <li><a href="#">Cars data</a></li>
-            <li><a href="#">Subsidy data</a></li>
+            <li><a href="#" id="subsidyData" name="subsidyData">Subsidy data</a></li>
             <li><a href="#">Charger data</a></li>
             <li><a href="#">Chargingfee data</a></li>
             <li><a href="#">Statistical info</a></li>
