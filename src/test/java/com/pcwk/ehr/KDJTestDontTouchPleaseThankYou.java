@@ -24,9 +24,6 @@ public class KDJTestDontTouchPleaseThankYou {
 	final Logger LOG = LogManager.getLogger(getClass());
 	
 	@Autowired
-	ApplicationContext context;
-	
-	@Autowired
 	UserDao userDao;
 	
 	UserVO userVO1;
@@ -44,23 +41,38 @@ public class KDJTestDontTouchPleaseThankYou {
 	@Ignore
 	public void doSave() throws Exception{
 		LOG.debug("userVO1: "+userVO1);
-		userDao.doSave(userVO2);
+		userDao.doSave(userVO1);
 	}
 	
 	@Test
+	@Ignore
 	public void doUpdate() throws Exception{
 		LOG.debug("userVO1: "+userVO1);
 		UserVO userVOkk = new UserVO("rlaehdwn60_U", "rlaehdwn60_U", "password_U", "김동_U");
-		userVOkk.setMemberSeq(1000022);
+		userVOkk.setMemberSeq(1000042);
 		userDao.doUpdate(userVOkk);
 	}
 	
 	@Test
+	@Ignore
+	public void doDelete() throws Exception{
+		LOG.debug("userVO1: "+userVO1);
+		userVO1.setMemberSeq(1000042);
+		userDao.doDelete(userVO1);
+	}
+	
+	@Test
+	public void doSelectOne() throws Exception{
+		LOG.debug("userVO1: "+userVO1);
+		userVO1.setMemberSeq(1000041);
+		UserVO outVO = userDao.doSelectOne(userVO1);
+		System.out.println(outVO);
+	}
+	
+	@Test
 	public void beans() {
-		LOG.debug("context"+context);
 		LOG.debug("userDao"+userDao);
 		
-		assertNotNull(context);
 		assertNotNull(userDao);
 	}
 	
