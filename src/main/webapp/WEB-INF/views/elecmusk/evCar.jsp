@@ -29,21 +29,6 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 
-		$(".menu-bar>li>a").on("click", function() {
-			if ($(".sub-menu").hasClass("visible") == false) {
-				$(".sub-menu").addClass("visible");
-				$(".sub-menu").css("opacity", "1");
-				$(".sub-menu").css("z-index", "1");
-				$(".sub-menu").slideDown("fast");
-			} else {
-				$(".sub-menu").slideUp("fast");
-				$(".sub-menu").css("opacity", "0");
-				$(".sub-menu").css("z-index", "-1");
-				$(".sub-menu").removeClass("visible");
-			}
-
-		});
-
 		$(function() {
 			let didScroll;
 			let lastScrollTop = 0;
@@ -127,60 +112,110 @@
         </tr>
       </tbody>
 		</table>
+				<div class="subsidy-info">
+				  <a href="#">보조금 상세 정보</a>
+				</div>
 		</div>
-		<div>
-		  <a href="#" ">보조금 상세 정보</a>
-		</div>
-    <div class="evcar1">
-      <table>
+		
+    <div class="evcar1 evcararea">
+      <table class="evcar-table">
         <tr>
-          <td rowspan="10"> 사 진 </td>
-          <td></td>
-          <td><input type="text" id="evName" name="evName"></td>
+          <div class="picture">
+          <td rowspan="11"><img src="${CP_RES}/asset/imgs/evcar_imgs/BOLTEV.png" alt="" style="width:700px;"></td>
+          </div>
         </tr>
         <tr>
           <td>자동차명</td>
-          <td><input type="text" id="" name=""></td>
+          <td><input type="text" id="evname" name=evname readonly="readonly" style="border:0px;"></td>
         </tr>
         <tr>
           <td>가격</td>
-          <td><input type="text" id="" name=""></td>
+          <td><input type="text" id="evprice" name="evprice" readonly="readonly" style="border:0px;"></td>
         </tr>
         <tr>
           <td>제조사</td>
-          <td><input type="text" id="" name=""></td>
+          <td><input type="text" id="manufacture" name="manufacture" readonly="readonly" style="border:0px;"></td>
         </tr>
         <tr>
           <td>연식</td>
-          <td><input type="text" id="" name=""></td>
+          <td><input type="text" id="evyear" name="evyear" readonly="readonly" style="border:0px;"></td>
         </tr>
         <tr>
           <td>차종</td>
-          <td><input type="text" id="" name=""></td>
+          <td><input type="text" id="cartype" name="cartype" readonly="readonly" style="border:0px;"></td>
         </tr>
         <tr>
           <td>모델</td>
-          <td><input type="text" id="" name=""></td>
+          <td><input type="text" id="evmodel" name="evmodel" readonly="readonly" style="border:0px;"></td>
         </tr>
         <tr>
           <td>배터리 타입</td>
-          <td><input type="text" id="" name=""></td>
+          <td><input type="text" id="battery-type" name="battery-type" readonly="readonly" style="border:0px;"></td>
         </tr>
         <tr>
           <td>배터리 전압</td>
-          <td><input type="text" id="" name=""></td>
+          <td><input type="text" id="battery-w" name="battery-w" readonly="readonly" style="border:0px;"></td>
         </tr>
         <tr>
           <td>최대속도</td>
-          <td><input type="text" id="" name=""></td>
+          <td><input type="text" id="max-speed" name="max-speed" readonly="readonly" style="border:0px;"></td>
         </tr>
         <tr>
           <td>output</td>
-          <td><input type="text" id="" name=""></td>
+          <td><input type="text" id="output" name="output" readonly="readonly" style="border:0px;"></td>
         </tr>
       </table>
     </div>    
-    
+		
+    <div class="evcar2 evcararea">
+      <table class="evcar-table">
+        <tr>
+          <div class="picture">
+          <td rowspan="11"><img src="${CP_RES}/asset/imgs/evcar_imgs/BOLTEV.png" alt="" style="width:700px;"></td>
+          </div>
+        </tr>
+        <tr>
+          <td>자동차명</td>
+          <td><input type="text" id="evname" name=evname readonly="readonly" style="border:0px;"></td>
+        </tr>
+        <tr>
+          <td>가격</td>
+          <td><input type="text" id="evprice" name="evprice" readonly="readonly" style="border:0px;"></td>
+        </tr>
+        <tr>
+          <td>제조사</td>
+          <td><input type="text" id="manufacture" name="manufacture" readonly="readonly" style="border:0px;"></td>
+        </tr>
+        <tr>
+          <td>연식</td>
+          <td><input type="text" id="evyear" name="evyear" readonly="readonly" style="border:0px;"></td>
+        </tr>
+        <tr>
+          <td>차종</td>
+          <td><input type="text" id="cartype" name="cartype" readonly="readonly" style="border:0px;"></td>
+        </tr>
+        <tr>
+          <td>모델</td>
+          <td><input type="text" id="evmodel" name="evmodel" readonly="readonly" style="border:0px;"></td>
+        </tr>
+        <tr>
+          <td>배터리 타입</td>
+          <td><input type="text" id="battery-type" name="battery-type" readonly="readonly" style="border:0px;"></td>
+        </tr>
+        <tr>
+          <td>배터리 전압</td>
+          <td><input type="text" id="battery-w" name="battery-w" readonly="readonly" style="border:0px;"></td>
+        </tr>
+        <tr>
+          <td>최대속도</td>
+          <td><input type="text" id="max-speed" name="max-speed" readonly="readonly" style="border:0px;"></td>
+        </tr>
+        <tr>
+          <td>output</td>
+          <td><input type="text" id="output" name="output" readonly="readonly" style="border:0px;"></td>
+        </tr>
+      </table>
+    </div>    
     
     
 	</div>

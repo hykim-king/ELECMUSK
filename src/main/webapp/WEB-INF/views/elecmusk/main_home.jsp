@@ -29,24 +29,6 @@
 <script type="text/javascript">
 $(document).ready(function(){
     
-    $(".menu-bar>li>a").on("click",function(){
-        if($(".sub-menu").hasClass("visible") == false) {
-           $(".sub-menu").addClass("visible");
-           $(".sub-menu").css("opacity","1");
-           $(".sub-menu").css("z-index","1");
-           $(".sub-menu").slideDown("fast");
-        } else {
-           $(".sub-menu").slideUp("fast");
-           $(".sub-menu").css("opacity","0");
-           $(".sub-menu").css("z-index","-1");
-           $(".sub-menu").removeClass("visible");
-        }
-        
-        
-     });
-    
-    
-    
 	   $(function() {
 	     let didScroll;
 	     let lastScrollTop = 0;
