@@ -44,7 +44,6 @@ public class CountApiController {
 			while ((line = rd.readLine()) != null) {
 				result.append(line + "\n");
 			}
-			//LOG.debug("result:" + result);
 
 
 
