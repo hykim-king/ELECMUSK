@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pcwk.ehr.station">
+
+  <sql id="searchCondition">
+      <choose>
+        <when test=" '10' == searchDiv and '' != searchWord ">
+         AND csnm LIKE #{searchWord} || '%'
+        </when>
+        <when test=" '20' == searchDiv and '' != searchWord ">
+         AND chargetp LIKE #{searchWord} || '%'
+        </when>
+        <when test=" '30' == searchDiv and '' != searchWord ">
+         AND cptp LIKE #{searchWord} || '%'
+        </when>
+      </choose>
+  </sql>
+	
+	<select id="doRetrieve" parameterType="SearchVO">
+		--paging
+		SELECT A.*, B.*
+		FROM(
+		    SELECT TT1.rnum as num,
+		           TT1.station_seq,
+		           TT1.addr,
+		           TT1.chargetp,
+		           TT1.cpid,
+		           TT1.cpnm,
+		           TT1.cpstat,
+		           TT1.cptp,
+		           TT1.csid,
+		           TT1.csnm,
+		           TT1.lat,
+		           TT1.longi,
+		           TT1.statupdatetime
+		    FROM(
+		        SELECT ROWNUM AS rnum, T1.*
+		        FROM(
+		            SELECT *
+		            FROM station_data
+		            --WHERE(10:충전소명, 20:충전기타입(완속/급속), 30:충전방식)
+		            <include refid="searchCondition"></include>
+		            ORDER BY station_seq DESC
+		        )T1
+		        <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} -1) + #{pageSize} ]]>
+		    )TT1
+		    <![CDATA[ WHERE rnum >= #{pageSize} * (#{pageNo} -1) + 1 ]]>
+		)A
+		CROSS JOIN
+		(
+		    SELECT COUNT(*) totalCnt
+		    FROM station_data
+		    --WHERE(10:충전소명, 20:충전기타입(완속/급속), 30:충전방식)
+		    <include refid="searchCondition"></include>
+		)B	
+			
+	</select>
+	
+	<select id="doSelectOne" parameterType="StationVO">
+	 SELECT
+		       station_seq,
+		       addr,
+		       chargetp,
+		       cpid,
+		       cpnm,
+		       cpstat,
+		       cptp,
+		       csid,
+		       csnm,
+		       lat,
+		       longi,
+		       statupdatetime
+		FROM station_data
+		WHERE station_seq = #{station_seq}
+	</select>
+	
+	<delete id="doDelete" parameterType="StationVO">
+	 DELETE FROM station_data
+   WHERE   station_seq = #{station_seq}
+	</delete>
+	
+	<insert id="doSave" parameterType="StationVO">
+		INSERT INTO station_data (
+		    station_seq,
+		    addr,
+		    chargetp,
+		    cpid,
+		    cpnm,
+		    cpstat,
+		    cptp,
+		    csid,
+		    csnm,
+		    lat,
+		    longi,
+		    statupdatetime
+		) VALUES (
+		    #{station_seq},
+		    #{addr},
+		    #{chargetp},
+		    #{cpid},
+		    #{cpnm},
+		    #{cpstat},
+		    #{cptp},
+		    #{csid},
+		    #{csnm},
+		    #{lat},
+		    #{longi},
+		    #{statupdatetime}
+		)	
+	</insert>
+	
+</mapper>  
