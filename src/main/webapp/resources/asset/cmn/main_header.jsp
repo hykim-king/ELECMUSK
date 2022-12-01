@@ -29,22 +29,24 @@
 <script type="text/javascript">
   $(document).ready(function(){
 
-	    $(".menu-bar>li>a").on("mouseenter", function() {
-	      if ($(".sub-menu").hasClass("visible") == false) {
+	    $(".header-area").click(function() {
 	        $(".sub-menu").addClass("visible");
 	        $(".sub-menu").css("opacity", "1");
 	        $(".sub-menu").css("z-index", "1");
+	        $(".sub-menu>li").css("z-index", "1");
+	        $(".sub-menu>li>a").css("z-index", "1");
 	        $(".sub-menu").slideDown("fast");
-	      } else {
+	    })
+	    .mouseleave(function(){
 	        $(".sub-menu").slideUp("fast");
 	        $(".sub-menu").css("opacity", "0");
 	        $(".sub-menu").css("z-index", "-1");
+	        $(".sub-menu>li").css("z-index", "-1");
+	        $(".sub-menu>li>a").css("z-index", "-1");
 	        $(".sub-menu").removeClass("visible");
-	      }
-	      
 	    });
-	  
-	  $("#subsidyData").on("click",function(){
+	    
+	  $("#carsData").on("click",function(){
 		  let link = "${CP}/elecmusk/evcar.do"
 		  location.href= link;
 	  });
@@ -70,43 +72,43 @@
     
     <!-- logo-area -->
     <div class="logo-area"> 
-      <img src="${CP_RES}/asset/imgs/EVerything_logo.png" id="logo">
+      <img src="${CP_RES}/asset/imgs/home_imgs/EVerything_logo.png" id="logo">
     </div>
     <!-- logo-area end--------------------------------------------------------->
     
     <div class="header-area">
     <div class="text-logo-area">
-      <img src="${CP_RES}/asset/imgs/EVerything_logo_text.png">
+      <img src="${CP_RES}/asset/imgs/home_imgs/EVerything_logo_text.png">
     </div>
     <!-- menu-area -->
     <div id="menu-area">
       <ul class="menu-bar">
-        <li><a href="#" id="mainhome" name="mainhome">HOME</a></li>
-        <li><a href="#">BOARD</a>
+        <li id="mainhome" name="mainhome">HOME</li>
+        <li>BOARD
           <ul class="sub-menu">
             <li><a href="#">Board 1</a></li>
             <li><a href="#">Board 2</a></li>
             <li><a href="#">Board 3</a></li>
           </ul>
         </li>
-        <li><a href="#">EVCARS</a>
+        <li>EVCARS
           <ul class="sub-menu">
-            <li><a href="#">Cars data</a></li>
+            <li><a href="#" id="carsData" name="carsData">Cars data</a></li>
             <li><a href="#" id="subsidyData" name="subsidyData">Subsidy data</a></li>
             <li><a href="#">Charger data</a></li>
-            <li><a href="#">Chargingfee data</a></li>
+            <li><a href="#">Charging fee data</a></li>
             <li><a href="#">Statistical info</a></li>
           </ul>
          </li>
          
-        <li><a href="#">STATION</a>
+        <li>STATION
           <ul class="sub-menu">
             <li><a href="#">Station</a></li>
             <li><a href="#">Reviewboard</a></li>
           </ul>
          </li>
          
-        <li><a href="#">NEWS</a>
+        <li>NEWS
           <ul class="sub-menu">
             <li><a href="#">Menu 1</a></li>
             <li><a href="#">Menu 2</a></li>

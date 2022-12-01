@@ -58,7 +58,11 @@
     padding: 0px;
     position:relative;
     width: 100%;
-    left: 45%
+    left: 50%;
+  }
+  
+  .sub-menu {
+    right: 30%;
   }
   
   .menu-bar > li {
@@ -75,22 +79,20 @@
     margin: 5px;
     text-align: center;
   }
-  
-  .menu-bar a:hover .sub-menu a:hover {
-    text-decoration: underline;
-  }
-  
+
   .sub-menu > li {
     padding: 5px;
     margin: 0px;
     text-align: center;
     position: relative;
+    z-index: -1;
   }
   
   .sub-menu > li > a {
     text-align: center;
     letter-spacing: 0.05em;
     position: relative;
+    z-index: -1;
   }
   
   .sub-menu {
@@ -98,15 +100,8 @@
     position: relative;
     top:10px;
     z-index: -1;
-    background-color: rgba(250, 250, 250,0.8);
+    background-color: rgba(220, 220, 220,0.8);
   }
-  
-/*   .menu-bar > li:hover > .sub-menu {
-    opacity: 1;
-    visibility: visible;
-    background-color: rgba(250, 250, 250,0.8);
-    transition: all 0.25s ease-in;
-  }  */
   
   /* login-area ------------------------------------------------------------- */
   .login-area {
@@ -126,7 +121,7 @@
 	  overflow: hidden;
 	  height: 800px;
 	  width: 1200px;
-	  background-color: #000;
+	  background-color: #fff;
 	}
 	.slide{
 	  width:2400px; /* 이미지 크기 * 이미지 개수 + 여유 */
@@ -193,7 +188,7 @@
   #menu-area {
     height: 100px;
     margin-bottom: 5px;
-    line-height: 130px;
+    line-height: 150px;
     text-align: center;
   }  
     
@@ -340,6 +335,10 @@
     left: 13%
   }
   
+  .sub-menu{
+    left: 5%;
+  }
+  
   .menu-bar > li {
     float: left;
     position: relative;
@@ -354,10 +353,6 @@
     margin: 5px;
     text-align: center;
     font-size: 14px;
-  }
-  
-  .menu-bar a:hover .sub-menu a:hover {
-    text-decoration: underline;
   }
   
   .sub-menu > li {

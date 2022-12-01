@@ -1,6 +1,8 @@
 package com.pcwk.ehr.user.domain;
 
-public class UserVO {
+import com.pcwk.ehr.cmn.DTO;
+
+public class UserVO extends DTO{
 	private int mSeq; // 순번
 	private String userId; // 아이디
 	private String nickname; // 닉네임

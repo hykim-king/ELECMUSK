@@ -77,7 +77,7 @@ $(document).ready(function(){
 	       $('.slide').stop().animate({'left' : -imgSize+"px"}, "slow");
 	     if(idx>1){ //idx>0으로 하면 첫 번째 리스트가 슬라이스되기전에 삭제가 된다.
 	       $('.slide>li:first').remove(); // 제일 첫 <li> 삭제
-	       $('.slide').append('<li><img src="${CP_RES}/asset/imgs/car'+i+'.jpg" alt="">');
+	       $('.slide').append('<li><img src="${CP_RES}/asset/imgs/home_imgs/car'+i+'.jpg" alt="">');
 	       //마지막에 <li> 추가
 	     }
 	     
@@ -97,9 +97,9 @@ $(document).ready(function(){
    <div id="imgslide" class="all">
     <div class="imgbox">
       <ul class="slide">
-        <li><img src="${CP_RES}/asset/imgs/car1.jpg" alt=""></li>
-        <li><img src="${CP_RES}/asset/imgs/car2.jpg" alt=""></li>
-        <li><img src="${CP_RES}/asset/imgs/car3.jpg" alt=""></li>
+        <li><img src="${CP_RES}/asset/imgs/home_imgs/car1.jpg" alt=""></li>
+        <li><img src="${CP_RES}/asset/imgs/home_imgs/car2.jpg" alt=""></li>
+        <li><img src="${CP_RES}/asset/imgs/home_imgs/car3.jpg" alt=""></li>
       </ul>
     </div>
   </div>
