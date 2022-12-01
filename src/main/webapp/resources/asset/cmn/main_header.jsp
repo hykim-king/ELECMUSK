@@ -50,6 +50,10 @@
 		  let link = "${CP}/elecmusk/evcar.do"
 		  location.href= link;
 	  });
+	  $("#subsidyData").on("click",function(){
+		  let link = "${CP}/elecmusk/subsidy.do"
+		  location.href= link;
+	  });
 	  
 	  $("#mainhome,#logo").on("click",function(){
 		  let link = "${CP}/elecmusk/view.do"

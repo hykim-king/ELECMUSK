@@ -42,4 +42,12 @@ public class HomeController {
 		return "elecmusk/evCar";
 	}
 	
+	@RequestMapping(value = "/elecmusk/subsidy.do", method = RequestMethod.GET)
+	public String subsidy() {
+		LOG.debug("┌───────────────────────────────────────────┐");
+		LOG.debug("│                   subsidy                 │");
+		LOG.debug("└───────────────────────────────────────────┘");		
+		
+		return "elecmusk/subsidy";
+	}
 }
