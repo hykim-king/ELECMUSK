@@ -37,4 +37,41 @@
 		)B
   </select>
   
+  <insert id="doSave" parameterType="com.pcwk.ehr.evcar.domain.EvCarVO">
+		    INSERT INTO evcar (
+		    car_no,
+		    name,
+		    image,
+		    price,
+		    manufacture,
+		    product_year,
+		    appearance,
+		    model,
+		    max_distance,
+		    battery_type,
+		    battery_capacity,
+		    max_speed,
+		    output
+		) VALUES (
+		    #{carNo},
+		    #{carName},
+		    #{imgUrl},
+		    #{carPrice},
+		    #{manufacture},
+		    #{productYear},
+		    #{appearance},
+		    #{carModel},
+		    #{maxDistance},
+		    #{batteryType},
+		    #{batteryCapa},
+		    #{maxSpeed},
+		    #{outPut}
+		)
+  </insert>
+  
+  <delete id="doDelete" parameterType="com.pcwk.ehr.evcar.domain.EvCarVO">
+        DELETE FROM evcar
+        WHERE  car_no = #{carNo}
+  </delete>
+  
 </mapper>  

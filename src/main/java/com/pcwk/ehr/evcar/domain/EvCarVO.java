@@ -1,8 +1,8 @@
 package com.pcwk.ehr.evcar.domain;
 
-import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.evcar.cmn.evDTO;
 
-public class EvCarVO extends DTO {
+public class EvCarVO extends evDTO {
 	
 	private int carNo;
 	private String carName;
