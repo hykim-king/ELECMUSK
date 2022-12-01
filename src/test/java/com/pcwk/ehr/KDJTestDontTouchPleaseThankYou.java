@@ -2,6 +2,8 @@ package com.pcwk.ehr;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
@@ -13,6 +15,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.pcwk.ehr.cmn.SearchVO;
 import com.pcwk.ehr.user.dao.UserDao;
 import com.pcwk.ehr.user.domain.UserVO;
 
@@ -30,11 +33,15 @@ public class KDJTestDontTouchPleaseThankYou {
 	UserVO userVO2;
 	UserVO userVO3;
 	
+	SearchVO searchVO;
+	
 	@Before
 	public void setUp(){
 		userVO1 = new UserVO("rlaehdwn60_1", "rlaehdwn60_1", "password", "김동주");
 		userVO2 = new UserVO("rlaehdwn60_2", "rlaehdwn60_2", "password", "김동주");
 		userVO3 = new UserVO("rlaehdwn60_3", "rlaehdwn60_3", "password", "김동주");
+	
+		searchVO = new SearchVO(10, 1, "10", "rla");
 	}
 
 	@Test
@@ -62,11 +69,19 @@ public class KDJTestDontTouchPleaseThankYou {
 	}
 	
 	@Test
+	@Ignore
 	public void doSelectOne() throws Exception{
 		LOG.debug("userVO1: "+userVO1);
-		userVO1.setMemberSeq(1000041);
+		userVO1.setMemberSeq(1000061);
 		UserVO outVO = userDao.doSelectOne(userVO1);
 		System.out.println(outVO);
+	}
+	
+	@Test
+	public void doRetrieve() throws Exception{
+		List<UserVO> list = userDao.doRetrieve(searchVO);
+		
+		LOG.debug("list: "+list);
 	}
 	
 	@Test

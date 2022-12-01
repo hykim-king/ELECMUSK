@@ -5,6 +5,7 @@ public class SearchVO extends DTO{
 	private int pageSize;//페이지 사이즈
 	private int pageNo;//페이지 번호
 	private String searchDiv;//검색구분
+	//user에서는 검색구분 10: 아이디 /20: 닉네임 / 30: 이름
 	private String searchWord;//검색어
 	
 	public SearchVO() {}

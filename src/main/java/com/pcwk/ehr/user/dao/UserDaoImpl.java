@@ -1,6 +1,7 @@
 package com.pcwk.ehr.user.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -9,6 +10,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.cmn.SearchVO;
 import com.pcwk.ehr.user.domain.UserVO;
 
 @Repository("userDao")
@@ -73,8 +76,20 @@ public class UserDaoImpl implements UserDao {
 		return outVO;
 	}
 
-	public List<UserVO> doRetrieve(UserVO inVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<UserVO> doRetrieve(DTO inVO) throws SQLException {
+		SearchVO search = (SearchVO) inVO;
+		
+		LOG.debug("inVO: "+inVO);
+		
+		List<UserVO> list = new ArrayList<UserVO>();
+		String statement = NAMESPACE+DOT+"doRetrieve";
+		
+		LOG.debug("statement: "+statement);
+		
+		list = sqlSessionTemplate.selectList(statement, search);
+		
+		LOG.debug("list: "+list);
+		
+		return list;
 	}
 }
