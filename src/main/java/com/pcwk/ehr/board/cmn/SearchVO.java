@@ -7,15 +7,34 @@ public class SearchVO extends DTO {
 	private String searchDiv;//검색구분(default = "")
 	private String searchWord;//검색어(default = "")
 	
+	private String category;//카테고리
+	
 	public SearchVO() {}
 
-	public SearchVO(int pageSize, int pageNo, String searchDiv, String searchWord) {
+
+
+
+
+	public SearchVO(int pageSize, int pageNo, String searchDiv, String searchWord, String category) {
 		super();
 		this.pageSize = pageSize;
 		this.pageNo = pageNo;
 		this.searchDiv = searchDiv;
 		this.searchWord = searchWord;
+		this.category = category;
 	}
+
+
+	public String getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+
 
 	public int getPageSize() {
 		return pageSize;
@@ -49,14 +68,13 @@ public class SearchVO extends DTO {
 		this.searchWord = searchWord;
 	}
 
+
 	@Override
 	public String toString() {
 		return "SearchVO [pageSize=" + pageSize + ", pageNo=" + pageNo + ", searchDiv=" + searchDiv + ", searchWord="
-				+ searchWord + ", toString()=" + super.toString() + "]";
+				+ searchWord + ", category=" + category + ", toString()=" + super.toString() + "]";
 	}
 
 
-
-	
 	
 }

@@ -42,5 +42,5 @@ public interface WorkDiv<T> {
 	 * @return 1/0(0이면 실패)(1이면 성공)
 	 * @throws SQLException
 	 */
-	List<T> doRetrive(DTO inVO)throws SQLException;
+	List<T> doRetrieve(DTO inVO)throws SQLException;
 }
