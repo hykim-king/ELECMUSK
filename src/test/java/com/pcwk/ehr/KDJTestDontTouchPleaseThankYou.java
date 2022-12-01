@@ -78,10 +78,47 @@ public class KDJTestDontTouchPleaseThankYou {
 	}
 	
 	@Test
+	@Ignore
 	public void doRetrieve() throws Exception{
 		List<UserVO> list = userDao.doRetrieve(searchVO);
 		
 		LOG.debug("list: "+list);
+	}
+	
+	@Test
+	@Ignore
+	public void idCheck() throws Exception{
+		LOG.debug("flag: "+userDao.idCheck(userVO1));
+	}
+	
+	@Test
+	@Ignore
+	public void passCheck() throws Exception{
+		LOG.debug("flag: "+userDao.passCheck(userVO1));
+	}
+	
+	@Test
+	@Ignore
+	public void findIdByEmail() throws Exception{
+		userVO1.setEmail("rlaehdwn60@gmail.com");
+		LOG.debug("userVO: "+userDao.findIdByEmail(userVO1));
+	}
+	
+	@Test
+	@Ignore
+	public void findIdByNameBirth() throws Exception{
+		userVO1.setBirth("99/01/31");
+		userVO1.setName("이상무");
+		LOG.debug("userVO: "+userDao.findIdByNameBirth(userVO1));
+	}
+	
+	@Test
+	@Ignore
+	public void findPwByBackup() throws Exception{
+		userVO1.setBackupQusetion("1+1은?");
+		userVO1.setBackupAnswer("2");
+		userVO1.setUserId("testId02");
+		LOG.debug("UserVO: "+userDao.findPwByBackup(userVO1));
 	}
 	
 	@Test

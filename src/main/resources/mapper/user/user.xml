@@ -139,4 +139,39 @@ FROM member
     <result column="join_date"        property="joinDate"      />
     <result column="status"           property="status"        />
   </resultMap>
+  
+  <select id="idCheck" parameterType="UserVO" resultType="int">
+    SELECT COUNT(*)
+    FROM member
+    WHERE id = #{userId}
+  </select>
+  
+  <select id="passCheck" parameterType="UserVO" resultType="int">
+    SELECT COUNT(*)
+    FROM member
+    WHERE id = #{userId}
+    AND password = #{userPw}
+  </select>
+  
+  <select id="findIdByEmail" parameterType="UserVO" resultMap="userMap">
+    SELECT id
+    FROM member
+    WHERE email = #{email}
+  </select>
+  
+  <select id="findIdByNameBirth" parameterType="UserVO" resultMap="userMap">
+    SELECT id
+    FROM member
+    WHERE name = #{name}
+    AND birth = #{birth}
+  </select>
+  
+  <select id="findPwByBackup" parameterType="UserVO" resultMap="userMap">
+    SELECT password
+    FROM member
+    WHERE id = #{userId}
+    AND backup_question = #{backupQusetion}
+    AND backup_answer = #{backupAnswer}
+  </select>
+  
 </mapper>  

@@ -56,40 +56,113 @@ public class UserDaoImpl implements UserDao {
 
 		String statement = NAMESPACE + DOT + "doDelete";
 		LOG.debug("statement: " + statement);
-		
+
 		int flag = sqlSessionTemplate.delete(statement, inVO);
 		LOG.debug("flag: " + flag);
 
 		return flag;
 	}
-	
+
 	public UserVO doSelectOne(UserVO inVO) throws SQLException {
 		LOG.debug("param: " + inVO);
-		
+
 		UserVO outVO = null;
-		
+
 		String statement = NAMESPACE + DOT + "doSelectOne";
 		LOG.debug("statement: " + statement);
-		
+
 		outVO = sqlSessionTemplate.selectOne(statement, inVO);
-		
+
 		return outVO;
 	}
 
 	public List<UserVO> doRetrieve(DTO inVO) throws SQLException {
 		SearchVO search = (SearchVO) inVO;
-		
-		LOG.debug("inVO: "+inVO);
-		
+
+		LOG.debug("inVO: " + inVO);
+
 		List<UserVO> list = new ArrayList<UserVO>();
-		String statement = NAMESPACE+DOT+"doRetrieve";
-		
-		LOG.debug("statement: "+statement);
-		
+		String statement = NAMESPACE + DOT + "doRetrieve";
+
+		LOG.debug("statement: " + statement);
+
 		list = sqlSessionTemplate.selectList(statement, search);
-		
-		LOG.debug("list: "+list);
-		
+
+		LOG.debug("list: " + list);
+
 		return list;
+	}
+	
+	@Override
+	public int idCheck(UserVO inVO) throws SQLException {
+		LOG.debug("param: " + inVO);
+
+		String statement = NAMESPACE + DOT + "idCheck";
+		LOG.debug("statement: " + statement);
+
+		int flag = sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("flag: " + flag);
+
+		//flag=1이면 있음, 0이면 없음.
+		return flag;
+	}
+
+	@Override
+	public int passCheck(UserVO inVO) throws SQLException {
+		LOG.debug("param: " + inVO);
+
+		String statement = NAMESPACE + DOT + "passCheck";
+		LOG.debug("statement: " + statement);
+		
+		int flag = sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("flag: " + flag);
+
+		//flag가 1이면 아이디와 비밀번호가 맞음, 0이면 안맞음.
+		return flag;
+	}
+
+	@Override
+	public UserVO findIdByEmail(UserVO inVO) throws SQLException {
+		LOG.debug("param: " + inVO);
+
+		String statement = NAMESPACE + DOT + "findIdByEmail";
+		LOG.debug("statement: " + statement);
+		
+		UserVO userVO = sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("userVO: " + userVO);
+		
+		//아이디만 차있는 userVO가 넘어감. 나중에 필요하면 String return하게 해도 됨
+		//실패하면 null이 반환됨
+		return userVO;
+	}
+
+	@Override
+	public UserVO findIdByNameBirth(UserVO inVO) throws SQLException {
+		LOG.debug("param: " + inVO);
+
+		String statement = NAMESPACE + DOT + "findIdByNameBirth";
+		LOG.debug("statement: " + statement);
+		
+		UserVO userVO = sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("userVO: " + userVO);
+		
+		//이메일만 차있는 userVO가 넘어감. 나중에 필요하면 String return하게 해도 됨
+		//실패하면 null이 반환됨
+		return userVO;
+	}
+
+	@Override
+	public UserVO findPwByBackup(UserVO inVO) throws SQLException {
+		LOG.debug("param: " + inVO);
+
+		String statement = NAMESPACE + DOT + "findPwByBackup";
+		LOG.debug("statement: " + statement);
+		
+		UserVO userVO = sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("userVO: " + userVO);
+		
+		//이메일만 차있는 userVO가 넘어감. 나중에 필요하면 String return하게 해도 됨
+		//실패하면 null이 반환됨
+		return userVO;
 	}
 }

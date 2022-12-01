@@ -16,7 +16,7 @@ public class LoginController {
 	@RequestMapping(value="/login.do")
 	public String view() {
 		
-		return "user/login.jsp";
+		return "login/login";
 	}
 	
 }
