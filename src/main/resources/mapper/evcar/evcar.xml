@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pcwk.ehr.evcar">
+  
+  <select id="doRetrieve" parameterType="SearchVO">
+		SELECT A.*, B.*
+		FROM (
+		    SELECT     
+		        TT1.name,
+		        TT1.image,
+		        TT1.price,
+		        TT1.manufacture,
+		        TT1.product_year,
+		        TT1.appearance,
+		        TT1.model,
+		        TT1.max_distance,
+		        TT1.battery_type,
+		        TT1.battery_capacity,
+		        TT1.max_speed,
+		        TT1.output
+		    FROM (
+		        SELECT ROWNUM as rnum, T1.*
+		        FROM (
+		            SELECT *
+		            FROM EVCAR
+		            ORDER BY name
+		        )T1
+		        <![CDATA[WHERE ROWNUM <= 6]]>
+		    )TT1
+		    <![CDATA[WHERE rnum >= 1]]>
+		)A
+		CROSS JOIN (
+		SELECT COUNT(*) totalCnt
+		FROM EVCAR
+		)B
+  </select>
+  
+</mapper>  
