@@ -39,6 +39,23 @@
     <result column="longi"     property="longi"    />
     <result column="statupdatetime"     property="statupdatetime"    />
   </resultMap>
+  
+  <update id="doUpdate" parameterType="StationVO">
+  UPDATE station_data
+	SET
+	  addr = #{addr},
+	  chargetp = #{chargetp},
+	  cpid = #{cpid},
+	  cpnm = #{cpnm},
+	  cpstat = #{cpstat},
+	  cptp = #{cptp},
+	  csid = #{csid},
+	  csnm = #{csnm},
+	  lat = #{lat},
+	  longi = #{longi},
+	  statupdatetime = #{statupdatetime}
+	WHERE station_seq = #{station_seq}
+  </update>
 	
 	<select id="doRetrieve" parameterType="SearchVO" resultMap="stationMap">
 		--paging

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pcwk.ehr.charger">
+
+  <sql id="searchCondition">
+      <choose>
+        <when test=" '10' == searchDiv and '' != searchWord ">
+         AND connector LIKE #{searchWord} || '%'
+        </when>
+        <when test=" '20' == searchDiv and '' != searchWord ">
+         AND ev_current LIKE #{searchWord} || '%'
+        </when>
+        <when test=" '30' == searchDiv and '' != searchWord ">
+         AND ev_power LIKE #{searchWord} || '%'
+        </when>
+        <when test=" '40' == searchDiv and '' != searchWord ">
+         AND ev_support LIKE #{searchWord} || '%'
+        </when>
+      </choose>
+  </sql>
+
+  <insert id="doSave" parameterType="ChargerVO">
+  INSERT INTO charger (
+	    charger_no,
+	    connector,
+	    image,
+	    ev_current,
+	    ev_voltage,
+	    ev_power,
+	    ev_level,
+	    ev_support
+	) VALUES (
+	    #{charger_no},
+	    #{connector},
+	    #{image},
+	    #{ev_current},
+	    #{ev_voltage},
+	    #{ev_power},
+	    #{ev_level},
+	    #{ev_support}
+	)
+  </insert>
+  
+  <delete id="doDelete" parameterType="ChargerVo">
+  DELETE FROM charger
+  WHERE charger_no = #{charger_no}
+  </delete>
+  
+  <update id="doUpdate" parameterType="ChargerVO">
+  UPDATE charger
+	SET connector = #{},
+	    image = #{},
+	    ev_current = #{},
+	    ev_voltage = #{},
+	    ev_power = #{},
+	    ev_level = #{},
+	    ev_support = #{}
+	WHERE charger_no = #{}
+  </update>
+  
+  <select id="doSelectOne" parameterType="ChargerVO">
+  SELECT  charger_no,
+			    connector,
+			    image,
+			    ev_current,
+			    ev_voltage,
+			    ev_power,
+			    ev_level,
+			    ev_support
+	FROM charger
+	WHERE charger_no = #{charger_no}
+  </select>
+  
+  <select id="doRetrieve" parameterType="SearchVO">
+      --paging
+		  SELECT A.*, B.*
+		  FROM(
+		      SELECT TT1.rnum as num,
+		             TT1.charger_no,
+		             TT1.connector,
+		             TT1.image,
+		             TT1.ev_current,
+		             TT1.ev_voltage,
+		             TT1.ev_power,
+				         TT1.ev_level,
+				         TT1.ev_support
+		      FROM(
+		          SELECT ROWNUM AS rnum, T1.*
+		          FROM(
+		              SELECT *
+		              FROM charger
+		              --WHERE(10:충전기명,20:충전전류,30:충전전력,40:지원차량)
+		              
+		              
+		              ORDER BY charger_no ASC
+		          )T1
+		          <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} -1) + #{pageSize} ]]>
+		      )TT1
+		      <![CDATA[ WHERE rnum >= #{pageSize} * (#{pageNo} -1) + 1 ]]>
+		  )A
+		  CROSS JOIN
+		  (
+		      SELECT COUNT(*) totalCnt
+		      FROM charger
+		      --WHERE(10:충전기명,20:충전전류,30:충전전력,40:지원차량)
+		      
+		      
+		  )B
+  </select>
+  
+	
+</mapper>  

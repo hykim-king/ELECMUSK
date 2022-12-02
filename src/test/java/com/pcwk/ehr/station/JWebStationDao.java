@@ -69,6 +69,18 @@ public class JWebStationDao {
 	
 	@Test
 	@Ignore
+	public void doSelectOne() throws SQLException{
+		dao.doSelectOne(station01);
+	}
+	
+	@Test
+	@Ignore
+	public void doDelete() throws SQLException{
+		dao.doDelete(station01);
+	}
+	
+	@Test
+	@Ignore
 	public void doSave() throws SQLException{
 		dao.doSave(station01);
 		
@@ -85,37 +97,15 @@ public class JWebStationDao {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void doUpdate() throws SQLException{
-		//1.삭제
-		//2.등록
-		//3.한건조회
-		//4.한건조회 데이터 수정
-		//5.수정
-		//6.한건조회
-		//7.비교
-		
-		//1.
 		dao.doDelete(station01);
-		//2.
 		dao.doSave(station01);
-		//3.
-		StationVO upVO01 = dao.doSelectOne(station01);
-		isSameData(upVO01, station01);
-		//4.
+		
 		String upStr = "_U";
-		int upInt = 10;
-		upVO01.setAddr(upVO01.getAddr()+upStr);
-		upVO01.setCpid(upVO01.getCpid()+upInt);
+		station01.setAddr(station01.getAddr()+upStr);
 		
-		//5.
-		//assertEquals(1,dao.doUpdate(upVO01));
-		
-		//6.
-		StationVO vsResult = dao.doSelectOne(upVO01);
-		
-		//7.
-		isSameData(vsResult, upVO01);
+		dao.doUpdate(station01);
 		
 	}
 	

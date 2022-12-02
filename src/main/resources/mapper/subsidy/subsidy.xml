@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pcwk.ehr.subsidy">
+  
+  <resultMap type="SubsidyVO" id="subsidyMap">
+    <result column="subsidy_no" property="subsidy_no"/>
+    <result column="name" property="name"/>
+    <result column="model" property="model"/>
+    <result column="subsidy" property="subsidy"/>
+    <result column="manufacturer" property="manufacturer"/>
+    <result column="madeby" property="madeby"/>
+  </resultMap>
+  
+    <sql id="searchCondition_subsidy">
+      <choose>
+        <when test=" '10' == searchDiv and '' != searchWord ">
+         AND name LIKE #{searchWord} || '%'
+        </when>
+        <when test=" '20' == searchDiv and '' != searchWord ">
+         AND model LIKE #{searchWord} || '%'
+        </when>
+        <when test=" '30' == searchDiv and '' != searchWord ">
+         AND manufacturer LIKE #{searchWord} || '%'
+        </when>
+        <when test=" '40' == searchDiv and '' != searchWord ">
+         AND madeby LIKE #{searchWord} || '%'
+        </when>
+      </choose>
+  </sql>
+  
+  <select id="doSelectOne" parameterType="SubsidyVO" resultMap="subsidyMap">
+  SELECT
+	     subsidy_no,
+	     name,
+	     model,
+	     subsidy,
+	     manufacturer,
+	     madeby
+	FROM subsidy
+	WHERE subsidy_no = #{subsidy_no}
+  </select>
+  
+  <update id="doUpdate" parameterType="SubsidyVO">
+      UPDATE subsidy
+	    SET name          = #{name},
+	        model         = #{model},
+	        subsidy       = #{subsidy},
+	        manufacturer  = #{manufacturer},
+	        madeby        = #{madeby}
+	    WHERE subsidy_no  = #{subsidy_no}
+  </update>
+  
+  <insert id="doSave" parameterType="SubsidyVO">
+    INSERT INTO subsidy (
+		    subsidy_no,
+		    name,
+		    model,
+		    subsidy,
+		    manufacturer,
+		    madeby
+		) VALUES (
+		    #{subsidy_no},
+		    #{name},
+		    #{model},
+		    #{subsidy},
+		    #{manufacturer},
+		    #{madeby}
+		)
+  </insert>
+  
+  <delete id="doDelete" parameterType="SubsidyVO">
+    DELETE FROM subsidy
+    WHERE subsidy_no = #{subsidy_no}
+  </delete>
+  
+  
+  <select id="doRetrieve" parameterType="SearchVO" resultMap="subsidyMap">
+  --paging
+	SELECT A.*, B.*
+	FROM(
+	    SELECT TT1.rnum as num,
+	           TT1.subsidy_no,
+	           TT1.name,
+	           TT1.model,
+	           TT1.subsidy,
+	           TT1.manufacturer,
+	           TT1.madeby
+	    FROM(
+	        SELECT ROWNUM AS rnum, T1.*
+	        FROM(
+	            SELECT *
+	            FROM subsidy
+	            --WHERE(10:자동차명,20:차종,30:제조사,40:생산지)
+	            <include refid="searchCondition_subsidy"></include>
+	            ORDER BY subsidy_no ASC
+	        )T1
+	        <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} -1) + #{pageSize} ]]>
+	    )TT1
+	    <![CDATA[ WHERE rnum >= #{pageSize} * (#{pageNo} -1) + 1 ]]>
+	)A
+	CROSS JOIN
+	(
+	    SELECT COUNT(*) totalCnt
+	    FROM subsidy
+	    --WHERE(10:자동차명,20:차종,30:제조사,40:생산지)
+	    <include refid="searchCondition_subsidy"></include>
+	)B
+  
+  </select>
+  
+</mapper>  

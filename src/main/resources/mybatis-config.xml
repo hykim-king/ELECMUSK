@@ -4,7 +4,8 @@
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
   <configuration>
     <typeAliases>
-      <typeAlias type="com.pcwk.ehr.evcar.domain.SubsidyVO" alias="SubsidyVO"/>
+      <typeAlias type="com.pcwk.ehr.charger.domain.ChargerVO" alias="ChargerVO"/>
+      <typeAlias type="com.pcwk.ehr.subsidy.domain.SubsidyVO" alias="SubsidyVO"/>
       <typeAlias type="com.pcwk.ehr.station.domain.StationVO" alias="StationVO"/>
       <typeAlias type="com.pcwk.ehr.board.domain.BoardVO" alias="BoardVO"/>
       <typeAlias type="com.pcwk.ehr.user.domain.UserVO" alias="UserVO"/>

@@ -22,27 +22,29 @@ public class SubsidyDaoImpl implements SubsidyDao {
 	final String NAMESPACE = "com.pcwk.ehr.subsidy";
 	final String DOT = ".";
 	
+	public SubsidyDaoImpl() {}
+	
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;//db연결 객체
 	
 	@Override
 	public int doSave(SubsidyVO inVO) throws SQLException {
-		return 0;
+		return sqlSessionTemplate.insert(NAMESPACE+DOT+"doSave", inVO);
 	}
 
 	@Override
 	public int doUpdate(SubsidyVO inVO) throws SQLException {
-		return 0;
+		return sqlSessionTemplate.update(NAMESPACE+DOT+"doUpdate", inVO);
 	}
 
 	@Override
 	public int doDelete(SubsidyVO inVO) throws SQLException {
-		return 0;
+		return sqlSessionTemplate.delete(NAMESPACE+DOT+"doDelete", inVO);
 	}
 
 	@Override
 	public SubsidyVO doSelectOne(SubsidyVO inVO) throws SQLException {
-		return null;
+		return sqlSessionTemplate.selectOne(NAMESPACE+DOT+"doSelectOne", inVO);
 	}
 
 	@Override

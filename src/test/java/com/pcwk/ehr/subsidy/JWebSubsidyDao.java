@@ -20,7 +20,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.pcwk.ehr.cmn.SearchVO;
-import com.pcwk.ehr.station.domain.StationVO;
 import com.pcwk.ehr.subsidy.dao.SubsidyDao;
 import com.pcwk.ehr.subsidy.domain.SubsidyVO;
 
@@ -45,22 +44,52 @@ public class JWebSubsidyDao {
 	
 	@Before
 	public void setUp() throws Exception {
+		subsidy01 = new SubsidyVO(99, "aa", "aa", 99, "aa", "aa");
+		
+		search = new SubsidyVO(99, "aa", "aa", 99, "aa", "aa");
+		
+		searchVO = new SearchVO(10, 1, "", "");
 	}
 	
-	public void isSameData(StationVO actual, StationVO expected) {
-		assertEquals(actual.getStation_seq(), expected.getStation_seq());
-		assertEquals(actual.getAddr(), expected.getAddr());
-		assertEquals(actual.getChargetp(), expected.getChargetp());
-		assertEquals(actual.getCpid(), expected.getCpid());
-		assertEquals(actual.getCpnm(), expected.getCpnm());
-		assertEquals(actual.getCpstat(), expected.getCpstat());
-		assertEquals(actual.getCptp(), expected.getCptp());
-		assertEquals(actual.getCsid(), expected.getCsid());
-		assertEquals(actual.getCsnm(), expected.getCsnm());
-		assertEquals(actual.getLat(), expected.getLat());
-		assertEquals(actual.getLongi(), expected.getLongi());
-		assertEquals(actual.getStatupdatetime(), expected.getStatupdatetime());
+	public void isSameData(SubsidyVO actual, SubsidyVO expected) {
+		assertEquals(actual.getSubsidy_no(), expected.getSubsidy_no());
+		assertEquals(actual.getName(), expected.getName());
+		assertEquals(actual.getModel(), expected.getModel());
+		assertEquals(actual.getSubsidy(), expected.getSubsidy());
+		assertEquals(actual.getManufacturer(), expected.getManufacturer());
+		assertEquals(actual.getMadeby(), expected.getMadeby());
 		
+	}
+	
+	@Test
+	@Ignore
+	public void doSelectOne() throws SQLException{
+		dao.doSelectOne(subsidy01);
+	}
+	
+	@Test
+	@Ignore
+	public void doUpdate() throws SQLException{
+		dao.doDelete(subsidy01);
+		dao.doSave(subsidy01);
+		
+		String upStr = "_U";
+		
+		subsidy01.setName(subsidy01.getName()+upStr);
+	
+		dao.doUpdate(subsidy01);
+	}
+	
+	@Test
+	@Ignore
+	public void doSave() throws SQLException{
+		dao.doSave(subsidy01);
+	}
+	
+	@Test
+	@Ignore
+	public void doDelete() throws SQLException{
+		dao.doDelete(subsidy01);
 	}
 	
 	
@@ -68,6 +97,9 @@ public class JWebSubsidyDao {
 	//@Ignore
 	public void doRetrieve() throws SQLException{
 		
+		dao.doDelete(subsidy01);
+		
+		dao.doSave(subsidy01);
 		
 		List<SubsidyVO> list = dao.doRetrieve(searchVO);
 	}
