@@ -50,4 +50,13 @@ public class HomeController {
 		
 		return "elecmusk/subsidy";
 	}
+	
+	@RequestMapping(value = "/elecmusk/station.do", method = RequestMethod.GET)
+	public String station() {
+		LOG.debug("┌───────────────────────────────────────────┐");
+		LOG.debug("│                   station                 │");
+		LOG.debug("└───────────────────────────────────────────┘");		
+		
+		return "elecmusk/station";
+	}
 }

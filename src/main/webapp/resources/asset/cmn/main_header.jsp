@@ -54,6 +54,10 @@
 		  let link = "${CP}/elecmusk/subsidy.do"
 		  location.href= link;
 	  });
+	  $("#stationSearch").on("click",function(){
+		  let link = "${CP}/elecmusk/station.do"
+		  location.href= link;
+	  });
 	  
 	  $("#mainhome,#logo").on("click",function(){
 		  let link = "${CP}/elecmusk/view.do"
@@ -107,7 +111,7 @@
          
         <li>STATION
           <ul class="sub-menu">
-            <li><a href="#">Station</a></li>
+            <li><a href="#" id="stationSearch" name="stationSearch">Station</a></li>
             <li><a href="#">Reviewboard</a></li>
           </ul>
          </li>
