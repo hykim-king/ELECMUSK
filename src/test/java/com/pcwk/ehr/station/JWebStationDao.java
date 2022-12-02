@@ -69,6 +69,13 @@ public class JWebStationDao {
 	
 	@Test
 	@Ignore
+	public void doSave() throws SQLException{
+		dao.doSave(station01);
+		
+	}
+	
+	@Test
+	@Ignore
 	public void doRetrieve() throws SQLException{
 		dao.doDelete(station01);
 		
@@ -78,7 +85,7 @@ public class JWebStationDao {
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void doUpdate() throws SQLException{
 		//1.삭제
 		//2.등록
@@ -113,6 +120,7 @@ public class JWebStationDao {
 	}
 	
 	@Test
+	@Ignore
 	public void beans() {
 		LOG.debug("┌─────────────────────────────────────┐");
 		LOG.debug("│context:" + context);

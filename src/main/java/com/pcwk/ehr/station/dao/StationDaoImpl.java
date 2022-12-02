@@ -8,17 +8,21 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.SearchVO;
 import com.pcwk.ehr.station.domain.StationVO;
 
+@Repository("stationDao")
 public class StationDaoImpl implements StationDAO {
 
 	final Logger LOG = LogManager.getFormatterLogger(getClass());
 	
 	final String NAMESPACE = "com.pcwk.ehr.station";
 	final String DOT = ".";
+	
+	public StationDaoImpl() {}
 	
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;//db연결 객체

@@ -17,8 +17,30 @@
         </when>
       </choose>
   </sql>
+  
+   <!-- resultMap -->
+  <!-- 
+    column : DB컬럼
+    property : VO 프로퍼티명
+    jdbcType : DB컬럼 타입
+    type : VO
+   -->
+  <resultMap type="StationVO" id="stationMap">
+    <result column="station_seq"        property="station_seq"      />
+    <result column="addr"        property="addr"      />
+    <result column="chargetp"        property="chargetp"      />
+    <result column="cpid"      property="cpid"    />
+    <result column="cpnm"   property="cpnm" />
+    <result column="cpstat"   property="cpstat"  />
+    <result column="cptp"     property="cptp"    />
+    <result column="csid"     property="csid"    />
+    <result column="csnm"     property="csnm"    />
+    <result column="lat"     property="lat"    />
+    <result column="longi"     property="longi"    />
+    <result column="statupdatetime"     property="statupdatetime"    />
+  </resultMap>
 	
-	<select id="doRetrieve" parameterType="SearchVO">
+	<select id="doRetrieve" parameterType="SearchVO" resultMap="stationMap">
 		--paging
 		SELECT A.*, B.*
 		FROM(
@@ -58,7 +80,7 @@
 			
 	</select>
 	
-	<select id="doSelectOne" parameterType="StationVO">
+	<select id="doSelectOne" parameterType="StationVO" resultMap="stationMap">
 	 SELECT
 		       station_seq,
 		       addr,
