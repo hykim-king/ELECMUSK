@@ -16,7 +16,7 @@ import com.pcwk.ehr.board.cmn.SearchVO;
 import com.pcwk.ehr.board.domain.BoardVO;
 import com.pcwk.ehr.user.domain.UserVO;
 
-@Repository
+@Repository("boardDao")
 public class BoardDaoImpl implements BoardDao {
 	
 	final Logger LOG = LogManager.getFormatterLogger(getClass());
@@ -120,20 +120,21 @@ public class BoardDaoImpl implements BoardDao {
 		
 		return list;
 	}
-	/*
-	 * @Override public List<BoardVO> doRetrieve(DTO inVO) throws SQLException {
-	 * SearchVO search = (SearchVO)inVO; List<BoardVO> list = new
-	 * ArrayList<BoardVO>(); String statement = NAMESPACE+DOT+"doRetrieve";
-	 * LOG.debug("┌─────────────────────────┐"); LOG.debug("│param: "+inVO);
-	 * LOG.debug("│statement: "+statement);
-	 * 
-	 * list = sqlSessionTemplate.selectList(statement,search);
-	 * 
-	 * for(BoardVO vo : list) { LOG.debug("|vo : " + vo); }
-	 * 
-	 * LOG.debug("└─────────────────────────┘");
-	 * 
-	 * return list; }
-	 */
+
+	@Override
+	public int updateReadCnt(BoardVO inVO) throws SQLException {
+		
+		int flag = 0;
+		
+		String statement = NAMESPACE+DOT+"updateReadCnt";
+		LOG.debug("┌─────────────────────────┐");
+		LOG.debug("│param: "+inVO);
+		LOG.debug("│statement: "+statement);
+		
+		flag = sqlSessionTemplate.update(statement, inVO);
+		
+		LOG.debug("└─────────────────────────┘");
+		return flag;
+	}
 
 }

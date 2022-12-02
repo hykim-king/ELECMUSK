@@ -21,5 +21,7 @@ public interface BoardDao extends WorkDiv<BoardVO>{
 	
 	// 등록된 데이터 건수 확인
 	int getCount(BoardVO inVO) throws SQLException;
+	
+	int updateReadCnt(BoardVO inVO) throws SQLException;
 
 }
