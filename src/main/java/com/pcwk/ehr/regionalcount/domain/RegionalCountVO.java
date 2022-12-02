@@ -1,4 +1,4 @@
-package com.pcwk.ehr.evcar.domain;
+package com.pcwk.ehr.regionalcount.domain;
 
 import com.pcwk.ehr.cmn.DTO;
 

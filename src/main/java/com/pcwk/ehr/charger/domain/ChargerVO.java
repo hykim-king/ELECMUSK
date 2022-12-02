@@ -1,4 +1,4 @@
-package com.pcwk.ehr.evcar.domain;
+package com.pcwk.ehr.charger.domain;
 
 import com.pcwk.ehr.cmn.DTO;
 

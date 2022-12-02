@@ -45,6 +45,79 @@
   $(document).ready(function(){
 	  console.log("document.ready");
 	  
+	  
+	  
+	  
+	  
+	    function doRetrieve(page){
+	        console.log("doRetrieve");
+	          
+	          let method = "GET";
+	          let url = "/elecmusk/doRetrieve.do";
+	          let async = true;
+	          let params = {
+	              searchDiv : $("#searchDiv").val(),
+	              searchWord : $("#searchWord").val(),
+	              pageSize : $("#pageSize").val(),
+	              pageNo : page
+	          };
+	          
+	          PClass.callAjax(method,url,async,params,function(data){
+	            console.log("data:"+data);
+	              let parsedJson = JSON.parse(data);
+	              
+	              let htmlData = "";
+	              
+	              //table 데이터 삭제
+	              $("#userTable>tbody").empty();
+	              
+	              //총글수
+	              let totalCnt = 0;
+	              //총페이지수
+	              let pageTotal = 1;
+	              
+	              if(null != parsedJson && parsedJson.length > 0){
+	                //총페이지수
+	                //총글수/페이수-나머지가 있으면 1증가
+	                totalCnt = parsedJson[0].totalCnt
+	                pageTotal = Math.ceil(totalCnt/$("#pageSize").val());
+	                console.log("=======================");
+	                console.log("=totalCnt="+totalCnt);
+	                console.log("=pageSize="+$("#pageSize").val());
+	                console.log("=pageTotal="+pageTotal);
+	                console.log("=======================");
+	                
+	                
+	                $.each(parsedJson, function(index,value){
+	                  //console.log(index+","+value.uId);
+	                  htmlData +=" <tr> ";
+	                  htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.model   +"</td> ";        
+	                  htmlData +="   <td class='text-left   col-sm-2 col-md-2 col-lg-2'>"+value.manufacturer   +"</td> ";        
+	                  htmlData +="   <td class='text-left   col-sm-6 col-md-6 col-lg-6'>"+value.name  +"</td> ";        
+	                  htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.subsidy +"</td> ";        
+	                  htmlData +=" </tr> ";
+	                });
+	                //데이터가 없는 경우
+	              }else{
+	                htmlData +=" <tr> ";
+	                htmlData +="   <td colspan='99' class='text-center col-sm-12 col-md-12 col-lg-12'>no data found</td> ";
+	                htmlData +=" </tr> ";
+	              }
+	              
+	              //table 데이터 출력
+	              $("#userTable>tbody").append(htmlData);
+
+	              //paging
+	              //paging 데이터 삭제
+	              $("#page-selection").empty();
+	              renderingPage(pageTotal,1);
+	              
+	            
+	            
+	          });
+	          
+	      }
+	  
   });
 </script>
 
