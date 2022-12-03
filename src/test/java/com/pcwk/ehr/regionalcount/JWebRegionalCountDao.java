@@ -1,4 +1,4 @@
-package com.pcwk.ehr.charger;
+package com.pcwk.ehr.regionalcount;
 
 import static org.junit.Assert.*;
 
@@ -18,15 +18,15 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.pcwk.ehr.charger.dao.ChargerDao;
-import com.pcwk.ehr.charger.domain.ChargerVO;
 import com.pcwk.ehr.cmn.SearchVO;
+import com.pcwk.ehr.regionalcount.dao.RegionalCountDao;
+import com.pcwk.ehr.regionalcount.domain.RegionalCountVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/root-context.xml",
 		"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" })
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class JWebChargerDao {
+public class JWebRegionalCountDao {
 
 	final Logger LOG = LogManager.getLogger(getClass());
 	
@@ -34,19 +34,19 @@ public class JWebChargerDao {
 	ApplicationContext context;
 	
 	@Autowired
-	ChargerDao dao;
+	RegionalCountDao dao;
 	
-	ChargerVO charger01;
+	RegionalCountVO rc01;
 	
 	SearchVO searchVO;
-	ChargerVO search;
 	
+	RegionalCountVO search;
 	
 	@Before
 	public void setUp() throws Exception {
-		charger01 = new ChargerVO(99, "aa", "aa", "aa", "aa", "aa", "aa", "aa");
+		rc01 = new RegionalCountVO(99, 99, 999999, 99, 99, 99, 99, 99, "aaaaaa", 99, 99, 99, 99, 99, 99, 99, 99, 99, 99);
 		
-		search = new ChargerVO(99, "aa", "aa", "aa", "aa", "aa", "aa", "aa");
+		search = new RegionalCountVO(99, 99, 999999, 99, 99, 99, 99, 99, "aaaaaa", 99, 99, 99, 99, 99, 99, 99, 99, 99, 99);
 		
 		searchVO = new SearchVO(10, 1, "", "");
 	}
@@ -54,49 +54,46 @@ public class JWebChargerDao {
 	@Test
 	@Ignore
 	public void doSelectOne() throws SQLException{
-		dao.doDelete(charger01);
-		dao.doSave(charger01);
-		dao.doSelectOne(charger01);
+		dao.doDelete(rc01);
+		dao.doSave(rc01);
+		dao.doSelectOne(rc01);
 	}
 	
 	@Test
 	@Ignore
 	public void doUpdate() throws SQLException{
-		dao.doDelete(charger01);
-		dao.doSave(charger01);
+		dao.doDelete(rc01);
+		dao.doSave(rc01);
 		
-		String upStr = "_U";
+		int upInt = 1000;
 		
-		charger01.setConnector(charger01.getConnector()+upStr);
+		rc01.setUlsan(rc01.getUlsan()+upInt);
 		
-		dao.doUpdate(charger01);
+		dao.doUpdate(rc01);
 		
-		dao.doSelectOne(charger01);
+		dao.doSelectOne(rc01);
 	}
 	
 	@Test
 	@Ignore
 	public void doSave() throws SQLException{
-		dao.doDelete(charger01);
-		dao.doSave(charger01);
-		dao.doSelectOne(charger01);
+		dao.doSave(rc01);
+		dao.doSelectOne(rc01);
 	}
 	
 	@Test
 	@Ignore
 	public void doDelete() throws SQLException{
-		dao.doDelete(charger01);
-		dao.doSave(charger01);
-		dao.doDelete(charger01);
-		dao.doSelectOne(charger01);
+		dao.doDelete(rc01);
+		dao.doSelectOne(rc01);
 	}
 	
 	@Test
 	@Ignore
 	public void doRetrieve() throws SQLException{
-		dao.doDelete(charger01);
-		dao.doSave(charger01);
-		List<ChargerVO> list = dao.doRetrieve(searchVO);
+		dao.doDelete(rc01);
+		dao.doSave(rc01);
+		List<RegionalCountVO> list = dao.doRetrieve(searchVO);
 	}
 
 	@Test

@@ -4,6 +4,17 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pcwk.ehr.charger">
 
+  <resultMap type="ChargerVO" id="chargerMap">
+    <result column="charger_no" property="charger_no"/>
+    <result column="connector" property="connector"/>
+    <result column="image" property="image"/>
+    <result column="ev_current" property="ev_current"/>
+    <result column="ev_voltage" property="ev_voltage"/>
+    <result column="ev_power" property="ev_power"/>
+    <result column="ev_level" property="ev_level"/>
+    <result column="ev_support" property="ev_support"/>
+  </resultMap>
+
   <sql id="searchCondition">
       <choose>
         <when test=" '10' == searchDiv and '' != searchWord ">
@@ -60,7 +71,7 @@
 	WHERE charger_no = #{}
   </update>
   
-  <select id="doSelectOne" parameterType="ChargerVO">
+  <select id="doSelectOne" parameterType="ChargerVO" resultMap="chargerMap">
   SELECT  charger_no,
 			    connector,
 			    image,
@@ -73,7 +84,7 @@
 	WHERE charger_no = #{charger_no}
   </select>
   
-  <select id="doRetrieve" parameterType="SearchVO">
+  <select id="doRetrieve" parameterType="SearchVO" resultMap="chargerMap">
       --paging
 		  SELECT A.*, B.*
 		  FROM(
@@ -92,8 +103,7 @@
 		              SELECT *
 		              FROM charger
 		              --WHERE(10:충전기명,20:충전전류,30:충전전력,40:지원차량)
-		              
-		              
+		              <include refid="searchCondition"></include>
 		              ORDER BY charger_no ASC
 		          )T1
 		          <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} -1) + #{pageSize} ]]>
@@ -105,8 +115,7 @@
 		      SELECT COUNT(*) totalCnt
 		      FROM charger
 		      --WHERE(10:충전기명,20:충전전류,30:충전전력,40:지원차량)
-		      
-		      
+		      <include refid="searchCondition"></include>
 		  )B
   </select>
   

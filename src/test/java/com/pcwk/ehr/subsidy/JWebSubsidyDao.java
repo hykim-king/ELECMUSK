@@ -64,6 +64,8 @@ public class JWebSubsidyDao {
 	@Test
 	@Ignore
 	public void doSelectOne() throws SQLException{
+		dao.doDelete(subsidy01);
+		dao.doSave(subsidy01);
 		dao.doSelectOne(subsidy01);
 	}
 	
@@ -78,23 +80,30 @@ public class JWebSubsidyDao {
 		subsidy01.setName(subsidy01.getName()+upStr);
 	
 		dao.doUpdate(subsidy01);
+		
+		dao.doSelectOne(subsidy01);
 	}
 	
 	@Test
 	@Ignore
 	public void doSave() throws SQLException{
+		dao.doDelete(subsidy01);
 		dao.doSave(subsidy01);
+		dao.doSelectOne(subsidy01);
 	}
 	
 	@Test
 	@Ignore
 	public void doDelete() throws SQLException{
 		dao.doDelete(subsidy01);
+		dao.doSave(subsidy01);
+		dao.doDelete(subsidy01);
+		dao.doSelectOne(subsidy01);
 	}
 	
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void doRetrieve() throws SQLException{
 		
 		dao.doDelete(subsidy01);

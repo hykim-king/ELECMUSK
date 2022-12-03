@@ -5,11 +5,11 @@
   
   Modification information
   
-    수정일     수정자      수정내용
-  -----   -----  -------------------------------------------
-    2022. 12. 2        최초작성 
+    수정일                수정자        수정내용
+  -----       -----   -------------------------------------------
+  2022.12.03  허승휘        최초작성 
     
-    author eclass 개발팀 :ITSC
+    author eclass 개발팀 :ELECMUSK
     since 2022.11.24
     Copyright (C) by KandJang All right reserved.
 */
@@ -76,7 +76,7 @@ function drawMap(locations){
     //          ["충전소명칭",위도,경도]
     //          ]
 
-    //// 학원 위치, 첫 시작 위치
+    //// 첫 시작 위치 - GPS기능 추가 전
     const myLatLng = { lat: 37.554075322663984, lng: 126.93576681191617 }; 
 
     
@@ -86,13 +86,14 @@ function drawMap(locations){
     
 
 
-    //지도 생성
+    //구글지도 생성
     const map = new google.maps.Map(document.getElementById("map"),{
         zoom:15,
         center: myLatLng,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
     });
 
+    //마커 클릭시 생성되는 인포윈도우
     const infowindow = new google.maps.InfoWindow();
 
     
@@ -101,14 +102,14 @@ function drawMap(locations){
     //현재 위치 마커 생성
     
     
-    //location별로 marker 생성
+    //마커에 충전소들의 위도, 경도 정보를 담아 표시
     for(i = 0; i < locations.length; i++){
         marker = new google.maps.Marker({
             position: new google.maps.LatLng(locations[i][8],locations[i][9]), 
             map: map,
         });
         
-        //marker를 클릭했을때 보여주는 정보
+        //인포윈도우 설정
         google.maps.event.addListener(
             marker,
             "click",
@@ -150,6 +151,8 @@ getData();
 	<header>
   <jsp:include page ="/resources/asset/cmn/main_header.jsp" flush="false"/>
   </header>
+  
+  
   <div id="contents">
   
       <!-- div container -->
@@ -165,6 +168,8 @@ getData();
   </div>
   
   </div>
+  
+  
   <footer>
     <jsp:include page="/resources/asset/cmn/main_footer.jsp" flush="false" />
   </footer>

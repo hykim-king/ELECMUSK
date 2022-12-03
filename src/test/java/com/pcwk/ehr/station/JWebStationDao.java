@@ -70,6 +70,8 @@ public class JWebStationDao {
 	@Test
 	@Ignore
 	public void doSelectOne() throws SQLException{
+		dao.doDelete(station01);
+		dao.doSave(station01);
 		dao.doSelectOne(station01);
 	}
 	
@@ -77,13 +79,17 @@ public class JWebStationDao {
 	@Ignore
 	public void doDelete() throws SQLException{
 		dao.doDelete(station01);
+		dao.doSave(station01);
+		dao.doDelete(station01);
+		dao.doSelectOne(station01);
 	}
 	
 	@Test
 	@Ignore
 	public void doSave() throws SQLException{
+		dao.doDelete(station01);
 		dao.doSave(station01);
-		
+		dao.doSelectOne(station01);
 	}
 	
 	@Test

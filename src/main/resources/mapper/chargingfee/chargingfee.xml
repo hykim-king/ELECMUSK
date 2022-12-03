@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pcwk.ehr.chargingfee">
+
+  <resultMap type="ChargingFeeVO" id="chargingfeeMap">
+    <result column="provider_no" property="provider_no"/>
+    <result column="enterprenuer" property="enterprenuer"/>
+    <result column="rapid_below100" property="rapid_below100"/>
+    <result column="rapid_above100" property="rapid_above100"/>
+    <result column="slow_fee" property="slow_fee"/>
+    <result column="image" property="image"/>
+  </resultMap>
+
+  <sql id="searchCondition">
+      <choose>
+        <when test=" '10' == searchDiv and '' != searchWord ">
+         AND enterprenuer LIKE #{searchWord} || '%'
+        </when>
+      </choose>
+  </sql>
+  
+  <select id="doSelectOne" parameterType="ChargingFeeVO" resultMap="chargingfeeMap">
+  SELECT
+	    provider_no,
+	    image,
+	    enterprenuer,
+	    rapid_below100,
+	    rapid_above100,
+	    slow_fee
+	FROM charging_fee
+	WHERE provider_no = #{provider_no}
+  </select>
+  
+  <update id="doUpdate" parameterType="ChargingFeeVO">
+  UPDATE charging_fee
+	SET image = #{image},
+	    enterprenuer = #{enterprenuer},
+	    rapid_below100 = #{rapid_below100},
+	    rapid_above100 = #{rapid_above100},
+	    slow_fee = #{slow_fee}
+	WHERE provider_no = #{provider_no}
+  </update>
+  
+  <insert id="doSave" parameterType="ChargingFeeVO">
+  INSERT INTO charging_fee (
+	    provider_no,
+	    image,
+	    enterprenuer,
+	    rapid_below100,
+	    rapid_above100,
+	    slow_fee
+	) VALUES (
+	    #{provider_no},
+	    #{image},
+	    #{enterprenuer},
+	    #{rapid_below100},
+	    #{rapid_above100},
+	    #{slow_fee}
+	)
+  </insert>
+  
+  <delete id="doDelete" parameterType="ChargingFeeVO">
+  DELETE FROM charging_fee
+  WHERE provider_no = #{provider_no}
+  </delete>
+
+  <select id="doRetrieve" parameterType="ChargingFeeVO" resultMap="chargingfeeMap">
+  --paging
+	SELECT A.*, B.*
+	FROM(
+	    SELECT TT1.rnum as num,
+	           TT1.provider_no,
+	           TT1.image,
+	           TT1.enterprenuer,
+	           TT1.rapid_below100,
+	           TT1.rapid_above100,
+	           TT1.slow_fee
+	    FROM(
+	        SELECT ROWNUM AS rnum, T1.*
+	        FROM(
+	            SELECT *
+	            FROM charging_fee
+	            --WHERE(10:사업자명)
+	            <include refid="searchCondition"></include>
+	            ORDER BY provider_no ASC
+	        )T1
+	        <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} -1) + #{pageSize} ]]>
+	    )TT1
+	    <![CDATA[ WHERE rnum >= #{pageSize} * (#{pageNo} -1) + 1 ]]>
+	)A
+	CROSS JOIN
+	(
+	    SELECT COUNT(*) totalCnt
+	    FROM charging_fee
+	    --WHERE(10:자동차명)
+	    <include refid="searchCondition"></include>
+	)B
+  </select>
+  
+	
+</mapper>  

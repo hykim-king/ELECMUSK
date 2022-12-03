@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pcwk.ehr.regionalcount">
+
+  <resultMap type="RegionalCountVO" id="regionalcountMap">
+    <result column="ulsan" property="ulsan"/>
+    <result column="choongbuk" property="choongbuk"/>
+    <result column="count_sum" property="count_sum"/>
+    <result column="seoul" property="seoul"/>
+    <result column="jeonbuk" property="jeonbuk"/>
+    <result column="gyeonggi" property="gyeonggi"/>
+    <result column="choongnam" property="choongnam"/>
+    <result column="busan" property="busan"/>
+    <result column="standard_date" property="standard_date"/>
+    <result column="gangwon" property="gangwon"/>
+    <result column="gyeongbuk" property="gyeongbuk"/>
+    <result column="daejeon" property="daejeon"/>
+    <result column="sejong" property="sejong"/>
+    <result column="jeju" property="jeju"/>
+    <result column="daegu" property="daegu"/>
+    <result column="incheon" property="incheon"/>
+    <result column="jeonnam" property="jeonnam"/>
+    <result column="gyeongnam" property="gyeongnam"/>
+    <result column="gwangju" property="gwangju"/>
+  </resultMap>
+
+  <sql id="searchCondition">
+      <choose>
+        <when test=" '10' == searchDiv and '' != searchWord ">
+         AND standard_date LIKE #{searchWord} || '%'
+        </when>
+      </choose>
+  </sql>
+  
+  <select id="doSelectOne" parameterType="RegionalCountVO" resultMap="regionalcountMap">
+  SELECT
+	    ulsan,
+	    choongbuk,
+	    count_sum,
+	    seoul,
+	    jeonbuk,
+	    gyeonggi,
+	    choongnam,
+	    busan,
+	    standard_date,
+	    gangwon,
+	    gyeongbuk,
+	    daejeon,
+	    sejong,
+	    jeju,
+	    daegu,
+	    incheon,
+	    jeonnam,
+	    gyeongnam,
+	    gwangju
+	FROM regional_count
+	WHERE standard_date = #{standard_date}
+  </select>
+  
+  <update id="doUpdate" parameterType="RegionalCountVO">
+  UPDATE regional_count
+	SET
+	    ulsan           = #{ulsan},
+	    choongbuk       = #{choongbuk},
+	    count_sum       = #{count_sum},
+	    seoul           = #{seoul},
+	    jeonbuk         = #{jeonbuk},
+	    gyeonggi        = #{gyeonggi},
+	    choongnam       = #{choongnam},
+	    busan           = #{busan},
+	    standard_date   = #{standard_date},
+	    gangwon         = #{gangwon},
+	    gyeongbuk       = #{gyeongbuk},
+	    daejeon         = #{daejeon},
+	    sejong          = #{sejong},
+	    jeju            = #{jeju},
+	    daegu           = #{daegu},
+	    incheon         = #{incheon},
+	    jeonnam         = #{jeonnam},
+	    gyeongnam       = #{gyeongnam},
+	    gwangju         = #{gwangju}
+	WHERE standard_date = #{standard_date}
+  </update>
+  
+  <insert id="doSave" parameterType="RegionalCountVO">
+  INSERT INTO regional_count (
+	      ulsan,
+	      choongbuk,
+	      count_sum,
+	      seoul,
+	      jeonbuk,
+	      gyeonggi,
+	      choongnam,
+	      busan,
+	      standard_date,
+	      gangwon,
+	      gyeongbuk,
+	      daejeon,
+	      sejong,
+	      jeju,
+	      daegu,
+	      incheon,
+	      jeonnam,
+	      gyeongnam,
+	      gwangju
+	) VALUES (
+	    #{ulsan},
+		  #{choongbuk},
+		  #{count_sum},
+		  #{seoul},
+		  #{jeonbuk},
+		  #{gyeonggi},
+		  #{choongnam},
+		  #{busan},
+		  #{standard_date},
+		  #{gangwon},
+		  #{gyeongbuk},
+		  #{daejeon},
+		  #{sejong},
+		  #{jeju},
+		  #{daegu},
+		  #{incheon},
+		  #{jeonnam},
+		  #{gyeongnam},
+		  #{gwangju}
+	)
+  </insert>
+  
+  <delete id="doDelete" parameterType="RegionalCountVO">
+  DELETE FROM regional_count
+  WHERE standard_date = #{standard_date}
+  </delete>
+
+  <select id="doRetrieve" parameterType="RegionalCountVO" resultMap="regionalcountMap">
+  --paging
+	SELECT A.*, B.*
+	FROM(
+	    SELECT TT1.rnum as num,
+	           TT1.ulsan,
+	           TT1.choongbuk,
+	           TT1.count_sum,
+	           TT1.seoul,
+	           TT1.jeonbuk,
+	           TT1.gyeonggi,
+			       TT1.choongnam,
+			       TT1.busan,
+			       TT1.standard_date,
+			       TT1.gangwon,
+			       TT1.gyeongbuk,
+			       TT1.daejeon,
+			       TT1.sejong,
+			       TT1.jeju,
+			       TT1.daegu,
+			       TT1.incheon,
+			       TT1.jeonnam,
+			       TT1.gyeongnam,
+			       TT1.gwangju
+	    FROM(
+	        SELECT ROWNUM AS rnum, T1.*
+	        FROM(
+	            SELECT *
+	            FROM regional_count
+	            --WHERE(10:기준일)
+	            <include refid="searchCondition"></include>
+	            ORDER BY standard_date ASC
+	        )T1
+	        <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} -1) + #{pageSize} ]]>
+	    )TT1
+	    <![CDATA[ WHERE rnum >= #{pageSize} * (#{pageNo} -1) + 1 ]]>
+	)A
+	CROSS JOIN
+	(
+	    SELECT COUNT(*) totalCnt
+	    FROM regional_count
+	    --WHERE(10:기준일)
+	    <include refid="searchCondition"></include>
+	)B
+  </select>
+  
+	
+</mapper>  
