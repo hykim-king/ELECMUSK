@@ -30,7 +30,7 @@ public class StationApiController {
 			sb.append("?" + URLEncoder.encode("page", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));//PageNo
 			sb.append("&" + URLEncoder.encode("perPage", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8"));//PageSize
 			sb.append("&" + URLEncoder.encode("serviceKey", "UTF-8")//Service Key
-					+ "{YOUR SERVICE KEY}");
+					+ "={YOUR SERVICE KEY}");
 			sb.append("&application/json;charset=UTF-8");//Content-Type
 			URL url = new URL(sb.toString());
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
