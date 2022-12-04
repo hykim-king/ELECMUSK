@@ -26,15 +26,15 @@ public class StationApiController {
 
 		StringBuffer result = new StringBuffer();
 		try {
-			StringBuilder sb = new StringBuilder("https://api.odcloud.kr/api/EvInfoServiceV2/v1/getEvSearchList");
-			sb.append("?" + URLEncoder.encode("page", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
-			sb.append("&" + URLEncoder.encode("perPage", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8"));
-			sb.append("&" + URLEncoder.encode("serviceKey", "UTF-8")
+			StringBuilder sb = new StringBuilder("https://api.odcloud.kr/api/EvInfoServiceV2/v1/getEvSearchList");//Request URl
+			sb.append("?" + URLEncoder.encode("page", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));//PageNo
+			sb.append("&" + URLEncoder.encode("perPage", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8"));//PageSize
+			sb.append("&" + URLEncoder.encode("serviceKey", "UTF-8")//Service Key
 					+ "=m8mhLoQ0Q98g4kewmJc%2B3l2PboIiGXBoq8WLOkx1QNqRJzBDzbH2rCRhsBNwTFjbI77pAcduxM3M9%2FwrB%2BKS6Q%3D%3D");
-			sb.append("&application/json;charset=UTF-8");
+			sb.append("&application/json;charset=UTF-8");//Content-Type
 			URL url = new URL(sb.toString());
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("GET");
+			conn.setRequestMethod("GET");//Request Method
 			BufferedReader rd;
 			if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
 				rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));

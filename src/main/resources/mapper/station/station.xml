@@ -7,13 +7,13 @@
   <sql id="searchCondition">
       <choose>
         <when test=" '10' == searchDiv and '' != searchWord ">
-         AND csnm LIKE #{searchWord} || '%'
+         AND csnm     LIKE #{searchWord} || '%'
         </when>
         <when test=" '20' == searchDiv and '' != searchWord ">
          AND chargetp LIKE #{searchWord} || '%'
         </when>
         <when test=" '30' == searchDiv and '' != searchWord ">
-         AND cptp LIKE #{searchWord} || '%'
+         AND cptp     LIKE #{searchWord} || '%'
         </when>
       </choose>
   </sql>
@@ -26,34 +26,34 @@
     type : VO
    -->
   <resultMap type="StationVO" id="stationMap">
-    <result column="station_seq"        property="station_seq"      />
-    <result column="addr"        property="addr"      />
-    <result column="chargetp"        property="chargetp"      />
-    <result column="cpid"      property="cpid"    />
-    <result column="cpnm"   property="cpnm" />
-    <result column="cpstat"   property="cpstat"  />
-    <result column="cptp"     property="cptp"    />
-    <result column="csid"     property="csid"    />
-    <result column="csnm"     property="csnm"    />
-    <result column="lat"     property="lat"    />
-    <result column="longi"     property="longi"    />
-    <result column="statupdatetime"     property="statupdatetime"    />
+    <result column="station_seq"        property="station_seq"    />
+    <result column="addr"               property="addr"           />
+    <result column="chargetp"           property="chargetp"       />
+    <result column="cpid"               property="cpid"           />
+    <result column="cpnm"               property="cpnm"           />
+    <result column="cpstat"             property="cpstat"         />
+    <result column="cptp"               property="cptp"           />
+    <result column="csid"               property="csid"           />
+    <result column="csnm"               property="csnm"           />
+    <result column="lat"                property="lat"            />
+    <result column="longi"              property="longi"          />
+    <result column="statupdatetime"     property="statupdatetime" />
   </resultMap>
   
   <update id="doUpdate" parameterType="StationVO">
   UPDATE station_data
 	SET
-	  addr = #{addr},
-	  chargetp = #{chargetp},
-	  cpid = #{cpid},
-	  cpnm = #{cpnm},
-	  cpstat = #{cpstat},
-	  cptp = #{cptp},
-	  csid = #{csid},
-	  csnm = #{csnm},
-	  lat = #{lat},
-	  longi = #{longi},
-	  statupdatetime = #{statupdatetime}
+	  addr            = #{addr},
+	  chargetp        = #{chargetp},
+	  cpid            = #{cpid},
+	  cpnm            = #{cpnm},
+	  cpstat          = #{cpstat},
+	  cptp            = #{cptp},
+	  csid            = #{csid},
+	  csnm            = #{csnm},
+	  lat             = #{lat},
+	  longi           = #{longi},
+	  statupdatetime  = #{statupdatetime}
 	WHERE station_seq = #{station_seq}
   </update>
 	

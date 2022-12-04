@@ -15,7 +15,7 @@ import com.pcwk.ehr.cmn.SearchVO;
 import com.pcwk.ehr.station.domain.StationVO;
 
 @Repository("stationDao")
-public class StationDaoImpl implements StationDAO {
+public class StationDaoImpl implements StationDao {
 
 	final Logger LOG = LogManager.getFormatterLogger(getClass());
 	

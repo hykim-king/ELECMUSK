@@ -20,7 +20,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.pcwk.ehr.cmn.SearchVO;
-import com.pcwk.ehr.station.dao.StationDAO;
+import com.pcwk.ehr.station.dao.StationDao;
 import com.pcwk.ehr.station.domain.StationVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -35,7 +35,7 @@ public class JWebStationDao {
 	ApplicationContext context;
 	
 	@Autowired
-	StationDAO dao;
+	StationDao dao;
 	
 	StationVO station01;
 	
