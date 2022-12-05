@@ -25,12 +25,6 @@ public class EvCarDaoImpl implements EvCarDao {
 	SqlSessionTemplate sqlSessionTemplate;
 	
 	public EvCarDaoImpl() {}
-	
-	@Override
-	public EvCarVO doSelectOne(EvCarVO inVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public List<EvCarVO> doRetrieve(evDTO inVO) throws SQLException {
@@ -46,40 +40,6 @@ public class EvCarDaoImpl implements EvCarDao {
 		}
 		LOG.debug("└───────────────────────────────────┘");
 		return list;
-	}
-
-	@Override
-	public int doSave(EvCarVO inVO) throws SQLException {
-		LOG.debug("┌───────────────────────────────────┐");
-		LOG.debug("│param : "+ inVO);
-		
-		String statement = NAMESPACE +DOT+"doSave";
-		LOG.debug("│statement : "+ statement);
-		
-		int flag = sqlSessionTemplate.insert(statement, inVO);
-		LOG.debug("│flag : "+ flag);
-		LOG.debug("└───────────────────────────────────┘");
-		return flag;
-	}
-
-	@Override
-	public int doUpdate(EvCarVO inVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int doDelete(EvCarVO inVO) throws SQLException {
-		LOG.debug("┌───────────────────────────────────┐");
-		LOG.debug("│param : "+ inVO);
-		
-		String statement = NAMESPACE +DOT+"doDelete";
-		LOG.debug("│statement : "+ statement);
-		
-		int flag = sqlSessionTemplate.delete(statement, inVO);
-		LOG.debug("│flag : "+ flag);
-		LOG.debug("└───────────────────────────────────┘");
-		return flag;
 	}
 
 }

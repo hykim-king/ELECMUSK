@@ -4,6 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
   <configuration>
     <typeAliases>
+      <typeAlias type="com.pcwk.ehr.evcar.domain.EvCarVO" alias="evCarVO"/>
       <typeAlias type="com.pcwk.ehr.regionalcount.domain.RegionalCountVO" alias="RegionalCountVO"/>
       <typeAlias type="com.pcwk.ehr.chargingfee.domain.ChargingFeeVO" alias="ChargingFeeVO"/>
       <typeAlias type="com.pcwk.ehr.charger.domain.ChargerVO" alias="ChargerVO"/>
