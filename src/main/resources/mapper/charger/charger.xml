@@ -61,14 +61,14 @@
   
   <update id="doUpdate" parameterType="ChargerVO">
   UPDATE charger
-	SET connector = #{},
-	    image = #{},
-	    ev_current = #{},
-	    ev_voltage = #{},
-	    ev_power = #{},
-	    ev_level = #{},
-	    ev_support = #{}
-	WHERE charger_no = #{}
+	SET connector = #{connector},
+	    image = #{image},
+	    ev_current = #{ev_current},
+	    ev_voltage = #{ev_voltage},
+	    ev_power = #{ev_power},
+	    ev_level = #{ev_level},
+	    ev_support = #{ev_support}
+	WHERE charger_no = #{charger_no}
   </update>
   
   <select id="doSelectOne" parameterType="ChargerVO" resultMap="chargerMap">
