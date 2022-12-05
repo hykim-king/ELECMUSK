@@ -60,7 +60,7 @@ public class JCIWebEvCarTest {
 	@Before
 	public void setUp() throws Exception {
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-		searchVO = new evSearchVO(6, 1, "", "");
+		searchVO = new evSearchVO(10, 1, "", "");
 	}
 	
 	@Test
