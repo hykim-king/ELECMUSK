@@ -45,40 +45,35 @@ public class KDJTestDontTouchPleaseThankYou {
 	}
 
 	@Test
-	@Ignore
 	public void doSave() throws Exception{
 		LOG.debug("userVO1: "+userVO1);
 		userDao.doSave(userVO1);
 	}
 	
 	@Test
-	@Ignore
 	public void doUpdate() throws Exception{
 		LOG.debug("userVO1: "+userVO1);
 		UserVO userVOkk = new UserVO("rlaehdwn60_U", "rlaehdwn60_U", "password_U", "김동_U");
-		userVOkk.setMemberSeq(1000042);
+		userVOkk.setMemberSeq(1000041);
 		userDao.doUpdate(userVOkk);
 	}
 	
 	@Test
-	@Ignore
 	public void doDelete() throws Exception{
 		LOG.debug("userVO1: "+userVO1);
-		userVO1.setMemberSeq(1000042);
+		userVO1.setMemberSeq(1000021);
 		userDao.doDelete(userVO1);
 	}
 	
 	@Test
-	@Ignore
 	public void doSelectOne() throws Exception{
 		LOG.debug("userVO1: "+userVO1);
-		userVO1.setMemberSeq(1000061);
+		userVO1.setMemberSeq(1000041);
 		UserVO outVO = userDao.doSelectOne(userVO1);
 		System.out.println(outVO);
 	}
 	
 	@Test
-	@Ignore
 	public void doRetrieve() throws Exception{
 		List<UserVO> list = userDao.doRetrieve(searchVO);
 		
@@ -86,26 +81,22 @@ public class KDJTestDontTouchPleaseThankYou {
 	}
 	
 	@Test
-	@Ignore
 	public void idCheck() throws Exception{
 		LOG.debug("flag: "+userDao.idCheck(userVO1));
 	}
 	
 	@Test
-	@Ignore
 	public void passCheck() throws Exception{
 		LOG.debug("flag: "+userDao.passCheck(userVO1));
 	}
 	
 	@Test
-	@Ignore
 	public void findIdByEmail() throws Exception{
 		userVO1.setEmail("rlaehdwn60@gmail.com");
 		LOG.debug("userVO: "+userDao.findIdByEmail(userVO1));
 	}
 	
 	@Test
-	@Ignore
 	public void findIdByNameBirth() throws Exception{
 		userVO1.setBirth("99/01/31");
 		userVO1.setName("이상무");
@@ -113,7 +104,6 @@ public class KDJTestDontTouchPleaseThankYou {
 	}
 	
 	@Test
-	@Ignore
 	public void findPwByBackup() throws Exception{
 		userVO1.setBackupQusetion("1+1은?");
 		userVO1.setBackupAnswer("2");
