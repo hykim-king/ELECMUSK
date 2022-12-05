@@ -65,7 +65,7 @@ public class JCIWebEvCarTest {
 	
 	@Test
 	public void doRetrieve() throws Exception {
-		MockHttpServletRequestBuilder  requestBuilder = MockMvcRequestBuilders.get("/home/doRetrive.do")
+		MockHttpServletRequestBuilder  requestBuilder = MockMvcRequestBuilders.get("/elecmusk/doRetrive.do")
 										                .param("pageSize", searchVO.getPageSize()+"")
 										                .param("pageNo", searchVO.getPageNo()+"")
 										                .param("searchDiv", searchVO.getSearchDiv())

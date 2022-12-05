@@ -44,6 +44,37 @@
 <meta charset="UTF-8">
 <title>충전소 찾기</title>
 <script >
+$(document).ready(function(){
+    
+    $(function() {
+      let didScroll;
+      let lastScrollTop = 0;
+      let navbarHeight = $("header").outerHeight();
+       $(window).scroll(function(event){
+           didScroll = true;
+       });
+       setInterval(function() {
+           if (didScroll) {
+               hasScrolled();
+               didScroll = false;
+           }
+       }); // 스크롤이 멈춘 후 동작이 실행되기 까지의 딜레이
+       function hasScrolled() {
+         if($(this).width() > 700) {       
+         let st = $(this).scrollTop(); // 현재 window의 scrollTop 값
+             if ($(window).scrollTop() > 50){
+                 $(".logo-area").slideUp("fast"); // header 숨기기
+                 $(".text-logo-area").addClass("visible");
+             } else {
+                 if($(window).scrollTop() < 200) {
+                     $(".logo-area").slideDown("fast"); // header 보이기
+                     $(".text-logo-area").removeClass("visible");
+             }
+          }
+       }
+    }
+    });
+});
 const API_KEY='m8mhLoQ0Q98g4kewmJc%2B3l2PboIiGXBoq8WLOkx1QNqRJzBDzbH2rCRhsBNwTFjbI77pAcduxM3M9%2FwrB%2BKS6Q%3D%3D';
 
 

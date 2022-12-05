@@ -117,6 +117,35 @@
 	          });
 	          
 	      }
+	    
+	     $(function() {
+	         let didScroll;
+	         let lastScrollTop = 0;
+	         let navbarHeight = $("header").outerHeight();
+	          $(window).scroll(function(event){
+	              didScroll = true;
+	          });
+	          setInterval(function() {
+	              if (didScroll) {
+	                  hasScrolled();
+	                  didScroll = false;
+	              }
+	          }); // 스크롤이 멈춘 후 동작이 실행되기 까지의 딜레이
+	          function hasScrolled() {
+	            if($(this).width() > 700) {       
+	            let st = $(this).scrollTop(); // 현재 window의 scrollTop 값
+	                if ($(window).scrollTop() > 50){
+	                    $(".logo-area").slideUp("fast"); // header 숨기기
+	                    $(".text-logo-area").addClass("visible");
+	                } else {
+	                    if($(window).scrollTop() < 200) {
+	                        $(".logo-area").slideDown("fast"); // header 보이기
+	                        $(".text-logo-area").removeClass("visible");
+	                }
+	             }
+	          }
+	       }
+	       });
 	  
   });
 </script>

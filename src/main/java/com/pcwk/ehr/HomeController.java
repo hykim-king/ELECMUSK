@@ -21,7 +21,7 @@ import com.pcwk.ehr.evcar.service.evCarService;
  * Handles requests for the application home page.
  */
 @Controller("HomeController")
-@RequestMapping("home")
+@RequestMapping("elecmusk")
 public class HomeController {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(HomeController.class);
@@ -34,7 +34,7 @@ public class HomeController {
 	
 	public HomeController() {}
 	
-	@RequestMapping(value = "/elecmusk/view.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/view.do", method = RequestMethod.GET)
 	public String mainHome() {
 		LOG.debug("┌───────────────────────────────────────────┐");
 		LOG.debug("│                 mainHome                  │");
@@ -43,7 +43,7 @@ public class HomeController {
 		return VIEW_NAME;
 	}
 	
-	@RequestMapping(value = "/elecmusk/evcar.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/evcar.do", method = RequestMethod.GET)
 	public String evCar() {
 		LOG.debug("┌───────────────────────────────────────────┐");
 		LOG.debug("│                   evCar                   │");
@@ -52,7 +52,7 @@ public class HomeController {
 		return "elecmusk/evCar";
 	}
 	
-	@RequestMapping(value = "/elecmusk/subsidy.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/subsidy.do", method = RequestMethod.GET)
 	public String subsidy() {
 		LOG.debug("┌───────────────────────────────────────────┐");
 		LOG.debug("│                   subsidy                 │");
@@ -61,7 +61,7 @@ public class HomeController {
 		return "elecmusk/subsidy";
 	}
 	
-	@RequestMapping(value = "/elecmusk/station.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/station.do", method = RequestMethod.GET)
 	public String station() {
 		LOG.debug("┌───────────────────────────────────────────┐");
 		LOG.debug("│                   station                 │");
