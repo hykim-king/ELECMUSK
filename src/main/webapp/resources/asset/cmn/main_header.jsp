@@ -103,8 +103,7 @@
           <ul class="sub-menu">
             <li><a href="#" id="carsData" name="carsData">Cars data</a></li>
             <li><a href="#" id="subsidyData" name="subsidyData">Subsidy data</a></li>
-            <li><a href="#">Charger data</a></li>
-            <li><a href="#">Charging fee data</a></li>
+            <li><a href="#">Charger & Fee data</a></li>
             <li><a href="#">Statistical info</a></li>
           </ul>
          </li>

@@ -45,78 +45,80 @@
   $(document).ready(function(){
 	  console.log("document.ready");
 	  
+	  $("#doRetrieve").on("click", function(){
+	      console.log("#doRetrieve");
+	      
+	      doRetrieve(1);
+	      
+	    //doRetrieve  
+	    });
+	  //document  
+	 });
 	  
 	  
 	  
-	  
-	    function doRetrieve(page){
-	        console.log("doRetrieve");
+	  function doRetrieve(page){
+		    console.log('doRetrieve() page:'+page);
+		    
+		    let method = "GET";
+		    let url = "/subsidy/doRetrieve.do";
+		    let async = true;
+		    let params = {
+		        searchDiv : $('#searchDiv').val(),
+		        searchWord : $('#searchWord').val(),
+		        pageSize : $('#pageSize').val(),
+		        pageNo : page
+		    };
 	          
-	          let method = "GET";
-	          let url = "/elecmusk/doRetrieve.do";
-	          let async = true;
-	          let params = {
-	              searchDiv : $("#searchDiv").val(),
-	              searchWord : $("#searchWord").val(),
-	              pageSize : $("#pageSize").val(),
-	              pageNo : page
-	          };
+        PClass.callAjax(method,url,async,params,function(data){
+          console.log("data:"+data);
+          
+          let parsedJson = JSON.parse(data);
+          
+          let htmlData = "";
+          
+          //table 데이터 삭제
+          $("#subsidyTable>tbody").empty();
+          
+          //총글수
+          let totalCnt = 0;
+          //총페이지수
+          let pageTotal = 1;
+          
+        if(null != parsedJson && parsedJson.length > 0){
+            //총페이지수
+            //총글수/페이수-나머지가 있으면 1증가
+            totalCnt = parsedJson[0].totalCnt
+            pageTotal = Math.ceil(totalCnt/$("#pageSize").val());
+            console.log("=======================");
+            console.log("=totalCnt="+totalCnt);
+            console.log("=pageSize="+$("#pageSize").val());
+            console.log("=pageTotal="+pageTotal);
+            console.log("=======================");
+          
+          $.each(parsedJson, function(index,value){
+              //console.log(index+","+value.uId);
+              htmlData +=" <tr> ";
+              htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'><input type='checkbox' name='chk' value='" +value.uId+"' ></td> ";        
+              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.model +"</td> ";        
+              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.manufacturer +"</td> ";        
+              htmlData +="   <td class='text-center col-sm-5 col-md-5 col-lg-5'>"+value.name +"</td> ";        
+              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.subsidy +"</td> ";        
+              htmlData +=" </tr> ";
+            });
+            //데이터가 없는 경우
+          }else{
+            htmlData +=" <tr> ";
+            htmlData +="   <td colspan='99' class='text-center col-sm-12 col-md-12 col-lg-12'>no data found</td> ";
+            htmlData +=" </tr> ";
+          }
+        
+      //table 데이터 출력
+        $("#subsidyTable>tbody").append(htmlData);
+          
+        });
 	          
-	          PClass.callAjax(method,url,async,params,function(data){
-	            console.log("data:"+data);
-	              let parsedJson = JSON.parse(data);
-	              
-	              let htmlData = "";
-	              
-	              //table 데이터 삭제
-	              $("#userTable>tbody").empty();
-	              
-	              //총글수
-	              let totalCnt = 0;
-	              //총페이지수
-	              let pageTotal = 1;
-	              
-	              if(null != parsedJson && parsedJson.length > 0){
-	                //총페이지수
-	                //총글수/페이수-나머지가 있으면 1증가
-	                totalCnt = parsedJson[0].totalCnt
-	                pageTotal = Math.ceil(totalCnt/$("#pageSize").val());
-	                console.log("=======================");
-	                console.log("=totalCnt="+totalCnt);
-	                console.log("=pageSize="+$("#pageSize").val());
-	                console.log("=pageTotal="+pageTotal);
-	                console.log("=======================");
-	                
-	                
-	                $.each(parsedJson, function(index,value){
-	                  //console.log(index+","+value.uId);
-	                  htmlData +=" <tr> ";
-	                  htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.model   +"</td> ";        
-	                  htmlData +="   <td class='text-left   col-sm-2 col-md-2 col-lg-2'>"+value.manufacturer   +"</td> ";        
-	                  htmlData +="   <td class='text-left   col-sm-6 col-md-6 col-lg-6'>"+value.name  +"</td> ";        
-	                  htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.subsidy +"</td> ";        
-	                  htmlData +=" </tr> ";
-	                });
-	                //데이터가 없는 경우
-	              }else{
-	                htmlData +=" <tr> ";
-	                htmlData +="   <td colspan='99' class='text-center col-sm-12 col-md-12 col-lg-12'>no data found</td> ";
-	                htmlData +=" </tr> ";
-	              }
-	              
-	              //table 데이터 출력
-	              $("#userTable>tbody").append(htmlData);
-
-	              //paging
-	              //paging 데이터 삭제
-	              $("#page-selection").empty();
-	              renderingPage(pageTotal,1);
-	              
-	            
-	            
-	          });
-	          
-	      }
+	  }
 	    
 	    //==================================================================
 	    //=헤더부분 스크립트 이부분 꼭 넣으세요
@@ -154,7 +156,6 @@
 	   //=헤더부분 스크립트 이부분 꼭 넣으세요
 	   //==================================================================
 	  
-  });
 </script>
 
 </head>
@@ -166,11 +167,38 @@
   
   <!-- div container -->
   <div class="container">
-  <!-- 테이블 목록 -->
+  ${list }
+  
+  <!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select) ---------------------------------------->
+    <form action="#" class="form-inline text-right">
+      <div class="form-group">
+        <select class="form-control input-sm" name="searchDiv" id="searchDiv">
+          <c:forEach var="code" items="${BOARD_SEARCH }">
+            <option value='<c:out value="${code.detCode }"></c:out>'>
+              <c:out value="${code.detName }"></c:out>
+            </option>  
+          </c:forEach>
+        </select>
+        <input type="text" class="form-control input-sm" name="searchWord" id="searchWord" placeholder="검색어를 입력하세요.">
+        <select class="form-control input-sm" name="pageSize" id="pageSize">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+        <input type="button" class="btn btn-success btn-sm" value="조회" id="doRetrieve">
+        <input type="button" class="btn btn-info btn-sm" value="등록">
+      </div>
+    </form>
+    <!-- 검색 ----------------------------------------------------------------------------->
+  
+  <!-- 테이블 목록 ---------------------------------------------------------------------------->
     <div class="table-responsive">
-    <table class="table table-bordered table-striped table-hover" id="userTable">
+    <table class="table table-bordered table-striped table-hover" id="subsidyTable">
       <thead class="bg-primary">
         <tr>
+          <th class="text-center col-sm-1 col-md-1 col-lg-1"><input type="checkbox" id="checkAll"></th>
           <th class="text-center col-sm-2 col-md-2 col-lg-2">구분</th>        
           <th class="text-center col-sm-2 col-md-2 col-lg-2">제조/수입사</th>        
           <th class="text-center col-sm-6 col-md-6 col-lg-6">차종</th>        
@@ -178,24 +206,35 @@
         </tr>
       </thead>
       <tbody>
-        <c:choose>
-          <c:when test="">
-          
-          
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              
-              
-          </c:when>
-        </c:choose>
+        
       </tbody>
     </table>
     </div>
-    <!-- 테이블 목록 ---------------------------------------------------->
+    <!-- 테이블 목록 ----------------------------------------------------------------------------->
+    
+    <!-- 페이징 -->
+    <div class="text-center">
+      <nav>
+        <ul class="pagination">
+          <li>
+            <a href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">5</a></li>
+          <li>
+            <a href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <!-- 페이징 ---------------------------------------------------->
   </div>
   </div>
   

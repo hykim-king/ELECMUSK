@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.pcwk.ehr.cmn.SearchVO;
 import com.pcwk.ehr.cmn.StringUtil;
-import com.pcwk.ehr.subsidy.dao.SubsidyDao;
 import com.pcwk.ehr.subsidy.domain.SubsidyVO;
 import com.pcwk.ehr.subsidy.service.SubsidyService;
 
@@ -29,6 +28,12 @@ public class SubsidyController {
 	
 	public SubsidyController() {}
 	
+	/**
+	 * 목록조회
+	 * @param inVO
+	 * @return JSON(String)
+	 * @throws SQLException
+	 */
 	@RequestMapping(value="/doRetrieve.do", method = RequestMethod.GET
 			,produces = "application/json;charset=UTF-8")
 	@ResponseBody
@@ -54,7 +59,10 @@ public class SubsidyController {
 		LOG.debug("┌───────────────────────────────────────────┐");
 		LOG.debug("│inVO" + inVO);
 		
+		List<SubsidyVO> list = subsidyService.doRetrieve(inVO);
 		
+		jsonString = new Gson().toJson(list);
+		LOG.debug("│jsonString:" + jsonString);
 		LOG.debug("└─────────────────────────────────────┘");
 		
 		return jsonString;
