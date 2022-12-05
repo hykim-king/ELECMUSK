@@ -55,7 +55,7 @@ public class JWebBoardDao {
 		LOG.debug("boardDao:"+dao);
 		LOG.debug("==============================");
 		
-		boardVO01 = new BoardVO(5, "lyk01", 1, "이영관 test01", "test01", 1, 1, "허승휘 충전소", "date", "lyk01", "date", "lyk01");
+		boardVO01 = new BoardVO(6, "lyk01", 1, "이영관 test01", "test01", 1, 1, "허승휘 충전소", "date", "lyk01", "date", "lyk01");
 		
 		
 		searchVO = new SearchVO(10, 1, "10", "01","1");
