@@ -30,91 +30,75 @@ import com.pcwk.ehr.station.domain.StationVO;
 public class JWebStationDao {
 
 	final Logger LOG = LogManager.getLogger(getClass());
-	
+
 	@Autowired
 	ApplicationContext context;
-	
+
 	@Autowired
 	StationDao dao;
-	
+
 	StationVO station01;
-	
+
 	SearchVO searchVO;
 	StationVO search;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		station01 = new StationVO(9999, "aaaa", "9", 9999, "aa99", "99", "9", 9999, "aaaa", "9999", "9999", "");
-		
+
 		search = new StationVO(9999, "aaaa", "9", 9999, "aa99", "99", "9", 9999, "aaaa", "9999", "9999", "");
-		
+
 		searchVO = new SearchVO(10, 1, "", "");
 	}
-	
-	public void isSameData(StationVO actual, StationVO expected) {
-		assertEquals(actual.getStation_seq(), expected.getStation_seq());
-		assertEquals(actual.getAddr(), expected.getAddr());
-		assertEquals(actual.getChargetp(), expected.getChargetp());
-		assertEquals(actual.getCpid(), expected.getCpid());
-		assertEquals(actual.getCpnm(), expected.getCpnm());
-		assertEquals(actual.getCpstat(), expected.getCpstat());
-		assertEquals(actual.getCptp(), expected.getCptp());
-		assertEquals(actual.getCsid(), expected.getCsid());
-		assertEquals(actual.getCsnm(), expected.getCsnm());
-		assertEquals(actual.getLat(), expected.getLat());
-		assertEquals(actual.getLongi(), expected.getLongi());
-		assertEquals(actual.getStatupdatetime(), expected.getStatupdatetime());
-		
-	}
-	
+
 	@Test
-	@Ignore
-	public void doSelectOne() throws SQLException{
+	//@Ignore
+	public void doSelectOne() throws SQLException {
 		dao.doDelete(station01);
 		dao.doSave(station01);
 		dao.doSelectOne(station01);
 	}
-	
+
 	@Test
-	@Ignore
-	public void doDelete() throws SQLException{
+	//@Ignore
+	public void doDelete() throws SQLException {
 		dao.doDelete(station01);
 		dao.doSave(station01);
 		dao.doDelete(station01);
 		dao.doSelectOne(station01);
 	}
-	
+
 	@Test
-	@Ignore
-	public void doSave() throws SQLException{
+	//@Ignore
+	public void doSave() throws SQLException {
 		dao.doDelete(station01);
 		dao.doSave(station01);
 		dao.doSelectOne(station01);
 	}
-	
+
 	@Test
-	@Ignore
-	public void doRetrieve() throws SQLException{
+	//@Ignore
+	public void doRetrieve() throws SQLException {
 		dao.doDelete(station01);
-		
+
 		dao.doSave(station01);
-		
+
 		List<StationVO> list = dao.doRetrieve(searchVO);
 	}
 
 	@Test
 	@Ignore
-	public void doUpdate() throws SQLException{
+	public void doUpdate() throws SQLException {
 		dao.doDelete(station01);
 		dao.doSave(station01);
-		
+
 		String upStr = "_U";
-		station01.setAddr(station01.getAddr()+upStr);
-		
+		station01.setAddr(station01.getAddr() + upStr);
+
 		dao.doUpdate(station01);
-		
+
 	}
-	
+
 	@Test
 	@Ignore
 	public void beans() {
@@ -122,7 +106,7 @@ public class JWebStationDao {
 		LOG.debug("│context:" + context);
 		LOG.debug("│dao:" + dao);
 		LOG.debug("└─────────────────────────────────────┘");
-		
+
 		assertNotNull(context);
 		assertNotNull(dao);
 	}

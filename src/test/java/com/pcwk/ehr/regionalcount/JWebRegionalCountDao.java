@@ -52,7 +52,7 @@ public class JWebRegionalCountDao {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void doSelectOne() throws SQLException{
 		dao.doDelete(rc01);
 		dao.doSave(rc01);
@@ -60,7 +60,7 @@ public class JWebRegionalCountDao {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void doUpdate() throws SQLException{
 		dao.doDelete(rc01);
 		dao.doSave(rc01);
@@ -75,21 +75,22 @@ public class JWebRegionalCountDao {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void doSave() throws SQLException{
+		dao.doDelete(rc01);
 		dao.doSave(rc01);
 		dao.doSelectOne(rc01);
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void doDelete() throws SQLException{
 		dao.doDelete(rc01);
 		dao.doSelectOne(rc01);
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void doRetrieve() throws SQLException{
 		dao.doDelete(rc01);
 		dao.doSave(rc01);
@@ -97,7 +98,7 @@ public class JWebRegionalCountDao {
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void beans() {
 		LOG.debug("┌─────────────────────────────────────┐");
 		LOG.debug("│context:" + context);

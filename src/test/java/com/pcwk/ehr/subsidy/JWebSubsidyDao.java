@@ -51,18 +51,8 @@ public class JWebSubsidyDao {
 		searchVO = new SearchVO(10, 1, "", "");
 	}
 	
-	public void isSameData(SubsidyVO actual, SubsidyVO expected) {
-		assertEquals(actual.getSubsidy_no(), expected.getSubsidy_no());
-		assertEquals(actual.getName(), expected.getName());
-		assertEquals(actual.getModel(), expected.getModel());
-		assertEquals(actual.getSubsidy(), expected.getSubsidy());
-		assertEquals(actual.getManufacturer(), expected.getManufacturer());
-		assertEquals(actual.getMadeby(), expected.getMadeby());
-		
-	}
-	
 	@Test
-	@Ignore
+	//@Ignore
 	public void doSelectOne() throws SQLException{
 		dao.doDelete(subsidy01);
 		dao.doSave(subsidy01);
@@ -70,7 +60,7 @@ public class JWebSubsidyDao {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void doUpdate() throws SQLException{
 		dao.doDelete(subsidy01);
 		dao.doSave(subsidy01);
@@ -85,7 +75,7 @@ public class JWebSubsidyDao {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void doSave() throws SQLException{
 		dao.doDelete(subsidy01);
 		dao.doSave(subsidy01);
@@ -93,7 +83,7 @@ public class JWebSubsidyDao {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void doDelete() throws SQLException{
 		dao.doDelete(subsidy01);
 		dao.doSave(subsidy01);
@@ -103,7 +93,7 @@ public class JWebSubsidyDao {
 	
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void doRetrieve() throws SQLException{
 		
 		dao.doDelete(subsidy01);
@@ -115,7 +105,7 @@ public class JWebSubsidyDao {
 
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void beans() {
 		LOG.debug("┌─────────────────────────────────────┐");
 		LOG.debug("│context:" + context);
