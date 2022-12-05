@@ -129,13 +129,7 @@ public class JWebBoardDao {
 		
 	}
 	
-	@Test
-	//@Ignore
-	public void doDelete()throws SQLException{
-		boardVO01.setBdSeq(1);
-		dao.doDelete(boardVO01);	
-	}
-	
+
 	@Test
 	//@Ignore
 	public void doUpdate()throws SQLException{
@@ -147,6 +141,14 @@ public class JWebBoardDao {
 		
 		dao.doUpdate(boardVO01);
 	}
+	
+	@Test
+	//@Ignore
+	public void doDelete()throws SQLException{
+		boardVO01.setBdSeq(1);
+		dao.doDelete(boardVO01);	
+	}
+	
 	
 	@Test
 	//@Ignore
