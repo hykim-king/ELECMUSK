@@ -4,6 +4,74 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pcwk.ehr.evcar">
   
+  <sql id="manufactureKeyword">
+      <where>
+        <if test="  '현대' == manufactureKeyword">
+         AND manufacture = #{manufactureKeyword}
+        </if>
+        <if test="  '기아' == manufactureKeyword">
+         AND manufacture = #{manufactureKeyword}
+        </if>
+        <if test="  '쌍용' == manufactureKeyword">
+         AND manufacture = #{manufactureKeyword}
+        </if>
+        <if test="  '르노삼성' == manufactureKeyword">
+         AND manufacture = #{manufactureKeyword}
+        </if>
+        <if test="  '쉐보레' == manufactureKeyword">
+         AND manufacture #{manufactureKeyword}
+        </if>
+        <if test="  '대창모터스' == manufactureKeyword">
+         AND manufacture = #{manufactureKeyword}
+        </if>
+      </where>
+  </sql>
+  
+  <sql id="appearanceKeyword">
+    <where>
+      <if test=" '세단' == appearanceKeyword">
+        AND appearance = #{appearanceKeyword}
+      </if>
+      <if test=" 'SUV' == appearanceKeyword">
+        AND appearance = #{appearanceKeyword}
+      </if>
+      <if test=" '해치백' == appearanceKeyword">
+        AND appearance = #{appearanceKeyword}
+      </if>
+    </where>
+  </sql>
+  
+  <sql id="modelKeyword">
+    <where>
+      <if test=" '경형' == modelKeyword">
+        AND model = #{modelKeyword}
+      </if>
+      <if test=" '소형' == modelKeyword">
+        AND model = #{modelKeyword}
+      </if>
+      <if test=" '준중형' == modelKeyword">
+        AND model = #{modelKeyword}
+      </if>
+      <if test=" '중형' == modelKeyword">
+        AND model = #{modelKeyword}
+      </if>
+      <if test=" '준대형' == modelKeyword">
+        AND model = #{modelKeyword}
+      </if>
+    </where>
+  </sql>
+  
+    <sql id="batteryTypeKeyword">
+    <where>
+      <if test=" '리튬이온' == batteryTypeKeyword">
+        AND battery_type = #{batteryTypeKeyword}
+      </if>
+      <if test=" '리튬이온폴리머' == batteryTypeKeyword">
+        AND battery_type = #{batteryTypeKeyword}
+      </if>
+    </where>
+  </sql>
+  
   <select id="doRetrieve" parameterType="com.pcwk.ehr.evcar.cmn.evSearchVO" resultType="evCarVO">
     SELECT A.*, B.*
     FROM (
@@ -25,6 +93,11 @@
             FROM (
                 SELECT *
                 FROM EVCAR
+                WHERE 
+                <include refid="manufactureKeyword"></include>
+                <include refid="appearanceKeyword"></include>
+                <include refid="modelKeyword"></include>
+                <include refid="batteryTypeKeyword"></include>
                 ORDER BY name
             )T1
           <![CDATA[  WHERE ROWNUM <= #{pageSize} * (#{pageNo} -1) + #{pageSize} ]]>

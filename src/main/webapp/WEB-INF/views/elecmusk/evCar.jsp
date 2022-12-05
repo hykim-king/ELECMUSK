@@ -59,6 +59,10 @@
 				}
 			}
 		});
+		
+		
+		
+		
 	});
 </script>
 </head>
@@ -69,15 +73,13 @@
 	<div id="contents">
 
 		<div class="select-area">
-		
 		<table>
 		  <thead>
 		    <th>&nbsp;</th>
 		    <th>제조사</th>
 		    <th>외형</th>
 		    <th>차종</th>
-		    <th>가격</th>
-		    <th>연비</th>
+		    <th>배터리종류</th>
 		  </thead>
       <tbody>
         <tr>
@@ -86,27 +88,38 @@
           </td>
           <td>
 			      <select>
-			        <option value="">전체</option>
+			        <option id="manufactureKeyword" name="manufactureKeyword" value="">전체</option>
+			        <option id="manufactureKeyword" name="manufactureKeyword" value="현대">현대</option>
+			        <option id="manufactureKeyword" name="manufactureKeyword" value="기아">기아</option>
+			        <option id="manufactureKeyword" name="manufactureKeyword" value="쌍용">쌍용</option>
+			        <option id="manufactureKeyword" name="manufactureKeyword" value="르노삼성">르노삼성</option>
+			        <option id="manufactureKeyword" name="manufactureKeyword" value="쉐보레">쉐보레</option>
+			        <option id="manufactureKeyword" name="manufactureKeyword" value="대창모터스">대창모터스</option>
 			      </select>
           </td>
           <td>
 			      <select>
-			        <option value="">전체</option>
+			        <option id="appearanceKeyword" name="appearanceKeyword" value="">전체</option>
+			        <option id="appearanceKeyword" name="appearanceKeyword" value="세단">세단</option>
+			        <option id="appearanceKeyword" name="appearanceKeyword" value="SUV">SUV</option>
+			        <option id="appearanceKeyword" name="appearanceKeyword" value="해치백">해치백</option>
 			      </select>
           </td>
           <td>
 			      <select>
-			        <option value="">전체</option>
+              <option id="modelKeyword" name="modelKeyword" value="">전체</option>
+              <option id="modelKeyword" name="modelKeyword" value="경형">경형</option>
+              <option id="modelKeyword" name="modelKeyword" value="소형">소형</option>
+              <option id="modelKeyword" name="modelKeyword" value="준중형">준중형</option>
+              <option id="modelKeyword" name="modelKeyword" value="중형">중형</option>
+              <option id="modelKeyword" name="modelKeyword" value="준대형">준대형</option>
 			      </select>
           </td>
           <td>
 			      <select>
-			        <option value="">전체</option>
-			      </select>
-          </td>
-          <td>
-			      <select>
-			        <option value="">전체</option>
+			        <option id="batteryTypeKeyword" name="batteryTypeKeyword" value="">전체</option>
+			        <option id="batteryTypeKeyword" name="batteryTypeKeyword" value="리튬이온">리튬이온</option>
+			        <option id="batteryTypeKeyword" name="batteryTypeKeyword" value="리튬이온폴리머">리튬이온폴리머</option>
 			      </select>
           </td>
         </tr>

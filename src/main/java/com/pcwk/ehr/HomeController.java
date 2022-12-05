@@ -85,16 +85,6 @@ public class HomeController {
 			inVO.setPageNo(1);
 		}
 		
-		//검색구분(default ="")
-		if(null == inVO.getSearchDiv()) {
-			inVO.setSearchDiv(StringUtil.nvl(inVO.getSearchDiv()));
-		}
-		
-		// 검색어(default ="")
-		if(null == inVO.getSearchWord()) {
-			inVO.setSearchWord(StringUtil.nvl(inVO.getSearchWord()));
-		}
-		
 		LOG.debug("┌=============================┐");	
 		LOG.debug("|inVO="+inVO);
 		

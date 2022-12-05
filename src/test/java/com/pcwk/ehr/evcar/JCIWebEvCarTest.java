@@ -60,7 +60,7 @@ public class JCIWebEvCarTest {
 	@Before
 	public void setUp() throws Exception {
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-		searchVO = new evSearchVO(10, 1, "", "");
+		searchVO = new evSearchVO(6, 1, "현대", "", "중형", "");
 	}
 	
 	@Test
@@ -68,8 +68,10 @@ public class JCIWebEvCarTest {
 		MockHttpServletRequestBuilder  requestBuilder = MockMvcRequestBuilders.get("/elecmusk/doRetrive.do")
 										                .param("pageSize", searchVO.getPageSize()+"")
 										                .param("pageNo", searchVO.getPageNo()+"")
-										                .param("searchDiv", searchVO.getSearchDiv())
-										                .param("searchWord", searchVO.getSearchWord());
+										                .param("manufactureKeyword", searchVO.getManufactureKeyword())
+										                .param("appearanceKeyword", searchVO.getAppearanceKeyword())
+														.param("modelKeyword", searchVO.getModelKeyword())
+														.param("batteryTypeKeyword", searchVO.getBatteryTypeKeyword());
 		//대역 객체를 통해 호출
 		ResultActions resultActions =mockMvc.perform(requestBuilder)
 		                .andExpect(status().is2xxSuccessful());	
