@@ -105,14 +105,14 @@ public class JWebBoardDao {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void doRetrieve()throws SQLException{
 		
 		List<BoardVO> list = dao.doRetrieve(searchVO);
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void doSelectOne()throws SQLException{
 		BoardVO outVO123 = dao.doSelectOne(boardVO01);
 		LOG.debug("outVO123: "+outVO123);
@@ -121,7 +121,7 @@ public class JWebBoardDao {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void doSave()throws SQLException{
 		
 		//1 한건등록
@@ -130,14 +130,14 @@ public class JWebBoardDao {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void doDelete()throws SQLException{
 		boardVO01.setBdSeq(1);
 		dao.doDelete(boardVO01);	
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void doUpdate()throws SQLException{
 		dao.doSave(boardVO01);
 		
@@ -149,7 +149,7 @@ public class JWebBoardDao {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void bean() {
 		assertNotNull(dao);
 
