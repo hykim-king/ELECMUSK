@@ -178,7 +178,20 @@
         </tr>
       </thead>
       <tbody>
-
+        <c:choose>
+          <c:when test="">
+          
+          
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              
+              
+          </c:when>
+        </c:choose>
       </tbody>
     </table>
     </div>
