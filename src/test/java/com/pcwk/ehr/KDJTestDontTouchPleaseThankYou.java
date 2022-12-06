@@ -86,8 +86,8 @@ public class KDJTestDontTouchPleaseThankYou {
 	}
 	
 	@Test
-	public void passCheck() throws Exception{
-		LOG.debug("flag: "+userDao.passCheck(userVO1));
+	public void passwordCheck() throws Exception{
+		LOG.debug("flag: "+userDao.passwordCheck(userVO1));
 	}
 	
 	@Test

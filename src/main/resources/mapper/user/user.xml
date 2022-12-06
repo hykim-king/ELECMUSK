@@ -146,7 +146,7 @@ FROM member
     WHERE id = #{userId}
   </select>
   
-  <select id="passCheck" parameterType="UserVO" resultType="int">
+  <select id="passwordCheck" parameterType="UserVO" resultType="int">
     SELECT COUNT(*)
     FROM member
     WHERE id = #{userId}

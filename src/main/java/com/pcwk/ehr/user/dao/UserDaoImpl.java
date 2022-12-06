@@ -108,10 +108,10 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public int passCheck(UserVO inVO) throws SQLException {
+	public int passwordCheck(UserVO inVO) throws SQLException {
 		LOG.debug("param: " + inVO);
 
-		String statement = NAMESPACE + DOT + "passCheck";
+		String statement = NAMESPACE + DOT + "passwordCheck";
 		LOG.debug("statement: " + statement);
 		
 		int flag = sqlSessionTemplate.selectOne(statement, inVO);

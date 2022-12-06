@@ -12,7 +12,7 @@ public interface UserDao extends WorkDiv<UserVO> {
 	int idCheck(UserVO inVO) throws SQLException;
 	
 	//아이디와 비번이 DB와 맞는지 확인
-	int passCheck(UserVO inVO) throws SQLException;
+	int passwordCheck(UserVO inVO) throws SQLException;
 	
 	//이메일로 아이디 찾기
 	UserVO findIdByEmail(UserVO inVO) throws SQLException;

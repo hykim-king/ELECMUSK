@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller("LoginController")
-@RequestMapping("login")
+@RequestMapping("elecmusk")
 public class LoginController {
 	
 	final Logger LOG = LogManager.getLogger(getClass());
@@ -19,4 +19,15 @@ public class LoginController {
 		return "login/login";
 	}
 	
+	@RequestMapping(value="/register.do")
+	public String login() {
+		
+		return "login/register";
+	}
+	
+	@RequestMapping(value="/findIdPw.do")
+	public String findIdPw() {
+		
+		return "login/findIdPw";
+	}
 }
