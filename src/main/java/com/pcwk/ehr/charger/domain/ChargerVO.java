@@ -98,6 +98,9 @@ public class ChargerVO extends DTO {
 				+ ev_current + ", ev_voltage=" + ev_voltage + ", ev_power=" + ev_power + ", ev_level=" + ev_level
 				+ ", ev_support=" + ev_support + "]";
 	}
+
 	
+
+
 	
 }

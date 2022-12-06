@@ -41,7 +41,7 @@ public interface SubsidyService {
 	    * @return T
 	    * @throws SQLException
 	    */
-	   BoardVO doSelectOne(SubsidyVO inVO)throws SQLException;
+	   SubsidyVO doSelectOne(SubsidyVO inVO)throws SQLException;
 	   
 	   /**
 	    * 목록조회

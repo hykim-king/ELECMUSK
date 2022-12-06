@@ -188,7 +188,8 @@
           <option value="100">100</option>
         </select>
         <input type="button" class="btn btn-success btn-sm" value="조회" id="doRetrieve">
-        <input type="button" class="btn btn-info btn-sm" value="등록">
+        <input type="button" class="btn btn-warning btn-sm" value="삭제" id="doDelete">
+        <input type="button" class="btn btn-info btn-sm" value="등록" id="doSave">
       </div>
     </form>
     <!-- 검색 ----------------------------------------------------------------------------->

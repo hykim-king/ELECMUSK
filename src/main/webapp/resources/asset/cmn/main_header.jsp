@@ -54,6 +54,10 @@
 		  let link = "${CP}/elecmusk/subsidy.do"
 		  location.href= link;
 	  });
+	  $("#chargerData").on("click",function(){
+		  let link = "${CP}/elecmusk/charger.do"
+		  location.href= link;
+	  });
 	  $("#stationSearch").on("click",function(){
 		  let link = "${CP}/elecmusk/station.do"
 		  location.href= link;
@@ -103,7 +107,7 @@
           <ul class="sub-menu">
             <li><a href="#" id="carsData" name="carsData">Cars data</a></li>
             <li><a href="#" id="subsidyData" name="subsidyData">Subsidy data</a></li>
-            <li><a href="#">Charger & Fee data</a></li>
+            <li><a href="#" id="chargerData" name="chargerData">Charger & Fee data</a></li>
             <li><a href="#">Statistical info</a></li>
           </ul>
          </li>

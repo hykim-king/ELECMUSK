@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pcwk.ehr.board.domain.BoardVO;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.subsidy.dao.SubsidyDao;
 import com.pcwk.ehr.subsidy.domain.SubsidyVO;
@@ -25,26 +24,22 @@ public class SubsidyServiceImpl implements SubsidyService {
 
 	@Override
 	public int doSave(SubsidyVO inVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		return subsidyDao.doSave(inVO);
 	}
 
 	@Override
 	public int doDelete(SubsidyVO inVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		return subsidyDao.doDelete(inVO);
 	}
 
 	@Override
 	public int doUpdate(SubsidyVO inVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		return subsidyDao.doUpdate(inVO);
 	}
 
 	@Override
-	public BoardVO doSelectOne(SubsidyVO inVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public SubsidyVO doSelectOne(SubsidyVO inVO) throws SQLException {
+		return subsidyDao.doSelectOne(inVO);
 	}
 
 	@Override
