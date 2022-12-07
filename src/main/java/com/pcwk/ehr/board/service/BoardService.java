@@ -3,8 +3,9 @@ package com.pcwk.ehr.board.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.pcwk.ehr.board.cmn.DTO;
 import com.pcwk.ehr.board.domain.BoardVO;
-import com.pcwk.ehr.cmn.DTO;
+
 
 public interface BoardService {
 	   final String DOT = ".";
@@ -48,5 +49,6 @@ public interface BoardService {
 	    * @return List<DTO>
 	    * @throws SQLException
 	    */
-	   List<BoardVO> doRetrive(DTO inVO)throws SQLException;
+	   List<BoardVO> doRetrieve(DTO inVO)throws SQLException;
+
 }
