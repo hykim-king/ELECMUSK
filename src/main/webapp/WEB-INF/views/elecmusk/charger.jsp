@@ -40,43 +40,14 @@
 <!-- bootstrap js -->
 <script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
-<title>보조금</title>
+<title>충전기정보</title>
 <script >
   $(document).ready(function(){
 	  
-	  //paging
-	  renderingPage('${pageTotal}',1);
 	  
-	  $("#chargerTable>tbody").on("click","tr",function(){
-	      let trArray = $(this).children();
-	      let tdSeq = trArray.eq(1).text();
-	      console.log("trArray: "+trArray);
-	      console.log("tdSeq: "+tdSeq);
-	      
-	      if(confirm("상세 조회 하시겠습니까?")==false) return;
-	      window.location.href="${CP}/charger/doSelectOne.do?div="+$("#div").val()+"&seq="+tdSeq;
-	    });
+  });
 	  
-	  //등록화면 이동
-	  $("#moveToReg").on("click",function(){
-	    window.location.href = "${CP}/charger/doSave.do";
-	  });
 	  
-	  //검색어 enter event
-    $("#searchWord").on("keypress",function(e){
-      if(13 == e.which) {
-        e.preventDefault();
-        doRetrieve(1);
-      }
-    });
-	  
-	  $("#doRetrieve").on("click", function(){
-	      doRetrieve(1);
-	      
-	    //doRetrieve  
-	    });
-	  //document end 
-	 });
 	  
 	  
 	  
@@ -129,7 +100,6 @@
               //console.log(index+","+value.uId);
               htmlData +=" <tr> ";
               htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'><input type='checkbox' name='chk' value='" +value.charger_no+"' ></td> ";        
-              htmlData +="   <td style='display:none;'>"+<c:out value='value.charger_seq'/>+"</td>";        
               htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+<c:out value='value.image'/> +"</td> ";        
               htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+<c:out value='value.connector'/> +"</td> ";        
               htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.ev_current'/> +"</td> ";        
@@ -150,41 +120,10 @@
       $("#chargerTable>tbody").append(htmlData);
         
     
-      $("#page-selection").empty();
-      renderingPage('${pageTotal}',page);
-   });
+        });
 	          
 }
-      //paging
-      function renderingPage(pageTotal, page){
-          console.log("pageTotal:"+pageTotal);
-          console.log("page:"+page);
-          
-          pageTotal=parseInt(pageTotal);
-          
-          //연결된 EventHandler제거
-          $('#page-selection').unbind('page');
-          
-          $('#page-selection').bootpag({
-              total: pageTotal,
-              page: page,
-              maxVisible: 10,
-              leaps: true,
-              firstLastUse: true,
-              first: '←',
-              last: '→',
-              wrapClass: 'pagination',
-              activeClass: 'active',
-              disabledClass: 'disabled',
-              nextClass: 'next',
-              prevClass: 'prev',
-              lastClass: 'last',
-              firstClass: 'first'
-          }).on("page", function(event, num){
-              console.log("num:"+num);
-              doRetrive(num);
-          });     
-        }
+      
 	  
 	    
 	    //==================================================================
