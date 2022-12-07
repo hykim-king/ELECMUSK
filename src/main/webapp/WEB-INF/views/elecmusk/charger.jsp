@@ -43,16 +43,39 @@
 <title>보조금</title>
 <script >
   $(document).ready(function(){
-	  console.log("document.ready");
+	  
+	  //paging
+	  renderingPage('${pageTotal}',1);
+	  
+	  $("#chargerTable>tbody").on("click","tr",function(){
+	      let trArray = $(this).children();
+	      let tdSeq = trArray.eq(1).text();
+	      console.log("trArray: "+trArray);
+	      console.log("tdSeq: "+tdSeq);
+	      
+	      if(confirm("상세 조회 하시겠습니까?")==false) return;
+	      window.location.href="${CP}/charger/doSelectOne.do?div="+$("#div").val()+"&seq="+tdSeq;
+	    });
+	  
+	  //등록화면 이동
+	  $("#moveToReg").on("click",function(){
+	    window.location.href = "${CP}/charger/doSave.do";
+	  });
+	  
+	  //검색어 enter event
+    $("#searchWord").on("keypress",function(e){
+      if(13 == e.which) {
+        e.preventDefault();
+        doRetrieve(1);
+      }
+    });
 	  
 	  $("#doRetrieve").on("click", function(){
-	      console.log("#doRetrieve");
-	      
 	      doRetrieve(1);
 	      
 	    //doRetrieve  
 	    });
-	  //document  
+	  //document end 
 	 });
 	  
 	  
@@ -63,11 +86,17 @@
 		    let method = "GET";
 		    let url = "/charger/doRetrieve.do";
 		    let async = true;
-		    let params = {
-		        searchDiv : $('#searchDiv').val(),
-		        searchWord : $('#searchWord').val(),
-		        pageSize : $('#pageSize').val(),
-		        pageNo : page
+		  //전체
+		    let searchDivValue = $("#searchDiv").val();
+		    if('ALL' == searchDivValue) {
+		      searchDivValue = "";
+		    }
+		    let param  = {
+		        div:$("#div").val(),
+		        searchDiv : searchDivValue,
+		        searchWord: $("#searchWord").val(),
+		        pageSize : $("#pageSize").val(),
+		        pageNo: page
 		    };
 	          
         PClass.callAjax(method,url,async,params,function(data){
@@ -92,22 +121,22 @@
             pageTotal = Math.ceil(totalCnt/$("#pageSize").val());
             console.log("=======================");
             console.log("=totalCnt="+totalCnt);
-            console.log("=pageSize="+$("#pageSize").val());
             console.log("=pageTotal="+pageTotal);
+            console.log("=page="+page);
             console.log("=======================");
           
           $.each(parsedJson, function(index,value){
               //console.log(index+","+value.uId);
               htmlData +=" <tr> ";
               htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'><input type='checkbox' name='chk' value='" +value.charger_no+"' ></td> ";        
-              htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+value.charger_no +"</td> ";        
-              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.connector +"</td> ";        
-              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.image +"</td> ";        
-              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.ev_current +"</td> ";        
-              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.ev_voltage +"</td> ";        
-              htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+value.ev_power +"</td> ";        
-              htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+value.ev_level +"</td> ";        
-              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.ev_support +"</td> ";        
+              htmlData +="   <td style='display:none;'>"+<c:out value='value.charger_seq'/>+"</td>";        
+              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+<c:out value='value.image'/> +"</td> ";        
+              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+<c:out value='value.connector'/> +"</td> ";        
+              htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.ev_current'/> +"</td> ";        
+              htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.ev_voltage'/> +"</td> ";        
+              htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.ev_power'/> +"</td> ";        
+              htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.ev_level'/> +"</td> ";        
+              htmlData +="   <td class='text-center col-sm-3 col-md-3 col-lg-3'>"+<c:out value='value.ev_support'/> +"</td> ";        
               htmlData +=" </tr> ";
             });
             //데이터가 없는 경우
@@ -118,11 +147,45 @@
           }
         
       //table 데이터 출력
-        $("#chargerTable>tbody").append(htmlData);
-          
-        });
+      $("#chargerTable>tbody").append(htmlData);
+        
+    
+      $("#page-selection").empty();
+      renderingPage('${pageTotal}',page);
+   });
 	          
-	  }
+}
+      //paging
+      function renderingPage(pageTotal, page){
+          console.log("pageTotal:"+pageTotal);
+          console.log("page:"+page);
+          
+          pageTotal=parseInt(pageTotal);
+          
+          //연결된 EventHandler제거
+          $('#page-selection').unbind('page');
+          
+          $('#page-selection').bootpag({
+              total: pageTotal,
+              page: page,
+              maxVisible: 10,
+              leaps: true,
+              firstLastUse: true,
+              first: '←',
+              last: '→',
+              wrapClass: 'pagination',
+              activeClass: 'active',
+              disabledClass: 'disabled',
+              nextClass: 'next',
+              prevClass: 'prev',
+              lastClass: 'last',
+              firstClass: 'first'
+          }).on("page", function(event, num){
+              console.log("num:"+num);
+              doRetrive(num);
+          });     
+        }
+	  
 	    
 	    //==================================================================
 	    //=헤더부분 스크립트 이부분 꼭 넣으세요
@@ -171,25 +234,29 @@
   
   <!-- div container -->
   <div class="container">
-  ${list }
-  
+    <!-- 제목 -->
+    <div class="page-header">
+       <h2>보조금 정보</h2>
+    </div>
+    <!-- 제목 ------------------------------------------------------------------->
   <!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select) ---------------------------------------->
     <form action="#" class="form-inline text-right">
+      <input type="hidden" name="div" id="div" value="${requestScope.divValue}">
       <div class="form-group">
         <select class="form-control input-sm" name="searchDiv" id="searchDiv">
-          <c:forEach var="code" items="${BOARD_SEARCH }">
-            <option value='<c:out value="${code.detCode }"></c:out>'>
-              <c:out value="${code.detName }"></c:out>
-            </option>  
+          <c:forEach items="${BOARD_SEARCH}" var="code">
+              <option value='<c:out value="${code.detCode}"/>'>
+              <c:out value="${code.detName}"/>
+            </option>
           </c:forEach>
         </select>
-        <input type="text" class="form-control input-sm" name="searchWord" id="searchWord" placeholder="검색어를 입력하세요.">
+        <input type="text" class="form-control input-sm" name="searchWord" id="searchWord" placeholder="검색어를 입력하세요">
         <select class="form-control input-sm" name="pageSize" id="pageSize">
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30">30</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
+          <c:forEach items="${PAGE_SIZE}" var="size">
+            <option value='<c:out value="${size.detCode}"/>'>
+            <c:out value="${size.detName}"/>
+            </option>
+          </c:forEach>
         </select>
         <input type="button" class="btn btn-success btn-sm" value="조회" id="doRetrieve">
         <input type="button" class="btn btn-warning btn-sm" value="삭제" id="doDelete">
@@ -204,14 +271,13 @@
       <thead class="bg-primary">
         <tr>
           <th class="text-center col-sm-1 col-md-1 col-lg-1"><input type="checkbox" id="checkAll"></th>
-          <th class="text-center col-sm-1 col-md-1 col-lg-1">순번</th>        
-          <th class="text-center col-sm-2 col-md-2 col-lg-2">충전기명</th>        
           <th class="text-center col-sm-2 col-md-2 col-lg-2">이미지</th>        
-          <th class="text-center col-sm-2 col-md-2 col-lg-2">전류</th>        
-          <th class="text-center col-sm-2 col-md-2 col-lg-2">전압</th>        
+          <th class="text-center col-sm-2 col-md-2 col-lg-2">충전기명</th>        
+          <th class="text-center col-sm-1 col-md-1 col-lg-1">전류</th>        
+          <th class="text-center col-sm-1 col-md-1 col-lg-1">전압</th>        
           <th class="text-center col-sm-1 col-md-1 col-lg-1">전력</th>        
           <th class="text-center col-sm-1 col-md-1 col-lg-1">레벨</th>        
-          <th class="text-center col-sm-2 col-md-2 col-lg-2">지원차량</th>        
+          <th class="text-center col-sm-3 col-md-3 col-lg-3">지원차량</th>        
         </tr>
       </thead>
       <tbody>
@@ -222,30 +288,13 @@
     <!-- 테이블 목록 ----------------------------------------------------------------------------->
     
     <!-- 페이징 -->
-    <div class="text-center">
-      <nav>
-        <ul class="pagination">
-          <li>
-            <a href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">5</a></li>
-          <li>
-            <a href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+    <div class="text-center col-sm-12 col-md-12 col-lg-12">
+      <div id="page-selection" class="text-center page"></div>    
     </div>
-    <!-- 페이징 ---------------------------------------------------->
+    <!-- 페이징--- -------------------------------------------------------------->
   </div>
-  </div>
-  
+  <!-- div container -->
+</div>
+<!-- div contents -->
 </body>
 </html>
