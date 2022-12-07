@@ -35,10 +35,10 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		  
-		doRetrieve(1);
+		doRetrieve();
 		
 		$("#keywordRetrive").on("click",function(){
-			doRetrieve(1);
+			doRetrieve();
 		});
 		
 		
@@ -75,7 +75,7 @@
 		//document End -------------------------------------------------------------
 	});
 	
-	function doRetrieve(page) {
+	function doRetrieve() {
 		console.log("doRetrieve");
 		
 		let method = "GET";
