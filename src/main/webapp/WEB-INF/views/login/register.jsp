@@ -89,7 +89,11 @@
       <div class="form-group">
         <label for="backupQuestion" class="col-sm-3 control-label">본인확인 질문</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="backupQuestion" placeholder="본인확인 질문">
+          <select  class="form-control">
+              <option>으악</option>
+              <option>으겍</option>
+              <option>으갹</option>
+            </select>
         </div>
       </div>
       <div class="form-group">
