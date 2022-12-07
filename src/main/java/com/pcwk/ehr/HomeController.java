@@ -78,7 +78,7 @@ public class HomeController {
 		return "elecmusk/station";
 	}
 	
-	@RequestMapping(value = "/doRetrive.do",method=RequestMethod.GET
+	@RequestMapping(value = "/doRetrieve.do",method=RequestMethod.GET
 			,produces = "application/json;charset=UTF-8")
 	@ResponseBody //비동기 처리를 하는 경우, HTTP 요청 부분의 body부분이 그대로 브라우저에 전달된다.	
 	public String doRetrieve(evSearchVO inVO) throws SQLException  {

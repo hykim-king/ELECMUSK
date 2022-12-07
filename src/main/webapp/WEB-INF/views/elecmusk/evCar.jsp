@@ -23,12 +23,25 @@
 <style>
 </style>
 <title>Everything</title>
+<!-- jQuery -->
+<script src="${CP_RES}/asset/js/jquery-1.12.4.js"></script>
+<!-- callAjax -->
+<script src="${CP_RES}/asset/js/callAjax.js"></script>
+<!-- String, Number, Date Util -->
+<script src="${CP_RES}/asset/js/eUtil.js"></script>
 <script src="${CP_RES}/asset/js/jquery-3.6.1.min.js"></script>
 <script src="${CP_RES}/asset/js/jquery-ui.js"></script>
 <!-- javascript -->
 <script type="text/javascript">
 	$(document).ready(function() {
-
+		  
+		doRetrieve();
+		
+		$("#keywordRetrive").on("click",function(){
+			doRetrieve();
+		});
+		
+		
 		$(function() {
 			let didScroll;
 			let lastScrollTop = 0;
@@ -59,11 +72,84 @@
 				}
 			}
 		});
-		
-		
-		
-		
+		//document End -------------------------------------------------------------
 	});
+	
+	function doRetrieve() {
+		console.log("doRetrieve");
+		
+		let method = "GET";
+		let url    = "/elecmusk/doRetrieve.do";
+		let async  = true;
+		let params = {
+				manufactureKeyword: $("#manufactureKeyword").val(),
+				appearanceKeyword: $("#appearanceKeyword").val(),
+				modelKeyword: $("#modelKeyword").val(),
+				batteryTypeKeyword: $("#batteryTypeKeyword").val(),
+		};
+		PClass.callAjax(method,url,async,params,function(data){
+	      let parsedJson = JSON.parse(data);
+	          
+	      let htmlData = "";
+	      $("#evCar>tbody").empty();
+	      
+	      if(null != parsedJson && parsedJson.length > 0) {
+	    	  $.each(parsedJson, function(index, value) {
+	    		   htmlData += "<tr>";
+	    		   htmlData += "<div class='picture'>";
+	    		   htmlData += "  <td rowspan='11'><img src='"+<c:out value='value.imgUrl'/>+"' alt='' style='width:700px;'></td>";
+	    		   htmlData += "</div>";
+	    		   htmlData += "</tr>";
+	    		   htmlData += "<tr>";
+	    		   htmlData += "  <td>자동차명</td>";
+	    		   htmlData += "  <td>"+<c:out value='value.carName'/>+"</td>";
+	    		   htmlData += "</tr>";
+	    	     htmlData += "<tr>";
+	    	     htmlData += "  <td>가격</td>";
+	    	     htmlData += "  <td>"+<c:out value='value.carPrice'/>+"</td>";
+	    	     htmlData += "</tr>";
+	    	     htmlData += "<tr>";
+	    	     htmlData += "  <td>제조사</td>";
+	    	     htmlData += "  <td>"+<c:out value='value.manufacture'/>+"</td>";
+	    	     htmlData += "</tr>";
+	    	     htmlData += "<tr>";
+	    	     htmlData += "  <td>연식</td>";
+	    	     htmlData += "  <td>"+<c:out value='value.productYear'/>+"</td>";
+	    	     htmlData += "</tr>";
+	    	     htmlData += "<tr>";
+	    	     htmlData += "  <td>차종</td>";
+	    	     htmlData += "  <td>"+<c:out value='value.appearance'/>+"</td>";
+	    	     htmlData += "</tr>";
+	    	     htmlData += "<tr>";
+	    	     htmlData += "  <td>모델</td>";
+	    	     htmlData += "  <td>"+<c:out value='value.carModel'/>+"</td>";
+	    	     htmlData += "</tr>";
+	    	     htmlData += "<tr>";
+	    	     htmlData += "  <td>배터리 타입</td>";
+	    	     htmlData += "  <td>"+<c:out value='value.batteryType'/>+"</td>";
+	    	     htmlData += "</tr>";
+	    	     htmlData += "<tr>";
+	    	     htmlData += "  <td>배터리 전압</td>";
+	    	     htmlData += "  <td>"+<c:out value='value.batteryCapa'/>+"</td>";
+	    	     htmlData += "</tr>";
+	    	     htmlData += "<tr>";
+	    	     htmlData += "  <td>최대속도</td>";
+	    	     htmlData += "  <td>"+<c:out value='value.maxSpeed'/>+"</td>";
+	    	     htmlData += "</tr>";
+	    	     htmlData += "<tr>";
+	    	     htmlData += "  <td>output</td>";
+	    	     htmlData += "  <td>"+<c:out value='value.outPut'/>+"</td>";
+	    	     htmlData += "</tr>";
+	    	  })
+	      } else {
+	             htmlData += "<tr>";
+	             htmlData += "  <td colsapn='2' rowspan='11'>등록된 차 정보가 없습니다.</td>";
+	             htmlData += "</tr>";
+	      }
+	      $("#evCar>tbody").append(htmlData);
+		});
+		
+	}
 </script>
 </head>
 <body>
@@ -87,40 +173,43 @@
             <label>키워드</label>
           </td>
           <td>
-			      <select>
-			        <option id="manufactureKeyword" name="manufactureKeyword" value="">전체</option>
-			        <option id="manufactureKeyword" name="manufactureKeyword" value="현대">현대</option>
-			        <option id="manufactureKeyword" name="manufactureKeyword" value="기아">기아</option>
-			        <option id="manufactureKeyword" name="manufactureKeyword" value="쌍용">쌍용</option>
-			        <option id="manufactureKeyword" name="manufactureKeyword" value="르노삼성">르노삼성</option>
-			        <option id="manufactureKeyword" name="manufactureKeyword" value="쉐보레">쉐보레</option>
-			        <option id="manufactureKeyword" name="manufactureKeyword" value="대창모터스">대창모터스</option>
+			      <select id="manufactureKeyword" name="manufactureKeyword">
+			        <option value="">전체</option>
+			        <option value="현대">현대</option>
+			        <option value="기아">기아</option>
+			        <option value="쌍용">쌍용</option>
+			        <option value="르노삼성">르노삼성</option>
+			        <option value="쉐보레">쉐보레</option>
+			        <option value="대창모터스">대창모터스</option>
 			      </select>
           </td>
           <td>
-			      <select>
-			        <option id="appearanceKeyword" name="appearanceKeyword" value="">전체</option>
-			        <option id="appearanceKeyword" name="appearanceKeyword" value="세단">세단</option>
-			        <option id="appearanceKeyword" name="appearanceKeyword" value="SUV">SUV</option>
-			        <option id="appearanceKeyword" name="appearanceKeyword" value="해치백">해치백</option>
+			      <select id="appearanceKeyword" name="appearanceKeyword">
+			        <option value="">전체</option>
+			        <option value="세단">세단</option>
+			        <option value="SUV">SUV</option>
+			        <option value="해치백">해치백</option>
 			      </select>
           </td>
           <td>
-			      <select>
-              <option id="modelKeyword" name="modelKeyword" value="">전체</option>
-              <option id="modelKeyword" name="modelKeyword" value="경형">경형</option>
-              <option id="modelKeyword" name="modelKeyword" value="소형">소형</option>
-              <option id="modelKeyword" name="modelKeyword" value="준중형">준중형</option>
-              <option id="modelKeyword" name="modelKeyword" value="중형">중형</option>
-              <option id="modelKeyword" name="modelKeyword" value="준대형">준대형</option>
+			      <select id="modelKeyword" name="modelKeyword">
+              <option value="">전체</option>
+              <option value="경형">경형</option>
+              <option value="소형">소형</option>
+              <option value="준중형">준중형</option>
+              <option value="중형">중형</option>
+              <option value="준대형">준대형</option>
 			      </select>
           </td>
           <td>
-			      <select>
-			        <option id="batteryTypeKeyword" name="batteryTypeKeyword" value="">전체</option>
-			        <option id="batteryTypeKeyword" name="batteryTypeKeyword" value="리튬이온">리튬이온</option>
-			        <option id="batteryTypeKeyword" name="batteryTypeKeyword" value="리튬이온폴리머">리튬이온폴리머</option>
+			      <select id="batteryTypeKeyword" name="batteryTypeKeyword">
+			        <option value="">전체</option>
+			        <option value="리튬이온">리튬이온</option>
+			        <option value="리튬이온폴리머">리튬이온폴리머</option>
 			      </select>
+          </td>
+          <td>
+            <input type="button" class="btn btn-primary btn-sm" value="조회" id="keywordRetrive">
           </td>
         </tr>
       </tbody>
@@ -130,106 +219,10 @@
 				</div>
 		</div>
 		
-    <div class="evcar1 evcararea">
-      <table class="evcar-table">
-        <tr>
-          <div class="picture">
-          <td rowspan="11"><img src="${CP_RES}/asset/imgs/evcar_imgs/BOLTEV.png" alt="" style="width:700px;"></td>
-          </div>
-        </tr>
-        <tr>
-          <td>자동차명</td>
-          <td><input type="text" id="evname" name=evname readonly="readonly" style="border:0px;"></td>
-        </tr>
-        <tr>
-          <td>가격</td>
-          <td><input type="text" id="evprice" name="evprice" readonly="readonly" style="border:0px;"></td>
-        </tr>
-        <tr>
-          <td>제조사</td>
-          <td><input type="text" id="manufacture" name="manufacture" readonly="readonly" style="border:0px;"></td>
-        </tr>
-        <tr>
-          <td>연식</td>
-          <td><input type="text" id="evyear" name="evyear" readonly="readonly" style="border:0px;"></td>
-        </tr>
-        <tr>
-          <td>차종</td>
-          <td><input type="text" id="cartype" name="cartype" readonly="readonly" style="border:0px;"></td>
-        </tr>
-        <tr>
-          <td>모델</td>
-          <td><input type="text" id="evmodel" name="evmodel" readonly="readonly" style="border:0px;"></td>
-        </tr>
-        <tr>
-          <td>배터리 타입</td>
-          <td><input type="text" id="battery-type" name="battery-type" readonly="readonly" style="border:0px;"></td>
-        </tr>
-        <tr>
-          <td>배터리 전압</td>
-          <td><input type="text" id="battery-w" name="battery-w" readonly="readonly" style="border:0px;"></td>
-        </tr>
-        <tr>
-          <td>최대속도</td>
-          <td><input type="text" id="max-speed" name="max-speed" readonly="readonly" style="border:0px;"></td>
-        </tr>
-        <tr>
-          <td>output</td>
-          <td><input type="text" id="output" name="output" readonly="readonly" style="border:0px;"></td>
-        </tr>
+      <table class="evcar-table" id="evCar">
+        <tbody>
+        </tbody>
       </table>
-    </div>    
-		
-    <div class="evcar2 evcararea">
-      <table class="evcar-table">
-        <tr>
-          <div class="picture">
-          <td rowspan="11"><img src="${CP_RES}/asset/imgs/evcar_imgs/BOLTEV.png" alt="" style="width:700px;"></td>
-          </div>
-        </tr>
-        <tr>
-          <td>자동차명</td>
-          <td><input type="text" id="evname" name=evname readonly="readonly" style="border:0px;"></td>
-        </tr>
-        <tr>
-          <td>가격</td>
-          <td><input type="text" id="evprice" name="evprice" readonly="readonly" style="border:0px;"></td>
-        </tr>
-        <tr>
-          <td>제조사</td>
-          <td><input type="text" id="manufacture" name="manufacture" readonly="readonly" style="border:0px;"></td>
-        </tr>
-        <tr>
-          <td>연식</td>
-          <td><input type="text" id="evyear" name="evyear" readonly="readonly" style="border:0px;"></td>
-        </tr>
-        <tr>
-          <td>차종</td>
-          <td><input type="text" id="cartype" name="cartype" readonly="readonly" style="border:0px;"></td>
-        </tr>
-        <tr>
-          <td>모델</td>
-          <td><input type="text" id="evmodel" name="evmodel" readonly="readonly" style="border:0px;"></td>
-        </tr>
-        <tr>
-          <td>배터리 타입</td>
-          <td><input type="text" id="battery-type" name="battery-type" readonly="readonly" style="border:0px;"></td>
-        </tr>
-        <tr>
-          <td>배터리 전압</td>
-          <td><input type="text" id="battery-w" name="battery-w" readonly="readonly" style="border:0px;"></td>
-        </tr>
-        <tr>
-          <td>최대속도</td>
-          <td><input type="text" id="max-speed" name="max-speed" readonly="readonly" style="border:0px;"></td>
-        </tr>
-        <tr>
-          <td>output</td>
-          <td><input type="text" id="output" name="output" readonly="readonly" style="border:0px;"></td>
-        </tr>
-      </table>
-    </div>    
-    
     
 	</div>
 	<footer>
