@@ -103,7 +103,7 @@
               htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.model +"</td> ";        
               htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.manufacturer +"</td> ";        
               htmlData +="   <td class='text-center col-sm-5 col-md-5 col-lg-5'>"+value.name +"</td> ";        
-              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.subsidy +"</td> ";        
+              htmlData +="   <td class='text-center col-sm-3 col-md-3 col-lg-3'>"+value.subsidy +"</td> ";        
               htmlData +=" </tr> ";
             });
             //데이터가 없는 경우
@@ -202,8 +202,8 @@
           <th class="text-center col-sm-1 col-md-1 col-lg-1"><input type="checkbox" id="checkAll"></th>
           <th class="text-center col-sm-2 col-md-2 col-lg-2">구분</th>        
           <th class="text-center col-sm-2 col-md-2 col-lg-2">제조/수입사</th>        
-          <th class="text-center col-sm-6 col-md-6 col-lg-6">차종</th>        
-          <th class="text-center col-sm-2 col-md-2 col-lg-2">지원금액(만원)</th>        
+          <th class="text-center col-sm-5 col-md-5 col-lg-5">차종</th>        
+          <th class="text-center col-sm-3 col-md-3 col-lg-3">지원금액(만원)</th>        
         </tr>
       </thead>
       <tbody>
