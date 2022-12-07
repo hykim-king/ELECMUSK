@@ -10,10 +10,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.code.domain.CodeVO;
 
+@Repository("codeDao")
 public class CodeDaoImpl implements CodeDao {
 	final Logger LOG = LogManager.getFormatterLogger(getClass());
 	final String NAMESPACE = "com.pcwk.ehr.code";

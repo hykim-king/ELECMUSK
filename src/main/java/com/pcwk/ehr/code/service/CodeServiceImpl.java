@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.pcwk.ehr.code.dao.CodeDao;
 import com.pcwk.ehr.code.domain.CodeVO;
 
-@Service("codeServiceImpl")
+@Service("codeService")
 public class CodeServiceImpl implements CodeService {
 
 	final Logger LOG = LogManager.getLogger(getClass());
