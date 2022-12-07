@@ -65,7 +65,7 @@ public class JCIWebEvCarTest {
 	
 	@Test
 	public void doRetrieve() throws Exception {
-		MockHttpServletRequestBuilder  requestBuilder = MockMvcRequestBuilders.get("/elecmusk/doRetrive.do")
+		MockHttpServletRequestBuilder  requestBuilder = MockMvcRequestBuilders.get("/elecmusk/doRetrieve.do")
 										                .param("pageSize", searchVO.getPageSize()+"")
 										                .param("pageNo", searchVO.getPageNo()+"")
 										                .param("manufactureKeyword", searchVO.getManufactureKeyword())
@@ -84,6 +84,7 @@ public class JCIWebEvCarTest {
 	}
 	
 	@Test
+	@Ignore
 	public void beans() {
 		LOG.debug("┌-------------------------------------------┐");
 		LOG.debug("|webApplicationContext:"+webApplicationContext);

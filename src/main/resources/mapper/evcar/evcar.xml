@@ -5,77 +5,94 @@
 <mapper namespace="com.pcwk.ehr.evcar">
   
   <sql id="manufactureKeyword">
-      <where>
-        <if test="  '현대' == manufactureKeyword">
+    <choose>
+        <when test="  '현대' == manufactureKeyword">
          AND manufacture = #{manufactureKeyword}
-        </if>
-        <if test="  '기아' == manufactureKeyword">
+        </when>
+        <when test="  '기아' == manufactureKeyword">
          AND manufacture = #{manufactureKeyword}
-        </if>
-        <if test="  '쌍용' == manufactureKeyword">
+        </when>
+        <when test="  '쌍용' == manufactureKeyword">
          AND manufacture = #{manufactureKeyword}
-        </if>
-        <if test="  '르노삼성' == manufactureKeyword">
+        </when>
+        <when test="  '르노삼성' == manufactureKeyword">
          AND manufacture = #{manufactureKeyword}
-        </if>
-        <if test="  '쉐보레' == manufactureKeyword">
+        </when>
+        <when test="  '쉐보레' == manufactureKeyword">
          AND manufacture #{manufactureKeyword}
-        </if>
-        <if test="  '대창모터스' == manufactureKeyword">
+        </when>
+        <when test="  '대창모터스' == manufactureKeyword">
          AND manufacture = #{manufactureKeyword}
-        </if>
-      </where>
+        </when>
+    </choose>  
   </sql>
   
   <sql id="appearanceKeyword">
-    <where>
-      <if test=" '세단' == appearanceKeyword">
+    <choose>
+      <when test=" '세단' == appearanceKeyword">
         AND appearance = #{appearanceKeyword}
-      </if>
-      <if test=" 'SUV' == appearanceKeyword">
+      </when>
+      <when test=" 'SUV' == appearanceKeyword">
         AND appearance = #{appearanceKeyword}
-      </if>
-      <if test=" '해치백' == appearanceKeyword">
+      </when>
+      <when test=" '해치백' == appearanceKeyword">
         AND appearance = #{appearanceKeyword}
-      </if>
-    </where>
+      </when>
+    </choose>
   </sql>
   
   <sql id="modelKeyword">
-    <where>
-      <if test=" '경형' == modelKeyword">
+    <choose>
+      <when test=" '경형' == modelKeyword">
         AND model = #{modelKeyword}
-      </if>
-      <if test=" '소형' == modelKeyword">
+      </when>
+      <when test=" '소형' == modelKeyword">
         AND model = #{modelKeyword}
-      </if>
-      <if test=" '준중형' == modelKeyword">
+      </when>
+      <when test=" '준중형' == modelKeyword">
         AND model = #{modelKeyword}
-      </if>
-      <if test=" '중형' == modelKeyword">
+      </when>
+      <when test=" '중형' == modelKeyword">
         AND model = #{modelKeyword}
-      </if>
-      <if test=" '준대형' == modelKeyword">
+      </when>
+      <when test=" '준대형' == modelKeyword">
         AND model = #{modelKeyword}
-      </if>
-    </where>
+      </when>
+    </choose>
   </sql>
   
-    <sql id="batteryTypeKeyword">
-    <where>
-      <if test=" '리튬이온' == batteryTypeKeyword">
+  <sql id="batteryTypeKeyword">
+    <choose>
+      <when test=" '리튬이온' == batteryTypeKeyword">
         AND battery_type = #{batteryTypeKeyword}
-      </if>
-      <if test=" '리튬이온폴리머' == batteryTypeKeyword">
+      </when>
+      <when test=" '리튬이온폴리머' == batteryTypeKeyword">
         AND battery_type = #{batteryTypeKeyword}
-      </if>
-    </where>
+      </when>
+    </choose>
   </sql>
   
-  <select id="doRetrieve" parameterType="com.pcwk.ehr.evcar.cmn.evSearchVO" resultType="evCarVO">
+  <resultMap type="evCarVO" id="evcarVO">
+   <result  column="car_no"       property="carNo"      />
+   <result  column="name"       property="carName"      />
+   <result  column="image"       property="imgUrl"      />
+   <result  column="price"       property="carPrice"      />
+   <result  column="manufacture"     property="manufacture"    />
+   <result  column="product_year"  property="productYear" />
+   <result  column="appearance"  property="appearance"  />
+   <result  column="model"    property="carModel"    />
+   <result  column="max_distance"    property="maxDistance"    />
+   <result  column="battery_type"    property="batteryType"    />
+   <result  column="battery_capacity"    property="batteryCapa"    />
+   <result  column="max_speed"    property="maxSpeed"    />
+   <result  column="output"    property="outPut"    />
+  </resultMap>  
+  
+  <select id="doRetrieve" parameterType="com.pcwk.ehr.evcar.cmn.evSearchVO" resultMap="evcarVO">
     SELECT A.*, B.*
     FROM (
         SELECT     
+            TT1.car_no,
             TT1.name,
             TT1.image,
             TT1.price,
@@ -93,7 +110,7 @@
             FROM (
                 SELECT *
                 FROM EVCAR
-                WHERE 
+                <![CDATA[WHERE car_no >= 0]]>
                 <include refid="manufactureKeyword"></include>
                 <include refid="appearanceKeyword"></include>
                 <include refid="modelKeyword"></include>

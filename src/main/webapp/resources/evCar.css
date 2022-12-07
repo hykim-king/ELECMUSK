@@ -6,9 +6,14 @@
   clear: both;
   margin-top: 10px;
 }
-#contents {
-	width: 1200px;
-}
+  #contents {
+    position: relative;
+    padding-top: 300px;
+    padding-bottom: 20px;
+    margin: 0 auto;
+    width: 1200px;
+    height: 100%;
+  }
 .subsidy-info{
 	text-align: right;
 	padding-right: 50px;
@@ -16,7 +21,14 @@
 }
 .select-area{
 	padding-left: 50px;
+	z-index: 1;
 }
-table td{
+.evcar-table{
+	border-collapse: collapse;
+	width: 100%;
+}
+.evcar-table td {
+	border-bottom: 1px solid;
+	border-top: 1px solid;
 	text-align: center;
 }
