@@ -14,9 +14,14 @@ public class UserController {
 	public UserController() {}
 	
 	@RequestMapping(value="/myPage.do")
-	public String mypage() {
+	public String myPage() {
 		
 		return "user/myPage";
+	}
+	
+	@RequestMapping(value="/userMng.do")
+	public String userMng() {
+		return "user/userMng";
 	}
 	
 }
