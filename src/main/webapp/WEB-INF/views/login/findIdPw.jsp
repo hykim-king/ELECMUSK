@@ -64,24 +64,47 @@ h4{
 			<button type="button" class="btn btn-default btn-lg btn-block" id="mainButton">찾기</button>
 		</div>
 		<div>
-			<h4 class="text-center">생년월일로 비밀번호 찾기</h4>
+			<h4 class="text-center">생년월일로 아이디 찾기</h4>
 			<form class="form-horizontal">
 				<div class="form-group">
-					<label for="email" class="col-sm-3 control-label">이메일</label>
+					<label for="name" class="col-sm-3 control-label">이름</label>
 					<div class="col-sm-6">
-						<input type="email" class="form-control" id="email" placeholder="이메일">
+						<input type="text" class="form-control" id="name"	placeholder="홍길동">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="birth" class="col-sm-3 control-label">생년월일</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" id="birth" placeholder="19990101">
 					</div>
 				</div>
 			</form>
-			<button type="button" class="btn btn-default btn-lg btn-block" id="mainButton">찾기</button>
+			<button type="button" class="btn btn-default btn-lg btn-block"
+				id="mainButton">찾기</button>
 		</div>
 		<div>
-			<h4 class="text-center">본인확인 질문으로 찾기</h4>
+			<h4 class="text-center">본인확인 질문으로 비밀번호 찾기</h4>
 			<form class="form-horizontal">
 				<div class="form-group">
-					<label for="email" class="col-sm-3 control-label">이메일</label>
+					<label for="userId" class="col-sm-3 control-label">아이디</label>
 					<div class="col-sm-6">
-						<input type="email" class="form-control" id="email" placeholder="이메일">
+						<input type="text" class="form-control" id="userId" placeholder="아이디">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="backupAnswer" class="col-sm-3 control-label">본인확인 질문 답변</label>
+					<div class="col-sm-6">
+						<select  class="form-control">
+						  <option>으악</option>
+						  <option>으겍</option>
+						  <option>으갹</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="backupAnswer" class="col-sm-3 control-label">본인확인 질문 답변</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" id="backupAnswer" placeholder="답변">
 					</div>
 				</div>
 			</form>

@@ -1,0 +1,22 @@
+package com.pcwk.ehr.user.controller;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller("userContorller")
+@RequestMapping("elecmusk")
+public class UserController {
+
+	final Logger LOG = LogManager.getLogger(getClass());
+	
+	public UserController() {}
+	
+	@RequestMapping(value="/myPage.do")
+	public String mypage() {
+		
+		return "user/myPage";
+	}
+	
+}
