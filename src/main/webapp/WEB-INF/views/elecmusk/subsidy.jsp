@@ -45,6 +45,8 @@
   $(document).ready(function(){
 	  console.log("document.ready");
 	  
+	  doRetrieve(1);
+	  
 	  $("#doRetrieve").on("click", function(){
 	      console.log("#doRetrieve");
 	      
