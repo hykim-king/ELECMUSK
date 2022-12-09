@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.pcwk.ehr.chart.dao.evChartDao;
+import com.pcwk.ehr.chart.domain.evChartVO;
+import com.pcwk.ehr.chart.service.evChartService;
 import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.evcar.cmn.evSearchVO;
 import com.pcwk.ehr.evcar.domain.EvCarVO;
@@ -31,6 +34,9 @@ public class HomeController {
 	
 	@Autowired
 	evCarService evCarService;
+	
+	@Autowired
+	evChartService evChartService;
 	
 	public HomeController() {}
 	
@@ -105,7 +111,7 @@ public class HomeController {
 		LOG.debug("┌=============================┐");	
 		LOG.debug("|inVO="+inVO);
 		
-		List<EvCarVO> list = evCarService.doRetrieve(inVO);
+		List<evChartVO> list = evChartService.doRetrieve(inVO);
 		
 		jsonString=new Gson().toJson(list);
 		LOG.debug("|jsonString="+jsonString);
