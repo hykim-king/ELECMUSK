@@ -7,13 +7,17 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.pcwk.ehr.board.domain.BoardVO;
+import com.pcwk.ehr.cmn.MessageVO;
 import com.pcwk.ehr.cmn.SearchVO;
 import com.pcwk.ehr.cmn.StringUtil;
+import com.pcwk.ehr.code.service.CodeService;
 import com.pcwk.ehr.subsidy.domain.SubsidyVO;
 import com.pcwk.ehr.subsidy.service.SubsidyService;
 
@@ -25,6 +29,9 @@ public class SubsidyController {
 	
 	@Autowired
 	SubsidyService subsidyService;
+	
+	@Autowired
+	CodeService codeService;
 	
 	public SubsidyController() {}
 	
@@ -65,6 +72,99 @@ public class SubsidyController {
 		LOG.debug("│jsonString:" + jsonString);
 		LOG.debug("└─────────────────────────────────────┘");
 		
+		return jsonString;
+	}
+	
+	@RequestMapping(value="/doSelectOne.do",method = RequestMethod.GET
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String doSelectOne(SubsidyVO inVO, Model model)throws SQLException {
+		String jsonString = "";
+		LOG.debug("┌=============================┐");	
+		LOG.debug("|inVO="+inVO);		
+		
+		SubsidyVO outVO = subsidyService.doSelectOne(inVO);
+		
+		jsonString = new Gson().toJson(outVO);
+		LOG.debug("|jsonString="+jsonString);
+		LOG.debug("└=============================┘");		
+		return jsonString;
+	}
+	
+	
+	@RequestMapping(value="/doUpdate.do",method = RequestMethod.POST
+			,produces ="application/json;charset=UTF-8")
+	@ResponseBody
+	public String doUpdate(SubsidyVO inVO) throws SQLException{
+		String jsonString = "";
+		LOG.debug("┌=============================┐");	
+		LOG.debug("|inVO="+inVO);
+		int flag = subsidyService.doUpdate(inVO);
+		
+		String message = "";//json으로 전달할 메시지
+		if(1==flag) {
+			message = inVO.getSubsidy_no()+"수정 되었습니다.";
+		}else {
+			message = inVO.getSubsidy_no()+"수정 실패";
+		}
+		
+		MessageVO messageVO=new MessageVO(String.valueOf(flag), message);
+		
+		jsonString = new Gson().toJson(messageVO);
+		
+		LOG.debug("|jsonString="+jsonString);
+		LOG.debug("└=============================┘");			
+		return 	jsonString;	
+	}
+	
+	@RequestMapping(value="/doSave.do",method = RequestMethod.POST
+			,produces ="application/json;charset=UTF-8")
+	@ResponseBody	
+	public String doSave(SubsidyVO inVO) throws SQLException {
+		String jsonString = "";
+		LOG.debug("┌=============================┐");	
+		LOG.debug("|inVO="+inVO);
+		int flag = subsidyService.doSave(inVO);
+		
+		String message = "";//json으로 전달할 메시지
+		if(1==flag) {
+			message = inVO.getSubsidy_no()+"등록 되었습니다.";
+		}else {
+			message = inVO.getSubsidy_no()+"등록 실패";
+		}
+		
+		MessageVO messageVO=new MessageVO(String.valueOf(flag), message);
+		
+		jsonString = new Gson().toJson(messageVO);
+		
+		LOG.debug("|jsonString="+jsonString);
+		LOG.debug("└=============================┘");			
+		return 	jsonString;
+	}
+	
+	@RequestMapping(value="/doDelete.do",method = RequestMethod.GET
+			,produces ="application/json;charset=UTF-8")
+	@ResponseBody
+	public String doDelete(SubsidyVO inVO) throws SQLException {
+		String jsonString = "";
+		
+		LOG.debug("┌=============================┐");
+		LOG.debug("|inVO:"+inVO);
+		
+		int flag = subsidyService.doDelete(inVO);
+			
+		LOG.debug("|flag:"+flag);
+		
+		String message = "";   	
+		if(flag ==1) {
+			message = "삭제 되었습니다.";
+		}else {
+			message = "삭제 실패";
+		}
+		
+		jsonString = new Gson().toJson(new MessageVO(String.valueOf(flag), message));
+		LOG.debug("|jsonString:"+jsonString);
+		LOG.debug("└=============================┘");
 		return jsonString;
 	}
 	

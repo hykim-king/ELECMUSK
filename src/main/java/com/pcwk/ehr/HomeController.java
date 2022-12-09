@@ -78,6 +78,42 @@ public class HomeController {
 		return "elecmusk/station";
 	}
 	
+	@RequestMapping(value = "/evChart.do", method = RequestMethod.GET)
+	public String evChart() {
+		LOG.debug("┌───────────────────────────────────────────┐");
+		LOG.debug("│                   station                 │");
+		LOG.debug("└───────────────────────────────────────────┘");		
+		
+		return "elecmusk/evChart";
+	}
+	
+	@RequestMapping(value = "/chartRetrieve.do",method=RequestMethod.GET
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody //비동기 처리를 하는 경우, HTTP 요청 부분의 body부분이 그대로 브라우저에 전달된다.	
+	public String chartRetrieve(evSearchVO inVO) throws SQLException  {
+		String jsonString = "";
+		// 페이지 사이즈(default =10)
+		if( 0==inVO.getPageSize()) {
+			inVO.setPageSize(20);
+		}
+		
+		//페이지 번호(default =1)
+		if( 0==inVO.getPageNo()) {
+			inVO.setPageNo(1);
+		}
+		
+		LOG.debug("┌=============================┐");	
+		LOG.debug("|inVO="+inVO);
+		
+		List<EvCarVO> list = evCarService.doRetrieve(inVO);
+		
+		jsonString=new Gson().toJson(list);
+		LOG.debug("|jsonString="+jsonString);
+		LOG.debug("└=============================┘");		
+		
+		return jsonString;
+	}
+	
 	@RequestMapping(value = "/doRetrieve.do",method=RequestMethod.GET
 			,produces = "application/json;charset=UTF-8")
 	@ResponseBody //비동기 처리를 하는 경우, HTTP 요청 부분의 body부분이 그대로 브라우저에 전달된다.	
@@ -85,7 +121,7 @@ public class HomeController {
 		String jsonString = "";
 		// 페이지 사이즈(default =10)
 		if( 0==inVO.getPageSize()) {
-			inVO.setPageSize(10);
+			inVO.setPageSize(20);
 		}
 		
 		//페이지 번호(default =1)

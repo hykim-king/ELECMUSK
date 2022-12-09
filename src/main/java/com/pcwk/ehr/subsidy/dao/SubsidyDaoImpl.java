@@ -49,22 +49,7 @@ public class SubsidyDaoImpl implements SubsidyDao {
 
 	@Override
 	public List<SubsidyVO> doRetrieve(DTO inVO) throws SQLException {
-		SearchVO search =  (SearchVO)inVO;
-		List<SubsidyVO> list = new ArrayList<SubsidyVO>();
-		String statement = NAMESPACE+DOT+"doRetrieve";
-		
-		LOG.debug("┌─────────────────────────────────────┐");
-		LOG.debug("│param:"+inVO);
-		LOG.debug("│statement:"+statement);
-		
-		list = sqlSessionTemplate.selectList(statement, search);
-		
-		for(SubsidyVO vo : list) {
-			LOG.debug("│vo:"+vo);
-		}
-		LOG.debug("└─────────────────────────────────────┘");
-		
-		return list;
+		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"doRetrieve", inVO);
 	}
 
 }
