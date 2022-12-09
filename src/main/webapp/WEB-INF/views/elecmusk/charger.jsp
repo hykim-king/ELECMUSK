@@ -43,12 +43,21 @@
 <title>충전기정보</title>
 <script >
   $(document).ready(function(){
+	  console.log("document.ready");
+	  doRetrieve();
 	  
-	  
+	//등록화면으로 이동
+  $("#moveToReg").on("click",function(){
+    
+    console.log('moveToReg');
+    console.log('div:'+$("#div").val());
+    
+    window.location.href = "${CP}/elecmusk/charger/doSave.do";
+    
+  //moveToReg
   });
 	  
-	  
-	  
+  });//document
 	  
 	  
 	  function doRetrieve(page){
@@ -57,20 +66,14 @@
 		    let method = "GET";
 		    let url = "/charger/doRetrieve.do";
 		    let async = true;
-		  //전체
-		    let searchDivValue = $("#searchDiv").val();
-		    if('ALL' == searchDivValue) {
-		      searchDivValue = "";
-		    }
-		    let param  = {
-		        div:$("#div").val(),
-		        searchDiv : searchDivValue,
+		    let params  = {
+		        searchDiv : $('#searchDiv').val(),
 		        searchWord: $("#searchWord").val(),
 		        pageSize : $("#pageSize").val(),
 		        pageNo: page
 		    };
 	          
-        PClass.callAjax(method,url,async,params,function(data){
+		    PClass.callAjax(method,url,async,params,function(data){
           console.log("data:"+data);
           
           let parsedJson = JSON.parse(data);
@@ -79,34 +82,34 @@
           
           //table 데이터 삭제
           $("#chargerTable>tbody").empty();
+
           
-          //총글수
-          let totalCnt = 0;
-          //총페이지수
-          let pageTotal = 1;
-          
-        if(null != parsedJson && parsedJson.length > 0){
-            //총페이지수
-            //총글수/페이수-나머지가 있으면 1증가
-            totalCnt = parsedJson[0].totalCnt
-            pageTotal = Math.ceil(totalCnt/$("#pageSize").val());
-            console.log("=======================");
-            console.log("=totalCnt="+totalCnt);
-            console.log("=pageTotal="+pageTotal);
-            console.log("=page="+page);
-            console.log("=======================");
+          if(null != parsedJson && parsedJson.length > 0){
           
           $.each(parsedJson, function(index,value){
               //console.log(index+","+value.uId);
               htmlData +=" <tr> ";
-              htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'><input type='checkbox' name='chk' value='" +value.charger_no+"' ></td> ";        
-              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+<c:out value='value.image'/> +"</td> ";        
-              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+<c:out value='value.connector'/> +"</td> ";        
-              htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.ev_current'/> +"</td> ";        
-              htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.ev_voltage'/> +"</td> ";        
-              htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.ev_power'/> +"</td> ";        
-              htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.ev_level'/> +"</td> ";        
-              htmlData +="   <td class='text-center col-sm-3 col-md-3 col-lg-3'>"+<c:out value='value.ev_support'/> +"</td> ";        
+              htmlData +=" <div>"
+              htmlData +="   <td colspan='4' rowspan='4'><img src='"+<c:out value = 'value.image'/>+"' alt='' style='width:100%; height:100%;'></td> ";        
+              htmlData +=" </div>"
+              htmlData +=" </tr> ";
+              htmlData +=" <tr> ";
+              htmlData +="   <td colspan ='2'>충전기명 </td> ";        
+              htmlData +="   <td colspan ='2'>"+<c:out value = 'value.connector'/> +"</td> ";        
+              htmlData +="   <td colspan ='2'>충전전류 </td> ";        
+              htmlData +="   <td colspan ='2'>"+ value.ev_current +"</td> ";        
+              htmlData +=" </tr> ";
+              htmlData +=" <tr> ";
+              htmlData +="   <td colspan ='2'>충전전압 </td> ";        
+              htmlData +="   <td colspan ='2'>"+ value.ev_voltage +"</td> ";        
+              htmlData +="   <td colspan ='2'>충전전력 </td> ";        
+              htmlData +="   <td colspan ='2'>"+ value.ev_power +"</td> ";        
+              htmlData +=" </tr> ";
+              htmlData +=" <tr> ";
+              htmlData +="   <td colspan ='2'>충전레벨 </td> ";        
+              htmlData +="   <td colspan ='2'>"+ value.ev_level +"</td> ";        
+              htmlData +="   <td colspan ='2'>지원차량 </td> ";        
+              htmlData +="   <td colspan ='2'>"+ value.ev_support +"</td> ";        
               htmlData +=" </tr> ";
             });
             //데이터가 없는 경우
@@ -175,13 +178,14 @@
   <div class="container">
     <!-- 제목 -->
     <div class="page-header">
-       <h2>보조금 정보</h2>
+       <h2>충전기 정보</h2>
     </div>
     <!-- 제목 ------------------------------------------------------------------->
   <!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select) ---------------------------------------->
     <form action="#" class="form-inline text-right">
       <input type="hidden" name="div" id="div" value="${requestScope.divValue}">
       <div class="form-group">
+      <!-- 검색 조건 수정 필요-------------------------------------------------------------------->
         <select class="form-control input-sm" name="searchDiv" id="searchDiv">
           <c:forEach items="${BOARD_SEARCH}" var="code">
               <option value='<c:out value="${code.detCode}"/>'>
@@ -191,13 +195,14 @@
         </select>
         <input type="text" class="form-control input-sm" name="searchWord" id="searchWord" placeholder="검색어를 입력하세요">
         <select class="form-control input-sm" name="pageSize" id="pageSize">
-          <c:forEach items="${PAGE_SIZE}" var="size">
-            <option value='<c:out value="${size.detCode}"/>'>
-            <c:out value="${size.detName}"/>
-            </option>
-          </c:forEach>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
         </select>
-        <input type="button" class="btn btn-success btn-sm" value="조회" id="doRetrieve">
+      <!-- 검색 조건 수정 필요-------------------------------------------------------------------->
+        <input type="button" class="btn btn-success btn-sm" value="수정" id="doUpdate">
         <input type="button" class="btn btn-warning btn-sm" value="삭제" id="doDelete">
         <input type="button" class="btn btn-info btn-sm" value="등록" id="doSave">
       </div>
@@ -207,10 +212,10 @@
   <!-- 테이블 목록 ---------------------------------------------------------------------------->
     <div class="table-responsive">
     <table class="table table-bordered table-striped table-hover" id="chargerTable">
-      <thead class="bg-primary">
+      <!-- <thead class="bg-success">
         <tr>
           <th class="text-center col-sm-1 col-md-1 col-lg-1"><input type="checkbox" id="checkAll"></th>
-          <th class="text-center col-sm-2 col-md-2 col-lg-2">이미지</th>        
+          <th colspan="4">이미지</th>        
           <th class="text-center col-sm-2 col-md-2 col-lg-2">충전기명</th>        
           <th class="text-center col-sm-1 col-md-1 col-lg-1">전류</th>        
           <th class="text-center col-sm-1 col-md-1 col-lg-1">전압</th>        
@@ -218,7 +223,7 @@
           <th class="text-center col-sm-1 col-md-1 col-lg-1">레벨</th>        
           <th class="text-center col-sm-3 col-md-3 col-lg-3">지원차량</th>        
         </tr>
-      </thead>
+      </thead> -->
       <tbody>
         
       </tbody>
