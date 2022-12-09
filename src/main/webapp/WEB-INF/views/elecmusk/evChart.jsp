@@ -14,6 +14,8 @@
     Copyright (C) by KandJang All right reserved.
 */
  --%>
+<%@page import="java.util.List"%>
+<%@page import="com.pcwk.ehr.chart.dao.evChartDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
@@ -271,7 +273,6 @@
 	   //=헤더부분 스크립트 이부분 꼭 넣으세요
 	   //==================================================================
   });
-  
   
   
 </script>
