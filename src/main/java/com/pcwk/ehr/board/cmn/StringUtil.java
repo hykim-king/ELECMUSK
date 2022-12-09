@@ -1,7 +1,22 @@
 package com.pcwk.ehr.board.cmn;
 
+import com.google.gson.Gson;
+import com.pcwk.ehr.cmn.MessageVO;
+
 public class StringUtil {
 
+	
+	
+	public static int nvlToInt(String input, String replace) {
+		return Integer.parseInt(nvl(input,replace));
+	}
+	
+	public static int nvlToInt(String input){
+		return Integer.parseInt(nvl(input));
+	}
+	
+	
+	
 	/**
 	 * NULL처리
 	 * 
@@ -169,6 +184,10 @@ public class StringUtil {
 		
 		
 		return html.toString();
+	}
+	public static String validMessageToJson(String msgId, String msgContents) {
+		
+		return new Gson().toJson(new MessageVO(msgId, msgContents));
 	}
 	
 }
