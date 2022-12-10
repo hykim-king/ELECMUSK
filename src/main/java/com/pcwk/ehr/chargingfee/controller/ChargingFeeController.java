@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.pcwk.ehr.charger.domain.ChargerVO;
 import com.pcwk.ehr.chargingfee.domain.ChargingFeeVO;
 import com.pcwk.ehr.chargingfee.service.ChargingFeeService;
 import com.pcwk.ehr.cmn.SearchVO;
@@ -27,6 +26,8 @@ public class ChargingFeeController {
 	@Autowired
 	ChargingFeeService chargingfeeService;
 	
+	
+	
 	public ChargingFeeController() {}
 	
 	@RequestMapping(value="/view.do" , method = RequestMethod.GET)
@@ -34,7 +35,7 @@ public class ChargingFeeController {
 		LOG.debug("┌───────────────────────────────────────────┐");
 		LOG.debug("│                 View()                    │");
 		LOG.debug("└───────────────────────────────────────────┘");	
-		return "elecmusk/chargingfee";
+		return "elecmusk/chargingFee";
 	}
 	
 	
@@ -71,4 +72,39 @@ public class ChargingFeeController {
 		
 		return jsonString;
 	}
+	
+	@RequestMapping(value="/showSlow.do", method = RequestMethod.GET
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String showSlow(SearchVO inVO) throws SQLException{
+		String jsonString = "";
+		
+		if (null != inVO && inVO.getPageNo() == 0) {
+			inVO.setPageNo(1);
+		}
+		//페이지 사이즈
+		if (null != inVO && inVO.getPageSize() == 0) {
+			inVO.setPageSize(10);
+		}
+		//검색구분
+		if (null != inVO && null == inVO.getSearchDiv()) {
+			inVO.setSearchDiv(StringUtil.nvl(inVO.getSearchDiv()));
+		}
+		//검색어
+		if (null != inVO && null == inVO.getSearchWord()) {
+			inVO.setSearchWord(StringUtil.nvl(inVO.getSearchWord()));
+		}
+		
+		LOG.debug("┌───────────────────────────────────────────┐");
+		LOG.debug("│inVO" + inVO);
+		
+		List<ChargingFeeVO> list = chargingfeeService.showSlow(inVO);
+		
+		jsonString = new Gson().toJson(list);
+		LOG.debug("│jsonString:" + jsonString);
+		LOG.debug("└─────────────────────────────────────┘");
+		
+		return jsonString;
+	}
+
 }

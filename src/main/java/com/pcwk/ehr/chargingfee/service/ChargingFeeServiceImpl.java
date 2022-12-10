@@ -16,10 +16,10 @@ import com.pcwk.ehr.cmn.DTO;
 public class ChargingFeeServiceImpl implements ChargingFeeService {
 
 	final Logger LOG = LogManager.getLogger(getClass());
-	
+
 	@Autowired
 	ChargingFeeDao chargingfeeDao;
-	
+
 	@Override
 	public int doSave(ChargingFeeVO inVO) throws SQLException {
 		return chargingfeeDao.doSave(inVO);
@@ -44,5 +44,14 @@ public class ChargingFeeServiceImpl implements ChargingFeeService {
 	public List<ChargingFeeVO> doRetrieve(DTO inVO) throws SQLException {
 		return chargingfeeDao.doRetrieve(inVO);
 	}
+
+	@Override
+	public List<ChargingFeeVO> showSlow(DTO inVO) throws SQLException {
+		return chargingfeeDao.showSlow(inVO);
+	}
+
+	
+
+	
 
 }
