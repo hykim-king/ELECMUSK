@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "elecmusk", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+@RequestMapping(value = "count", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 @ResponseBody
 public class CountApiController {
 
