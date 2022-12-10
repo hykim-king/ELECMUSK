@@ -1,4 +1,4 @@
-package com.pcwk.ehr.charger.controller;
+package com.pcwk.ehr.chargingfee.controller;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -13,35 +13,31 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.pcwk.ehr.charger.domain.ChargerVO;
-import com.pcwk.ehr.charger.service.ChargerService;
+import com.pcwk.ehr.chargingfee.domain.ChargingFeeVO;
+import com.pcwk.ehr.chargingfee.service.ChargingFeeService;
 import com.pcwk.ehr.cmn.SearchVO;
 import com.pcwk.ehr.cmn.StringUtil;
 
-@Controller("chargerController")
-@RequestMapping("charger")
-public class ChargerController {
+@Controller("chargingfeeController")
+@RequestMapping("chargingfee")
+public class ChargingFeeController {
 
 	final Logger LOG = LogManager.getLogger(getClass());
 	
 	@Autowired
-	ChargerService chargerService;
+	ChargingFeeService chargingfeeService;
 	
-	public ChargerController() {}
+	public ChargingFeeController() {}
 	
 	@RequestMapping(value="/view.do" , method = RequestMethod.GET)
 	public String View() {
 		LOG.debug("┌───────────────────────────────────────────┐");
 		LOG.debug("│                 View()                    │");
 		LOG.debug("└───────────────────────────────────────────┘");	
-		return "elecmusk/charger";
+		return "elecmusk/chargingfee";
 	}
 	
-	/**
-	 * 목록조회
-	 * @param inVO
-	 * @return JSON(String)
-	 * @throws SQLException
-	 */
+	
 	@RequestMapping(value="/doRetrieve.do", method = RequestMethod.GET
 			,produces = "application/json;charset=UTF-8")
 	@ResponseBody
@@ -67,7 +63,7 @@ public class ChargerController {
 		LOG.debug("┌───────────────────────────────────────────┐");
 		LOG.debug("│inVO" + inVO);
 		
-		List<ChargerVO> list = chargerService.doRetrieve(inVO);
+		List<ChargingFeeVO> list = chargingfeeService.doRetrieve(inVO);
 		
 		jsonString = new Gson().toJson(list);
 		LOG.debug("│jsonString:" + jsonString);

@@ -58,32 +58,6 @@ public class HomeController {
 		return "elecmusk/evCar";
 	}
 	
-	@RequestMapping(value = "/subsidy.do", method = RequestMethod.GET)
-	public String subsidy() {
-		LOG.debug("┌───────────────────────────────────────────┐");
-		LOG.debug("│                   subsidy                 │");
-		LOG.debug("└───────────────────────────────────────────┘");		
-		
-		return "elecmusk/subsidy";
-	}
-	@RequestMapping(value = "/charger.do", method = RequestMethod.GET)
-	public String charger() {
-		LOG.debug("┌───────────────────────────────────────────┐");
-		LOG.debug("│                   charger                 │");
-		LOG.debug("└───────────────────────────────────────────┘");		
-		
-		return "elecmusk/charger";
-	}
-	
-	@RequestMapping(value = "/station.do", method = RequestMethod.GET)
-	public String station() {
-		LOG.debug("┌───────────────────────────────────────────┐");
-		LOG.debug("│                   station                 │");
-		LOG.debug("└───────────────────────────────────────────┘");		
-		
-		return "elecmusk/station";
-	}
-	
 	@RequestMapping(value = "/evChart.do", method = RequestMethod.GET)
 	public String evChart() {
 		LOG.debug("┌───────────────────────────────────────────┐");

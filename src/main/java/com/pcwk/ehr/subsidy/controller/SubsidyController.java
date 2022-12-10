@@ -35,6 +35,14 @@ public class SubsidyController {
 	
 	public SubsidyController() {}
 	
+	@RequestMapping(value="/view.do" , method = RequestMethod.GET)
+	public String View() {
+		LOG.debug("┌───────────────────────────────────────────┐");
+		LOG.debug("│                 View()                    │");
+		LOG.debug("└───────────────────────────────────────────┘");	
+		return "elecmusk/subsidy";
+	}
+	
 	/**
 	 * 목록조회
 	 * @param inVO
