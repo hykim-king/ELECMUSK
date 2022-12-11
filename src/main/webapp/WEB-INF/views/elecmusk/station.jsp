@@ -27,10 +27,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon" href="${CP}/favicon.ico">   
 <!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="${CP_RES}/css/bootstrap.min.css">
-
-<!-- jQuery -->
-<script src="${CP_RES}/js/jquery-1.12.4.js"></script>
+<link rel="stylesheet" href="${CP_RES}/bootstrap/css/bootstrap.min.css">
 <style>
   #map{
     width: 100%;
@@ -39,8 +36,16 @@
   }
 </style>
 
+<!-- jQuery -->
+<script src="${CP_RES}/bootstrap/js/jquery-1.12.4.js"></script>
+<!-- callAjax -->
+<script src="${CP_RES}/bootstrap/js/callAjax.js"></script>
+<!-- String, Number, Date Util  -->
+<script src="${CP_RES}/bootstrap/js/eUtil.js"></script>
+<!-- paging -->
+<script src="${CP_RES}/bootstrap/js/jquery.bootpag.js"></script>
 <!-- bootstrap js -->
-<script src="${CP_RES}/js/bootstrap.min.js"></script>
+<script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
 <title>충전소 찾기</title>
 <script >
@@ -96,6 +101,7 @@ async function getData(){//전기차 충전소 정보 api 받기
                                            //spot.spot.statUpdatetime, //업데이트시간
                                     ]);
 
+
     console.log("locations",locations);
 
     drawMap(locations);
@@ -111,8 +117,8 @@ function drawMap(locations){
     const myLatLng = { lat: 37.554075322663984, lng: 126.93576681191617 }; 
 
     
+   
     
-
 
     
 
@@ -149,6 +155,7 @@ function drawMap(locations){
                     infowindow.setOptions({
                         pixelOffset: new google.maps.Size(0,-23)
                     });
+                    
                     
                     infowindow.setContent("충전소명 : "+locations[i][7]+"<br>"+//충전소명칭
                                         
