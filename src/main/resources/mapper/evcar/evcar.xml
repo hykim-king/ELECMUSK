@@ -24,6 +24,12 @@
         <when test="  '대창모터스' == manufactureKeyword">
          AND manufacture = #{manufactureKeyword}
         </when>
+        <when test="  '벤츠' == manufactureKeyword">
+         AND manufacture = #{manufactureKeyword}
+        </when>
+        <when test="  '테슬라' == manufactureKeyword">
+         AND manufacture = #{manufactureKeyword}
+        </when>
     </choose>  
   </sql>
   
