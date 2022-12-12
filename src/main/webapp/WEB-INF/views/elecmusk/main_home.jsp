@@ -22,9 +22,17 @@
 <style>
 </style>
 <title>Everything</title>
-<script src="${CP_RES}/asset/js/jquery-3.6.1.min.js"></script>
-<script src="${CP_RES}/asset/js/jquery-ui.js"></script>
-<!-- javascript -->
+<!-- jQuery -->
+<script src="${CP_RES}/bootstrap/js/jquery-1.12.4.js"></script>
+<!-- callAjax -->
+<script src="${CP_RES}/bootstrap/js/callAjax.js"></script>
+<!-- String, Number, Date Util  -->
+<script src="${CP_RES}/bootstrap/js/eUtil.js"></script>
+<!-- paging -->
+<script src="${CP_RES}/bootstrap/js/jquery.bootpag.js"></script>
+<!-- bootstrap js -->
+<script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
+<meta charset="UTF-8">
 <script type="text/javascript">
 $(document).ready(function(){
     
@@ -103,8 +111,7 @@ $(document).ready(function(){
   
     <div id="contents-area">
       <div id="contents-1">
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
+        <jsp:include page ="/resources/asset/cmn/evChart.jsp" flush="false"/>
       </div>
       <div id="contents-2">
         <p>&nbsp;</p>

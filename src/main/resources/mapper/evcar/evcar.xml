@@ -97,7 +97,8 @@
   <select id="doRetrieve" parameterType="com.pcwk.ehr.evcar.cmn.evSearchVO" resultMap="evcarVO">
     SELECT A.*, B.*
     FROM (
-        SELECT     
+        SELECT
+            TT1.rnum,     
             TT1.car_no,
             TT1.name,
             TT1.image,
@@ -121,7 +122,6 @@
                 <include refid="appearanceKeyword"></include>
                 <include refid="modelKeyword"></include>
                 <include refid="batteryTypeKeyword"></include>
-                ORDER BY name
             )T1
           <![CDATA[  WHERE ROWNUM <= #{pageSize} * (#{pageNo} -1) + #{pageSize} ]]>
         )TT1

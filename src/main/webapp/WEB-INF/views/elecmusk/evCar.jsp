@@ -24,13 +24,16 @@
 </style>
 <title>Everything</title>
 <!-- jQuery -->
-<script src="${CP_RES}/asset/js/jquery-1.12.4.js"></script>
+<script src="${CP_RES}/bootstrap/js/jquery-1.12.4.js"></script>
 <!-- callAjax -->
-<script src="${CP_RES}/asset/js/callAjax.js"></script>
-<!-- String, Number, Date Util -->
-<script src="${CP_RES}/asset/js/eUtil.js"></script>
-<script src="${CP_RES}/asset/js/jquery-3.6.1.min.js"></script>
-<script src="${CP_RES}/asset/js/jquery-ui.js"></script>
+<script src="${CP_RES}/bootstrap/js/callAjax.js"></script>
+<!-- String, Number, Date Util  -->
+<script src="${CP_RES}/bootstrap/js/eUtil.js"></script>
+<!-- paging -->
+<script src="${CP_RES}/bootstrap/js/jquery.bootpag.js"></script>
+<!-- bootstrap js -->
+<script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
+<meta charset="UTF-8">
 <!-- javascript -->
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -97,7 +100,7 @@
 	    	  $.each(parsedJson, function(index, value) {
 	    		   htmlData += "<tr>";
 	    		   htmlData += "<div class='picture'>";
-	    		   htmlData += "  <td rowspan='11'><img src='"+<c:out value='value.imgUrl'/>+"' alt='' style='width:700px;'></td>";
+	    		   htmlData += "  <td rowspan='11'><img src='"+<c:out value='value.imgUrl'/>+"' alt='"+<c:out value='value.carName'/>+"' style='width:700px;'></td>";
 	    		   htmlData += "</div>";
 	    		   htmlData += "</tr>";
 	    		   htmlData += "<tr>";
@@ -216,15 +219,14 @@
         </tr>
       </tbody>
 		</table>
-				<div class="subsidy-info">
-				  <a href="#">보조금 상세 정보</a>
-				</div>
 		</div>
 		
       <table class="evcar-table" id="evCar">
         <tbody>
         </tbody>
       </table>
+      
+      
     
 	</div>
 	<footer>
