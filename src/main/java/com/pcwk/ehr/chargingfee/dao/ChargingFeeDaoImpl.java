@@ -50,4 +50,13 @@ public class ChargingFeeDaoImpl implements ChargingFeeDao {
 		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"doRetrieve", inVO);
 	}
 
+	@Override
+	public List<ChargingFeeVO> showSlow(DTO inVO) throws SQLException {
+		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"showSlow", inVO);
+	}
+	
+	
+	
+	
+
 }

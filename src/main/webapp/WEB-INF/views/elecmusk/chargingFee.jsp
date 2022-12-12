@@ -44,31 +44,26 @@
 <!-- bootstrap js -->
 <script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
-<title>충전기정보</title>
+<title>충전요금정보</title>
 <script >
   $(document).ready(function(){
 	  console.log("document.ready");
 	  doRetrieve();
+	  showSlow();
 	  
-	//등록화면으로 이동
-  $("#moveToReg").on("click",function(){
-    
-    console.log('moveToReg');
-    console.log('div:'+$("#div").val());
-    
-    window.location.href = "${CP}/elecmusk/charger/doSave.do";
-    
-  //moveToReg
-  });
+	  
+
 	  
   });//document
 	  
+
+  
 	  
 	  function doRetrieve(page){
 		    console.log('doRetrieve() page:'+page);
 		    
 		    let method = "GET";
-		    let url = "/charger/doRetrieve.do";
+		    let url = "/chargingfee/doRetrieve.do";
 		    let async = true;
 		    let params  = {
 		        searchDiv : $('#searchDiv').val(),
@@ -85,7 +80,7 @@
           let htmlData = "";
           
           //table 데이터 삭제
-          $("#chargerTable>tbody").empty();
+          $("#rapidTable>tbody").empty();
 
           
           if(null != parsedJson && parsedJson.length > 0){
@@ -93,27 +88,9 @@
           $.each(parsedJson, function(index,value){
               //console.log(index+","+value.uId);
               htmlData +=" <tr> ";
-              htmlData +=" <div>"
-              htmlData +="   <td width='33%' rowspan='4'><img src='"+<c:out value = 'value.image'/>+"' alt='Responsive image' style='width:100%; height:100%;' class='img-rounded img-responsive'></td> ";        
-              htmlData +=" </div>"
-              htmlData +=" <tr> ";
-              htmlData +="   <td width='11%' height='12.5%'><strong>충전기명</strong> </td> ";        
-              htmlData +="   <td width='22%' height='12.5%'>"+<c:out value = 'value.connector'/> +"</td> ";        
-              htmlData +="   <td width='11%' height='12.5%'><strong>충전전류</strong> </td> ";        
-              htmlData +="   <td width='22%' height='12.5%'>"+ value.ev_current +"</td> ";        
-              htmlData +=" </tr> ";
-              htmlData +=" <tr> ";
-              htmlData +="   <td width='11%' height='12.5%'><strong>충전전압</strong> </td> ";        
-              htmlData +="   <td width='22%' height='12.5%'>"+ value.ev_voltage +"</td> ";        
-              htmlData +="   <td width='11%' height='12.5%'><strong>충전전력</strong> </td> ";        
-              htmlData +="   <td width='22%' height='12.5%'>"+ value.ev_power +"</td> ";        
-              htmlData +=" </tr> ";
-              htmlData +=" <tr> ";
-              htmlData +="   <td width='11%' height='12.5%'><strong>충전레벨</strong> </td> ";        
-              htmlData +="   <td width='22%' height='12.5%'>"+ value.ev_level +"</td> ";        
-              htmlData +="   <td width='11%' height='12.5%'><strong>지원차량</strong> </td> ";        
-              htmlData +="   <td width='22%' height='12.5%'>"+ value.ev_support +"</td> ";        
-              htmlData +=" </tr> ";
+              htmlData +="   <td width='20%' height='10%' class='text-center'><img src='"+<c:out value = 'value.image'/>+"' alt='Responsive image' style='width:100%; height:100%;' class='img-rounded img-responsive'>"+<c:out value = 'value.enterprenuer'/> +"</td> ";        
+              htmlData +="   <td width='20%' height='10%' class='text-center'>"+ value.rapid_above100 +"원</td> ";        
+              htmlData +="   <td width='20%' height='10%' class='text-center'>"+ value.rapid_below100 +"원</td> ";        
               htmlData +=" </tr> ";
             });
             //데이터가 없는 경우
@@ -124,12 +101,60 @@
           }
         
       //table 데이터 출력
-      $("#chargerTable>tbody").append(htmlData);
+      $("#rapidTable>tbody").append(htmlData);
         
     
         });
 	          
 }
+	  
+	  function showSlow(page){
+		    console.log('showSlow() page:'+page);
+		    
+		    let method = "GET";
+		    let url = "/chargingfee/showSlow.do";
+		    let async = true;
+		    let params  = {
+		        searchDiv : $('#searchDiv').val(),
+		        searchWord: $("#searchWord").val(),
+		        pageSize : $("#pageSize").val(),
+		        pageNo: page
+		    };
+	          
+		    PClass.callAjax(method,url,async,params,function(data){
+          console.log("data:"+data);
+          
+          let parsedJson = JSON.parse(data);
+          
+          let htmlData = "";
+          
+          //table 데이터 삭제
+          $("#slowTable>tbody").empty();
+
+          
+          if(null != parsedJson && parsedJson.length > 0){
+          
+          $.each(parsedJson, function(index,value){
+              //console.log(index+","+value.uId);
+              htmlData +=" <tr> ";
+              htmlData +="   <td width='20%' height='10%' class='text-center'><img src='"+<c:out value = 'value.image'/>+"' alt='Responsive image' style='width:100%; height:100%;' class='img-rounded img-responsive'>"+<c:out value = 'value.enterprenuer'/> +"</td> ";        
+              htmlData +="   <td width='20%' height='10%' class='text-center'>"+ value.slow_fee +"원</td> ";        
+              htmlData +=" </tr> ";
+            });
+            //데이터가 없는 경우
+          }else{
+            htmlData +=" <tr> ";
+            htmlData +="   <td colspan='99' class='text-center col-sm-12 col-md-12 col-lg-12'>no data found</td> ";
+            htmlData +=" </tr> ";
+          }
+        
+      //table 데이터 출력
+      $("#slowTable>tbody").append(htmlData);
+        
+    
+        });
+	          
+      }
       
 	  
 	    
@@ -182,40 +207,51 @@
   <div class="container">
     <!-- 제목 -->
     <div class="page-header">
-       <h2>충전기 정보</h2>
+       <h2>충전요금 정보</h2>
     </div>
     <!-- 제목 ------------------------------------------------------------------->
   <!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select) ---------------------------------------->
     <form action="#" class="form-inline text-right">
       <input type="hidden" name="div" id="div" value="${requestScope.divValue}">
-      <div class="form-group">
-      <!-- 검색 조건 수정 필요-------------------------------------------------------------------->
-        <select class="form-control input-sm" name="searchDiv" id="searchDiv">
-          <c:forEach items="${BOARD_SEARCH}" var="code">
-              <option value='<c:out value="${code.detCode}"/>'>
-              <c:out value="${code.detName}"/>
-            </option>
-          </c:forEach>
-        </select>
-        <input type="text" class="form-control input-sm" name="searchWord" id="searchWord" placeholder="검색어를 입력하세요">
-        <select class="form-control input-sm" name="pageSize" id="pageSize">
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30">30</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
-        </select>
-      <!-- 검색 조건 수정 필요-------------------------------------------------------------------->
-        <input type="button" class="btn btn-success btn-sm" value="수정" id="doUpdate">
-        <input type="button" class="btn btn-warning btn-sm" value="삭제" id="doDelete">
-        <input type="button" class="btn btn-info btn-sm" value="등록" id="doSave">
-      </div>
+      
+      <ul class="nav nav-tabs text-left">
+			  <li role="presentation" class="active" id="showRapid"><a href="">급속요금</a></li>
+			</ul>
+      
+
     </form>
     <!-- 검색 ----------------------------------------------------------------------------->
   
   <!-- 충전기 테이블 목록 ---------------------------------------------------------------------------->
     <div class="table-responsive">
-    <table class="table table-bordered table-striped table-hover chargerTable" id="chargerTable">
+    <table class="table table-bordered table-striped table-hover rapidTable" id="rapidTable">
+      <thead>
+        <tr>
+          <th class="text-center"><strong>사업자명</strong></th>
+          <th class="text-center"><strong>급속100kW이상요금</strong></th>
+          <th class="text-center"><strong>급속100kW미만요금</strong></th>
+        </tr>
+      </thead>
+      <tbody>
+      
+      </tbody>
+    </table>
+    </div>
+  <!-- 테이블 목록 ----------------------------------------------------------------------------->
+  
+  <ul class="nav nav-tabs text-left">
+    <li role="presentation" class="active" id="showSlow"><a href="">완속요금</a></li>
+  </ul>
+      
+  <!-- 충전기 테이블 목록 ---------------------------------------------------------------------------->
+    <div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover slowTable" id="slowTable">
+      <thead>
+        <tr>
+          <th class="text-center"><strong>사업자명</strong></th>
+          <th class="text-center"><strong>완속요금</strong></th>
+        </tr>
+      </thead>
       <tbody>
         
       </tbody>

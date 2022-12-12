@@ -1,4 +1,4 @@
-package com.pcwk.ehr.charger.controller;
+package com.pcwk.ehr.station.controller;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -13,27 +13,28 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.pcwk.ehr.charger.domain.ChargerVO;
-import com.pcwk.ehr.charger.service.ChargerService;
 import com.pcwk.ehr.cmn.SearchVO;
 import com.pcwk.ehr.cmn.StringUtil;
+import com.pcwk.ehr.station.domain.StationVO;
+import com.pcwk.ehr.station.service.StationService;
 
-@Controller("chargerController")
-@RequestMapping("charger")
-public class ChargerController {
+@Controller("stationController")
+@RequestMapping("station")
+public class StationController {
 
 	final Logger LOG = LogManager.getLogger(getClass());
 	
 	@Autowired
-	ChargerService chargerService;
+	StationService stationService;
 	
-	public ChargerController() {}
+	public StationController() {}
 	
 	@RequestMapping(value="/view.do" , method = RequestMethod.GET)
 	public String View() {
 		LOG.debug("┌───────────────────────────────────────────┐");
 		LOG.debug("│                 View()                    │");
 		LOG.debug("└───────────────────────────────────────────┘");	
-		return "elecmusk/charger";
+		return "elecmusk/station";
 	}
 	
 	/**
@@ -67,7 +68,7 @@ public class ChargerController {
 		LOG.debug("┌───────────────────────────────────────────┐");
 		LOG.debug("│inVO" + inVO);
 		
-		List<ChargerVO> list = chargerService.doRetrieve(inVO);
+		List<StationVO> list = stationService.doRetrieve(inVO);
 		
 		jsonString = new Gson().toJson(list);
 		LOG.debug("│jsonString:" + jsonString);
@@ -75,4 +76,5 @@ public class ChargerController {
 		
 		return jsonString;
 	}
+	
 }

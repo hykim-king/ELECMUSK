@@ -99,5 +99,14 @@
 	)B
   </select>
   
+  
+  <select id="showSlow" parameterType="ChargingFeeVO" resultMap="chargingfeeMap">
+  SELECT provider_no,
+	       image,
+	       enterprenuer,
+	       slow_fee
+	FROM CHARGING_FEE
+	WHERE slow_fee > 0
+  </select>
 	
 </mapper>  

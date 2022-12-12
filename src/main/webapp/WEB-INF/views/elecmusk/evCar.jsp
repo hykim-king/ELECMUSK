@@ -181,6 +181,8 @@
 			        <option value="르노삼성">르노삼성</option>
 			        <option value="쉐보레">쉐보레</option>
 			        <option value="대창모터스">대창모터스</option>
+			        <option value="벤츠">벤츠</option>
+			        <option value="테슬라">테슬라</option>
 			      </select>
           </td>
           <td>

@@ -45,15 +45,18 @@
   $(document).ready(function(){
 	  console.log("document.ready");
 	  
-	  doRetrieve(1);
+	  doRetrieve();
 	  
-	  $("#doRetrieve").on("click", function(){
-	      console.log("#doRetrieve");
-	      
-	      doRetrieve(1);
-	      
-	    //doRetrieve  
-	    });
+	  //등록화면으로 이동
+    $("#moveToReg").on("click",function(){
+      
+      console.log('moveToReg');
+      console.log('div:'+$("#div").val());
+      
+      window.location.href = "${CP}/elecmusk/subsidy/doSave.do";
+      
+    //moveToReg
+    });
 	  //document  
 	 });
 	  
@@ -101,7 +104,7 @@
           $.each(parsedJson, function(index,value){
               //console.log(index+","+value.uId);
               htmlData +=" <tr> ";
-              htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'><input type='checkbox' name='chk' value='" +value.uId+"' ></td> ";        
+              htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'><input type='checkbox' name='chk' value='" +value.subsidy_no+"' ></td> ";        
               htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.model +"</td> ";        
               htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.manufacturer +"</td> ";        
               htmlData +="   <td class='text-center col-sm-5 col-md-5 col-lg-5'>"+value.name +"</td> ";        
@@ -169,11 +172,15 @@
   
   <!-- div container -->
   <div class="container">
-  ${list }
-  
+    <!-- 제목 -->
+    <div class="page-header">
+       <h2>보조금 정보</h2>
+    </div>
+    <!-- 제목 ------------------------------------------------------------------->
   <!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select) ---------------------------------------->
     <form action="#" class="form-inline text-right">
       <div class="form-group">
+      <!-- 검색 조건 수정 필요-------------------------------------------------------------------->
         <select class="form-control input-sm" name="searchDiv" id="searchDiv">
           <c:forEach var="code" items="${BOARD_SEARCH }">
             <option value='<c:out value="${code.detCode }"></c:out>'>
@@ -189,17 +196,18 @@
           <option value="50">50</option>
           <option value="100">100</option>
         </select>
-        <input type="button" class="btn btn-success btn-sm" value="조회" id="doRetrieve">
+      <!-- 검색 조건 -------------------------------------------------------------------->
+        <input type="button" class="btn btn-success btn-sm" value="수정" id="doUpdate">
         <input type="button" class="btn btn-warning btn-sm" value="삭제" id="doDelete">
-        <input type="button" class="btn btn-info btn-sm" value="등록" id="doSave">
+        <input type="button" class="btn btn-info btn-sm" value="등록" id="moveToReg">
       </div>
     </form>
     <!-- 검색 ----------------------------------------------------------------------------->
   
   <!-- 테이블 목록 ---------------------------------------------------------------------------->
     <div class="table-responsive">
-    <table class="table table-bordered table-striped table-hover" id="subsidyTable">
-      <thead class="bg-primary">
+    <table class="table table-striped table-hover" id="subsidyTable">
+      <thead class="bg-success">
         <tr>
           <th class="text-center col-sm-1 col-md-1 col-lg-1"><input type="checkbox" id="checkAll"></th>
           <th class="text-center col-sm-2 col-md-2 col-lg-2">구분</th>        
@@ -239,7 +247,8 @@
     </div>
     <!-- 페이징 ---------------------------------------------------->
   </div>
-  </div>
-  
+  <!-- div container -->
+</div>
+<!-- div contents -->
 </body>
 </html>

@@ -52,7 +52,7 @@ public class JWebChargerDao {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void doSelectOne() throws SQLException{
 		dao.doDelete(charger01);
 		dao.doSave(charger01);
@@ -60,7 +60,7 @@ public class JWebChargerDao {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void doUpdate() throws SQLException{
 		dao.doDelete(charger01);
 		dao.doSave(charger01);
@@ -75,7 +75,7 @@ public class JWebChargerDao {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void doSave() throws SQLException{
 		dao.doDelete(charger01);
 		dao.doSave(charger01);
@@ -92,7 +92,7 @@ public class JWebChargerDao {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void doRetrieve() throws SQLException{
 		dao.doDelete(charger01);
 		dao.doSave(charger01);
@@ -100,7 +100,7 @@ public class JWebChargerDao {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void beans() {
 		LOG.debug("┌─────────────────────────────────────┐");
 		LOG.debug("│context:" + context);

@@ -51,15 +51,19 @@
 		  location.href= link;
 	  });
 	  $("#subsidyData").on("click",function(){
-		  let link = "${CP}/elecmusk/subsidy.do"
+		  let link = "${CP}/subsidy/view.do"
 		  location.href= link;
 	  });
 	  $("#chargerData").on("click",function(){
-		  let link = "${CP}/elecmusk/charger.do"
+		  let link = "${CP}/charger/view.do"
+		  location.href= link;
+	  });
+	  $("#feeData").on("click",function(){
+		  let link = "${CP}/chargingfee/view.do"
 		  location.href= link;
 	  });
 	  $("#stationSearch").on("click",function(){
-		  let link = "${CP}/elecmusk/station.do"
+		  let link = "${CP}/station/view.do"
 		  location.href= link;
 	  });
 	  
@@ -107,7 +111,8 @@
           <ul class="sub-menu">
             <li><a href="#" id="carsData" name="carsData">Cars data</a></li>
             <li><a href="#" id="subsidyData" name="subsidyData">Subsidy data</a></li>
-            <li><a href="#" id="chargerData" name="chargerData">Charger & Fee data</a></li>
+            <li><a href="#" id="chargerData" name="chargerData">Charger data</a></li>
+            <li><a href="#" id="feeData" name="feeData">Charging Fee</a></li>
             <li><a href="#">Statistical info</a></li>
           </ul>
          </li>
