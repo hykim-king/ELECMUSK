@@ -103,8 +103,6 @@
 }
 
 #graphArea{
-  padding-top: 10px;
-  padding-right: 10px;
   text-align: right;
 }
 
@@ -113,7 +111,7 @@
   $(document).ready(function(){
 	  console.log("document.ready");
 	  
-	  $("#selectGraph").on("change",function(){
+	  $("#selectGraph").change(function(){
 		     if($(this).val() == 10) {
 		         $("#chartArea1").css("display","block");
 		         $("#chartArea2").css("display","none");
@@ -385,7 +383,7 @@
 <body>
 <div>
 <div id="graphArea">
-  <select id="selectGraph" name="selectGraph">
+  <select id="selectGraph" name="selectGraph" onchange="selectGraphVal()">
     <option value="10">대전 이북 통계</option>
     <option value="20">대전 이남 통계</option>
     <option value="30" selected="selected">전국 통계</option>

@@ -29,7 +29,7 @@
 <script type="text/javascript">
   $(document).ready(function(){
 
-	    $(".header-area").click(function() {
+	    $("#header-area").click(function() {
 	        $(".sub-menu").addClass("visible");
 	        $(".sub-menu").css("opacity", "1");
 	        $(".sub-menu").css("z-index", "1");
@@ -92,7 +92,7 @@
     </div>
     <!-- logo-area end--------------------------------------------------------->
     
-    <div class="header-area">
+    <div class="header-area" id="header-area">
     <div class="text-logo-area">
       <img src="${CP_RES}/asset/imgs/home_imgs/EVerything_logo_text.png">
     </div>
