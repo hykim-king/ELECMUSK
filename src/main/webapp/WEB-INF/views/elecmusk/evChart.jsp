@@ -99,30 +99,55 @@
   $(document).ready(function(){
 	  console.log("document.ready");
 	    
-	    let seoulList;
-	  
       let method = "GET";
       let url    = "/elecmusk/chartRetrieve.do";
       let async  = false;
       let params = {};
       PClass.callAjax(method,url,async,params,function(data){
         let parsedJson = JSON.parse(data);
-        let seoul = "";
+        let seoul = [];
+        let ulsan = [];
+        let choongbuk = [];
+        let jeonbuk = [];
+        let gyeonggi = [];
+        let choongnam = [];
+        let busan = [];
+        let gangwon = [];
+        let gyeongbuk = [];
+        let daejeon = [];
+        let sejong = [];
+        let jeju = [];
+        let daegu = [];
+        let incheon = [];
+        let jeonnam = [];
+        let gyeongnam = [];
+        let gwangju = [];
+        let countSum = [];
         if(null != parsedJson && parsedJson.length > 0) {
           $.each(parsedJson, function(index, value){
-            seoul += value.seoul+",";
+            seoul.push([value.seoul]);
+            ulsan.push([value.ulsan]);
+            choongbuk.push([value.choongbuk]);
+            jeonbuk.push([value.jeonbuk]);
+            gyeonggi.push([value.gyeonggi]);
+            choongnam.push([value.choongnam]);
+            busan.push([value.busan]);
+            gangwon.push([value.gangwon]);
+            gyeongbuk.push([value.gyeongbuk]);
+            daejeon.push([value.daejeon]);
+            sejong.push([value.sejong]);
+            jeju.push([value.jeju]);
+            daegu.push([value.daegu]);
+            incheon.push([value.incheon]);
+            jeonnam.push([value.jeonnam]);
+            gyeongnam.push([value.gyeongnam]);
+            gwangju.push([value.gwangju]);
+            countSum.push([value.countSum]);
           })//.each
-          let listSeoul = seoul.slice(0,-1);
-          console.log("listSeoul: "+ listSeoul);
-          chart(listSeoul);
+          chart(seoul,ulsan,choongbuk,jeonbuk,gyeonggi,choongnam,busan,gangwon,gyeongbuk,daejeon,sejong,jeju,daegu,incheon,jeonnam,gyeongnam,gwangju);
+          koreaChart(countSum)
         }
       });
-      if(seoulList != null && seoulList === undefined) 
-      console.log("seoulList: "+seoulList);
-      
-      
-	  
-	    
 
 	    //==================================================================
 	    //=헤더부분 스크립트 이부분 꼭 넣으세요
@@ -161,7 +186,7 @@
 	   //==================================================================
   });
   
-  function chart(locationArea) {
+  function chart(seoul,ulsan,choongbuk,jeonbuk,gyeonggi,choongnam,busan,gangwon,gyeongbuk,daejeon,sejong,jeju,daegu,incheon,jeonnam,gyeongnam,gwangju,countSum) {
 	  Highcharts.chart('chartArea', {
 	        chart: {
 	          type: 'area'
@@ -208,96 +233,109 @@
 	        },
 	        series: [{
 	          name: '서울',
-	          data: [locationArea]
-	           
+	          data: seoul
 	        }, 
 	        { name: '경기',
-	          data: [null, null, null, null, null, null, null, null, null,
-	            1
-	          ]
+	          data: gyeonggi
 	        },
 	        { name: '울산',
-	            data: [null, null, null, null, null, null, null, null, null,
-	                1
-	              ]
+	            data: ulsan
 	        },
 	        { name: '충북',
-	            data: [null, null, null, null, null, null, 3246, null, null,
-	                1
-	              ]
+	            data: choongbuk
 	        },
 	        { name: '전북',
-	            data: [null, null, null, 4623, null, null, null, null, null,
-	                1
-	              ]
+	            data: jeonbuk
 	        },
 	        { name: '충남',
-	            data: [null, 10, null, 3246, null, null, null, null, null,
-	                1
-	              ]
+	            data: choongnam
 	        },
 	        { name: '부산',
-	            data: [null, null, null, 50, null, null, 40, null, null,
-	                1
-	              ]
+	            data: busan
 	        },
 	        { name: '강원',
-	            data: [null, null, null, null, null, 500, 20, null, null,
-	                1
-	              ]
+	            data: gangwon
 	        },
 	        { name: '경북',
-	            data: [null, null, null, null, 20, null, null, null, null,
-	                1
-	              ]
+	            data: gyeongbuk
 	        },
 	        { name: '대전',
-	            data: [null, null, 125, 80, null, null, 126, null, null,
-	                1
-	              ]
+	            data: daejeon
 	        },
 	        { name: '세종',
-	            data: [null, null, null, null, null, 126, null, null, null,
-	                1
-	              ]
+	            data: sejong
 	        },
 	        { name: '제주',
-	            data: [null, null, null, null, 4236, null, null, null, null,
-	                1
-	              ]
+	            data: jeju
 	        },
 	        { name: '대구',
-	            data: [null, null, 3246, null, 4362, null, null, null, null,
-	                1
-	              ]
+	            data: daegu
 	        },
 	        { name: '인천',
-	            data: [null, null, 3462, null, 2346, 2346, null, 634, null,
-	                1
-	              ]
+	            data: incheon
 	        },
 	        { name: '전남',
-	            data: [null, null, null, 1236, null, null, null, null, null,
-	                1
-	              ]
+	            data: jeonnam
 	        },
 	        { name: '경남',
-	            data: [null, null, null, null, null, 2346, null, null, null,
-	                1
-	              ]
+	            data: gyeongnam
 	        },
 	        { name: '광주',
-	            data: [null, null, null, null, null, 2346, null, null, null,
-	                1
-	              ]
-	        },               
-	        {name: '전국',
-	            data: [null, null, null, 5236, null, 621, null, null, null,
-	                1
-	              ]
+	            data: gwangju
 	        }]
 	      });
   }
+  function koreaChart(countSum) {
+	    Highcharts.chart('chartArea2', {
+	          chart: {
+	            type: 'area'
+	          },
+	          accessibility: {
+	            description: ''
+	          },
+	          title: {
+	            text: '월 별 전기차 통계 현황'
+	          },
+	          subtitle: {
+	            text: '전국 전기차 통계'
+	          },
+	                xAxis : {
+	                    categories:["21년6월","21년7월","21년8월","21년9월","21년10월","21년11월","21년12월","22년1월","22년2월","22년3월"]
+	          },
+	          yAxis: {
+	            title: {
+	              text: '전국 전기차 통계 정보'
+	            },
+	            labels: {
+	              formatter: function () {
+	                return this.value / 0.025 + '대';
+	              }
+	            }
+	          },
+	          tooltip: {
+	            pointFormat: '{series.name} 전기차 통계 <b>{point.y:,.0f}</b><br/>{point.x}'
+	          },
+	          plotOptions: {
+	            area: {
+	              pointStart: 0,
+	              marker: {
+	                enabled: false,
+	                symbol: 'circle',
+	                radius: 2,
+	                states: {
+	                  hover: {
+	                    enabled: true
+	                  }
+	                }
+	              }
+	            }
+	          },
+	          series: [             
+	          {name: '전국',
+	              data: countSum
+	          }]
+	        });
+	  }
 </script>
 
 </head>
@@ -308,6 +346,12 @@
 <div id="contents">
   <figure class="highcharts-figure">
   <div id="chartArea"></div>
+  <p class="highcharts-description">
+    2021년 06월 ~ 2022년 03월.
+  </p>
+</figure>
+  <figure class="highcharts-figure">
+  <div id="chartArea2"></div>
   <p class="highcharts-description">
     2021년 06월 ~ 2022년 03월.
   </p>
