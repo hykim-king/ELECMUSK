@@ -15,13 +15,10 @@
 <meta name="description" content="pcwk html" />
 <!-- 키워드 -->
 <meta name="keyword" content="html5, css3, javascript6, jQuery">
-<meta charset="UTF-8">
-<!-- jquery ui -->
-<link rel="stylesheet" href="${CP_RES}/asset/css/jquery-ui.css">
+<link rel="shortcut icon" type="image/x-icon" href="${CP_RES}/asset/cmn/favicon.ico">   
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="${CP_RES}/bootstrap/css/bootstrap.min.css">>
 <link rel="stylesheet" href="${CP_RES}/main_home.css">
-<style>
-</style>
-<title>Everything</title>
 <!-- jQuery -->
 <script src="${CP_RES}/bootstrap/js/jquery-1.12.4.js"></script>
 <!-- callAjax -->
@@ -33,6 +30,7 @@
 <!-- bootstrap js -->
 <script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
+<title>Everything</title>
 <script type="text/javascript">
 $(document).ready(function(){
     
@@ -95,7 +93,7 @@ $(document).ready(function(){
 </head>
 <body>
   <header>
-  <jsp:include page ="/resources/asset/cmn/main_header.jsp" flush="false"/>
+  <jsp:include page ="${CO}/resources/asset/cmn/main_header.jsp" flush="false"/>
   </header>
   <div id="contents">
   

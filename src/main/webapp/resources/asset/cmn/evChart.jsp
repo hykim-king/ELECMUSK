@@ -55,15 +55,15 @@
 }
 
 #chartArea1{
-  height: 450px;
+  max-height: 450px;
   display: none;
 }
 #chartArea2{
-  height: 450px;
+  max-height: 450px;
   display: none;
 }
 #chartArea3{
-  height: 450px;
+  max-height: 450px;
 }
 
 .highcharts-data-table table {
@@ -193,6 +193,7 @@
 	        subtitle: {
 	          text: '대전 이북 지역별 전기차 통계'
 	        },
+	        credits: { enabled: false },
 	              xAxis : {
 	                  categories:["21년6월","21년7월","21년8월","21년9월","21년10월","21년11월","21년12월","22년1월","22년2월","22년3월"]
 	        },
@@ -265,6 +266,7 @@
 	        subtitle: {
 	          text: '대전 이남 지역별 전기차 통계'
 	        },
+	        credits: { enabled: false },
 	              xAxis : {
 	                  categories:["21년6월","21년7월","21년8월","21년9월","21년10월","21년11월","21년12월","22년1월","22년2월","22년3월"]
 	        },
@@ -340,6 +342,7 @@
 	          subtitle: {
 	            text: '전국 전기차 통계'
 	          },
+	          credits: { enabled: false },
 	                xAxis : {
 	                    categories:["21년6월","21년7월","21년8월","21년9월","21년10월","21년11월","21년12월","22년1월","22년2월","22년3월"]
 	          },
