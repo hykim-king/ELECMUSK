@@ -79,6 +79,8 @@
 <style>
 #header-area{
   border-bottom: 1px solid;
+  width: 100%;
+  display: flex;
 }
 </style>
 <div class="container-fluid">
@@ -105,7 +107,7 @@
 		</div>
 
 		<!-- menu-area -->
-		<div id="menu-area" class="container-fluid">
+		<div id="menu-area" class="container-fluid text-center">
 			<ul class="menu-bar breadcrumb nav text-center">
 				<li id="main_home" name="main_home">Home</li>
 				<li>BOARD

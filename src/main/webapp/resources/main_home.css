@@ -58,9 +58,7 @@
   .menu-bar{
     margin: 0 auto;
     padding: 0px;
-    position:relative;
     border-bottom: 1px solid;
-    left: 40%;
     height: 30px;
     margin-bottom: 20px;
     line-height: 30px;
@@ -220,7 +218,6 @@
     padding: 0px;
     position:relative;
     width: 100%;
-    left: 10%
   }
   
   .sub-menu{
