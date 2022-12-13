@@ -13,11 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.pcwk.ehr.board.domain.BoardVO;
-import com.pcwk.ehr.cmn.MessageVO;
-import com.pcwk.ehr.cmn.SearchVO;
-import com.pcwk.ehr.cmn.StringUtil;
-import com.pcwk.ehr.code.service.CodeService;
+import com.pcwk.ehr.evcar.cmn.evMessageVO;
+import com.pcwk.ehr.evcar.cmn.evSearchVO;
 import com.pcwk.ehr.subsidy.domain.SubsidyVO;
 import com.pcwk.ehr.subsidy.service.SubsidyService;
 
@@ -30,8 +27,7 @@ public class SubsidyController {
 	@Autowired
 	SubsidyService subsidyService;
 	
-	@Autowired
-	CodeService codeService;
+
 	
 	public SubsidyController() {}
 	
@@ -52,7 +48,7 @@ public class SubsidyController {
 	@RequestMapping(value="/doRetrieve.do", method = RequestMethod.GET
 			,produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String doRetrieve(SearchVO inVO) throws SQLException{
+	public String doRetrieve(evSearchVO inVO) throws SQLException{
 		String jsonString = "";
 		
 		if (null != inVO && inVO.getPageNo() == 0) {
@@ -60,16 +56,9 @@ public class SubsidyController {
 		}
 		//페이지 사이즈
 		if (null != inVO && inVO.getPageSize() == 0) {
-			inVO.setPageSize(10);
+			inVO.setPageSize(200);
 		}
-		//검색구분
-		if (null != inVO && null == inVO.getSearchDiv()) {
-			inVO.setSearchDiv(StringUtil.nvl(inVO.getSearchDiv()));
-		}
-		//검색어
-		if (null != inVO && null == inVO.getSearchWord()) {
-			inVO.setSearchWord(StringUtil.nvl(inVO.getSearchWord()));
-		}
+
 		
 		LOG.debug("┌───────────────────────────────────────────┐");
 		LOG.debug("│inVO" + inVO);
@@ -116,7 +105,7 @@ public class SubsidyController {
 			message = inVO.getSubsidy_no()+"수정 실패";
 		}
 		
-		MessageVO messageVO=new MessageVO(String.valueOf(flag), message);
+		evMessageVO messageVO=new evMessageVO(String.valueOf(flag), message);
 		
 		jsonString = new Gson().toJson(messageVO);
 		
@@ -141,7 +130,7 @@ public class SubsidyController {
 			message = inVO.getSubsidy_no()+"등록 실패";
 		}
 		
-		MessageVO messageVO=new MessageVO(String.valueOf(flag), message);
+		evMessageVO messageVO=new evMessageVO(String.valueOf(flag), message);
 		
 		jsonString = new Gson().toJson(messageVO);
 		
@@ -170,7 +159,7 @@ public class SubsidyController {
 			message = "삭제 실패";
 		}
 		
-		jsonString = new Gson().toJson(new MessageVO(String.valueOf(flag), message));
+		jsonString = new Gson().toJson(new evMessageVO(String.valueOf(flag), message));
 		LOG.debug("|jsonString:"+jsonString);
 		LOG.debug("└=============================┘");
 		return jsonString;

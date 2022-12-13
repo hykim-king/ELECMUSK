@@ -38,5 +38,29 @@ public class evChartDaoImpl implements evChartDao {
 		return list;
 	}
 
+	@Override
+	public int doSave(evChartVO inVO) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int doUpdate(evChartVO inVO) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int doDelete(evChartVO inVO) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public evChartVO doSelectOne(evChartVO inVO) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

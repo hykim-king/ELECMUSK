@@ -1,8 +1,8 @@
 package com.pcwk.ehr.subsidy.domain;
 
-import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.evcar.cmn.evDTO;
 
-public class SubsidyVO extends DTO {
+public class SubsidyVO extends evDTO {
 	
 	private int subsidy_no;			//보조금번호
 	private String name;			//자동차명

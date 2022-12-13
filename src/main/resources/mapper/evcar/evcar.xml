@@ -94,7 +94,7 @@
    <result  column="output"    property="outPut"    />
   </resultMap>  
   
-  <select id="doRetrieve" parameterType="com.pcwk.ehr.evcar.cmn.evSearchVO" resultMap="evcarVO">
+  <select id="doRetrieve" parameterType="evSearchVO" resultMap="evcarVO">
     SELECT A.*, B.*
     FROM (
         SELECT
