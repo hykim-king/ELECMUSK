@@ -61,13 +61,13 @@
           <![CDATA[ AND subsidy BETWEEN 0 AND #{subsidyKeyword} ]]>
         </when>
         <when test=" '2000' == subsidyKeyword">
-          <![CDATA[ AND subsidy BETWEEN 1000 AND #{subsidyKeyword} ]]>
+          <![CDATA[ AND subsidy BETWEEN 1001 AND #{subsidyKeyword} ]]>
         </when>
         <when test=" '3000' == subsidyKeyword">
-          <![CDATA[ AND subsidy BETWEEN 2000 AND #{subsidyKeyword} ]]>
+          <![CDATA[ AND subsidy BETWEEN 2001 AND #{subsidyKeyword} ]]>
         </when>
-        <when test=" '3000' == subsidyKeyword">
-          <![CDATA[ AND subsidy > #{subsidyKeyword}  ]]>
+        <when test=" '15000' == subsidyKeyword">
+          <![CDATA[ AND subsidy BETWEEN 3001 AND #{subsidyKeyword}  ]]>
         </when>
       </choose>
     </sql>
