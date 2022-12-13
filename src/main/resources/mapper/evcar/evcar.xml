@@ -98,7 +98,7 @@
     SELECT A.*, B.*
     FROM (
         SELECT
-            TT1.rnum,     
+            TT1.rnum as num,     
             TT1.car_no,
             TT1.name,
             TT1.image,

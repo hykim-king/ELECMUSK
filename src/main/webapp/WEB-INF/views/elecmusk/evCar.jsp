@@ -1,28 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:set var="CP" value="${pageContext.request.contextPath}" />
-<c:set var="resources" value="/resources" />
-<c:set var="CP_RES" value="${CP}${resources}" />
-
-<fmt:bundle basename="message">
-	<%@include file="/resources/asset/jsp/cache.jsp"%>
-	<!DOCTYPE html>
-	<html lang="ko">
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
+<c:set var="RES" value="/resources" ></c:set>
+<c:set var="CP_RES" value="${CP}${RES}" ></c:set>
+<!DOCTYPE html>
+<html>  
 <head>
-<meta name="viewport" content="width=device-width, initail-scale=1.0">
-<meta name="description" content="pcwk html" />
-<!-- 키워드 -->
-<meta name="keyword" content="html5, css3, javascript6, jQuery">
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/x-icon" href="${CP}/favicon.ico">   
 <!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="${CP_RES}/bootstrap/css/bootstrap.min.css">>
-<link rel="stylesheet" href="${CP_RES}/main_home.css">
+<link rel="stylesheet" href="${CP_RES}/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="${CP_RES}/evCar.css">
-<style>
-</style>
-<title>Everything</title>
+<link rel="stylesheet" href="${CP_RES}/main_home.css">
+
 <!-- jQuery -->
 <script src="${CP_RES}/bootstrap/js/jquery-1.12.4.js"></script>
 <!-- callAjax -->
@@ -34,16 +26,14 @@
 <!-- bootstrap js -->
 <script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
-<!-- javascript -->
-<script type="text/javascript">
+<title>evCarData</title>
+<script>
 	$(document).ready(function() {
-		  
-		doRetrieve();
+		doRetrieve(1);
 		
 		$("#keywordRetrive").on("click",function(){
-			doRetrieve();
+			doRetrieve(1);
 		});
-		
 		
 		$(function() {
 			let didScroll;
@@ -78,7 +68,7 @@
 		//document End -------------------------------------------------------------
 	});
 	
-	function doRetrieve() {
+	function doRetrieve(page) {
 		console.log("doRetrieve");
 		
 		let method = "GET";
@@ -89,6 +79,8 @@
 				appearanceKeyword: $("#appearanceKeyword").val(),
 				modelKeyword: $("#modelKeyword").val(),
 				batteryTypeKeyword: $("#batteryTypeKeyword").val(),
+				pageSize : $("#pageSize").val(),
+				pageNo: page
 		};
 		PClass.callAjax(method,url,async,params,function(data){
 	      let parsedJson = JSON.parse(data);
@@ -96,7 +88,20 @@
 	      let htmlData = "";
 	      $("#evCar>tbody").empty();
 	      
+        let totalCnt = 0; //총글수
+        let pageTotal = 0;//총 페이지수	      
+	      
 	      if(null != parsedJson && parsedJson.length > 0) {
+	    	  
+          totalCnt=parsedJson[0].totalCnt;
+          pageTotal = Math.ceil( totalCnt/$("#pageSize").val() );
+          console.log("================");
+          console.log("=totalCnt="+totalCnt);
+          console.log("=pageSize="+$("#pageSize").val());
+          console.log("=pageTotal="+pageTotal);          
+          console.log("=page="+page);
+          console.log("================");	    
+          
 	    	  $.each(parsedJson, function(index, value) {
 	    		   htmlData += "<tr>";
 	    		   htmlData += "<div class='picture'>";
@@ -150,9 +155,41 @@
 	             htmlData += "</tr>";
 	      }
 	      $("#evCar>tbody").append(htmlData);
+        $("#page-selection").empty();
+        renderingPage(pageTotal,page)
 		});
 		
 	}
+	
+	function renderingPage(pageTotal, page){
+	    console.log("pageTotal:"+pageTotal);
+	    console.log("page:"+page);
+	    
+	    pageTotal=parseInt(pageTotal);
+	    
+	    //연결된 EventHandler제거
+	    $("#page-selection").unbind("page");
+	    
+	    $("#page-selection").bootpag({
+	          total: pageTotal,
+	          page: page,
+	          maxVisible: 10,
+	          leaps: true,
+	          firstLastUse: true,
+	          first: '←',
+	          last: '→',
+	          wrapClass: 'pagination',
+	          activeClass: 'active',
+	          disabledClass: 'disabled',
+	          nextClass: 'next',
+	          prevClass: 'prev',
+	          lastClass: 'last',
+	          firstClass: 'first'
+	      }).on("page", function(event, num){
+	          console.log("num:"+num);
+	          doRetrieve(num);
+	      });
+	  }
 </script>
 </head>
 <body>
@@ -160,7 +197,7 @@
 		<jsp:include page="/resources/asset/cmn/main_header.jsp" flush="false" />
 	</header>
 	<div id="contents">
-
+	<input type="hidden" id="pageSize" name="pageSize" value="6">
 		<div class="select-area">
 		<table>
 		  <thead>
@@ -221,17 +258,20 @@
 		</table>
 		</div>
 		
-      <table class="evcar-table" id="evCar">
-        <tbody>
-        </tbody>
-      </table>
-      
-      
+    <table class="evcar-table" id="evCar">
+      <tbody>
+      </tbody>
+    </table>
     
+    <div class="page-header" style="margin:30px">
+    <div class="text-center col-sm-12 col-md-12 col-lg-12">
+      <div id="page-selection" class="text-center page"></div>    
+    </div>
+    </div>
+     
 	</div>
 	<footer>
 		<jsp:include page="/resources/asset/cmn/main_footer.jsp" flush="false" />
 	</footer>
 </body>
 	</html>
-</fmt:bundle>

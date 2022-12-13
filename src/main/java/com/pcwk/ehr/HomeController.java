@@ -73,7 +73,7 @@ public class HomeController {
 	public String chartRetrieve(evSearchVO inVO) throws SQLException  {
 		String jsonString = "";
 		// 페이지 사이즈(default =10)
-		if( 0==inVO.getPageSize()) {
+		if( 10==inVO.getPageSize()) {
 			inVO.setPageSize(10);
 		}
 		
@@ -101,7 +101,7 @@ public class HomeController {
 		String jsonString = "";
 		// 페이지 사이즈(default =10)
 		if( 0==inVO.getPageSize()) {
-			inVO.setPageSize(20);
+			inVO.setPageSize(6);
 		}
 		
 		//페이지 번호(default =1)

@@ -17,7 +17,7 @@
 <meta name="keyword" content="html5, css3, javascript6, jQuery">
 <link rel="shortcut icon" type="image/x-icon" href="${CP_RES}/asset/cmn/favicon.ico">   
 <!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="${CP_RES}/bootstrap/css/bootstrap.min.css">>
+<link rel="stylesheet" href="${CP_RES}/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="${CP_RES}/main_home.css">
 <!-- jQuery -->
 <script src="${CP_RES}/bootstrap/js/jquery-1.12.4.js"></script>
@@ -25,8 +25,6 @@
 <script src="${CP_RES}/bootstrap/js/callAjax.js"></script>
 <!-- String, Number, Date Util  -->
 <script src="${CP_RES}/bootstrap/js/eUtil.js"></script>
-<!-- paging -->
-<script src="${CP_RES}/bootstrap/js/jquery.bootpag.js"></script>
 <!-- bootstrap js -->
 <script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">

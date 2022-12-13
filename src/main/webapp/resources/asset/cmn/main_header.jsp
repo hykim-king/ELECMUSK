@@ -76,6 +76,11 @@
 
 	});
 </script>
+<style>
+#header-area{
+  border-bottom: 1px solid;
+}
+</style>
 <div class="container-fluid">
   <!-- login-area -->
     <div class="login-area">
@@ -94,7 +99,7 @@
 	<!-- logo-area end--------------------------------------------------------->
 
 	<div class="header-area" id="header-area">
-
+  
 		<div class="text-logo-area">
 			<img src="${CP_RES}/asset/imgs/home_imgs/EVerything_logo_text.png" id="text-logo">
 		</div>
