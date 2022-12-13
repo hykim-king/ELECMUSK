@@ -44,11 +44,11 @@ public class BoardDaoImpl implements BoardDao {
 		LOG.debug("│param: "+inVO);
 		
 		String statement = NAMESPACE+DOT+"doSave";
-		LOG.debug("│statement: "+statement);
+		//LOG.debug("│statement: "+statement);
 		
 		int flag = sqlSessionTemplate.insert(statement, inVO);
 		
-		LOG.debug("│flag: "+flag);
+		//LOG.debug("│flag: "+flag);
 		LOG.debug("└─────────────────────────┘");
 		return flag;
 	}

@@ -16,7 +16,7 @@
   <sql id="searchcondition">
       <choose>
         <when test=" '10' ==searchDiv and '' != searchWord">
-         and nickname LIKE '%' || #{searchWord} || '%'
+         and nickName LIKE '%' || #{searchWord} || '%'
         </when>
         <when test=" '20' ==searchDiv and '' != searchWord">
          and title LIKE '%' || #{searchWord} || '%'

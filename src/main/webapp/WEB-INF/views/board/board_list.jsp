@@ -28,6 +28,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="${CP}/favicon.ico">   
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="${CP_RES}/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="${CP_RES}/main_home.css">
 
 <!-- jQuery -->
 <script src="${CP_RES}/bootstrap/js/jquery-1.12.4.js"></script>
@@ -45,14 +46,44 @@
   $(document).ready(function(){
 	  console.log("document.ready");
 	  
+    //===========================검색어 enter event
+    $("#searchWord").on("keydown",function(e){
+      
+      if(13 == e.which){
+        e.preventDefault();
+        doRetrive(1);
+      }
+    });//========================검색어 enter event 끝
+	  
+	//========================================한건조회(상세조회) 테이블 클릭
+	  $("#boardTable>tbody").on("click","tr",function(){
+		  console.log("boardTable>tbody");
+		  let tdArray = $(this).children();
+		  console.log("tdArray: "+tdArray);
+		  
+		  console.log(tdArray.eq(5).text());
+		  
+		  let boardSeq = tdArray.eq(5).text();
+		  
+		  if(confirm("상세 조회를 하시겠습니까?")==false)return;
+		  window.location.href = "${CP}/board/doSelectOne.do?bdSeq="+boardSeq;
+	  });
+	//========================================한건조회(상세조회) 테이블 클릭 끝  
 	  $("#doRetrieve").on("click",function(){
 		  console.log("doRetrieve");
 		  doRetrieve(1);
 	  });
-
+	  
+	  //========================================등록화면 이동
+	  $("#moveToReg").on("click",function(){
+		  console.log("doSave");
+		  
+		  window.location.href = "${CP}/board/moveToReg.do";
+		  
+	  });//========================================등록화면 이동끝
 	  
 	  
-  });
+  });//=====================================document.ready끝
   
   //==================================================================
   //=헤더부분 스크립트 이부분 꼭 넣으세요
@@ -90,7 +121,9 @@
  //=헤더부분 스크립트 이부분 꼭 넣으세요
  //==================================================================
 	 
-
+   //=================================
+	 //조회함수
+	 //=================================
   function doRetrieve(page){
     console.log("doRetrive().page: "+page);
     
@@ -104,7 +137,7 @@
         pageNo    : page
     };
     
-    PClass.callAjax(method,url,async,params,function(data){
+      PClass.callAjax(method,url,async,params,function(data){
       console.log(data);
       
       let parsedJson = JSON.parse(data);
@@ -131,12 +164,12 @@
           htmlData += "<tr>";
           htmlData += "  <td class='text-center col-sm-1 col-dm-1 col-lg-1'>"+<c:out value='value.num'></c:out>+"</td>";
           htmlData += "  <td class='text-left col-sm-6 col-dm-6 col-lg-6'>"+<c:out value='value.title'></c:out>+"</td>";
-          htmlData += "  <td class='text-center col-sm-2 col-dm-2 col-lg-2'>"+<c:out value='value.modId'></c:out>+"</td>";
+          htmlData += "  <td class='text-center col-sm-2 col-dm-2 col-lg-2'>"+<c:out value='value.nickName'></c:out>+"</td>";
           htmlData += "  <td class='text-center col-sm-2 col-dm-2 col-lg-2'>"+<c:out value='value.modDt'></c:out>+"</td>";
           htmlData += "  <td class='text-right col-sm-1 col-dm-1 col-lg-1'>"+<c:out value='value.readCnt'></c:out>+"</td>";
-          htmlData += "  <td style='display: none;'>"+<c:out value='value.seq '/>+"</td>";
+          htmlData += "  <td class='text-right col-sm-1 col-dm-1 col-lg-1'>"+<c:out value='value.bdSeq '/>+"</td>";
           htmlData += "</tr>";
-          
+          //<td style='display: none;'>"+<c:out value='value.bdSeq '/>+"</td>
         });
       }//if
       else{
@@ -152,8 +185,47 @@
       //데이터출력
       $("#boardTable>tbody").append(htmlData);
       
-    });
+      //paging
+      $("#page-selection").empty();//페이지 삭제
+      renderingPage(pageTotal,page);
+      
+    });//===============PClass.callAjax끝
   }
+  //=================================
+  //조회함수 끝
+  //=================================
+	  
+	  
+  //=====================================================page
+  function renderingPage(pageTotal,page){
+    console.log("pageTotal"+pageTotal);
+    console.log("page"+page);
+    
+    pageTotal = parseInt(pageTotal);
+    
+    //연결된 이벤트 제거
+    $('#page-selection').unbind('page');
+    
+    $('#page-selection').bootpag({
+        total: pageTotal,
+        page: page,
+        maxVisible: 10,
+        leaps: true,
+        firstLastUse: true,
+        first: '←',
+        last: '→',
+        wrapClass: 'pagination',
+        activeClass: 'active',
+        disabledClass: 'disabled',
+        nextClass: 'next',
+        prevClass: 'prev',
+        lastClass: 'last',
+        firstClass: 'first'
+    }).on("page", function(event, num){
+        console.log("num"+num);
+        doRetrieve(num);
+    }); 
+  }//=======================================================page 끝
 </script>
 
 </head>
@@ -178,7 +250,8 @@
       <div class="form-group">
         <select class="form-control input-sm" name="searchDiv" id="searchDiv">
           <option value="">전체</option>
-          <option value="10">제목</option>
+          <option value="10">작성자</option>
+          <option value="20">제목</option>
           <option value="20">내용</option>
         </select>
         <input type="text" class="form-control input-sm" 
@@ -193,7 +266,7 @@
         </select>
         <!------------------------------------- 버튼 -->
           <input type="button" class="btn btn-primary btn-sm" value="조회" id="doRetrieve">
-          <input type="button" class="btn btn-primary btn-sm" value="등록">
+          <input type="button" class="btn btn-primary btn-sm" value="등록" id="moveToReg">
         <!------------------------------------- 버튼 -->
       </div>
     </form>
@@ -239,28 +312,13 @@
     <!-------------------------------------------------- 테이블 목록 -->
     
     <!-------------------------------------------------- 페이징 -->
-    <div class="text-center">
-      <nav>
-        <ul class="pagination">
-          <li>
-            <a href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">5</a></li>
-          <li>
-            <a href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+    <div class="text-center col-sm-12 col-dm-12 col-lg-12">
+      <div id="page-selection" class="text-center page"></div>
     </div>
     <!-------------------------------------------------- 페이징 -->
+    
+    
+
   
   </div>
   <!--------------------------------------- div container --->

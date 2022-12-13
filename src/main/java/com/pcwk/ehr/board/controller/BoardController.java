@@ -36,6 +36,114 @@ public class BoardController {
 	
 	public BoardController() {}
 	
+	@RequestMapping(value = "/moveToReg.do", method = RequestMethod.GET)
+	public String moveToReg(Model model, SearchVO inVO) throws SQLException{
+		String VIEW_NAME = "board/board_reg";
+		LOG.debug("┌──────────────────────────────┐");
+		LOG.debug("│inVO = "+inVO);
+		LOG.debug("│VIEW_NAME = "+VIEW_NAME);
+		LOG.debug("└──────────────────────────────┘");
+		
+		return VIEW_NAME;
+	}
+	
+	/**
+	 * doUpdate
+	 * @param inVO
+	 * @return
+	 * @throws SQLException
+	 */
+	@RequestMapping(value = "/doUpdate.do", method = RequestMethod.POST
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String doUpdate(BoardVO inVO)throws SQLException{
+		String jsonString = "";
+		
+		if(null!=inVO && inVO.getNickName()==null) {
+			inVO.setNickName("");
+		}
+		if(null!=inVO && inVO.getCsnm()==null) {
+			inVO.setCsnm("");
+		}
+		if(null!=inVO && inVO.getRegId()==null) {
+			inVO.setRegId("");
+		}
+		if(null!=inVO && inVO.getModId()==null) {
+			inVO.setModId("");
+		}
+		
+		LOG.debug("┌──────────────────────────────┐");
+		
+		MessageVO outMsg = new MessageVO();
+		//제목
+		if(null != inVO && inVO.getTitle() ==null) {
+			return StringUtil.validMessageToJson("20", "제목을 입력하세요.");
+		}
+		//내용
+		if(null != inVO && inVO.getContents() ==null) {
+			return StringUtil.validMessageToJson("30", "내용을 입력하세요.");
+		}
+		LOG.debug("│inVO = "+inVO);
+		LOG.debug("└──────────────────────────────┘");
+		
+		int flag = boardService.doUpdate(inVO);
+		LOG.debug("┌──────────────────────────────┐");
+		LOG.debug("│flag = "+flag);
+		
+		String message = "";
+		if(1==flag) { 
+			message = inVO.getTitle()+" 수정 되었습니다.";
+		}else {
+			message = inVO.getTitle()+" 수정 실패";
+		}
+		jsonString = new Gson().toJson(new MessageVO(flag+"", message));
+		LOG.debug("│jsonString = "+jsonString);
+		LOG.debug("└──────────────────────────────┘");
+		
+		return jsonString;
+	}
+	
+	@RequestMapping(value = "/doSelectOne.do", method = RequestMethod.GET)
+	public String doSelectOne(BoardVO inVO, Model model)throws SQLException{
+		String jsonString = "";
+		
+		if(null!=inVO && inVO.getNickName()==null) {
+			inVO.setNickName("");
+		}
+		if(null!=inVO && inVO.getCsnm()==null) {
+			inVO.setCsnm("");
+		}
+		if(null!=inVO && inVO.getRegId()==null) {
+			inVO.setRegId("");
+		}
+		if(null!=inVO && inVO.getModId()==null) {
+			inVO.setModId("");
+		}
+		if(null!=inVO && inVO.getModId()==null) {
+			inVO.setModId("");
+		}
+		
+		LOG.debug("┌──────────────────────────────┐");
+		LOG.debug("│inVO = "+inVO);
+		LOG.debug("└──────────────────────────────┘");
+		//key생성
+		if(null != inVO && inVO.getBdSeq() ==0) {
+			return StringUtil.validMessageToJson("20", "순번을 확인하세요.");
+		}
+		
+		BoardVO outVO = boardService.doSelectOne(inVO);
+		LOG.debug("┌──────────────────────────────┐");
+		LOG.debug("│outVO = "+outVO);
+		String message = "";
+		
+		model.addAttribute("vo", outVO);
+		
+		LOG.debug("└──────────────────────────────┘");
+		
+		return "board/board_mod";
+	}
+	
+	
 	/**
 	 * 목록조회
 	 * @param inVO
@@ -119,7 +227,7 @@ public class BoardController {
 			inVO.setSearchWord(StringUtil.nvl(inVO.getSearchWord()));
 		}
 		
-		//10번 공지, 20번 자유게시판
+		//1번 공지, 2번 자유게시판
 		if(null != inVO && null == inVO.getCategory()) {
 			inVO.setCategory(StringUtil.nvl(inVO.getCategory(),"1"));
 		}
@@ -187,6 +295,20 @@ public class BoardController {
 		LOG.debug("┌──────────────────────────────┐");
 		
 		MessageVO outMsg = new MessageVO();
+		
+		if(null!=inVO && inVO.getNickName()==null) {
+			inVO.setNickName("");
+		}
+		if(null!=inVO && inVO.getCsnm()==null) {
+			inVO.setCsnm("");
+		}
+		if(null!=inVO && inVO.getRegId()==null) {
+			inVO.setRegId("");
+		}
+		if(null!=inVO && inVO.getModId()==null) {
+			inVO.setModId("");
+		}
+		
 		
 		//제목
 		if(null != inVO && inVO.getTitle() ==null) {
