@@ -20,6 +20,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.pcwk.ehr.cmn.SearchVO;
+import com.pcwk.ehr.evcar.cmn.evSearchVO;
 import com.pcwk.ehr.subsidy.dao.SubsidyDao;
 import com.pcwk.ehr.subsidy.domain.SubsidyVO;
 
@@ -39,7 +40,7 @@ public class JWebSubsidyDao {
 	
 	SubsidyVO subsidy01;
 	
-	SearchVO searchVO;
+	evSearchVO searchVO;
 	SubsidyVO search;
 	
 	@Before
@@ -48,7 +49,7 @@ public class JWebSubsidyDao {
 		
 		search = new SubsidyVO(99, "aa", "aa", 99, "aa", "aa");
 		
-		searchVO = new SearchVO(10, 1, "", "");
+		searchVO = new evSearchVO(10, 1, "", "", "", "", "", "", "", "");
 	}
 	
 	@Test

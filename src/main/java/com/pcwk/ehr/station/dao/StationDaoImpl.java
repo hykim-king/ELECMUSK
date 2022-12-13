@@ -10,8 +10,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.pcwk.ehr.cmn.DTO;
-import com.pcwk.ehr.cmn.SearchVO;
+import com.pcwk.ehr.evcar.cmn.evDTO;
+import com.pcwk.ehr.evcar.cmn.evSearchVO;
 import com.pcwk.ehr.station.domain.StationVO;
 
 @Repository("stationDao")
@@ -52,9 +52,9 @@ public class StationDaoImpl implements StationDao {
 	}
 
 	@Override
-	public List<StationVO> doRetrieve(DTO inVO) throws SQLException {
+	public List<StationVO> doRetrieve(evDTO inVO) throws SQLException {
 		
-		SearchVO search =  (SearchVO)inVO;
+		evSearchVO search =  (evSearchVO)inVO;
 		List<StationVO> list = new ArrayList<StationVO>();
 		String statement = NAMESPACE+DOT+"doRetrieve";
 		

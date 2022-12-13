@@ -3,8 +3,7 @@ package com.pcwk.ehr.subsidy.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.pcwk.ehr.board.domain.BoardVO;
-import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.evcar.cmn.evDTO;
 import com.pcwk.ehr.subsidy.domain.SubsidyVO;
 
 public interface SubsidyService {
@@ -49,5 +48,5 @@ public interface SubsidyService {
 	    * @return List<DTO>
 	    * @throws SQLException
 	    */
-	   List<SubsidyVO> doRetrieve(DTO inVO)throws SQLException;
+	   List<SubsidyVO> doRetrieve(evDTO inVO)throws SQLException;
 }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.pcwk.ehr.chargingfee.dao.ChargingFeeDao;
 import com.pcwk.ehr.chargingfee.domain.ChargingFeeVO;
-import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.evcar.cmn.evDTO;
 
 @Service("chargingfeeService")
 public class ChargingFeeServiceImpl implements ChargingFeeService {
@@ -41,12 +41,12 @@ public class ChargingFeeServiceImpl implements ChargingFeeService {
 	}
 
 	@Override
-	public List<ChargingFeeVO> doRetrieve(DTO inVO) throws SQLException {
+	public List<ChargingFeeVO> doRetrieve(evDTO inVO) throws SQLException {
 		return chargingfeeDao.doRetrieve(inVO);
 	}
 
 	@Override
-	public List<ChargingFeeVO> showSlow(DTO inVO) throws SQLException {
+	public List<ChargingFeeVO> showSlow(evDTO inVO) throws SQLException {
 		return chargingfeeDao.showSlow(inVO);
 	}
 

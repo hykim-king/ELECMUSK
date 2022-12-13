@@ -1,7 +1,6 @@
 package com.pcwk.ehr.subsidy.dao;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -10,8 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.pcwk.ehr.cmn.DTO;
-import com.pcwk.ehr.cmn.SearchVO;
+import com.pcwk.ehr.evcar.cmn.evDTO;
 import com.pcwk.ehr.subsidy.domain.SubsidyVO;
 
 @Repository("subsidyDao")
@@ -48,7 +46,7 @@ public class SubsidyDaoImpl implements SubsidyDao {
 	}
 
 	@Override
-	public List<SubsidyVO> doRetrieve(DTO inVO) throws SQLException {
+	public List<SubsidyVO> doRetrieve(evDTO inVO) throws SQLException {
 		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"doRetrieve", inVO);
 	}
 

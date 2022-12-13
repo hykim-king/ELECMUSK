@@ -20,6 +20,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.pcwk.ehr.cmn.SearchVO;
+import com.pcwk.ehr.evcar.cmn.evSearchVO;
 import com.pcwk.ehr.station.dao.StationDao;
 import com.pcwk.ehr.station.domain.StationVO;
 
@@ -39,7 +40,7 @@ public class JWebStationDao {
 
 	StationVO station01;
 
-	SearchVO searchVO;
+	evSearchVO searchVO;
 	StationVO search;
 
 	@Before
@@ -48,7 +49,7 @@ public class JWebStationDao {
 
 		search = new StationVO(9999, "aaaa", "9", 9999, "aa99", "99", "9", 9999, "aaaa", "9999", "9999", "");
 
-		searchVO = new SearchVO(10, 1, "", "");
+		searchVO = new evSearchVO(10, 1, "", "", "", "", "", "", "", "");
 	}
 
 	@Test

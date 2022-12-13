@@ -1,8 +1,8 @@
 package com.pcwk.ehr.chargingfee.domain;
 
-import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.evcar.cmn.evDTO;
 
-public class ChargingFeeVO extends DTO {
+public class ChargingFeeVO extends evDTO {
 	
 	private int provider_no;		//충전기순번
 	private String image;			//이미지경로

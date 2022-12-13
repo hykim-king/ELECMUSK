@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.pcwk.ehr.charger.domain.ChargerVO;
-import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.evcar.cmn.evDTO;
 
 public interface ChargerService {
 	/**
@@ -46,5 +46,5 @@ public interface ChargerService {
 	    * @return List<DTO>
 	    * @throws SQLException
 	    */
-	   List<ChargerVO> doRetrieve(DTO inVO)throws SQLException;
+	   List<ChargerVO> doRetrieve(evDTO inVO)throws SQLException;
 }

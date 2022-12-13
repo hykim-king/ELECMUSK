@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.evcar.cmn.evDTO;
 import com.pcwk.ehr.subsidy.dao.SubsidyDao;
 import com.pcwk.ehr.subsidy.domain.SubsidyVO;
 
@@ -43,7 +43,7 @@ public class SubsidyServiceImpl implements SubsidyService {
 	}
 
 	@Override
-	public List<SubsidyVO> doRetrieve(DTO inVO) throws SQLException {
+	public List<SubsidyVO> doRetrieve(evDTO inVO) throws SQLException {
 		
 		return subsidyDao.doRetrieve(inVO);
 	}

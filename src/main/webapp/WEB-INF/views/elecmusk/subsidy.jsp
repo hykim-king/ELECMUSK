@@ -28,6 +28,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="${CP}/favicon.ico">   
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="${CP_RES}/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="${CP_RES}/main_home.css">
 
 <!-- jQuery -->
 <script src="${CP_RES}/bootstrap/js/jquery-1.12.4.js"></script>
@@ -47,6 +48,10 @@
 	  
 	  doRetrieve();
 	  
+	  $("#keywordRetrieve").on("click",function(){
+		  doRetrieve();
+	  });
+	  
 	  //등록화면으로 이동
     $("#moveToReg").on("click",function(){
       
@@ -58,13 +63,8 @@
     //moveToReg
     });
 	  
-	  $("#searchKeyword").on("click",function(){
-		  doRetrieve();
-	  });
+
 	  
-	  $("#doRetrieve").on("click",function(){
-		  doRetrieve(1);
-	  });
 	  //document  
 	 });
 	  
@@ -81,7 +81,8 @@
 		        searchWord : $('#searchWord').val(),
 		        pageSize : $('#pageSize').val(),
 		        pageNo : page,
-		        modelSearch : $('#modelSearch').val()
+		        submodelKeyword : $('#submodelKeyword').val(),
+		        madebyKeyword : $('#madebyKeyword').val()
 		    };
 	          
         PClass.callAjax(method,url,async,params,function(data){
@@ -100,20 +101,11 @@
           let pageTotal = 1;
           
         if(null != parsedJson && parsedJson.length > 0){
-            //총페이지수
-            //총글수/페이수-나머지가 있으면 1증가
-            totalCnt = parsedJson[0].totalCnt
-            pageTotal = Math.ceil(totalCnt/$("#pageSize").val());
-            console.log("=======================");
-            console.log("=totalCnt="+totalCnt);
-            console.log("=pageSize="+$("#pageSize").val());
-            console.log("=pageTotal="+pageTotal);
-            console.log("=======================");
+
           
           $.each(parsedJson, function(index,value){
               //console.log(index+","+value.uId);
               htmlData +=" <tr> ";
-              htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'><input type='checkbox' name='chk' value='" +value.subsidy_no+"' ></td> ";        
               htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.model +"</td> ";        
               htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.manufacturer +"</td> ";        
               htmlData +="   <td class='text-center col-sm-5 col-md-5 col-lg-5'>"+value.name +"</td> ";        
@@ -190,56 +182,42 @@
     
     
   <!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select) ---------------------------------------->
-    <form action="#" class="form-inline text-right">
-    <!-- 키워드 검색 -->
-    <select id="modelSearch" name="modelSearch">
-      <option value="">전체</option>
-      <option value="승용차">승용차</option>
-      <option value="승합차">승합차</option>
-      <option value="화물차">화물차</option>
-    </select>
-    
-    <select id="madebySearch">
-      <option>전체</option>
-      <option>국산</option>
-      <option>수입</option>
-    </select>
-    
-    <select id="subsidySearch">
-      <option>전체</option>
-      <option>1000만원이하</option>
-      <option>1000~2000만원</option>
-      <option>2000~3000만원</option>
-      <option>3000만원이상</option>
-    </select>
-    
-    <input type="button" class="btn btn-info btn-sm" value="검색" id="searchKeyword">
-    <!-- 키워드 검색 -->
-    
-    
-      <div class="form-group">
-      <!-- 검색 조건 수정 필요-------------------------------------------------------------------->
-        <select class="form-control input-sm" name="searchDiv" id="searchDiv">
-          <c:forEach var="code" items="${BOARD_SEARCH }">
-            <option value='<c:out value="${code.detCode }"></c:out>'>
-              <c:out value="${code.detName }"></c:out>
-            </option>  
-          </c:forEach>
-        </select>
-        <input type="text" class="form-control input-sm" name="searchWord" id="searchWord" placeholder="검색어를 입력하세요.">
-        <select class="form-control input-sm" name="pageSize" id="pageSize">
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30">30</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
-        </select>
-      <!-- 검색 조건 -------------------------------------------------------------------->
-        <input type="button" class="btn btn-success btn-sm" value="조회" id="doRetrieve">
-        <input type="button" class="btn btn-warning btn-sm" value="삭제" id="doDelete">
-        <input type="button" class="btn btn-info btn-sm" value="등록" id="moveToReg">
-      </div>
-    </form>
+    <div class="select-area">
+    <table>
+      <thead>
+        <th>&nbsp;</th>
+        <th>차종</th>
+        <th>생산지</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <label>키워드</label>
+          </td>
+          <td>
+            <select id="submodelKeyword" name="submodelKeyword">
+              <option value="">전체</option>
+              <option value="승용차">승용차</option>
+              <option value="승합차">승합차</option>
+              <option value="화물차">화물차</option>
+              
+            </select>
+          </td>
+          <td>
+            <select id="madebyKeyword" name="madebyKeyword">
+              <option value="">전체</option>
+              <option value="국산">국산</option>
+              <option value="수입">수입</option>
+            </select>
+          </td>
+
+          <td>
+            <input type="button" class="btn btn-primary btn-sm" value="조회" id="keywordRetrieve">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
     <!-- 검색 ----------------------------------------------------------------------------->
   
   <!-- 테이블 목록 ---------------------------------------------------------------------------->
@@ -247,7 +225,6 @@
     <table class="table table-striped table-hover" id="subsidyTable">
       <thead class="bg-success">
         <tr>
-          <th class="text-center col-sm-1 col-md-1 col-lg-1"><input type="checkbox" id="checkAll"></th>
           <th class="text-center col-sm-2 col-md-2 col-lg-2">구분</th>        
           <th class="text-center col-sm-2 col-md-2 col-lg-2">제조/수입사</th>        
           <th class="text-center col-sm-5 col-md-5 col-lg-5">차종</th>        

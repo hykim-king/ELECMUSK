@@ -42,4 +42,28 @@ public class EvCarDaoImpl implements EvCarDao {
 		return list;
 	}
 
+	@Override
+	public int doSave(EvCarVO inVO) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int doUpdate(EvCarVO inVO) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int doDelete(EvCarVO inVO) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public EvCarVO doSelectOne(EvCarVO inVO) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

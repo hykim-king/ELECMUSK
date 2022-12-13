@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.pcwk.ehr.charger.dao.ChargerDao;
 import com.pcwk.ehr.charger.domain.ChargerVO;
-import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.evcar.cmn.evDTO;
 
 @Service("chargerService")
 public class ChargerServiceImpl implements ChargerService {
@@ -43,7 +43,7 @@ public class ChargerServiceImpl implements ChargerService {
 	}
 
 	@Override
-	public List<ChargerVO> doRetrieve(DTO inVO) throws SQLException {
+	public List<ChargerVO> doRetrieve(evDTO inVO) throws SQLException {
 		return chargerDao.doRetrieve(inVO);
 	}
 

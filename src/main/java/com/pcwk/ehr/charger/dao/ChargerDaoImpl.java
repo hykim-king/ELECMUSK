@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.pcwk.ehr.charger.domain.ChargerVO;
-import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.evcar.cmn.evDTO;
 
 @Repository("chargerDao")
 public class ChargerDaoImpl implements ChargerDao {
@@ -46,7 +46,7 @@ public class ChargerDaoImpl implements ChargerDao {
 	}
 
 	@Override
-	public List<ChargerVO> doRetrieve(DTO inVO) throws SQLException {
+	public List<ChargerVO> doRetrieve(evDTO inVO) throws SQLException {
 		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"doRetrieve", inVO);
 	}
 

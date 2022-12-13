@@ -1,8 +1,8 @@
 package com.pcwk.ehr.charger.domain;
 
-import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.evcar.cmn.evDTO;
 
-public class ChargerVO extends DTO {
+public class ChargerVO extends evDTO {
 	
 	private int charger_no;			//충전기순번
 	private String connector;		//충전기명
