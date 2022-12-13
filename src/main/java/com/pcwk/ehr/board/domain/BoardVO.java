@@ -133,9 +133,12 @@ public class BoardVO extends DTO{
 
 	@Override
 	public String toString() {
-		return "boardVO [bdSeq=" + bdSeq + ", nickName=" + nickName + ", category=" + category + ", title=" + title
+		return "BoardVO [bdSeq=" + bdSeq + ", nickName=" + nickName + ", category=" + category + ", title=" + title
 				+ ", contents=" + contents + ", readCnt=" + readCnt + ", recommendation=" + recommendation + ", csnm="
-				+ csnm + ", regDt=" + regDt + ", regId=" + regId + ", modDt=" + modDt + ", modId=" + modId + "]";
+				+ csnm + ", regDt=" + regDt + ", regId=" + regId + ", modDt=" + modDt + ", modId=" + modId
+				+ ", toString()=" + super.toString() + "]";
 	}
+
+
 
 }
