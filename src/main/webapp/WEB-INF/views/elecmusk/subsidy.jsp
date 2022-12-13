@@ -57,6 +57,14 @@
       
     //moveToReg
     });
+	  
+	  $("#searchKeyword").on("click",function(){
+		  doRetrieve();
+	  });
+	  
+	  $("#doRetrieve").on("click",function(){
+		  doRetrieve(1);
+	  });
 	  //document  
 	 });
 	  
@@ -72,7 +80,8 @@
 		        searchDiv : $('#searchDiv').val(),
 		        searchWord : $('#searchWord').val(),
 		        pageSize : $('#pageSize').val(),
-		        pageNo : page
+		        pageNo : page,
+		        modelSearch : $('#modelSearch').val()
 		    };
 	          
         PClass.callAjax(method,url,async,params,function(data){
@@ -177,8 +186,37 @@
        <h2>보조금 정보</h2>
     </div>
     <!-- 제목 ------------------------------------------------------------------->
+    
+    
+    
   <!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select) ---------------------------------------->
     <form action="#" class="form-inline text-right">
+    <!-- 키워드 검색 -->
+    <select id="modelSearch" name="modelSearch">
+      <option value="">전체</option>
+      <option value="승용차">승용차</option>
+      <option value="승합차">승합차</option>
+      <option value="화물차">화물차</option>
+    </select>
+    
+    <select id="madebySearch">
+      <option>전체</option>
+      <option>국산</option>
+      <option>수입</option>
+    </select>
+    
+    <select id="subsidySearch">
+      <option>전체</option>
+      <option>1000만원이하</option>
+      <option>1000~2000만원</option>
+      <option>2000~3000만원</option>
+      <option>3000만원이상</option>
+    </select>
+    
+    <input type="button" class="btn btn-info btn-sm" value="검색" id="searchKeyword">
+    <!-- 키워드 검색 -->
+    
+    
       <div class="form-group">
       <!-- 검색 조건 수정 필요-------------------------------------------------------------------->
         <select class="form-control input-sm" name="searchDiv" id="searchDiv">
@@ -197,7 +235,7 @@
           <option value="100">100</option>
         </select>
       <!-- 검색 조건 -------------------------------------------------------------------->
-        <input type="button" class="btn btn-success btn-sm" value="수정" id="doUpdate">
+        <input type="button" class="btn btn-success btn-sm" value="조회" id="doRetrieve">
         <input type="button" class="btn btn-warning btn-sm" value="삭제" id="doDelete">
         <input type="button" class="btn btn-info btn-sm" value="등록" id="moveToReg">
       </div>
