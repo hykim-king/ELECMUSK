@@ -3,7 +3,7 @@ package com.pcwk.ehr.station.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.evcar.cmn.evDTO;
 import com.pcwk.ehr.station.domain.StationVO;
 
 public interface StationService {
@@ -47,5 +47,5 @@ public interface StationService {
 	    * @return List<DTO>
 	    * @throws SQLException
 	    */
-	   List<StationVO> doRetrieve(DTO inVO)throws SQLException;
+	   List<StationVO> doRetrieve(evDTO inVO)throws SQLException;
 }

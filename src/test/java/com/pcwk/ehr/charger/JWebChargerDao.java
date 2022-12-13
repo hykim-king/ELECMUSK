@@ -1,6 +1,6 @@
 package com.pcwk.ehr.charger;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -21,6 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.pcwk.ehr.charger.dao.ChargerDao;
 import com.pcwk.ehr.charger.domain.ChargerVO;
 import com.pcwk.ehr.cmn.SearchVO;
+import com.pcwk.ehr.evcar.cmn.evSearchVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/root-context.xml",
@@ -38,7 +39,7 @@ public class JWebChargerDao {
 	
 	ChargerVO charger01;
 	
-	SearchVO searchVO;
+	evSearchVO searchVO;
 	ChargerVO search;
 	
 	
@@ -48,7 +49,7 @@ public class JWebChargerDao {
 		
 		search = new ChargerVO(99, "aa", "aa", "aa", "aa", "aa", "aa", "aa");
 		
-		searchVO = new SearchVO(10, 1, "", "");
+		searchVO = new evSearchVO(10, 1, "", "", "", "", "", "", "", "");
 	}
 	
 	@Test

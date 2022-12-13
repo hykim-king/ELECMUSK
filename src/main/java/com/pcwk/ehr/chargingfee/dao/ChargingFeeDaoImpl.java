@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.pcwk.ehr.chargingfee.domain.ChargingFeeVO;
-import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.evcar.cmn.evDTO;
 
 @Repository("chargingfeeDao")
 public class ChargingFeeDaoImpl implements ChargingFeeDao {
@@ -46,12 +46,12 @@ public class ChargingFeeDaoImpl implements ChargingFeeDao {
 	}
 
 	@Override
-	public List<ChargingFeeVO> doRetrieve(DTO inVO) throws SQLException {
+	public List<ChargingFeeVO> doRetrieve(evDTO inVO) throws SQLException {
 		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"doRetrieve", inVO);
 	}
 
 	@Override
-	public List<ChargingFeeVO> showSlow(DTO inVO) throws SQLException {
+	public List<ChargingFeeVO> showSlow(evDTO inVO) throws SQLException {
 		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"showSlow", inVO);
 	}
 	

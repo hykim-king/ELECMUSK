@@ -1,8 +1,8 @@
 package com.pcwk.ehr.station.domain;
 
-import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.evcar.cmn.evDTO;
 
-public class StationVO extends DTO {
+public class StationVO extends evDTO {
 	
 	private int station_seq;			//충전소순번
 	private String addr;				//주소

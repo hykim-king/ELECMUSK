@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.evcar.cmn.evDTO;
 import com.pcwk.ehr.station.dao.StationDao;
 import com.pcwk.ehr.station.domain.StationVO;
 
@@ -44,7 +44,7 @@ public class StationServiceImpl implements StationService {
 	}
 
 	@Override
-	public List<StationVO> doRetrieve(DTO inVO) throws SQLException {
+	public List<StationVO> doRetrieve(evDTO inVO) throws SQLException {
 		return stationDao.doRetrieve(inVO);
 	}
 

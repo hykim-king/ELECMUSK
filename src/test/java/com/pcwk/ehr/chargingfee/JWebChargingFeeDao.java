@@ -21,6 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.pcwk.ehr.chargingfee.dao.ChargingFeeDao;
 import com.pcwk.ehr.chargingfee.domain.ChargingFeeVO;
 import com.pcwk.ehr.cmn.SearchVO;
+import com.pcwk.ehr.evcar.cmn.evSearchVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/root-context.xml",
@@ -38,7 +39,7 @@ public class JWebChargingFeeDao {
 	
 	ChargingFeeVO chargingfee01;
 	
-	SearchVO searchVO;
+	evSearchVO searchVO;
 	ChargingFeeVO search;
 	
 	@Before
@@ -47,7 +48,7 @@ public class JWebChargingFeeDao {
 		
 		search = new ChargingFeeVO(99, "aa", "aa", 99, 99, 99);
 		
-		searchVO = new SearchVO(10, 1, "", "");
+		searchVO = new evSearchVO(10, 1, "", "", "", "", "", "", "", "");
 	}
 	
 	@Test

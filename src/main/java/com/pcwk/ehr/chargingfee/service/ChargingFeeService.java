@@ -4,8 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.pcwk.ehr.chargingfee.domain.ChargingFeeVO;
-import com.pcwk.ehr.cmn.DTO;
-import com.pcwk.ehr.cmn.SearchVO;
+import com.pcwk.ehr.evcar.cmn.evDTO;
 
 public interface ChargingFeeService {
 	/**
@@ -51,7 +50,7 @@ public interface ChargingFeeService {
 	 * @return List<DTO>
 	 * @throws SQLException
 	 */
-	List<ChargingFeeVO> doRetrieve(DTO inVO) throws SQLException;
+	List<ChargingFeeVO> doRetrieve(evDTO inVO) throws SQLException;
 
 	/**
 	 * 완속요금조회
@@ -60,6 +59,6 @@ public interface ChargingFeeService {
 	 * @return List<DTO>
 	 * @throws SQLException
 	 */
-	List<ChargingFeeVO> showSlow(DTO inVO) throws SQLException;
+	List<ChargingFeeVO> showSlow(evDTO inVO) throws SQLException;
 
 }

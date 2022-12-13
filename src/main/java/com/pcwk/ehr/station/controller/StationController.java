@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.pcwk.ehr.charger.domain.ChargerVO;
-import com.pcwk.ehr.cmn.SearchVO;
-import com.pcwk.ehr.cmn.StringUtil;
+import com.pcwk.ehr.evcar.cmn.evSearchVO;
+import com.pcwk.ehr.evcar.cmn.evStringUtil;
 import com.pcwk.ehr.station.domain.StationVO;
 import com.pcwk.ehr.station.service.StationService;
 
@@ -46,7 +45,7 @@ public class StationController {
 	@RequestMapping(value="/doRetrieve.do", method = RequestMethod.GET
 			,produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String doRetrieve(SearchVO inVO) throws SQLException{
+	public String doRetrieve(evSearchVO inVO) throws SQLException{
 		String jsonString = "";
 		
 		if (null != inVO && inVO.getPageNo() == 0) {
@@ -58,11 +57,11 @@ public class StationController {
 		}
 		//검색구분
 		if (null != inVO && null == inVO.getSearchDiv()) {
-			inVO.setSearchDiv(StringUtil.nvl(inVO.getSearchDiv()));
+			inVO.setSearchDiv(evStringUtil.nvl(inVO.getSearchDiv()));
 		}
 		//검색어
 		if (null != inVO && null == inVO.getSearchWord()) {
-			inVO.setSearchWord(StringUtil.nvl(inVO.getSearchWord()));
+			inVO.setSearchWord(evStringUtil.nvl(inVO.getSearchWord()));
 		}
 		
 		LOG.debug("┌───────────────────────────────────────────┐");
