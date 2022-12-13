@@ -49,7 +49,7 @@ public class JWebChargerDao {
 		
 		search = new ChargerVO(99, "aa", "aa", "aa", "aa", "aa", "aa", "aa");
 		
-		searchVO = new evSearchVO(10, 1, "", "", "", "", "", "", "", "");
+		searchVO = new evSearchVO(10, 1, "", "", "", "", "", "", "", "","");
 	}
 	
 	@Test

@@ -49,7 +49,7 @@ public class JWebSubsidyDao {
 		
 		search = new SubsidyVO(99, "aa", "aa", 99, "aa", "aa");
 		
-		searchVO = new evSearchVO(10, 1, "", "", "", "", "", "", "", "");
+		searchVO = new evSearchVO(10, 1, "", "", "", "", "", "", "", "","");
 	}
 	
 	@Test

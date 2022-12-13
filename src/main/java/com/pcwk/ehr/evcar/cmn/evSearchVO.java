@@ -12,12 +12,13 @@ public class evSearchVO extends evDTO{
 	private String batteryTypeKeyword; // 배터리타입 키워드
 	private String submodelKeyword; // 보조금차종 키워드
 	private String madebyKeyword; //생산지 키워드
+	private String subsidyKeyword; //보조금 키워드
 	
 	public evSearchVO() {}
 
 	public evSearchVO(int pageSize, int pageNo, String searchDiv, String searchWord, String manufactureKeyword,
 			String appearanceKeyword, String modelKeyword, String batteryTypeKeyword, String submodelKeyword,
-			String madebyKeyword) {
+			String madebyKeyword, String subsidyKeyword) {
 		super();
 		this.pageSize = pageSize;
 		this.pageNo = pageNo;
@@ -29,6 +30,7 @@ public class evSearchVO extends evDTO{
 		this.batteryTypeKeyword = batteryTypeKeyword;
 		this.submodelKeyword = submodelKeyword;
 		this.madebyKeyword = madebyKeyword;
+		this.subsidyKeyword = subsidyKeyword;
 	}
 
 	public int getPageSize() {
@@ -111,14 +113,23 @@ public class evSearchVO extends evDTO{
 		this.madebyKeyword = madebyKeyword;
 	}
 
+	public String getSubsidyKeyword() {
+		return subsidyKeyword;
+	}
+
+	public void setSubsidyKeyword(String subsidyKeyword) {
+		this.subsidyKeyword = subsidyKeyword;
+	}
+
 	@Override
 	public String toString() {
 		return "evSearchVO [pageSize=" + pageSize + ", pageNo=" + pageNo + ", searchDiv=" + searchDiv + ", searchWord="
 				+ searchWord + ", manufactureKeyword=" + manufactureKeyword + ", appearanceKeyword=" + appearanceKeyword
 				+ ", modelKeyword=" + modelKeyword + ", batteryTypeKeyword=" + batteryTypeKeyword + ", submodelKeyword="
-				+ submodelKeyword + ", madebyKeyword=" + madebyKeyword + "]";
+				+ submodelKeyword + ", madebyKeyword=" + madebyKeyword + ", subsidyKeyword=" + subsidyKeyword + "]";
 	}
 
+	
 	
 
 	

@@ -82,7 +82,8 @@
 		        pageSize : $('#pageSize').val(),
 		        pageNo : page,
 		        submodelKeyword : $('#submodelKeyword').val(),
-		        madebyKeyword : $('#madebyKeyword').val()
+		        madebyKeyword : $('#madebyKeyword').val(),
+		        subsidyKeyword : $('#subsidyKeyword').val()
 		    };
 	          
         PClass.callAjax(method,url,async,params,function(data){
@@ -188,6 +189,7 @@
         <th>&nbsp;</th>
         <th>차종</th>
         <th>생산지</th>
+        <th>보조금</th>
       </thead>
       <tbody>
         <tr>
@@ -208,6 +210,15 @@
               <option value="">전체</option>
               <option value="국산">국산</option>
               <option value="수입">수입</option>
+            </select>
+          </td>
+          <td>
+            <select id="subsidyKeyword" name="subsidyKeyword">
+              <option value="">전체</option>
+              <option value="1000">1000만원이하</option>
+              <option value="2000">1000~2000만원</option>
+              <option value="3000">2000~3000만원</option>
+              <option value="3000">3000만원이상</option>
             </select>
           </td>
 

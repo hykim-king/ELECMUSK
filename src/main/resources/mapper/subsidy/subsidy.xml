@@ -55,6 +55,23 @@
       </choose>
     </sql>
 
+    <sql id="subsidyKeyword">
+      <choose>
+        <when test=" '1000' == subsidyKeyword">
+          <![CDATA[ AND subsidy BETWEEN 0 AND #{subsidyKeyword} ]]>
+        </when>
+        <when test=" '2000' == subsidyKeyword">
+          <![CDATA[ AND subsidy BETWEEN 1000 AND #{subsidyKeyword} ]]>
+        </when>
+        <when test=" '3000' == subsidyKeyword">
+          <![CDATA[ AND subsidy BETWEEN 2000 AND #{subsidyKeyword} ]]>
+        </when>
+        <when test=" '3000' == subsidyKeyword">
+          <![CDATA[ AND subsidy > #{subsidyKeyword}  ]]>
+        </when>
+      </choose>
+    </sql>
+
 
   
   <select id="doSelectOne" parameterType="SubsidyVO" resultMap="subsidyMap">
@@ -122,6 +139,7 @@
 	            <![CDATA[WHERE subsidy_no >= 0]]>
 	            <include refid="submodelKeyword"></include>
 	            <include refid="madebyKeyword"></include>
+	            <include refid="subsidyKeyword"></include>
 	            ORDER BY subsidy_no ASC
 	        )T1
 	        <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} -1) + #{pageSize} ]]>
