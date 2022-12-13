@@ -98,22 +98,22 @@
               htmlData +="   <td width='33%' rowspan='4'><img src='"+<c:out value = 'value.image'/>+"' alt='Responsive image' style='width:100%; height:100%;' class='img-rounded img-responsive'></td> ";        
               htmlData +=" </div>"
               htmlData +=" <tr> ";
-              htmlData +="   <td width='11%' height='12.5%'><strong>충전기명</strong> </td> ";        
-              htmlData +="   <td width='22%' height='12.5%'>"+<c:out value = 'value.connector'/> +"</td> ";        
-              htmlData +="   <td width='11%' height='12.5%'><strong>충전전류</strong> </td> ";        
-              htmlData +="   <td width='22%' height='12.5%'>"+ value.ev_current +"</td> ";        
+              htmlData +="   <td width='11%' height='12.5%' class='text-center'><strong>충전기명</strong> </td> ";        
+              htmlData +="   <td width='22%' height='12.5%' class='text-center'>"+<c:out value = 'value.connector'/> +"</td> ";        
+              htmlData +="   <td width='11%' height='12.5%' class='text-center'><strong>충전전류</strong> </td> ";        
+              htmlData +="   <td width='22%' height='12.5%' class='text-center'>"+ value.ev_current +"</td> ";        
               htmlData +=" </tr> ";
               htmlData +=" <tr> ";
-              htmlData +="   <td width='11%' height='12.5%'><strong>충전전압</strong> </td> ";        
-              htmlData +="   <td width='22%' height='12.5%'>"+ value.ev_voltage +"</td> ";        
-              htmlData +="   <td width='11%' height='12.5%'><strong>충전전력</strong> </td> ";        
-              htmlData +="   <td width='22%' height='12.5%'>"+ value.ev_power +"</td> ";        
+              htmlData +="   <td width='11%' height='12.5%' class='text-center'><strong>충전전압</strong> </td> ";        
+              htmlData +="   <td width='22%' height='12.5%' class='text-center'>"+ value.ev_voltage +"</td> ";        
+              htmlData +="   <td width='11%' height='12.5%' class='text-center'><strong>충전전력</strong> </td> ";        
+              htmlData +="   <td width='22%' height='12.5%' class='text-center'>"+ value.ev_power +"</td> ";        
               htmlData +=" </tr> ";
               htmlData +=" <tr> ";
-              htmlData +="   <td width='11%' height='12.5%'><strong>충전레벨</strong> </td> ";        
-              htmlData +="   <td width='22%' height='12.5%'>"+ value.ev_level +"</td> ";        
-              htmlData +="   <td width='11%' height='12.5%'><strong>지원차량</strong> </td> ";        
-              htmlData +="   <td width='22%' height='12.5%'>"+ value.ev_support +"</td> ";        
+              htmlData +="   <td width='11%' height='12.5%' class='text-center'><strong>충전레벨</strong> </td> ";        
+              htmlData +="   <td width='22%' height='12.5%' class='text-center'>"+ value.ev_level +"</td> ";        
+              htmlData +="   <td width='11%' height='12.5%' class='text-center'><strong>지원차량</strong> </td> ";        
+              htmlData +="   <td width='22%' height='12.5%' class='text-center'>"+ value.ev_support +"</td> ";        
               htmlData +=" </tr> ";
               htmlData +=" </tr> ";
             });
@@ -187,31 +187,7 @@
     </div>
     <!-- 제목 ------------------------------------------------------------------->
   <!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select) ---------------------------------------->
-    <form action="#" class="form-inline text-right">
-      <input type="hidden" name="div" id="div" value="${requestScope.divValue}">
-      <div class="form-group">
-      <!-- 검색 조건 수정 필요-------------------------------------------------------------------->
-        <select class="form-control input-sm" name="searchDiv" id="searchDiv">
-          <c:forEach items="${BOARD_SEARCH}" var="code">
-              <option value='<c:out value="${code.detCode}"/>'>
-              <c:out value="${code.detName}"/>
-            </option>
-          </c:forEach>
-        </select>
-        <input type="text" class="form-control input-sm" name="searchWord" id="searchWord" placeholder="검색어를 입력하세요">
-        <select class="form-control input-sm" name="pageSize" id="pageSize">
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30">30</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
-        </select>
-      <!-- 검색 조건 수정 필요-------------------------------------------------------------------->
-        <input type="button" class="btn btn-success btn-sm" value="수정" id="doUpdate">
-        <input type="button" class="btn btn-warning btn-sm" value="삭제" id="doDelete">
-        <input type="button" class="btn btn-info btn-sm" value="등록" id="doSave">
-      </div>
-    </form>
+
     <!-- 검색 ----------------------------------------------------------------------------->
   
   <!-- 충전기 테이블 목록 ---------------------------------------------------------------------------->
@@ -233,5 +209,9 @@
   <!-- div container -->
 </div>
 <!-- div contents -->
+
+<footer>
+  <jsp:include page="/resources/asset/cmn/main_footer.jsp" flush="false" />
+</footer>
 </body>
 </html>

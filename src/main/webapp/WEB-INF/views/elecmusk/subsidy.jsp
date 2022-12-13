@@ -48,6 +48,9 @@
 	  
 	  doRetrieve();
 	  
+	  //paging
+    renderingPage('${pageTotal}',1);
+	  
 	  $("#keywordRetrieve").on("click",function(){
 		  doRetrieve();
 	  });
@@ -99,9 +102,17 @@
           //총글수
           let totalCnt = 0;
           //총페이지수
-          let pageTotal = 1;
+          let pageTotal = 0;
           
         if(null != parsedJson && parsedJson.length > 0){
+        	
+        	totalCnt = parsedJson[0].totalCnt;
+          pageTotal = Math.ceil( totalCnt/$("#pageSize").val());
+          console.log("----------------------------");
+          console.log("-totalCnt:"+totalCnt);
+          console.log("-pageTotal:"+pageTotal);
+          console.log("-page:"+page);
+          console.log("----------------------------");
 
           
           $.each(parsedJson, function(index,value){
@@ -123,9 +134,43 @@
       //table 데이터 출력
         $("#subsidyTable>tbody").append(htmlData);
           
-        });
+      //paging
+        $("#page-selection").empty();//페이저 삭제
+        renderingPage(pageTotal,page);
+      
+        });//PClass.callAjax
 	          
 	  }
+     //paging
+     function renderingPage(pageTotal, page){
+       console.log("pageTotal:"+pageTotal);
+       console.log("page:"+page);
+       
+       pageTotal=parseInt(pageTotal);
+       
+       //연결된 EventHandler제거
+       $('#page-selection').unbind('page');
+       
+       $('#page-selection').bootpag({
+           total: pageTotal,
+           page: page,
+           maxVisible: 10,
+           leaps: true,
+           firstLastUse: true,
+           first: '←',
+           last: '→',
+           wrapClass: 'pagination',
+           activeClass: 'active',
+           disabledClass: 'disabled',
+           nextClass: 'next',
+           prevClass: 'prev',
+           lastClass: 'last',
+           firstClass: 'first'
+       }).on("page", function(event, num){
+           console.log("num:"+num);
+           doRetrieve(num);
+       });  
+     }  
 	    
 	    //==================================================================
 	    //=헤더부분 스크립트 이부분 꼭 넣으세요
@@ -250,31 +295,18 @@
     <!-- 테이블 목록 ----------------------------------------------------------------------------->
     
     <!-- 페이징 -->
-    <div class="text-center">
-      <nav>
-        <ul class="pagination">
-          <li>
-            <a href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">5</a></li>
-          <li>
-            <a href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+    <div class="text-center col-sm-12 col-md-12 col-lg-12">
+      <div id="page-selection" class="text-center page"></div>    
     </div>
-    <!-- 페이징 ---------------------------------------------------->
+    <!-- 페이징--- -------------------------------------------------------------->   
+    
   </div>
   <!-- div container -->
 </div>
 <!-- div contents -->
+
+<footer>
+  <jsp:include page="/resources/asset/cmn/main_footer.jsp" flush="false" />
+</footer>
 </body>
 </html>

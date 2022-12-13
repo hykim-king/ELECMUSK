@@ -1,6 +1,7 @@
 package com.pcwk.ehr.subsidy.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.pcwk.ehr.cmn.StringUtil;
+import com.pcwk.ehr.code.domain.CodeVO;
+import com.pcwk.ehr.code.service.CodeService;
 import com.pcwk.ehr.evcar.cmn.evMessageVO;
 import com.pcwk.ehr.evcar.cmn.evSearchVO;
 import com.pcwk.ehr.subsidy.domain.SubsidyVO;
@@ -27,7 +31,8 @@ public class SubsidyController {
 	@Autowired
 	SubsidyService subsidyService;
 	
-
+	@Autowired
+	CodeService   codeService;
 	
 	public SubsidyController() {}
 	
@@ -56,7 +61,7 @@ public class SubsidyController {
 		}
 		//페이지 사이즈
 		if (null != inVO && inVO.getPageSize() == 0) {
-			inVO.setPageSize(200);
+			inVO.setPageSize(20);
 		}
 
 		
@@ -71,6 +76,101 @@ public class SubsidyController {
 		
 		return jsonString;
 	}
+	
+	/**
+	 * 목록조회(form submit())
+	 * @param model
+	 * @param inVO
+	 * @return 화면,목록,code목록
+	 * @throws SQLException
+	 */
+	@RequestMapping(value="/subsidyView.do",method = RequestMethod.GET)
+	public String subsidyView(Model model, evSearchVO inVO) throws SQLException{
+		String viewPage = "subsidy/subsidy";
+		//검색 Default값 설정
+		
+		//페이지 번호
+		if(null !=inVO && inVO.getPageNo()==0) {
+			inVO.setPageNo(1);
+		}
+		
+		//페이지사이즈
+		if(null !=inVO && inVO.getPageSize()==0) {
+		    inVO.setPageSize(10);
+		}
+		
+		//검색구분
+		if(null !=inVO && null == inVO.getSearchDiv()) {
+			inVO.setSearchDiv(StringUtil.nvl(inVO.getSearchDiv()));
+		}
+		
+		//검색어
+		if(null !=inVO && null == inVO.getSearchWord()) {  
+			inVO.setSearchWord(StringUtil.nvl(inVO.getSearchWord()));
+		}
+		
+
+		   
+		LOG.debug("┌=============================┐");	
+		LOG.debug("|inVO="+inVO);
+		
+		List<SubsidyVO> list = subsidyService.doRetrieve(inVO);
+		
+		//code목록 조회
+		List<String>  codeList=new ArrayList<String>();
+		codeList.add("PAGE_SIZE");
+		
+		List<CodeVO> outCodeList = codeService.doRetrive(codeList);
+		//검색조건
+		List<CodeVO> searchList  = new ArrayList<CodeVO>();
+		
+		//페이지사이즈
+		List<CodeVO> pageSizeList  = new ArrayList<CodeVO>();		
+		for(CodeVO vo  :outCodeList) {
+			if(vo.getMstCode().equals("PAGE_SIZE") ==true) {
+				pageSizeList.add(vo);
+			}
+		}
+		
+		//Java 8 lambda
+//		1. 람다 함수(Lambda Function)란?
+//				람다 함수는 함수형 프로그래밍 언어에서 사용되는 개념으로 익명 함수라고도 한다.
+//				Java 8 부터 지원되며, 불필요한 코드를 줄이고 가독성을 향상시키는 것을 목적으로 두고있다.
+//
+//		2. 람다 함수의 특징
+//		메소드의 매개변수로 전달될 수 있고, 변수에 저장될 수 있다.
+//		즉, 어떤 전달되는 매개변수에 따라서 행위가 결정될 수 있음을 의미한다.
+//		컴파일러 추론에 의지하고 추론이 가능한 코드는 모두 제거해 코드를 간결하게 한다.		
+//		pageSizeList = outCodeList.stream()
+//				       .filter(vo -> vo.getMstCode().equals("PAGE_SIZE") )
+//				       .collect(Collectors.toList());
+//		
+		//paging정보 추출: 총글수, 총페이지수
+		int totalCnt  = 0;//총글수
+		double pageTotal = 0;//총페이지수
+		
+		if(null !=list && list.size() >0) {
+			totalCnt = list.get(0).getTotalCnt();
+			
+			pageTotal = Math.ceil( ( totalCnt / (inVO.getPageSize()*1.0)) );
+			LOG.debug("|Math.ceil="+( totalCnt / (inVO.getPageSize()*1.0)));
+			LOG.debug("|totalCnt="+totalCnt);
+			LOG.debug("|pageTotal="+pageTotal);
+			LOG.debug("|PageSize="+inVO.getPageSize());
+		}
+		
+		
+		
+		LOG.debug("|outCodeList="+outCodeList);
+		model.addAttribute("list", list);
+		model.addAttribute("totalCnt", totalCnt);
+		model.addAttribute("pageTotal", (int)pageTotal);
+		
+		
+		model.addAttribute("PAGE_SIZE",pageSizeList);
+		return viewPage;
+	}
+	
 	
 	@RequestMapping(value="/doSelectOne.do",method = RequestMethod.GET
 			,produces = "application/json;charset=UTF-8")

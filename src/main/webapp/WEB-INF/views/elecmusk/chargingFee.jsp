@@ -48,32 +48,30 @@
 <title>충전요금정보</title>
 <script >
   $(document).ready(function(){
-	  console.log("document.ready");
-	  doRetrieve();
-	  showSlow();
-	  
-	  
-
-	  
+    console.log("document.ready");
+    doRetrieve();
+    showSlow();
+    
+    
+    
   });//document
-	  
-
+    
   
-	  
-	  function doRetrieve(page){
-		    console.log('doRetrieve() page:'+page);
-		    
-		    let method = "GET";
-		    let url = "/chargingfee/doRetrieve.do";
-		    let async = true;
-		    let params  = {
-		        searchDiv : $('#searchDiv').val(),
-		        searchWord: $("#searchWord").val(),
-		        pageSize : $("#pageSize").val(),
-		        pageNo: page
-		    };
-	          
-		    PClass.callAjax(method,url,async,params,function(data){
+    
+    function doRetrieve(page){
+        console.log('doRetrieve() page:'+page);
+        
+        let method = "GET";
+        let url = "/chargingfee/doRetrieve.do";
+        let async = true;
+        let params  = {
+            searchDiv : $('#searchDiv').val(),
+            searchWord: $("#searchWord").val(),
+            pageSize : $("#pageSize").val(),
+            pageNo: page
+        };
+            
+        PClass.callAjax(method,url,async,params,function(data){
           console.log("data:"+data);
           
           let parsedJson = JSON.parse(data);
@@ -82,7 +80,6 @@
           
           //table 데이터 삭제
           $("#rapidTable>tbody").empty();
-
           
           if(null != parsedJson && parsedJson.length > 0){
           
@@ -106,23 +103,23 @@
         
     
         });
-	          
+            
 }
-	  
-	  function showSlow(page){
-		    console.log('showSlow() page:'+page);
-		    
-		    let method = "GET";
-		    let url = "/chargingfee/showSlow.do";
-		    let async = true;
-		    let params  = {
-		        searchDiv : $('#searchDiv').val(),
-		        searchWord: $("#searchWord").val(),
-		        pageSize : $("#pageSize").val(),
-		        pageNo: page
-		    };
-	          
-		    PClass.callAjax(method,url,async,params,function(data){
+    
+    function showSlow(page){
+        console.log('showSlow() page:'+page);
+        
+        let method = "GET";
+        let url = "/chargingfee/showSlow.do";
+        let async = true;
+        let params  = {
+            searchDiv : $('#searchDiv').val(),
+            searchWord: $("#searchWord").val(),
+            pageSize : $("#pageSize").val(),
+            pageNo: page
+        };
+            
+        PClass.callAjax(method,url,async,params,function(data){
           console.log("data:"+data);
           
           let parsedJson = JSON.parse(data);
@@ -131,7 +128,6 @@
           
           //table 데이터 삭제
           $("#slowTable>tbody").empty();
-
           
           if(null != parsedJson && parsedJson.length > 0){
           
@@ -154,52 +150,52 @@
         
     
         });
-	          
+            
       }
       
-	  
-	    
-	    //==================================================================
-	    //=헤더부분 스크립트 이부분 꼭 넣으세요
-	    //==================================================================
-	    
-	     $(function() {
-	         let didScroll;
-	         let lastScrollTop = 0;
-	         let navbarHeight = $("header").outerHeight();
-	          $(window).scroll(function(event){
-	              didScroll = true;
-	          });
-	          setInterval(function() {
-	              if (didScroll) {
-	                  hasScrolled();
-	                  didScroll = false;
-	              }
-	          }); // 스크롤이 멈춘 후 동작이 실행되기 까지의 딜레이
-	          function hasScrolled() {
-	            if($(this).width() > 700) {       
-	            let st = $(this).scrollTop(); // 현재 window의 scrollTop 값
-	                if ($(window).scrollTop() > 50){
-	                    $(".logo-area").slideUp("fast"); // header 숨기기
-	                    $(".text-logo-area").addClass("visible");
-	                } else {
-	                    if($(window).scrollTop() < 200) {
-	                        $(".logo-area").slideDown("fast"); // header 보이기
-	                        $(".text-logo-area").removeClass("visible");
-	                }
-	             }
-	          }
-	       }
-	       });
-	   //==================================================================
-	   //=헤더부분 스크립트 이부분 꼭 넣으세요
-	   //==================================================================
-	  
+    
+      
+      //==================================================================
+      //=헤더부분 스크립트 이부분 꼭 넣으세요
+      //==================================================================
+      
+       $(function() {
+           let didScroll;
+           let lastScrollTop = 0;
+           let navbarHeight = $("header").outerHeight();
+            $(window).scroll(function(event){
+                didScroll = true;
+            });
+            setInterval(function() {
+                if (didScroll) {
+                    hasScrolled();
+                    didScroll = false;
+                }
+            }); // 스크롤이 멈춘 후 동작이 실행되기 까지의 딜레이
+            function hasScrolled() {
+              if($(this).width() > 700) {       
+              let st = $(this).scrollTop(); // 현재 window의 scrollTop 값
+                  if ($(window).scrollTop() > 50){
+                      $(".logo-area").slideUp("fast"); // header 숨기기
+                      $(".text-logo-area").addClass("visible");
+                  } else {
+                      if($(window).scrollTop() < 200) {
+                          $(".logo-area").slideDown("fast"); // header 보이기
+                          $(".text-logo-area").removeClass("visible");
+                  }
+               }
+            }
+         }
+         });
+     //==================================================================
+     //=헤더부분 스크립트 이부분 꼭 넣으세요
+     //==================================================================
+    
 </script>
 
 </head>
 <body>
-	<header>
+  <header>
   <jsp:include page ="/resources/asset/cmn/main_header.jsp" flush="false"/>
   </header>
   <div id="contents">
@@ -216,8 +212,8 @@
       <input type="hidden" name="div" id="div" value="${requestScope.divValue}">
       
       <ul class="nav nav-tabs text-left">
-			  <li role="presentation" class="active" id="showRapid"><a href="">급속요금</a></li>
-			</ul>
+        <li role="presentation" class="active" id="showRapid"><a href="">급속요금</a></li>
+      </ul>
       
 
     </form>
@@ -226,7 +222,7 @@
   <!-- 충전기 테이블 목록 ---------------------------------------------------------------------------->
     <div class="table-responsive">
     <table class="table table-bordered table-striped table-hover rapidTable" id="rapidTable">
-      <thead>
+      <thead class="bg-success">
         <tr>
           <th class="text-center"><strong>사업자명</strong></th>
           <th class="text-center"><strong>급속100kW이상요금</strong></th>
@@ -247,7 +243,7 @@
   <!-- 충전기 테이블 목록 ---------------------------------------------------------------------------->
     <div class="table-responsive">
     <table class="table table-bordered table-striped table-hover slowTable" id="slowTable">
-      <thead>
+      <thead class="bg-success">
         <tr>
           <th class="text-center"><strong>사업자명</strong></th>
           <th class="text-center"><strong>완속요금</strong></th>
@@ -269,5 +265,9 @@
   <!-- div container -->
 </div>
 <!-- div contents -->
+
+<footer>
+  <jsp:include page="/resources/asset/cmn/main_footer.jsp" flush="false" />
+</footer>
 </body>
 </html>

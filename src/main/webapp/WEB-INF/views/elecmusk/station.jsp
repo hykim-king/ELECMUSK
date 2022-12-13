@@ -170,7 +170,12 @@ function drawMap(locations){
 
                                           "위도 : "+locations[i][8]+"<br>"+//위도
 
-                                          "경도 : "+locations[i][9] //경도
+                                          "경도 : "+locations[i][9]+"<br>"+//경도
+                                          
+                                          "<input type='button' class='btn btn-success btn-sm' value='리뷰보기' id='moveToList'>"+
+                                          
+                                          "<input type='button' class='btn btn-primary btn-sm' value='리뷰쓰기' id='moveToReg' style='float:right;'>"
+                                          
                                           );
                     infowindow.open(map, marker);
                 };
@@ -209,8 +214,8 @@ getData();
   </div>
   
   
-  <footer>
-    <jsp:include page="/resources/asset/cmn/main_footer.jsp" flush="false" />
-  </footer>
+<footer>
+  <jsp:include page="/resources/asset/cmn/main_footer.jsp" flush="false" />
+</footer>
 </body>
 </html>
