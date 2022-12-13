@@ -16,8 +16,8 @@
 <!-- 키워드 -->
 <meta name="keyword" content="html5, css3, javascript6, jQuery">
 <meta charset="UTF-8">
-<!-- jquery ui -->
-<link rel="stylesheet" href="${CP_RES}/asset/css/jquery-ui.css">
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="${CP_RES}/bootstrap/css/bootstrap.min.css">>
 <link rel="stylesheet" href="${CP_RES}/main_home.css">
 <link rel="stylesheet" href="${CP_RES}/evCar.css">
 <style>
