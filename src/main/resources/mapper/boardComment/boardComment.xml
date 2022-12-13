@@ -2,26 +2,49 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pcwk.ehr.board.Comment">
+<mapper namespace="com.pcwk.ehr.board.comment">
+  
+  <sql id="searchcondition">
+      <choose>
+      
+        <when test=" '30' ==searchDiv and '' != searchWord">
+         and contents LIKE '%' || #{searchWord} || '%'
+        </when>
+      </choose>
+  </sql>
+  
   
   <!-- 조회 retrieve-->
-  <select id="doRetrieve" resultType="BoardCommentVO" parameterType="SearchVO">
+  <select id="doRetrieve" resultType="BoardVO" parameterType="SearchVO">
 
     --페이징
     SELECT A.*,B.*
     FROM (
-        SELECT  tt1.bd_seq as bdSeq,
+        SELECT  tt1.RNUM as num,
+                tt1.bd_seq as bdSeq,
+                tt1.nickname as nickName,
+                tt1.category,
+                tt1.title,
                 tt1.contents,
+                tt1.read_cnt as readCnt,
+                tt1.recommendation,
+                tt1.csnm,
                 --당일이면 시:분 , 그렇지 않으면 년/월/일
                 DECODE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'), TO_CHAR(TT1.reg_dt, 'YYYY-MM-DD'),--DECODE
                                                        TO_CHAR(TT1.reg_dt, 'HH24:MI'),--위가 같으면 이걸
                                                        TO_CHAR(TT1.reg_dt, 'YYYY-MM-DD')) as regDt, --다르면 이걸
+                tt1.reg_id AS regId,
+                DECODE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'), TO_CHAR(TT1.mod_dt, 'YYYY-MM-DD'),--DECODE
+                                                       TO_CHAR(TT1.mod_dt, 'HH24:MI'),--위가 같으면 이걸
+                                                       TO_CHAR(TT1.mod_dt, 'YYYY-MM-DD')) as modDt, --다르면 이걸
+                tt1.mod_id AS modId
         FROM(
-            SELECT t1.*
+            SELECT  ROWNUM AS RNUM, t1.*
             FROM (select *
-                  FROM BOARD
+                  FROM BD_COMMENT
                   --WHERE 조건 (검색구분:''(전체),10(nickname),20(title),30(contents), 검색어)
                   WHERE category = #{category}
+                  <include refid="searchcondition"/>
                   ORDER BY reg_dt DESC
             )T1
             --종료 번호<![CDATA[
@@ -29,14 +52,10 @@
         )TT1
         --시작 번호
         WHERE RNUM >= #{pageSize} * (#{pageNo} - 1) +1  ]]>
-    )A
-    CROSS JOIN
-    (
-      SELECT COUNT(*) totalCnt
-      FROM BOARD
-      WHERE category = #{category}
-    )B
+    )
   </select>
+  
+  
   
   
   <select id="doSelectOne" parameterType="BoardCommentVO" resultType="BoardCommentVO">

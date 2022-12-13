@@ -14,7 +14,7 @@
       <typeAlias type="com.pcwk.ehr.subsidy.domain.SubsidyVO" alias="SubsidyVO"/>
       <typeAlias type="com.pcwk.ehr.station.domain.StationVO" alias="StationVO"/>
       <typeAlias type="com.pcwk.ehr.board.domain.BoardVO" alias="BoardVO"/>
-        <typeAlias type="com.pcwk.ehr.board.Comment.domain.BoardCommentVO" alias="BoardCommentVO"/>
+        <typeAlias type="com.pcwk.ehr.board.comment.domain.BoardCommentVO" alias="BoardCommentVO"/>
       <typeAlias type="com.pcwk.ehr.user.domain.UserVO" alias="UserVO"/>
       <typeAlias type="com.pcwk.ehr.cmn.SearchVO" alias="SearchVO"/>
     </typeAliases>

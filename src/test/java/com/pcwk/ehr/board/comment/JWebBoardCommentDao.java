@@ -17,9 +17,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.pcwk.ehr.board.Comment.Dao.BoardCommentDao;
-import com.pcwk.ehr.board.Comment.domain.BoardCommentVO;
 import com.pcwk.ehr.board.cmn.SearchVO;
+import com.pcwk.ehr.board.comment.dao.BoardCommentDao;
+import com.pcwk.ehr.board.comment.domain.BoardCommentVO;
 import com.pcwk.ehr.board.dao.BoardDao;
 import com.pcwk.ehr.board.domain.BoardVO;
 import com.pcwk.ehr.user.domain.UserVO;
@@ -38,10 +38,6 @@ public class JWebBoardCommentDao {
 	BoardCommentDao dao;
 	
 	BoardCommentVO boardCommentVO1;
-	BoardCommentVO boardCommentVO2;
-	BoardCommentVO boardCommentVO3;
-	BoardCommentVO boardCommentVO4;
-	BoardCommentVO boardCommentVO5;
 	
 	BoardCommentVO search;
 	
@@ -57,11 +53,8 @@ public class JWebBoardCommentDao {
 		LOG.debug("BoardCommentVO:"+dao);
 		LOG.debug("==============================");
 		
-		boardCommentVO1 = new BoardCommentVO(125,1,"A","");
-		boardCommentVO2 = new BoardCommentVO(126,2,"B","");
-		boardCommentVO3 = new BoardCommentVO(127,3,"C","");
-		boardCommentVO4 = new BoardCommentVO(128,4,"D","");
-		boardCommentVO5 = new BoardCommentVO(129,5,"E","");
+		boardCommentVO1 = new BoardCommentVO(12,1,"A","");
+
 		
 		
 		//searchVO = new SearchVO(10, 1, "10","01","");
@@ -76,6 +69,7 @@ public class JWebBoardCommentDao {
 	
 	
 	@Test
+	@Ignore
 	public void doRetrieve()throws SQLException{
 		
 		List<BoardCommentVO> list = dao.doRetrieve(searchVO);
@@ -90,17 +84,11 @@ public class JWebBoardCommentDao {
 		
 	}
 	
-	@Test 
-	@Ignore //완 
+	@Test  //완 
 	public void doSave()throws SQLException{
 		
 		
-		//등록
 		dao.doSave(boardCommentVO1);
-		dao.doSave(boardCommentVO2);
-		dao.doSave(boardCommentVO3);
-		dao.doSave(boardCommentVO4);
-		dao.doSave(boardCommentVO5);
 	}
 	
 
@@ -120,11 +108,6 @@ public class JWebBoardCommentDao {
 	@Ignore //완
 	public void doDelete()throws SQLException{
 		dao.doDelete(boardCommentVO1);	
-		dao.doDelete(boardCommentVO2);	
-		dao.doDelete(boardCommentVO3);	
-		dao.doDelete(boardCommentVO4);	
-		dao.doDelete(boardCommentVO5);	
-	
 	}
 	
 	
