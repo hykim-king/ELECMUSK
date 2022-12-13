@@ -1,13 +1,13 @@
 package com.pcwk.ehr.board.comment;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hamcrest.core.IsSame;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -17,12 +17,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.pcwk.ehr.board.Comment.Dao.BoardCommentDao;
+import com.pcwk.ehr.board.Comment.domain.BoardCommentVO;
 import com.pcwk.ehr.board.cmn.SearchVO;
-import com.pcwk.ehr.board.comment.dao.BoardCommentDao;
-import com.pcwk.ehr.board.comment.domain.BoardCommentVO;
-import com.pcwk.ehr.board.dao.BoardDao;
-import com.pcwk.ehr.board.domain.BoardVO;
-import com.pcwk.ehr.user.domain.UserVO;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)//spring-test lib에 있음!

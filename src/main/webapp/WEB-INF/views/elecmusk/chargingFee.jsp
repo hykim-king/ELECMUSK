@@ -89,7 +89,7 @@
           $.each(parsedJson, function(index,value){
               //console.log(index+","+value.uId);
               htmlData +=" <tr> ";
-              htmlData +="   <td width='20%' height='10%' class='text-center'><img src='"+<c:out value = 'value.image'/>+"' alt='Responsive image' style='width:100%; height:100%;' class='img-rounded img-responsive'>"+<c:out value = 'value.enterprenuer'/> +"</td> ";        
+              htmlData +="   <td width='20%' height='10%' class='text-center'><img src='"+<c:out value = 'value.image'/>+"' alt='image' style='width:50px; height:50px;' class='img-rounded'>"+<c:out value = 'value.enterprenuer'/> +"</td> ";        
               htmlData +="   <td width='20%' height='10%' class='text-center'>"+ value.rapid_above100 +"원</td> ";        
               htmlData +="   <td width='20%' height='10%' class='text-center'>"+ value.rapid_below100 +"원</td> ";        
               htmlData +=" </tr> ";
@@ -138,7 +138,7 @@
           $.each(parsedJson, function(index,value){
               //console.log(index+","+value.uId);
               htmlData +=" <tr> ";
-              htmlData +="   <td width='20%' height='10%' class='text-center'><img src='"+<c:out value = 'value.image'/>+"' alt='Responsive image' style='width:100%; height:100%;' class='img-rounded img-responsive'>"+<c:out value = 'value.enterprenuer'/> +"</td> ";        
+              htmlData +="   <td width='20%' height='10%' class='text-center'><img src='"+<c:out value = 'value.image'/>+"' alt='image' style='width:50px; height:50px;' class='img-rounded'>"+<c:out value = 'value.enterprenuer'/> +"</td> ";        
               htmlData +="   <td width='20%' height='10%' class='text-center'>"+ value.slow_fee +"원</td> ";        
               htmlData +=" </tr> ";
             });
