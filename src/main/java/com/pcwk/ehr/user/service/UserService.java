@@ -21,6 +21,14 @@ public interface UserService {
 	int multiDelete(List<UserVO> users) throws SQLException;
 	
 	/**
+	 * 로그인 시 아이디 확인. 아이디와 비번을 동시에 확인함.
+	 * @param inVO
+	 * @return 아이디가 존재하지 않으면 10, 아이디는 존재하나 비밀번호가 틀리면20, 성공30
+	 * @throws SQLException
+	 */
+	int idPassCheck(UserVO inVO) throws SQLException;
+	
+	/**
 	 * id 중복확인, 로그인과 회원가입시에 쓰임
 	 * @param inVO
 	 * @return 중복이 있으면 1, 아니라면 0

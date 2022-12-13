@@ -16,10 +16,11 @@
 <!-- jQuery -->
 <script src="${CP_RES}/bootstrap/js/jquery-1.12.4.js"></script>
 
+<!-- String, Number, Date Util -->
+<script src="${CP_RES}/bootstrap/js/eUtil.js"></script>
+
 <!-- bootstrap js -->
 <script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
-
-<meta charset="UTF-8">
 <title>제목</title>
 <style type="text/css">
 #mainButton {
@@ -35,7 +36,77 @@
   $(document).ready(function(){
 	  console.log("document.ready");
 	  
-  });
+	  $("#mainButton").on("click",function(){
+		  console.log("엑");
+		  
+		  if(confirm("로그인 하시겠습니까?")==false){
+			  return;
+		  }
+		  
+		  $.ajax({ 
+			   type: "POST",
+			   url: "/ehr/elecmusk/doLogin.do",
+			   asyn: "true",
+			   dataType: "html",
+			   data:{
+				   userId : $("#userId").val(),
+				   userPw : $("#password").val()
+			   },
+			   success:function(data){ //통신 성공
+				   console.log(data);
+			   
+				   let parsedJson = JSON.parse(data);
+				   
+				   //아이디 확인 결과
+				   //성공:10 / 아이디 존재X:20 / 아이디 안넘어감: 30
+				   //비밀번호 틀림:40 / 비밀번호 안넘어감: 50
+				   
+				   if("20"==parsedJson.msgId){
+					   alert(parsedJson.msgContents);
+					   $("#userId").focus();
+					   return;
+					 }
+				   if("30"==parsedJson.msgId){
+					   alert(parsedJson.msgContents);
+					   $("#userId").focus();
+					   return;
+					 }
+				   if("40"==parsedJson.msgId){
+					   alert(parsedJson.msgContents);
+					   $("#password").focus();
+					   return;
+					 }
+				   if("50"==parsedJson.msgId){
+					   alert(parsedJson.msgContents);
+					   $("#password").focus();
+					   return;
+					 }
+				   
+				   //성공했을 때 어떻게 할 지. 메인화면으로 보내버릴까요??
+				   if("10"==parsedJson.msgId){
+					   alert(parsedJson.msgContents);
+					   
+					   window.location.href="${CP}/elecmusk/view.do";
+					 }
+				   
+			   },
+			   error:function(data){//실패
+			   
+			   },
+			   complete:function(data){//성공, 실패 관계 없이 출력
+			   
+			   }
+
+			});
+		  
+		  
+	  });//메인버튼(로그인 버튼) 클릭
+	  
+	  
+	  
+	  
+	  
+  });//document.ready
 </script>
 
 </head>

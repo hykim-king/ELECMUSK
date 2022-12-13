@@ -37,7 +37,26 @@ public class UserServiceImpl implements UserService {
 		}
 		return cnt;
 	}
-
+	
+	@Override
+	public int idPassCheck(UserVO inVO) throws SQLException {
+		int flag =  userDao.idCheck(inVO);
+		if (1 != flag) {
+			LOG.debug("id가 존재하지 않음");
+			return 20;
+		}
+		
+		flag = userDao.passwordCheck(inVO);
+		if (1 != flag) {
+			LOG.debug("비밀번호 불일치");
+			return 40;
+		}
+		
+		LOG.debug("아이디, 비밀번호 일치");
+		return 10;
+		
+	}
+	
 	@Override
 	public int idCheck(UserVO inVO) throws SQLException {
 		return userDao.idCheck(inVO);
@@ -87,5 +106,7 @@ public class UserServiceImpl implements UserService {
 	public UserVO findPwByBackup(UserVO inVO) throws SQLException {
 		return userDao.findPwByBackup(inVO);
 	}
+
+	
 
 }

@@ -57,55 +57,59 @@ h4{
 		<div class="page-header text-center">
 			<h2>회원관리</h2>
 		</div>
-		
-		<!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select)--> 
-    <form action="#" class="form-inline text-right">
-      <div class="form-group">
-        <select class="form-control input-sm" name="searchDiv" id="searchDiv">
-          <option value="">전체</option>
-          <option value="10">아이디</option>
-          <option value="20">이름</option>
-          <option value="30">이메일</option>
-        </select>
-        <input type="text" class="form-control input-sm" name="searchWord" id="searchWord" placeholder="검색어를 입력하세요">
-        <select class="form-control input-sm" name="pageSize" id="pageSize">
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30">30</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
-        </select>
-        <input type="button" class="btn btn-primary btn-sm" value="조회" id="doRetrive">          
-        <input type="button" class="btn btn-primary btn-sm" value="삭제" id="upDeleteAll">
-      </div><!-- 검색부분 ----------------------------------------->
-      
-      
-    </form>
-<table class="table table-striped table-bordered table-hover" id="userTable">
-      <thead class="bg-primary">
-        <tr>
-          <th class="text-center col-sm-1 col-md-1 col-lg-1"><input type="checkbox" id="checkAll"></th>
-          <th class="text-center col-sm-1 col-md-1 col-lg-1">고유번호</th>
-          <th class="text-center col-sm-2 col-md-2 col-lg-2">아이디</th>
-          <th class="text-center col-sm-1 col-md-1 col-lg-1">닉네임</th>
-          <th class="text-center col-sm-1 col-md-1 col-lg-1">이름</th>
-          <th class="text-center col-sm-1 col-md-1 col-lg-1">생년월일</th>
-          <th class="text-center col-sm-2 col-md-2 col-lg-2">이메일</th>
-          <th class="text-center col-sm-1 col-md-1 col-lg-1">포인트</th>
-          <th class="text-center col-sm-1 col-md-1 col-lg-1">가입일</th>
-          <th class="text-center col-sm-1 col-md-1 col-lg-1">상태</th>
-        </tr>
-      </thead>
-      <tbody>                   
-      </tbody>
-    </table>
-    <!-- 테이블 목록 -------------------------------------------------------------->
-    
-    <!-- 페이징 -->
-    <div class="text-center col-sm-12 col-md-12 col-lg-12">
-      <div id="page-selection" class="text-center page"></div>    
-    </div>
-    <!-- 페이징--- -------------------------------------------------------------->
+
+		<!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select)-->
+		<form action="#" class="form-inline text-right">
+			<div class="form-group">
+				<select class="form-control input-sm" name="searchDiv"
+					id="searchDiv">
+					<option value="">전체</option>
+					<option value="10">아이디</option>
+					<option value="20">이름</option>
+					<option value="30">이메일</option>
+				</select> <input type="text" class="form-control input-sm" name="searchWord"
+					id="searchWord" placeholder="검색어를 입력하세요"> <select
+					class="form-control input-sm" name="pageSize" id="pageSize">
+					<option value="10">10</option>
+					<option value="20">20</option>
+					<option value="30">30</option>
+					<option value="50">50</option>
+					<option value="100">100</option>
+				</select> <input type="button" class="btn btn-primary btn-sm" value="조회"
+					id="doRetrive"> <input type="button"
+					class="btn btn-primary btn-sm" value="삭제" id="upDeleteAll">
+			</div>
+			<!-- 검색부분 ----------------------------------------->
+
+
+		</form>
+		<table class="table table-striped table-bordered table-hover"
+			id="userTable">
+			<thead class="bg-primary">
+				<tr>
+					<th class="text-center col-sm-1 col-md-1 col-lg-1"><input
+						type="checkbox" id="checkAll"></th>
+					<th class="text-center col-sm-1 col-md-1 col-lg-1">고유번호</th>
+					<th class="text-center col-sm-2 col-md-2 col-lg-2">아이디</th>
+					<th class="text-center col-sm-1 col-md-1 col-lg-1">닉네임</th>
+					<th class="text-center col-sm-1 col-md-1 col-lg-1">이름</th>
+					<th class="text-center col-sm-1 col-md-1 col-lg-1">생년월일</th>
+					<th class="text-center col-sm-2 col-md-2 col-lg-2">이메일</th>
+					<th class="text-center col-sm-1 col-md-1 col-lg-1">포인트</th>
+					<th class="text-center col-sm-1 col-md-1 col-lg-1">가입일</th>
+					<th class="text-center col-sm-1 col-md-1 col-lg-1">상태</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+		<!-- 테이블 목록 -------------------------------------------------------------->
+
+		<!-- 페이징 -->
+		<div class="text-center col-sm-12 col-md-12 col-lg-12">
+			<div id="page-selection" class="text-center page"></div>
+		</div>
+		<!-- 페이징--- -------------------------------------------------------------->
 
 	</div>
 	<!-- div container ------------------------------------------->
