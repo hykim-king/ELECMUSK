@@ -17,8 +17,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.pcwk.ehr.board.Comment.Dao.BoardCommentDao;
-import com.pcwk.ehr.board.Comment.domain.BoardCommentVO;
+import com.pcwk.ehr.board.comment.dao.BoardCommentDao;
+import com.pcwk.ehr.board.comment.domain.BoardCommentVO;
 import com.pcwk.ehr.board.cmn.SearchVO;
 
 
