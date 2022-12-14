@@ -50,5 +50,7 @@ public interface BoardService {
 	    * @throws SQLException
 	    */
 	   List<BoardVO> doRetrieve(DTO inVO)throws SQLException;
+	   
+
 
 }

@@ -45,6 +45,7 @@
 <script >
   $(document).ready(function(){
 	  console.log("document.ready");
+	  doRetrieve(1);
 	  
     //===========================검색어 enter event
     $("#searchWord").on("keydown",function(e){
@@ -56,18 +57,7 @@
     });//========================검색어 enter event 끝
 	  
 	//========================================한건조회(상세조회) 테이블 클릭
-	  $("#boardTable>tbody").on("click","tr",function(){
-		  console.log("boardTable>tbody");
-		  let tdArray = $(this).children();
-		  console.log("tdArray: "+tdArray);
-		  
-		  console.log(tdArray.eq(5).text());
-		  
-		  let boardSeq = tdArray.eq(5).text();
-		  
-		  if(confirm("상세 조회를 하시겠습니까?")==false)return;
-		  window.location.href = "${CP}/board/doSelectOne.do?bdSeq="+boardSeq;
-	  });
+
 	//========================================한건조회(상세조회) 테이블 클릭 끝  
 	  $("#doRetrieve").on("click",function(){
 		  console.log("doRetrieve");
@@ -160,14 +150,14 @@
         console.log("-----------------");
         
         $.each(parsedJson,function(index,value){
-          
+          //htmlData += "  <td class='text-left col-sm-6 col-dm-6 col-lg-6'><a href='#' onClick='doSelectOne("+<c:out value='value.bdSeq '/>+")'>"+<c:out value='value.title'></c:out>+"</a></td>";
           htmlData += "<tr>";
           htmlData += "  <td class='text-center col-sm-1 col-dm-1 col-lg-1'>"+<c:out value='value.num'></c:out>+"</td>";
-          htmlData += "  <td class='text-left col-sm-6 col-dm-6 col-lg-6'>"+<c:out value='value.title'></c:out>+"</td>";
+          htmlData += "  <td class='text-left col-sm-6 col-dm-6 col-lg-6'><a href='#' onClick='doSelectOne("+<c:out value='value.bdSeq '/>+")'>"+<c:out value='value.title'></c:out>+"</a></td>";
           htmlData += "  <td class='text-center col-sm-2 col-dm-2 col-lg-2'>"+<c:out value='value.nickName'></c:out>+"</td>";
           htmlData += "  <td class='text-center col-sm-2 col-dm-2 col-lg-2'>"+<c:out value='value.modDt'></c:out>+"</td>";
           htmlData += "  <td class='text-right col-sm-1 col-dm-1 col-lg-1'>"+<c:out value='value.readCnt'></c:out>+"</td>";
-          htmlData += "  <td class='text-right col-sm-1 col-dm-1 col-lg-1'>"+<c:out value='value.bdSeq '/>+"</td>";
+          htmlData += "  <td class='text-right col-sm-1 col-dm-1 col-lg-1' style='display: none;'>"+<c:out value='value.bdSeq '/>+"</td>";
           htmlData += "</tr>";
           //<td style='display: none;'>"+<c:out value='value.bdSeq '/>+"</td>
         });
@@ -226,6 +216,18 @@
         doRetrieve(num);
     }); 
   }//=======================================================page 끝
+  
+  
+  //=============================doSelectOne함수
+  function doSelectOne(boardSeq){
+	   let url = "${CP}/board/doSelectOne.do";
+
+    url = url + "?bdSeq="+boardSeq;
+    console.log("url : "+url);
+    location.href = url;
+  //=============================doSelectOne함수 끝  
+
+  }
 </script>
 
 </head>
