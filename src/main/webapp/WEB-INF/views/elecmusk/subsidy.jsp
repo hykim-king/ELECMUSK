@@ -25,7 +25,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" type="image/x-icon" href="${CP}/favicon.ico">   
+<link rel="shortcut icon" type="image/x-icon" href="${CP_RES}/asset/cmn/favicon.ico"> 
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="${CP_RES}/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="${CP_RES}/main_home.css">
@@ -48,23 +48,13 @@
 	  
 	  doRetrieve();
 	  
-	  //paging
-    renderingPage('${pageTotal}',1);
+	  
 	  
 	  $("#keywordRetrieve").on("click",function(){
 		  doRetrieve();
 	  });
 	  
-	  //등록화면으로 이동
-    $("#moveToReg").on("click",function(){
-      
-      console.log('moveToReg');
-      console.log('div:'+$("#div").val());
-      
-      window.location.href = "${CP}/elecmusk/subsidy/doSave.do";
-      
-    //moveToReg
-    });
+
 	  
 
 	  
@@ -110,6 +100,7 @@
           pageTotal = Math.ceil( totalCnt/$("#pageSize").val());
           console.log("----------------------------");
           console.log("-totalCnt:"+totalCnt);
+          console.log("-pageSize:"+$("#pageSize").val());
           console.log("-pageTotal:"+pageTotal);
           console.log("-page:"+page);
           console.log("----------------------------");
@@ -146,7 +137,7 @@
        console.log("pageTotal:"+pageTotal);
        console.log("page:"+page);
        
-       pageTotal=parseInt(pageTotal);
+       pageTotal = parseInt(pageTotal);
        
        //연결된 EventHandler제거
        $('#page-selection').unbind('page');
@@ -229,6 +220,7 @@
     
   <!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select) ---------------------------------------->
     <div class="select-area">
+    
     <table>
       <thead>
         <th>&nbsp;</th>
@@ -240,6 +232,7 @@
         <tr>
           <td>
             <label>키워드</label>
+            <input type="hidden" id="pageSize" name="pageSize" value="20">
           </td>
           <td>
             <select id="submodelKeyword" name="submodelKeyword">
