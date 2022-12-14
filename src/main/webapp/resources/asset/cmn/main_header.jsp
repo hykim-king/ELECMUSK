@@ -68,6 +68,10 @@
 			let link = "${CP}/station/view.do"
 			location.href = link;
 		});
+		$("#rvboard").on("click", function() {
+			let link = "${CP}/review/rvboardView.do"
+			location.href = link;
+		});
 
 		$("#mainhome,#logo").on("click", function() {
 			let link = "${CP}/elecmusk/view.do"
@@ -131,7 +135,7 @@
 				<li>STATION
 					<ul class="sub-menu nav nav-stacked">
 						<li><a href="#" id="stationSearch" name="stationSearch">Station</a></li>
-						<li><a href="#">Review board</a></li>
+						<li><a href="#" id="rvboard" name="rvboard">Review board</a></li>
 					</ul>
 				</li>
 				<li>NEWS
