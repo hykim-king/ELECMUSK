@@ -35,6 +35,8 @@ public class JWebBoardCommentDao {
 	BoardCommentDao dao;
 	
 	BoardCommentVO boardCommentVO1;
+	BoardCommentVO boardCommentVO2;
+	BoardCommentVO boardCommentVO3;
 	
 	BoardCommentVO search;
 	
@@ -50,11 +52,13 @@ public class JWebBoardCommentDao {
 		LOG.debug("BoardCommentVO:"+dao);
 		LOG.debug("==============================");
 		
-		boardCommentVO1 = new BoardCommentVO(12,1,"A","");
-
+		boardCommentVO1 = new BoardCommentVO(0,0,"asd","");
+		
+		boardCommentVO2 = new BoardCommentVO(0,0,"asd","");
+		boardCommentVO3 = new BoardCommentVO(0,0,"asd","");
 		
 		
-		//searchVO = new SearchVO(10, 1, "10","01","");
+		searchVO = new SearchVO(0, 1, "asd","01","");
 	}
 	
 	public void isSameUser(BoardCommentVO actUser, BoardCommentVO addUser) {
@@ -66,7 +70,7 @@ public class JWebBoardCommentDao {
 	
 	
 	@Test
-	@Ignore
+	
 	public void doRetrieve()throws SQLException{
 		
 		List<BoardCommentVO> list = dao.doRetrieve(searchVO);
@@ -82,10 +86,12 @@ public class JWebBoardCommentDao {
 	}
 	
 	@Test  //완 
+	@Ignore
 	public void doSave()throws SQLException{
 		
-		
 		dao.doSave(boardCommentVO1);
+		dao.doSave(boardCommentVO2);
+		dao.doSave(boardCommentVO3);
 	}
 	
 
@@ -105,10 +111,13 @@ public class JWebBoardCommentDao {
 	@Ignore //완
 	public void doDelete()throws SQLException{
 		dao.doDelete(boardCommentVO1);	
+		dao.doDelete(boardCommentVO2);	
+		dao.doDelete(boardCommentVO3);	
 	}
 	
 	
 	@Test
+	@Ignore
 	public void bean() {
 		assertNotNull(dao);
 		assertNotNull(context);
