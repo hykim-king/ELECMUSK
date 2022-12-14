@@ -19,6 +19,7 @@ import com.pcwk.ehr.code.domain.CodeVO;
 import com.pcwk.ehr.code.service.CodeService;
 import com.pcwk.ehr.evcar.cmn.evMessageVO;
 import com.pcwk.ehr.evcar.cmn.evSearchVO;
+import com.pcwk.ehr.evcar.cmn.evStringUtil;
 import com.pcwk.ehr.subsidy.domain.SubsidyVO;
 import com.pcwk.ehr.subsidy.service.SubsidyService;
 
@@ -56,6 +57,7 @@ public class SubsidyController {
 	public String doRetrieve(evSearchVO inVO) throws SQLException{
 		String jsonString = "";
 		
+		//페이지 번호
 		if (null != inVO && inVO.getPageNo() == 0) {
 			inVO.setPageNo(1);
 		}
@@ -63,6 +65,17 @@ public class SubsidyController {
 		if (null != inVO && inVO.getPageSize() == 0) {
 			inVO.setPageSize(20);
 		}
+		
+		//검색구분
+		if(null !=inVO && null == inVO.getSearchDiv()) {
+			inVO.setSearchDiv(evStringUtil.nvl(inVO.getSearchDiv()));
+		}
+		
+		//검색어
+		if(null !=inVO && null == inVO.getSearchWord()) {  
+			inVO.setSearchWord(evStringUtil.nvl(inVO.getSearchWord()));
+		}
+		
 
 		
 		LOG.debug("┌───────────────────────────────────────────┐");
@@ -86,7 +99,7 @@ public class SubsidyController {
 	 */
 	@RequestMapping(value="/subsidyView.do",method = RequestMethod.GET)
 	public String subsidyView(Model model, evSearchVO inVO) throws SQLException{
-		String viewPage = "subsidy/subsidy";
+		String viewPage = "elecmusk/subsidy";
 		//검색 Default값 설정
 		
 		//페이지 번호
@@ -98,18 +111,6 @@ public class SubsidyController {
 		if(null !=inVO && inVO.getPageSize()==0) {
 		    inVO.setPageSize(10);
 		}
-		
-		//검색구분
-		if(null !=inVO && null == inVO.getSearchDiv()) {
-			inVO.setSearchDiv(StringUtil.nvl(inVO.getSearchDiv()));
-		}
-		
-		//검색어
-		if(null !=inVO && null == inVO.getSearchWord()) {  
-			inVO.setSearchWord(StringUtil.nvl(inVO.getSearchWord()));
-		}
-		
-
 		   
 		LOG.debug("┌=============================┐");	
 		LOG.debug("|inVO="+inVO);
@@ -121,8 +122,6 @@ public class SubsidyController {
 		codeList.add("PAGE_SIZE");
 		
 		List<CodeVO> outCodeList = codeService.doRetrive(codeList);
-		//검색조건
-		List<CodeVO> searchList  = new ArrayList<CodeVO>();
 		
 		//페이지사이즈
 		List<CodeVO> pageSizeList  = new ArrayList<CodeVO>();		
@@ -145,28 +144,9 @@ public class SubsidyController {
 //				       .filter(vo -> vo.getMstCode().equals("PAGE_SIZE") )
 //				       .collect(Collectors.toList());
 //		
-		//paging정보 추출: 총글수, 총페이지수
-		int totalCnt  = 0;//총글수
-		double pageTotal = 0;//총페이지수
-		
-		if(null !=list && list.size() >0) {
-			totalCnt = list.get(0).getTotalCnt();
-			
-			pageTotal = Math.ceil( ( totalCnt / (inVO.getPageSize()*1.0)) );
-			LOG.debug("|Math.ceil="+( totalCnt / (inVO.getPageSize()*1.0)));
-			LOG.debug("|totalCnt="+totalCnt);
-			LOG.debug("|pageTotal="+pageTotal);
-			LOG.debug("|PageSize="+inVO.getPageSize());
-		}
-		
-		
 		
 		LOG.debug("|outCodeList="+outCodeList);
 		model.addAttribute("list", list);
-		model.addAttribute("totalCnt", totalCnt);
-		model.addAttribute("pageTotal", (int)pageTotal);
-		
-		
 		model.addAttribute("PAGE_SIZE",pageSizeList);
 		return viewPage;
 	}

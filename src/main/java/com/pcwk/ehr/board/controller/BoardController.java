@@ -46,6 +46,7 @@ public class BoardController {
 		
 		return VIEW_NAME;
 	}
+
 	
 	/**
 	 * doUpdate
@@ -103,6 +104,13 @@ public class BoardController {
 		return jsonString;
 	}
 	
+	/**
+	 * 상세조회doSelectOne
+	 * @param inVO
+	 * @param model
+	 * @return
+	 * @throws SQLException
+	 */
 	@RequestMapping(value = "/doSelectOne.do", method = RequestMethod.GET)
 	public String doSelectOne(BoardVO inVO, Model model)throws SQLException{
 		String jsonString = "";
@@ -145,7 +153,7 @@ public class BoardController {
 	
 	
 	/**
-	 * 목록조회
+	 * 목록조회doRetrieve
 	 * @param inVO
 	 * @return JSON(String)
 	 * @throws SQLException
@@ -196,7 +204,7 @@ public class BoardController {
 	}
 	
 	/**
-	 * 목록조회 (form submit())
+	 * boardView
 	 * @param model
 	 * @param inVO
 	 * @return 화면, 목록 , code목록
@@ -282,7 +290,7 @@ public class BoardController {
 	
 	
 	/**
-	 * 추가 
+	 * 추가 doSave
 	 * @param inVO
 	 * @return jsonString(JSON(MessageVO))
 	 * @throws SQLException
@@ -347,4 +355,35 @@ public class BoardController {
 		
 	}
 	
+	/**
+	 * 삭제
+	 * @param inVO
+	 * @return jsonString(JSON(MessageVO)
+	 * @throws SQLException
+	 */
+	@RequestMapping(value = "/doDelete.do",method = RequestMethod.GET
+				,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String doDelete(BoardVO inVO) throws SQLException {
+		String jsonString = "";
+		LOG.debug("┌──────────────────────────────┐");
+		LOG.debug("│inVO = "+inVO);
+		int flag = boardService.doDelete(inVO);
+		
+		LOG.debug("│flag = "+flag);
+		
+		String message = "";
+		if(flag == 1) {
+			message = "삭제 되었습니다.";
+		}else {
+			message = "삭제 실패";
+		}
+		
+		jsonString = new Gson().toJson(new MessageVO(String.valueOf(flag), message));
+		
+		LOG.debug("│jsonString = "+jsonString);
+		LOG.debug("└──────────────────────────────┘");
+		
+		return jsonString;
+	}
 }

@@ -25,7 +25,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" type="image/x-icon" href="${CP}/favicon.ico">  
+<link rel="shortcut icon" type="image/x-icon" href="${CP_RES}/asset/cmn/favicon.ico"> 
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="${CP_RES}/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="${CP_RES}/main_home.css"> 

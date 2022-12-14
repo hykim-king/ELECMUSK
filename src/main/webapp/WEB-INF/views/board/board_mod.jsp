@@ -48,7 +48,27 @@
 	  
 	  $("#doDelete").on("click",function(){
 		  console.log("document.ready");
-	  });
+		  
+		  if(confirm("삭제 하시겠습니까?") == false)return;
+	    let method = "GET";
+	    let url    = "/board/doDelete.do";
+	    let async  = true;
+	    let params ={
+	    		category: $("#category").val(),
+	        bdSeq: $("#bdSeq").val()
+	    };
+	    PClass.callAjax(method,url,async,params,function(data){
+      console.log(data);
+      let parsedJson = JSON.parse(data);
+      if("1" == parsedJson.msgId){
+        alert(parsedJson.msgContents);
+        moveToList();
+      }else{
+        alert(parsedJson.msgContents);
+      }
+	      
+	    });//=========================================PClass.callAjax끝
+	  });//==============================================삭제 끝
 	  
 	  
 	  $("#doUpdate").on("click",function(){
@@ -169,9 +189,12 @@
  //=헤더부분 스크립트 이부분 꼭 넣으세요
  //==================================================================
 	 
+	 
+	//===================================목록으로 함수이동
   function moveToList(){
 	  window.location.href="${CP}/board/boardView.do";
-  }
+  };
+//===================================목록으로 이동 끝
 	 
 </script>
 
