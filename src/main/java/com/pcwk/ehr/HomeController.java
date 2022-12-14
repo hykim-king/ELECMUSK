@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +16,7 @@ import com.google.gson.Gson;
 import com.pcwk.ehr.chart.dao.evChartDao;
 import com.pcwk.ehr.chart.domain.evChartVO;
 import com.pcwk.ehr.chart.service.evChartService;
+import com.pcwk.ehr.cmn.MessageVO;
 import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.evcar.cmn.evSearchVO;
 import com.pcwk.ehr.evcar.domain.EvCarVO;
@@ -94,6 +96,8 @@ public class HomeController {
 		return jsonString;
 	}
 	
+	//evCar부분 ------------------------------------------------------------------
+	
 	@RequestMapping(value = "/doRetrieve.do",method=RequestMethod.GET
 			,produces = "application/json;charset=UTF-8")
 	@ResponseBody //비동기 처리를 하는 경우, HTTP 요청 부분의 body부분이 그대로 브라우저에 전달된다.	
@@ -127,6 +131,83 @@ public class HomeController {
 		*/
 		LOG.debug("|jsonString="+jsonString);
 		LOG.debug("└=============================┘");		
+		
+		return jsonString;
+	}
+	
+	@RequestMapping(value="/evCarSave.do",method = RequestMethod.POST
+			,produces ="application/json;charset=UTF-8")
+	@ResponseBody
+	public String evCarSave(EvCarVO inVO) throws SQLException {
+		String jsonString = "";
+		
+		MessageVO outMsg = new MessageVO();
+		
+		int flag = this.evCarService.doSave(inVO);
+		
+		String message = "";
+		if(1 == flag) {
+			message = inVO.getCarName()+" 등록 완료";
+		} else {
+			message = inVO.getCarName()+" 등록 실패";
+		}
+		
+		jsonString = new Gson().toJson(new MessageVO(flag+"", message));
+		
+		return jsonString;
+	}
+	
+	@RequestMapping(value="/evCarDelete.do",method = RequestMethod.GET
+			,produces ="application/json;charset=UTF-8")
+	@ResponseBody
+	public String evCarDelete(EvCarVO inVO) throws SQLException {
+		String jsonString = "";
+		
+		int flag = evCarService.doDelete(inVO);
+		
+		String message = "";
+		
+		if(flag == 1) {
+			message = "삭제 되었습니다.";
+		} else {
+			message = "삭제 실패";
+		}
+		
+		jsonString = new Gson().toJson(new MessageVO(String.valueOf(flag),message));
+		
+		return jsonString;
+	}
+	
+	@RequestMapping(value="/evCarSelectOne.do",method = RequestMethod.GET)
+	public String evCarSelectOne(EvCarVO inVO, Model model) throws SQLException {
+		if(null != inVO && inVO.getCarNo() == -1) {
+			return StringUtil.validMessageToJson("20", "순번을 확인하세요.");
+		}
+		
+		EvCarVO outVO = evCarService.doSelectOne(inVO);
+		
+		model.addAttribute("vo", outVO);
+		return "elecmusk/select_evcar";
+	}
+	
+	@RequestMapping(value="/evCarUpdate.do",method = RequestMethod.POST
+			,produces ="application/json;charset=UTF-8")
+	@ResponseBody
+	public String evCarUpdate(EvCarVO inVO) throws SQLException {
+		String jsonString = "";
+		
+		MessageVO outMsg = new MessageVO();
+		
+		int flag = evCarService.doUpdate(inVO);
+		
+		String message = "";
+		if(flag == 1) {
+			message = inVO.getCarNo()+" 수정 완료";
+		} else {
+			message = inVO.getCarNo()+" 수정 실패";
+		}
+		
+		jsonString = new Gson().toJson(new MessageVO(flag+"", message));
 		
 		return jsonString;
 	}

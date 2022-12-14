@@ -44,26 +44,46 @@ public class EvCarDaoImpl implements EvCarDao {
 
 	@Override
 	public int doSave(EvCarVO inVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		int flag = 0;
+		LOG.debug("┌--------------------------------┐");
+		LOG.debug("|param:"+inVO );		
+		
+		String statement = NAMESPACE+DOT+"evCarSave";
+		
+		LOG.debug("|statement:"+statement );
+		
+		flag = sqlSessionTemplate.insert(statement, inVO);
+		LOG.debug("|flag:"+flag );
+		LOG.debug("└--------------------------------┘");	
+		
+		return flag;
 	}
 
 	@Override
 	public int doUpdate(EvCarVO inVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSessionTemplate.update(NAMESPACE+DOT+"evCarUpdate", inVO);
 	}
 
 	@Override
 	public int doDelete(EvCarVO inVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		LOG.debug("┌--------------------------------┐");
+		LOG.debug("|param:"+inVO );
+
+		
+		String statement = NAMESPACE+DOT+"evCarDelete";
+		LOG.debug("|statement:"+statement );
+
+		
+		int flag = sqlSessionTemplate.delete(statement, inVO);
+		LOG.debug("|flag:"+flag );
+		LOG.debug("└--------------------------------┘");		
+		return flag;
 	}
 
 	@Override
 	public EvCarVO doSelectOne(EvCarVO inVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		EvCarVO outVO = null;
+		return outVO = sqlSessionTemplate.selectOne(NAMESPACE+DOT+"evCarSelectOne", inVO);
 	}
 
 }

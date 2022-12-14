@@ -9,7 +9,7 @@ public class EvCarVO extends evDTO {
 	private String imgUrl;
 	private String carPrice;
 	private String manufacture;
-	private String productYear;
+	private int productYear;
 	private String appearance;
 	private String carModel;
 	private String maxDistance;
@@ -20,7 +20,8 @@ public class EvCarVO extends evDTO {
 	
 	public EvCarVO() {}
 
-	public EvCarVO(int carNo, String carName, String imgUrl, String carPrice, String manufacture, String productYear,
+
+	public EvCarVO(int carNo, String carName, String imgUrl, String carPrice, String manufacture, int productYear,
 			String appearance, String carModel, String maxDistance, String batteryType, String batteryCapa,
 			int maxSpeed, String outPut) {
 		super();
@@ -38,6 +39,7 @@ public class EvCarVO extends evDTO {
 		this.maxSpeed = maxSpeed;
 		this.outPut = outPut;
 	}
+
 
 	public int getCarNo() {
 		return carNo;
@@ -79,13 +81,16 @@ public class EvCarVO extends evDTO {
 		this.manufacture = manufacture;
 	}
 
-	public String getProductYear() {
+
+	public int getProductYear() {
 		return productYear;
 	}
 
-	public void setProductYear(String productYear) {
+
+	public void setProductYear(int productYear) {
 		this.productYear = productYear;
 	}
+
 
 	public String getAppearance() {
 		return appearance;
@@ -143,6 +148,7 @@ public class EvCarVO extends evDTO {
 		this.outPut = outPut;
 	}
 
+
 	@Override
 	public String toString() {
 		return "EvCarVO [carNo=" + carNo + ", carName=" + carName + ", imgUrl=" + imgUrl + ", carPrice=" + carPrice
@@ -151,6 +157,7 @@ public class EvCarVO extends evDTO {
 				+ ", batteryCapa=" + batteryCapa + ", maxSpeed=" + maxSpeed + ", outPut=" + outPut + ", toString()="
 				+ super.toString() + "]";
 	}
+
 	
 	
 	

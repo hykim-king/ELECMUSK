@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" type="image/x-icon" href="${CP}/favicon.ico">   
+<link rel="shortcut icon" type="image/x-icon" href="${CP_RES}/asset/cmn/favicon.ico">   
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="${CP_RES}/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="${CP_RES}/evCar.css">
@@ -30,6 +30,21 @@
 <script>
 	$(document).ready(function() {
 		doRetrieve(1);
+		
+		$("#evCarSave").on("click",function(){
+			console.log("등록화면으로 이동한다아아아아.");
+			//window.location.href = ${CP}/elecmusk/evCarSelectOne.do;
+		});
+		
+	  $("#evCar>tbody").on("click",function(){
+	      let trArray = $("#selectEvCar").children();
+	      let tdCarNo = trArray.eq(1).text();
+	      console.log("tdCarNo: "+ tdCarNo);
+	      
+	      //관리자 쉬프트 클릭하면 이동하게 할것.
+	      
+	      window.location.href="${CP}/elecmusk/evCarSelectOne.do?$carNo="+tdCarNo;
+	    });		
 		
 		$("#keywordRetrive").on("click",function(){
 			doRetrieve(1);
@@ -83,6 +98,7 @@
 				pageNo: page
 		};
 		PClass.callAjax(method,url,async,params,function(data){
+			console.log("data: "+data);
 	      let parsedJson = JSON.parse(data);
 	          
 	      let htmlData = "";
@@ -103,9 +119,10 @@
           console.log("================");	    
           
 	    	  $.each(parsedJson, function(index, value) {
-	    		   htmlData += "<tr>";
+	    		   htmlData += "<tr id='selectEvCar'>";
 	    		   htmlData += "<div class='picture'>";
-	    		   htmlData += "  <td rowspan='11'><img src='"+<c:out value='value.imgUrl'/>+"' alt='"+<c:out value='value.carName'/>+"' style='width:700px;'></td>";
+	    		   htmlData += "  <td rowspan='11'><img src='"+<c:out value='value.imgUrl'/>+"' id='"+<c:out value='value.carName'/>+"' style='width:700px;'></td>";
+	    		   htmlData += "  <td rowspan='11' style='display:none'>"+<c:out value='value.carNo'/>+"</td>";
 	    		   htmlData += "</div>";
 	    		   htmlData += "</tr>";
 	    		   htmlData += "<tr>";
@@ -252,6 +269,7 @@
           </td>
           <td>
             <input type="button" class="btn btn-primary btn-sm" value="조회" id="keywordRetrive">
+            <input type="button" class="btn btn-primary btn-sm" value="등록" id="evCarSave">
           </td>
         </tr>
       </tbody>

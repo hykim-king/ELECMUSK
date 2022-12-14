@@ -133,4 +133,81 @@
     )B
   </select>
   
+  <insert id="evCarSave" parameterType="evCarVO">
+		INSERT INTO evcar (
+		    car_no,
+		    name,
+		    image,
+		    price,
+		    manufacture,
+		    product_year,
+		    appearance,
+		    model,
+		    max_distance,
+		    battery_type,
+		    battery_capacity,
+		    max_speed,
+		    output
+		) VALUES (
+		    #{carNo},
+		    #{carName},
+		    #{imgUrl},
+		    #{carPrice},
+		    #{manufacture},
+		    #{productYear},
+		    #{appearance},
+		    #{carModel},
+		    #{maxDistance},
+		    #{batteryType},
+		    #{batteryCapa},
+		    #{maxSpeed},
+		    #{outPut}
+		)  
+  </insert>
+  
+  <select id="evCarSelectOne" parameterType="evCarVO" resultMap="evcarVO">
+		SELECT
+		    car_no,
+		    name,
+		    image,
+		    price,
+		    manufacture,
+		    product_year,
+		    appearance,
+		    model,
+		    max_distance,
+		    battery_type,
+		    battery_capacity,
+		    max_speed,
+		    output
+		FROM
+		    evcar
+		WHERE car_no = #{carNo}
+  </select>
+  
+  <delete id="evCarDelete" parameterType="evCarVO">
+		DELETE FROM evcar
+		WHERE
+        car_no = #{carNo}  
+  </delete>
+  
+  <update id="evCarUpdate" parameterType="com.pcwk.ehr.evcar.domain.EvCarVO">
+		UPDATE evcar
+		SET
+		    name             = #{carName},
+		    image            = #{imgUrl},
+		    price            = #{carPrice},
+		    manufacture      = #{manufacture},
+		    product_year     = #{productYear},
+		    appearance       = #{appearance},
+		    model            = #{carModel},
+		    max_distance     = #{maxDistance},
+		    battery_type     = #{batteryType},
+		    battery_capacity = #{batteryCapa},
+		    max_speed        = #{maxSpeed},
+		    output           = #{outPut}
+		WHERE
+		    car_no = #{carNo}  
+  </update>
+  
 </mapper>  

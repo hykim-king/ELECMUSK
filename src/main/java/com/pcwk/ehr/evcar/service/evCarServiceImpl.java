@@ -26,4 +26,24 @@ public class evCarServiceImpl implements evCarService {
 		return evCarDao.doRetrieve(inVO);
 	}
 
+	@Override
+	public int doSave(EvCarVO inVO) throws SQLException {
+		return evCarDao.doSave(inVO);
+	}
+
+	@Override
+	public int doDelete(EvCarVO inVO) throws SQLException {
+		return evCarDao.doDelete(inVO);
+	}
+
+	@Override
+	public int doUpdate(EvCarVO inVO) throws SQLException {
+		return evCarDao.doUpdate(inVO);
+	}
+
+	@Override
+	public EvCarVO doSelectOne(EvCarVO inVO) throws SQLException {
+		return evCarDao.doSelectOne(inVO);
+	}
+
 }

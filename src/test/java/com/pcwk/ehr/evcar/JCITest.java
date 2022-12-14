@@ -47,16 +47,47 @@ public class JCITest {
 		LOG.debug("=EvCarDao= : "+evDao);
 		LOG.debug("=================================");	
 		
-		evDao01 = new EvCarVO(1, "차이름01", "이미지url", "200a", "menu", "연식", "appe", "model", "distance", "batteryTP", "battery", 200, "out");
-		evDao02 = new EvCarVO(2, "차이름02", "이미지url", "200a", "menu", "연식", "appe", "model", "distance", "batteryTP", "battery", 200, "out");
-		evDao03 = new EvCarVO(3, "차이름03", "이미지url", "200a", "menu", "연식", "appe", "model", "distance", "batteryTP", "battery", 200, "out");
-		evDao04 = new EvCarVO(4, "차이름04", "이미지url", "200a", "menu", "연식", "appe", "model", "distance", "batteryTP", "battery", 200, "out");
-		evDao05 = new EvCarVO(5, "차이름05", "이미지url", "200a", "menu", "연식", "appe", "model", "distance", "batteryTP", "battery", 200, "out");
-		search =  new EvCarVO(1, "차이름05", "이미지url", "200a", "menu", "연식", "appe", "model", "distance", "batteryTP", "battery", 200, "out");
+		evDao01 = new EvCarVO(26, "차이름01", "url", "200", "menu", 2022, "appe", "model", "dis", "batteryTP", "battery", 100, "out");
+		evDao02 = new EvCarVO(27, "차이름02", "url", "200", "menu", 2022, "appe", "model", "dis", "batteryTP", "battery", 100, "out");
+		evDao03 = new EvCarVO(28, "차이름03", "url", "200", "menu", 2022, "appe", "model", "dis", "batteryTP", "battery", 100, "out");
+		evDao04 = new EvCarVO(29, "차이름04", "url", "200", "menu", 2022, "appe", "model", "dis", "batteryTP", "battery", 100, "out");
+		evDao05 = new EvCarVO(30, "차이름05", "url", "200", "menu", 2022, "appe", "model", "dis", "batteryTP", "battery", 100, "out");
+		search =  new EvCarVO(30, "차이름05", "url", "200", "menu", 2022, "appe", "model", "dis", "batteryTP", "battery", 100, "out");
 		searchVO = new evSearchVO(10, 1, "", "", "", "", "", "", "", "","");
 	}
 	
 	@Test
+	public void addAndGet() throws SQLException {
+		evDao.doDelete(evDao01);
+		evDao.doDelete(evDao02);
+		evDao.doDelete(evDao03);
+		evDao.doDelete(evDao04);
+		evDao.doDelete(evDao05);
+		
+		evDao.doSave(evDao01);
+		evDao.doSave(evDao02);
+		evDao.doSave(evDao03);
+		evDao.doSave(evDao04);
+		evDao.doSave(evDao05);
+		
+		EvCarVO out01 = evDao.doSelectOne(evDao01);
+		LOG.debug("┌──────────────────────────");
+		LOG.debug("│=evDao01= : "+evDao01);
+		LOG.debug("│=out01= : "+out01);
+		LOG.debug("└──────────────────────────");
+		
+		String upStr = "_U";
+		int upInt = 10;
+		
+		out01.setCarName(out01.getCarName()+upStr);
+		
+		evDao.doUpdate(out01);
+		
+		LOG.debug("│=out01= : "+out01);
+	}
+	
+	@Test
+	@Ignore
 	public void doRetrieve() throws SQLException {
 		List<EvCarVO> list = evDao.doRetrieve(searchVO);
 	}
