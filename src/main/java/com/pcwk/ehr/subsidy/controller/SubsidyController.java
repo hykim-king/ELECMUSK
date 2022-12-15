@@ -42,14 +42,14 @@ public class SubsidyController {
 		LOG.debug("┌───────────────────────────────────────────┐");
 		LOG.debug("│                 View()                    │");
 		LOG.debug("└───────────────────────────────────────────┘");	
-		return "elecmusk/subsidy";
+		return "subsidy/subsidy";
 	}
 	
 
 	
 	@RequestMapping(value="/moveToReg.do", method = RequestMethod.GET)
 	public String moveToReg(Model model, evSearchVO inVO) throws SQLException{
-		String VIEW_NAME = "elecmusk/subsidy_reg";
+		String VIEW_NAME = "subsidy/subsidy_reg";
 		
 		return VIEW_NAME;
 	}
@@ -108,7 +108,7 @@ public class SubsidyController {
 	 */
 	@RequestMapping(value="/subsidyView.do",method = RequestMethod.GET)
 	public String subsidyView(Model model, evSearchVO inVO) throws SQLException{
-		String viewPage = "elecmusk/subsidy";
+		String viewPage = "subsidy/subsidy";
 		//검색 Default값 설정
 		
 		//페이지 번호
@@ -174,7 +174,7 @@ public class SubsidyController {
 		jsonString = new Gson().toJson(outVO);
 		LOG.debug("|jsonString="+jsonString);
 		LOG.debug("└=============================┘");		
-		return "elecmusk/subsidy_mod";
+		return "subsidy/subsidy_mod";
 	}
 	
 	
@@ -214,9 +214,9 @@ public class SubsidyController {
 		
 		String message = "";//json으로 전달할 메시지
 		if(1==flag) {
-			message = inVO.getSubsidy_seq()+"등록 되었습니다.";
+			message = inVO.getName()+"등록 되었습니다.";
 		}else {
-			message = inVO.getSubsidy_seq()+"등록 실패";
+			message = inVO.getName()+"등록 실패";
 		}
 		
 		evMessageVO messageVO=new evMessageVO(String.valueOf(flag), message);

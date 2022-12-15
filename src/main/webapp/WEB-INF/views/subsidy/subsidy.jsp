@@ -47,23 +47,7 @@
 	  console.log("document.ready");
 	  
 	  doRetrieve();
-	  
-   //테이블 클릭
-   $("#subsidyTable>tbody").on("click","tr",function(e){
-     console.log('#subsidyTable>tbody');
-     let tdArray = $(this).children();
-     let name = tdArray.eq(2).text();
-     
-     console.log('name:'+name);
-     console.log('#subsidyTable>tbody');
-     
-     if(confirm("상세 조회를 하시겠습니까?")==false)return;
-    
-     window.location.href = "${CP}/subsidy/moveToMod.do";
-     
-     
-   //#boardTable>tbody
-   });
+
 	  
 	  $("#keywordRetrieve").on("click",function(){
 		  doRetrieve();
@@ -263,9 +247,8 @@
     <!---------------------------------------- 검색 : 검색 구분(select) 검색어(input) 페이지 사이즈(select) -->
     <form action="#" class="form-inline text-right">
       <div class="form-group">
-
+          
         <!------------------------------------- 버튼 -->
-          <input type="button" class="btn btn-danger btn-sm" value="삭제" id="doDelete">
           <input type="button" class="btn btn-info btn-sm" value="등록" id="moveToReg">
         <!------------------------------------- 버튼 -->
       </div>

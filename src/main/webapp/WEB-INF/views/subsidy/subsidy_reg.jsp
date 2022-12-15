@@ -50,12 +50,6 @@
 	//등록
 	    $("#doSave").on("click",function(){
 	      console.log("doSave");
-	      
-	      if(eUtil.ISEmpty($("#subsidy_seq").val()) == true){
-	        alert("번호를 입력 하세요.");
-	        $("#subsidy_seq").focus();
-	        return;
-	      }
 	    
 	      if(eUtil.ISEmpty($("#name").val()) == true){
 	        alert("자동차명을 입력 하세요.");
@@ -93,7 +87,6 @@
 	      let url    = "/subsidy/doSave.do";
 	      let async  = true;
 	      let params = {
-	    		  subsidy_seq : $("#subsidy_seq").val(),
 	    		  name : $("#name").val(),
 	    		  model : $("#model").val(),
 	    		  subsidy : $("#subsidy").val(),
@@ -189,9 +182,7 @@
     <!--버튼 -------------------------------------------------------------------->
         <!-- 폼 -->
     <form action="#" class="form-horizontal"> 
-         
-
-
+    <input type="hidden" id="subsidy_seq" name="subsidy_seq" value="${vo.subsidy_seq}"> 
       <div class="form-group">
         <label for="name" class="col-sm-2 col-md-2 col-lg-2 control-label">자동차명</label>
         <div class="col-sm-10 col-md-10 col-lg-10">

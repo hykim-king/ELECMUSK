@@ -57,11 +57,29 @@
   $(document).ready(function(){
 	  console.log("document.ready");
 	  
+	  //삭제
+	  $("#doDelete").on("click", function(){
+		  if(confirm("삭제 하시겠습니까?")==false)return;
+      let method  = "GET";
+      let url     = "/subsidy/doDelete.do";
+      let async   = true;
+      let params  ={
+    		  subsidy_seq : $("#subsidy_seq").val()
+      };
+      PClass.callAjax(method,url,async,params,function(data){
+        let parsedJson = JSON.parse(data);
+        if("1" == parsedJson.msgId){
+          alert(parsedJson.msgContents);
+          moveToList();
+        }else{
+          alert(parsedJson.msgContents);
+        }
+      });//PClass
+      
+	  });//doDelete
 	  
-	//수정
+	    //수정
 	    $("#doUpdate").on("click",function(){
-	      
-
 
 	      if(eUtil.ISEmpty( $("#name").val() ) == true){
 	        alert("자동차명을 입력 하세요.");
@@ -153,7 +171,8 @@
     <input type="hidden" class="form-control" id="subsidy_seq" name="subsidy_seq" value="${vo.subsidy_seq }">
     <!--버튼  -->
     <div class="row text-right">
-      <input type="button" class="btn btn-primary btn-sm" value="수정" id="doUpdate">
+      <input type="button" class="btn btn-warning btn-sm" value="수정" id="doUpdate">
+      <input type="button" class="btn btn-danger btn-sm" value="삭제" id="doDelete">
       <input type="button" class="btn btn-primary btn-sm" value="목록" id="moveToList">
     </div>
     <!--버튼 -------------------------------------------------------------------->
