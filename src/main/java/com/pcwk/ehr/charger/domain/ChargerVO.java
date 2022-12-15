@@ -4,7 +4,7 @@ import com.pcwk.ehr.evcar.cmn.evDTO;
 
 public class ChargerVO extends evDTO {
 	
-	private int charger_no;			//충전기순번
+	private int charger_seq;	    //충전기순번
 	private String connector;		//충전기명
 	private String image;			//이미지경로
 	private String ev_current;		//충전전류
@@ -15,10 +15,10 @@ public class ChargerVO extends evDTO {
 	
 	public ChargerVO() {}
 
-	public ChargerVO(int charger_no, String connector, String image, String ev_current, String ev_voltage,
+	public ChargerVO(int charger_seq, String connector, String image, String ev_current, String ev_voltage,
 			String ev_power, String ev_level, String ev_support) {
 		super();
-		this.charger_no = charger_no;
+		this.charger_seq = charger_seq;
 		this.connector = connector;
 		this.image = image;
 		this.ev_current = ev_current;
@@ -28,12 +28,12 @@ public class ChargerVO extends evDTO {
 		this.ev_support = ev_support;
 	}
 
-	public int getCharger_no() {
-		return charger_no;
+	public int getCharger_seq() {
+		return charger_seq;
 	}
 
-	public void setCharger_no(int charger_no) {
-		this.charger_no = charger_no;
+	public void setCharger_seq(int charger_seq) {
+		this.charger_seq = charger_seq;
 	}
 
 	public String getConnector() {
@@ -94,13 +94,10 @@ public class ChargerVO extends evDTO {
 
 	@Override
 	public String toString() {
-		return "ChargerVO [charger_no=" + charger_no + ", connector=" + connector + ", image=" + image + ", ev_current="
-				+ ev_current + ", ev_voltage=" + ev_voltage + ", ev_power=" + ev_power + ", ev_level=" + ev_level
-				+ ", ev_support=" + ev_support + "]";
+		return "ChargerVO [charger_seq=" + charger_seq + ", connector=" + connector + ", image=" + image
+				+ ", ev_current=" + ev_current + ", ev_voltage=" + ev_voltage + ", ev_power=" + ev_power + ", ev_level="
+				+ ev_level + ", ev_support=" + ev_support + "]";
 	}
-
-	
-
 
 	
 }

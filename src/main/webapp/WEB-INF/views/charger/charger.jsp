@@ -55,9 +55,8 @@
   $("#moveToReg").on("click",function(){
     
     console.log('moveToReg');
-    console.log('div:'+$("#div").val());
     
-    window.location.href = "${CP}/elecmusk/charger/doSave.do";
+    window.location.href = "${CP}/charger/moveToReg.do";
     
   //moveToReg
   });
@@ -99,7 +98,7 @@
               htmlData +=" </div>"
               htmlData +=" <tr> ";
               htmlData +="   <td width='11%' height='12.5%' class='text-center'><strong>충전기명</strong> </td> ";        
-              htmlData +="   <td width='22%' height='12.5%' class='text-center'>"+<c:out value = 'value.connector'/> +"</td> ";        
+              htmlData +="   <td width='22%' height='12.5%' class='text-center'><a href='#' onClick='doSelectOne("+<c:out value='value.charger_seq '/>+")'>"+<c:out value = 'value.connector'/> +"</td> ";        
               htmlData +="   <td width='11%' height='12.5%' class='text-center'><strong>충전전류</strong> </td> ";        
               htmlData +="   <td width='22%' height='12.5%' class='text-center'>"+ value.ev_current +"</td> ";        
               htmlData +=" </tr> ";
@@ -169,7 +168,17 @@
 	   //==================================================================
 	   //=헤더부분 스크립트 이부분 꼭 넣으세요
 	   //==================================================================
-	  
+		   
+      //=============================doSelectOne함수
+  function doSelectOne(charger_seq){
+     let url = "${CP}/charger/doSelectOne.do";
+
+    url = url + "?charger_seq="+charger_seq;
+    console.log("url : "+url);
+    location.href = url;
+     }
+  //=============================doSelectOne함수 끝 
+  
 </script>
 
 </head>
@@ -186,9 +195,17 @@
        <h2>충전기 정보</h2>
     </div>
     <!-- 제목 ------------------------------------------------------------------->
+  <!---------------------------------------- 검색 : 검색 구분(select) 검색어(input) 페이지 사이즈(select) -->
+    <form action="#" class="form-inline text-right">
+      <div class="form-group">
+        <!------------------------------------- 버튼 -->
+          <input type="button" class="btn btn-info btn-sm" value="등록" id="moveToReg">
+        <!------------------------------------- 버튼 -->
+      </div>
+    </form>
+    <!---------------------------------------- 검색 -->
+    
   <!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select) ---------------------------------------->
-
-    <!-- 검색 ----------------------------------------------------------------------------->
   
   <!-- 충전기 테이블 목록 ---------------------------------------------------------------------------->
     <div class="table-responsive">

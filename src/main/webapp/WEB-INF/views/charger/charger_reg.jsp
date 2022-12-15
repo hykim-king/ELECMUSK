@@ -51,47 +51,61 @@
 	    $("#doSave").on("click",function(){
 	      console.log("doSave");
 	    
-	      if(eUtil.ISEmpty($("#name").val()) == true){
-	        alert("자동차명을 입력 하세요.");
-	        $("#name").focus();
+	      if(eUtil.ISEmpty($("#connector").val()) == true){
+	        alert("충전기명을 입력 하세요.");
+	        $("#connector").focus();
 	        return;
 	      }
 	      
-	      if(eUtil.ISEmpty($("#model").val()) == true){
-	          alert("차종을 입력 하세요.");
-	          $("#model").focus();
+	      if(eUtil.ISEmpty($("#image").val()) == true){
+	          alert("이미지를 추가 하세요.");
+	          $("#image").focus();
 	          return;
 	      }
 	        
-	      if(eUtil.ISEmpty($("#subsidy").val()) == true){
-	          alert("보조금을 입력 하세요.");
-	          $("#subsidy").focus();
+	      if(eUtil.ISEmpty($("#ev_current").val()) == true){
+	          alert("충전전류을 입력 하세요.");
+	          $("#ev_current").focus();
 	          return;
 	      }       
 	      
-	      if(eUtil.ISEmpty($("#manufacturer").val()) == true){
-	          alert("제조사를 입력 하세요.");
-	          $("#manufacturer").focus();
+	      if(eUtil.ISEmpty($("#ev_voltage").val()) == true){
+	          alert("충전전압 입력 하세요.");
+	          $("#ev_voltage").focus();
 	          return;
 	      }       
 
-	      if(eUtil.ISEmpty($("#madeby").val()) == true){
-	          alert("생산지를 입력 하세요.");
-	          $("#madeby").focus();
+	      if(eUtil.ISEmpty($("#ev_power").val()) == true){
+	          alert("충전전력을 입력 하세요.");
+	          $("#ev_power").focus();
+	          return;
+	      }       
+
+	      if(eUtil.ISEmpty($("#ev_level").val()) == true){
+	          alert("충전레벨을 입력 하세요.");
+	          $("#ev_level").focus();
+	          return;
+	      }       
+
+	      if(eUtil.ISEmpty($("#ev_support").val()) == true){
+	          alert("지원차량을 입력 하세요.");
+	          $("#ev_support").focus();
 	          return;
 	      }       
 	        
 	      if(confirm("등록 하시겠습니까?")==false)return;
 	      
 	      let method = "POST";
-	      let url    = "/subsidy/doSave.do";
+	      let url    = "/charger/doSave.do";
 	      let async  = true;
 	      let params = {
-	    		  name : $("#name").val(),
-	    		  model : $("#model").val(),
-	    		  subsidy : $("#subsidy").val(),
-	    		  manufacturer : $("#manufacturer").val(),
-	    		  madeby : $("#madeby").val()
+	    		  connector : $("#connector").val(),
+	    		  image : $("#image").val(),
+	    		  ev_current : $("#ev_current").val(),
+	    		  ev_voltage : $("#ev_voltage").val(),
+	    		  ev_power : $("#ev_power").val(),
+	    		  ev_level : $("#ev_level").val(),
+	    		  ev_support : $("#ev_support").val()
 	      };
 	      
 	      PClass.callAjax(method,url,async,params,function(data){
@@ -113,15 +127,15 @@
 	    });
 	  
    //목록으로 이동
-    $("#subsidyView").on("click",function(){
-      console.log("subsidyView");
+    $("#chargerView").on("click",function(){
+      console.log("chargerView");
       moveToList();
     //boardView  
     });
   });
   
   function moveToList(){
-	    window.location.href= "${CP}/subsidy/view.do";
+	    window.location.href= "${CP}/charger/view.do";
 	}
   //==================================================================
   //=헤더부분 스크립트 이부분 꼭 넣으세요
@@ -172,7 +186,7 @@
   <div class="container">
     <!-- 제목 -->
     <div class="page-header">
-       <h2>보조금 등록</h2>
+       <h2>충전기 등록</h2>
     </div>
     <!-- 제목 ------------------------------------------------------------------->
     <!--버튼  -->
@@ -180,56 +194,74 @@
         <label for="inputEmail3" class="col-sm-2 col-md-2 col-lg-2 control-label"></label>
         <div class="col-sm-10 col-md-10 col-lg-10">
           <input type="button" class="btn btn-info btn-sm" value="등록"  id="doSave" >
-          <input type="button" class="btn btn-primary btn-sm" value="목록"  id="subsidyView" >
+          <input type="button" class="btn btn-primary btn-sm" value="목록"  id="chargerView" >
 
         </div>
     </div>
     <!--버튼 -------------------------------------------------------------------->
         <!-- 폼 -->
     <form action="#" class="form-horizontal"> 
-    <input type="hidden" id="subsidy_seq" name="subsidy_seq" value="${vo.subsidy_seq}"> 
+    <input type="hidden" id="charger_seq" name="charger_seq" value="${vo.charger_seq}"> 
       <div class="form-group">
-        <label for="name" class="col-sm-2 col-md-2 col-lg-2 control-label">자동차명</label>
+        <label for="connector" class="col-sm-2 col-md-2 col-lg-2 control-label">충전기명</label>
         <div class="col-sm-10 col-md-10 col-lg-10">
           <input type="text" 
           maxlength="20"
-          class="form-control" id="name" name="name" placeholder="자동차명을 입력하세요">
+          class="form-control" id="connector" name="connector" placeholder="충전기명을 입력하세요">
         </div>
       </div>
 
       <div class="form-group">
-        <label for="model" class="col-sm-2 col-md-2 col-lg-2 control-label">차종</label>
+        <label for="image" class="col-sm-2 col-md-2 col-lg-2 control-label">이미지</label>
         <div class="col-sm-10 col-md-10 col-lg-10">
           <input type="text" 
           maxlength="20"
-          class="form-control" id="model" name="model" placeholder="(소형,중형,대형) 입력하세요">
+          class="form-control" id="moimagedel" name="image" placeholder="이미지를 등록하세요">
         </div>
       </div>
 
       <div class="form-group">
-        <label for="subsidy" class="col-sm-2 col-md-2 col-lg-2 control-label">보조금</label>
+        <label for="ev_current" class="col-sm-2 col-md-2 col-lg-2 control-label">충전전류</label>
         <div class="col-sm-10 col-md-10 col-lg-10">
           <input type="text" 
           maxlength="20"
-          class="form-control" id="subsidy" name="subsidy" placeholder="보조금을 입력하세요">
+          class="form-control" id="ev_current" name="ev_current" placeholder="충전전류를 입력하세요">
         </div>
       </div>
 
       <div class="form-group">
-        <label for="manufacturer" class="col-sm-2 col-md-2 col-lg-2 control-label">제조사</label>
+        <label for="ev_voltage" class="col-sm-2 col-md-2 col-lg-2 control-label">충전전압</label>
         <div class="col-sm-10 col-md-10 col-lg-10">
           <input type="text" 
           maxlength="20"
-          class="form-control" id="manufacturer" name="manufacturer" placeholder="제조사를 입력하세요">
+          class="form-control" id="ev_voltage" name="ev_voltage" placeholder="충전전압을 입력하세요">
         </div>
       </div>
 
       <div class="form-group">
-        <label for="madeby" class="col-sm-2 col-md-2 col-lg-2 control-label">생산지</label>
+        <label for="ev_power" class="col-sm-2 col-md-2 col-lg-2 control-label">충전전력</label>
         <div class="col-sm-10 col-md-10 col-lg-10">
           <input type="text" 
           maxlength="20"
-          class="form-control" id="madeby" name="madeby" placeholder="생산지(국산,수입)를 입력하세요">
+          class="form-control" id="ev_power" name="ev_power" placeholder="충전전력을 입력하세요">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="ev_level" class="col-sm-2 col-md-2 col-lg-2 control-label">충전레벨</label>
+        <div class="col-sm-10 col-md-10 col-lg-10">
+          <input type="text" 
+          maxlength="20"
+          class="form-control" id="ev_level" name="ev_level" placeholder="충전레벨을 입력하세요">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="ev_support" class="col-sm-2 col-md-2 col-lg-2 control-label">지원차량</label>
+        <div class="col-sm-10 col-md-10 col-lg-10">
+          <input type="text" 
+          maxlength="20"
+          class="form-control" id="ev_support" name="ev_support" placeholder="지원차량들을 입력하세요">
         </div>
       </div>
              

@@ -5,7 +5,7 @@
 <mapper namespace="com.pcwk.ehr.charger">
 
   <resultMap type="ChargerVO" id="chargerMap">
-    <result column="charger_no" property="charger_no"/>
+    <result column="charger_seq" property="charger_seq"/>
     <result column="connector" property="connector"/>
     <result column="image" property="image"/>
     <result column="ev_current" property="ev_current"/>
@@ -34,7 +34,7 @@
 
   <insert id="doSave" parameterType="ChargerVO">
   INSERT INTO charger (
-	    charger_no,
+	    charger_seq,
 	    connector,
 	    image,
 	    ev_current,
@@ -43,7 +43,7 @@
 	    ev_level,
 	    ev_support
 	) VALUES (
-	    #{charger_no},
+	    CHARGER_SEQ.NEXTVAL,
 	    #{connector},
 	    #{image},
 	    #{ev_current},
@@ -54,9 +54,9 @@
 	)
   </insert>
   
-  <delete id="doDelete" parameterType="ChargerVo">
+  <delete id="doDelete" parameterType="ChargerVO">
   DELETE FROM charger
-  WHERE charger_no = #{charger_no}
+  WHERE charger_seq = #{charger_seq}
   </delete>
   
   <update id="doUpdate" parameterType="ChargerVO">
@@ -68,11 +68,11 @@
 	    ev_power = #{ev_power},
 	    ev_level = #{ev_level},
 	    ev_support = #{ev_support}
-	WHERE charger_no = #{charger_no}
+	WHERE charger_seq = #{charger_seq}
   </update>
   
   <select id="doSelectOne" parameterType="ChargerVO" resultMap="chargerMap">
-  SELECT  charger_no,
+  SELECT  charger_seq,
 			    connector,
 			    image,
 			    ev_current,
@@ -81,7 +81,7 @@
 			    ev_level,
 			    ev_support
 	FROM charger
-	WHERE charger_no = #{charger_no}
+	WHERE charger_seq = #{charger_seq}
   </select>
   
   <select id="doRetrieve" parameterType="SearchVO" resultMap="chargerMap">
@@ -89,7 +89,7 @@
 		  SELECT A.*, B.*
 		  FROM(
 		      SELECT TT1.rnum as num,
-		             TT1.charger_no,
+		             TT1.charger_seq,
 		             TT1.connector,
 		             TT1.image,
 		             TT1.ev_current,
@@ -104,7 +104,7 @@
 		              FROM charger
 		              --WHERE(10:충전기명,20:충전전류,30:충전전력,40:지원차량)
 		              <include refid="searchCondition"></include>
-		              ORDER BY charger_no ASC
+		              ORDER BY charger_seq ASC
 		          )T1
 		          <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} -1) + #{pageSize} ]]>
 		      )TT1
