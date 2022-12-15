@@ -47,16 +47,22 @@ public class JCITest {
 		LOG.debug("=EvCarDao= : "+evDao);
 		LOG.debug("=================================");	
 		
-		evDao01 = new EvCarVO(26, "차이름01", "url", "200", "menu", 2022, "appe", "model", "dis", "batteryTP", "battery", 100, "out");
-		evDao02 = new EvCarVO(27, "차이름02", "url", "200", "menu", 2022, "appe", "model", "dis", "batteryTP", "battery", 100, "out");
-		evDao03 = new EvCarVO(28, "차이름03", "url", "200", "menu", 2022, "appe", "model", "dis", "batteryTP", "battery", 100, "out");
-		evDao04 = new EvCarVO(29, "차이름04", "url", "200", "menu", 2022, "appe", "model", "dis", "batteryTP", "battery", 100, "out");
-		evDao05 = new EvCarVO(30, "차이름05", "url", "200", "menu", 2022, "appe", "model", "dis", "batteryTP", "battery", 100, "out");
-		search =  new EvCarVO(30, "차이름05", "url", "200", "menu", 2022, "appe", "model", "dis", "batteryTP", "battery", 100, "out");
+		evDao01 = new EvCarVO(27, "차이름01", "url", "200", "menu", 2022, "appe", "model", "dis", "batteryTP", "battery", 100, "out");
+		evDao02 = new EvCarVO(28, "차이름02", "url", "200", "menu", 2022, "appe", "model", "dis", "batteryTP", "battery", 100, "out");
+		evDao03 = new EvCarVO(29, "차이름03", "url", "200", "menu", 2022, "appe", "model", "dis", "batteryTP", "battery", 100, "out");
+		evDao04 = new EvCarVO(30, "차이름04", "url", "200", "menu", 2022, "appe", "model", "dis", "batteryTP", "battery", 100, "out");
+		evDao05 = new EvCarVO(31, "차이름05", "url", "200", "menu", 2022, "appe", "model", "dis", "batteryTP", "battery", 100, "out");
+		search =  new EvCarVO(31, "차이름05", "url", "200", "menu", 2022, "appe", "model", "dis", "batteryTP", "battery", 100, "out");
 		searchVO = new evSearchVO(10, 1, "", "", "", "", "", "", "", "","");
 	}
 	
 	@Test
+	public void add() throws SQLException {
+		evDao.doSave(evDao01);
+	}
+	
+	@Test
+	@Ignore
 	public void addAndGet() throws SQLException {
 		evDao.doDelete(evDao01);
 		evDao.doDelete(evDao02);
@@ -77,7 +83,6 @@ public class JCITest {
 		LOG.debug("└──────────────────────────");
 		
 		String upStr = "_U";
-		int upInt = 10;
 		
 		out01.setCarName(out01.getCarName()+upStr);
 		

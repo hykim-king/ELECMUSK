@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
 <c:set var="RES" value="/resources" ></c:set>
 <c:set var="CP_RES" value="${CP}${RES}" ></c:set>
@@ -31,20 +31,11 @@
 	$(document).ready(function() {
 		doRetrieve(1);
 		
-		$("#evCarSave").on("click",function(){
-			console.log("등록화면으로 이동한다아아아아.");
-			//window.location.href = ${CP}/elecmusk/evCarSelectOne.do;
-		});
 		
-	  $("#evCar>tbody").on("click",function(){
-	      let trArray = $("#selectEvCar").children();
-	      let tdCarNo = trArray.eq(1).text();
-	      console.log("tdCarNo: "+ tdCarNo);
-	      
-	      //관리자 쉬프트 클릭하면 이동하게 할것.
-	      
-	      window.location.href="${CP}/elecmusk/evCarSelectOne.do?$carNo="+tdCarNo;
-	    });		
+		
+		$("#evCarSave").on("click",function(){
+			window.location.href = "${CP}/elecmusk/evCarSelectOne.do";
+		});
 		
 		$("#keywordRetrive").on("click",function(){
 			doRetrieve(1);
@@ -119,10 +110,9 @@
           console.log("================");	    
           
 	    	  $.each(parsedJson, function(index, value) {
-	    		   htmlData += "<tr id='selectEvCar'>";
+	    		   htmlData += "<tr>";
 	    		   htmlData += "<div class='picture'>";
-	    		   htmlData += "  <td rowspan='11'><img src='"+<c:out value='value.imgUrl'/>+"' id='"+<c:out value='value.carName'/>+"' style='width:700px;'></td>";
-	    		   htmlData += "  <td rowspan='11' style='display:none'>"+<c:out value='value.carNo'/>+"</td>";
+	    		   htmlData += "  <td rowspan='11'><a href='#' onClick='evCarSelectOne("+<c:out value='value.carNo'/>+")'><img src='"+<c:out value='value.imgUrl'/>+"' style='width:700px;'/></a></td>";
 	    		   htmlData += "</div>";
 	    		   htmlData += "</tr>";
 	    		   htmlData += "<tr>";
@@ -206,6 +196,14 @@
 	          console.log("num:"+num);
 	          doRetrieve(num);
 	      });
+	  }
+	
+	  function evCarSelectOne(carNo){
+	    let url = "${CP}/elecmusk/evCarSelectOne.do";
+
+	    url = url + "?carNo="+carNo;
+	    console.log("url : "+url);
+	    location.href = url;
 	  }
 </script>
 </head>

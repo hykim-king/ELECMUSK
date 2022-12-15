@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.pcwk.ehr.board.cmn.SearchVO;
 import com.pcwk.ehr.chart.dao.evChartDao;
 import com.pcwk.ehr.chart.domain.evChartVO;
 import com.pcwk.ehr.chart.service.evChartService;
@@ -180,8 +181,43 @@ public class HomeController {
 	
 	@RequestMapping(value="/evCarSelectOne.do",method = RequestMethod.GET)
 	public String evCarSelectOne(EvCarVO inVO, Model model) throws SQLException {
+		
+		if(null != inVO && inVO.getCarName() == null) {
+			inVO.setCarName("");
+		}
+		if(null != inVO && inVO.getImgUrl() == null) {
+			inVO.setImgUrl("");
+		}
+		if(null != inVO && inVO.getCarPrice() == null) {
+			inVO.setCarPrice("");
+		}
+		if(null != inVO && inVO.getManufacture() == null) {
+			inVO.setManufacture("");
+		}
+		if(null != inVO && inVO.getAppearance() == null) {
+			inVO.setAppearance("");
+		}		
+		if(null != inVO && inVO.getCarModel() == null) {
+			inVO.setCarModel("");
+		}
+		if(null != inVO && inVO.getMaxDistance() == null) {
+			inVO.setMaxDistance("");
+		}
+		if(null != inVO && inVO.getBatteryType() == null) {
+			inVO.setBatteryType("");
+		}
+		if(null != inVO && inVO.getBatteryCapa() == null) {
+			inVO.setBatteryCapa("");
+		}
+		if(null != inVO && inVO.getOutPut() == null) {
+			inVO.setOutPut("");
+		}
+		if(null != inVO && inVO.getProductYear() == 0) {
+			inVO.setProductYear(0);
+		}
+		
 		if(null != inVO && inVO.getCarNo() == -1) {
-			return StringUtil.validMessageToJson("20", "순번을 확인하세요.");
+			return StringUtil.validMessageToJson("20", "차번호를 확인하세요.");
 		}
 		
 		EvCarVO outVO = evCarService.doSelectOne(inVO);
@@ -196,9 +232,44 @@ public class HomeController {
 	public String evCarUpdate(EvCarVO inVO) throws SQLException {
 		String jsonString = "";
 		
-		MessageVO outMsg = new MessageVO();
+		if(null != inVO && inVO.getCarName() == null) {
+			inVO.setCarName("");
+		}
+		if(null != inVO && inVO.getImgUrl() == null) {
+			inVO.setImgUrl("");
+		}
+		if(null != inVO && inVO.getCarPrice() == null) {
+			inVO.setCarPrice("");
+		}
+		if(null != inVO && inVO.getManufacture() == null) {
+			inVO.setManufacture("");
+		}
+		if(null != inVO && inVO.getAppearance() == null) {
+			inVO.setAppearance("");
+		}		
+		if(null != inVO && inVO.getCarModel() == null) {
+			inVO.setCarModel("");
+		}
+		if(null != inVO && inVO.getMaxDistance() == null) {
+			inVO.setMaxDistance("");
+		}
+		if(null != inVO && inVO.getBatteryType() == null) {
+			inVO.setBatteryType("");
+		}
+		if(null != inVO && inVO.getBatteryCapa() == null) {
+			inVO.setBatteryCapa("");
+		}
+		if(null != inVO && inVO.getOutPut() == null) {
+			inVO.setOutPut("");
+		}
+		if(null != inVO && inVO.getProductYear() == 0) {
+			inVO.setProductYear(0);
+		}
 		
+		MessageVO outMsg = new MessageVO();
 		int flag = evCarService.doUpdate(inVO);
+		LOG.debug("┌──────────────────────────────┐");
+		LOG.debug("│flag = "+flag);
 		
 		String message = "";
 		if(flag == 1) {

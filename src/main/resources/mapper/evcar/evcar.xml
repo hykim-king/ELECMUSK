@@ -79,7 +79,7 @@
   </sql>
   
   <resultMap type="evCarVO" id="evcarVO">
-   <result  column="car_no"       property="carNo"      />
+   <result  column="carNo"       property="carNo"      />
    <result  column="name"       property="carName"      />
    <result  column="image"       property="imgUrl"      />
    <result  column="price"       property="carPrice"      />
@@ -99,7 +99,7 @@
     FROM (
         SELECT
             TT1.rnum as num,     
-            TT1.car_no,
+            TT1.evcar_seq as carNo,
             TT1.name,
             TT1.image,
             TT1.price,
@@ -117,7 +117,7 @@
             FROM (
                 SELECT *
                 FROM EVCAR
-                <![CDATA[WHERE car_no >= 0]]>
+                <![CDATA[WHERE evcar_seq >= 0]]>
                 <include refid="manufactureKeyword"></include>
                 <include refid="appearanceKeyword"></include>
                 <include refid="modelKeyword"></include>
@@ -135,7 +135,7 @@
   
   <insert id="evCarSave" parameterType="evCarVO">
 		INSERT INTO evcar (
-		    car_no,
+		    evcar_seq,
 		    name,
 		    image,
 		    price,
@@ -149,7 +149,7 @@
 		    max_speed,
 		    output
 		) VALUES (
-		    #{carNo},
+		    EVCAR_SEQ.nextval,
 		    #{carName},
 		    #{imgUrl},
 		    #{carPrice},
@@ -167,7 +167,7 @@
   
   <select id="evCarSelectOne" parameterType="evCarVO" resultMap="evcarVO">
 		SELECT
-		    car_no,
+		    evcar_seq as carNo,
 		    name,
 		    image,
 		    price,
@@ -180,15 +180,13 @@
 		    battery_capacity,
 		    max_speed,
 		    output
-		FROM
-		    evcar
-		WHERE car_no = #{carNo}
+		FROM evcar
+		WHERE evcar_seq = #{carNo}
   </select>
   
   <delete id="evCarDelete" parameterType="evCarVO">
 		DELETE FROM evcar
-		WHERE
-        car_no = #{carNo}  
+		WHERE evcar_seq = #{carNo}  
   </delete>
   
   <update id="evCarUpdate" parameterType="com.pcwk.ehr.evcar.domain.EvCarVO">
@@ -207,7 +205,7 @@
 		    max_speed        = #{maxSpeed},
 		    output           = #{outPut}
 		WHERE
-		    car_no = #{carNo}  
+		    evcar_seq = #{carNo}  
   </update>
   
 </mapper>  
