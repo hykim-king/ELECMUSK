@@ -77,15 +77,15 @@
 			let link = "${CP}/elecmusk/view.do"
 			location.href = link;
 		});
-    $("#board01,#logo").on("click", function() {
+    $("#board01").on("click", function() {
       let link = "${CP}/board/boardView.do?category=1"
       location.href = link;
     });
-    $("#board02,#logo").on("click", function() {
+    $("#board02").on("click", function() {
       let link = "${CP}/board/boardView.do?category=2"
       location.href = link;
     });
-    $("#board03,#logo").on("click", function() {
+    $("#board03").on("click", function() {
       let link = "${CP}/board/boardView.do?category=3"
       location.href = link;
     });
