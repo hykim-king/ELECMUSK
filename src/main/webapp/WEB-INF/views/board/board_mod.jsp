@@ -17,6 +17,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%  
+    String categoryValue = request.getParameter("category");
+    String title = "";
+    if("1".equals(categoryValue)){
+      title = "자유게시판";
+    }else if("2".equals(categoryValue)){
+      title = "결함 게시판";
+    }else if("3".equals(categoryValue)){
+      title = "뉴스";
+    }else if("5".equals(categoryValue)){
+      title = "공지사항";
+    }
+    
+    request.setAttribute("title", title);
+    request.setAttribute("categoryValue", categoryValue);
+%>
+
 <c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
 <c:set var="RES" value="/resources" ></c:set>
 <c:set var="CP_RES" value="${CP}${RES}" ></c:set>
@@ -148,6 +165,8 @@
 	  
 	  
 	  $("#boardView").on("click",function(){
+		  
+		  
 		  moveToList();
 	  });
 	  
@@ -192,7 +211,7 @@
 	 
 	//===================================목록으로 함수이동
   function moveToList(){
-	  window.location.href="${CP}/board/boardView.do";
+	  window.location.href="${CP}/board/boardView.do?category="+$("#category").val();
   };
 //===================================목록으로 이동 끝
 	 
@@ -212,6 +231,7 @@
     <div class="page-header">
       <h2>게시등록</h2>
     </div>
+    category:${categoryValue }
     <!------------------------------------ 제목 -->
     <input type="hidden" class="form-control" id="category" name="category" value="${vo.category }">
     <input type="hidden" class="form-control" id="bdSeq" name="bdSeq" value="${vo.bdSeq }">

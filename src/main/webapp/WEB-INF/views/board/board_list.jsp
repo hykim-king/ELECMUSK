@@ -18,7 +18,6 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%  
-    //공지사항(10) / 자유게시판 구분(20)
     String categoryValue = request.getParameter("category");
     String title = "";
     if("1".equals(categoryValue)){
