@@ -45,6 +45,15 @@ public class SubsidyController {
 		return "elecmusk/subsidy";
 	}
 	
+
+	
+	@RequestMapping(value="/moveToReg.do", method = RequestMethod.GET)
+	public String moveToReg(Model model, evSearchVO inVO) throws SQLException{
+		String VIEW_NAME = "elecmusk/subsidy_reg";
+		
+		return VIEW_NAME;
+	}
+	
 	/**
 	 * 목록조회
 	 * @param inVO
@@ -152,9 +161,7 @@ public class SubsidyController {
 	}
 	
 	
-	@RequestMapping(value="/doSelectOne.do",method = RequestMethod.GET
-			,produces = "application/json;charset=UTF-8")
-	@ResponseBody
+	@RequestMapping(value="/doSelectOne.do",method = RequestMethod.GET)
 	public String doSelectOne(SubsidyVO inVO, Model model)throws SQLException {
 		String jsonString = "";
 		LOG.debug("┌=============================┐");	
@@ -162,10 +169,12 @@ public class SubsidyController {
 		
 		SubsidyVO outVO = subsidyService.doSelectOne(inVO);
 		
+		model.addAttribute("vo", outVO);
+		
 		jsonString = new Gson().toJson(outVO);
 		LOG.debug("|jsonString="+jsonString);
 		LOG.debug("└=============================┘");		
-		return jsonString;
+		return "elecmusk/subsidy_mod";
 	}
 	
 	
@@ -180,9 +189,9 @@ public class SubsidyController {
 		
 		String message = "";//json으로 전달할 메시지
 		if(1==flag) {
-			message = inVO.getSubsidy_no()+"수정 되었습니다.";
+			message = inVO.getSubsidy_seq()+"수정 되었습니다.";
 		}else {
-			message = inVO.getSubsidy_no()+"수정 실패";
+			message = inVO.getSubsidy_seq()+"수정 실패";
 		}
 		
 		evMessageVO messageVO=new evMessageVO(String.valueOf(flag), message);
@@ -205,9 +214,9 @@ public class SubsidyController {
 		
 		String message = "";//json으로 전달할 메시지
 		if(1==flag) {
-			message = inVO.getSubsidy_no()+"등록 되었습니다.";
+			message = inVO.getSubsidy_seq()+"등록 되었습니다.";
 		}else {
-			message = inVO.getSubsidy_no()+"등록 실패";
+			message = inVO.getSubsidy_seq()+"등록 실패";
 		}
 		
 		evMessageVO messageVO=new evMessageVO(String.valueOf(flag), message);

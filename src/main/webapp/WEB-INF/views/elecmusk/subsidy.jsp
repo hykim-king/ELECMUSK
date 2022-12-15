@@ -48,13 +48,37 @@
 	  
 	  doRetrieve();
 	  
-	  
+   //테이블 클릭
+   $("#subsidyTable>tbody").on("click","tr",function(e){
+     console.log('#subsidyTable>tbody');
+     let tdArray = $(this).children();
+     let name = tdArray.eq(2).text();
+     
+     console.log('name:'+name);
+     console.log('#subsidyTable>tbody');
+     
+     if(confirm("상세 조회를 하시겠습니까?")==false)return;
+    
+     window.location.href = "${CP}/subsidy/moveToMod.do";
+     
+     
+   //#boardTable>tbody
+   });
 	  
 	  $("#keywordRetrieve").on("click",function(){
 		  doRetrieve();
 	  });
 	  
-
+	  //등록화면으로 이동
+    $("#moveToReg").on("click",function(){
+      
+      console.log('moveToReg');
+      
+      window.location.href = "${CP}/subsidy/moveToReg.do";
+      
+    //moveToReg
+    });
+	  
 	  
 
 	  
@@ -111,7 +135,7 @@
               htmlData +=" <tr> ";
               htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.model +"</td> ";        
               htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.manufacturer +"</td> ";        
-              htmlData +="   <td class='text-center col-sm-5 col-md-5 col-lg-5'>"+value.name +"</td> ";        
+              htmlData +="   <td class='text-center col-sm-5 col-md-5 col-lg-5'><a href='#' onClick='doSelectOne("+<c:out value='value.subsidy_seq '/>+")'>"+value.name +"</td> ";        
               htmlData +="   <td class='text-center col-sm-3 col-md-3 col-lg-3'>"+value.subsidy +"</td> ";        
               htmlData +=" </tr> ";
             });
@@ -198,7 +222,15 @@
 	   //==================================================================
 	   //=헤더부분 스크립트 이부분 꼭 넣으세요
 	   //==================================================================
-	  
+	    //=============================doSelectOne함수
+  function doSelectOne(subsidy_seq){
+     let url = "${CP}/subsidy/doSelectOne.do";
+
+    url = url + "?subsidy_seq="+subsidy_seq;
+    console.log("url : "+url);
+    location.href = url;
+	   }
+  //=============================doSelectOne함수 끝  
 </script>
 
 </head>
@@ -215,8 +247,30 @@
        <h2>보조금 정보</h2>
     </div>
     <!-- 제목 ------------------------------------------------------------------->
+    <!-- 문단  -->
+    <dl>
+      <dt>보조금 지원 대상</dt>
+      <dd>* 중앙행정기관을 제외한 개인, 법인, 공공기관, 지방자치단체, 지방공기업 등</dd>
+      <dd>* 국고보조금 외 지방보조금을 추가로 지원하는 지방자치단체는 관할 자치단체 내 거주 등 자격조건 부여 가능</dd>
+      <br>
+      <dt>보조금 지원 차량</dt>
+      <dd>* 아래의 사항을 충족하는 전기자동차</dd>
+      <dd>-<자동차관리법>, <대기환경보전법>, <소음및진동관리법> 등 관계법령에 따라 자동차와 관련된 각종 인증을 모두 완료한 차량 </dd>
+      <dd>-<전기자동차 보급대상 평가에 관한 규정>에 따른 전기차의 평가항목 및 기준에 적합한 차량</dd>
+    </dl>
     
-    
+    <!-- 문단  ------------------------------------------------------->
+    <!---------------------------------------- 검색 : 검색 구분(select) 검색어(input) 페이지 사이즈(select) -->
+    <form action="#" class="form-inline text-right">
+      <div class="form-group">
+
+        <!------------------------------------- 버튼 -->
+          <input type="button" class="btn btn-danger btn-sm" value="삭제" id="doDelete">
+          <input type="button" class="btn btn-info btn-sm" value="등록" id="moveToReg">
+        <!------------------------------------- 버튼 -->
+      </div>
+    </form>
+    <!---------------------------------------- 검색 -->
     
   <!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select) ---------------------------------------->
     <div class="select-area">

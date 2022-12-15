@@ -5,7 +5,7 @@
 <mapper namespace="com.pcwk.ehr.subsidy">
   
   <resultMap type="SubsidyVO" id="subsidyMap">
-    <result column="subsidy_no" property="subsidy_no"/>
+    <result column="subsidy_seq" property="subsidy_seq"/>
     <result column="name" property="name"/>
     <result column="model" property="model"/>
     <result column="subsidy" property="subsidy"/>
@@ -76,14 +76,14 @@
   
   <select id="doSelectOne" parameterType="SubsidyVO" resultMap="subsidyMap">
   SELECT
-	     subsidy_no,
+	     subsidy_seq,
 	     name,
 	     model,
 	     subsidy,
 	     manufacturer,
 	     madeby
 	FROM subsidy
-	WHERE subsidy_no = #{subsidy_no}
+	WHERE subsidy_seq = #{subsidy_seq}
   </select>
   
   <update id="doUpdate" parameterType="SubsidyVO">
@@ -93,19 +93,19 @@
 	        subsidy       = #{subsidy},
 	        manufacturer  = #{manufacturer},
 	        madeby        = #{madeby}
-	    WHERE subsidy_no  = #{subsidy_no}
+	    WHERE subsidy_seq  = #{subsidy_seq}
   </update>
   
   <insert id="doSave" parameterType="SubsidyVO">
     INSERT INTO subsidy (
-		    subsidy_no,
+		    subsidy_seq,
 		    name,
 		    model,
 		    subsidy,
 		    manufacturer,
 		    madeby
 		) VALUES (
-		    #{subsidy_no},
+		    #{subsidy_seq},
 		    #{name},
 		    #{model},
 		    #{subsidy},
@@ -116,7 +116,7 @@
   
   <delete id="doDelete" parameterType="SubsidyVO">
     DELETE FROM subsidy
-    WHERE subsidy_no = #{subsidy_no}
+    WHERE subsidy_seq = #{subsidy_seq}
   </delete>
   
   
@@ -125,7 +125,7 @@
 	SELECT A.*, B.*
 	FROM(
 	    SELECT TT1.rnum as num,
-	           TT1.subsidy_no,
+	           TT1.subsidy_seq,
 	           TT1.name,
 	           TT1.model,
 	           TT1.subsidy,
@@ -136,11 +136,11 @@
 	        FROM(
 	            SELECT *
 	            FROM subsidy
-	            <![CDATA[WHERE subsidy_no >= 0]]>
+	            <![CDATA[WHERE subsidy_seq >= 0]]>
 	            <include refid="submodelKeyword"></include>
 	            <include refid="madebyKeyword"></include>
 	            <include refid="subsidyKeyword"></include>
-	            ORDER BY subsidy_no ASC
+	            ORDER BY subsidy_seq ASC
 	        )T1
 	        <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} -1) + #{pageSize} ]]>
 	    )TT1

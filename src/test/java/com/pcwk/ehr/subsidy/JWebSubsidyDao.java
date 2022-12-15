@@ -45,9 +45,9 @@ public class JWebSubsidyDao {
 	
 	@Before
 	public void setUp() throws Exception {
-		subsidy01 = new SubsidyVO(99, "aa", "aa", 99, "aa", "aa");
+		subsidy01 = new SubsidyVO(99999, "aa", "aa", 99, "aa", "aa");
 		
-		search = new SubsidyVO(99, "aa", "aa", 99, "aa", "aa");
+		search = new SubsidyVO(99999, "aa", "aa", 99, "aa", "aa");
 		
 		searchVO = new evSearchVO(10, 1, "", "", "", "", "", "", "", "","");
 	}
