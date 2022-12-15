@@ -21,10 +21,10 @@
      //공지사항(10)/자유게시판 구분(20)
      String divValue = request.getParameter("div");
      String title = "";
-     if("20".equals(divValue)){
-    	 title = "자유게시판";
+     if("40".equals(divValue)){
+    	 title = "충전소 리뷰게시판";
      }else{
-    	 title = "공지사항";
+    	 title = "";
      }
      
      request.setAttribute("title", title);
@@ -38,22 +38,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" type="image/x-icon" href="${CP}/favicon.ico">   
+<link rel="shortcut icon" type="image/x-icon" href="${CP_RES}/asset/cmn/favicon.ico"> 
 <!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="${CP_RES}/css/bootstrap.min.css">
+<link rel="stylesheet" href="${CP_RES}/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="${CP_RES}/main_home.css">
 
 <!-- jQuery -->
-<script src="${CP_RES}/js/jquery-1.12.4.js"></script>
+<script src="${CP_RES}/bootstrap/js/jquery-1.12.4.js"></script>
 <!-- callAjax -->
-<script src="${CP_RES}/js/callAjax.js"></script>
-<!-- String, Number, Date Util -->
-<script src="${CP_RES}/js/eUtil.js"></script>
-
+<script src="${CP_RES}/bootstrap/js/callAjax.js"></script>
+<!-- String, Number, Date Util  -->
+<script src="${CP_RES}/bootstrap/js/eUtil.js"></script>
 <!-- paging -->
-<script src="${CP_RES}/js/jquery.bootpag.js"></script>
-
+<script src="${CP_RES}/bootstrap/js/jquery.bootpag.js"></script>
 <!-- bootstrap js -->
-<script src="${CP_RES}/js/bootstrap.min.js"></script>
+<script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
 <title>${title}</title>
 <script >
@@ -73,7 +72,7 @@
 		  
 		  if(confirm("상세 조회를 하시겠습니까?")==false)return;
 		  //div,seql
-		  window.location.href = "${CP}/board/doSelectOne.do?div="+$("#div").val()+"&seq="+boardSeq;
+		  window.location.href = "${CP}/rvboard/doSelectOne.do?div="+$("#div").val()+"&seq="+boardSeq;
 		  
 		  
 		//#boardTable>tbody
@@ -85,7 +84,7 @@
 		  console.log('moveToReg');
 		  console.log('div:'+$("#div").val());
 		  
-		  window.location.href = "${CP}/board/moveToReg.do?div="+$("#div").val();
+		  window.location.href = "${CP}/rvboard/moveToReg.do?div="+$("#div").val();
 		  
 		//moveToReg
 	  });
@@ -116,7 +115,7 @@
 	  console.log('doRetrive() page:'+page);
 	  
 	  let method  ="GET";
-	  let url     ="/board/doRetrive.do";
+	  let url     ="/rvboard/doRetrive.do";
 	  let async   =true;
 	  
 	  //전체
@@ -141,7 +140,7 @@
 		  let htmlData = "";
 		  
 		  //기존 데이터 삭제
-		  $("#boardTable>tbody").empty();
+		  $("#rvboardTable>tbody").empty();
 		  
 		  let totalCnt = 0;//총글수  
 		  let pageTotal = 0;//총페이지수
@@ -160,11 +159,12 @@
 				  
 				  htmlData += "<tr>";
 				  htmlData += "    <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.num'/>+"</td>";    
-				  htmlData += "    <td class='text-left col-sm-6 col-md-6 col-lg-8'>"+<c:out value='value.title'/>+"</td>";
-				  htmlData += "    <td class='text-center col-sm-2 col-md-2 col-lg-1'>"+<c:out value='value.modId'/>+"</td>";
-				  htmlData += "    <td class='text-center col-sm-2 col-md-2 col-lg-1'>"+<c:out value='value.modDt'/>+"</td>";
+				  htmlData += "    <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+<c:out value='value.csnm'/>+"</td>";    
+				  htmlData += "    <td class='text-left col-sm-6 col-md-6 col-lg-6'>"+<c:out value='value.title'/>+"</td>";
+				  htmlData += "    <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.nickName'/>+"</td>";
+				  htmlData += "    <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.modDt'/>+"</td>";
 				  htmlData += "    <td class='text-right col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.readCnt'/>+"</td>";
-				  htmlData += "    <td style='display:none;'>"+<c:out value='value.seq'/>+"</td>";
+				  htmlData += "    <td style='display:none;'>"+<c:out value='value.bdSeq'/>+"</td>";
 				  htmlData += "</tr>";
 				  
 			  });
@@ -179,7 +179,7 @@
 		  }
 		    
 		  //데이터 출력
-		  $("#boardTable>tbody").append(htmlData);
+		  $("#rvboardTable>tbody").append(htmlData);
 		  
 		  //paging
 		  $("#page-selection").empty();//페이저 삭제
@@ -221,15 +221,56 @@
 		          doRetrive(num);
 		      });  
 		    }  
+
+		      //==================================================================
+		      //=헤더부분 스크립트 이부분 꼭 넣으세요
+		      //==================================================================
+		      
+		       $(function() {
+		           let didScroll;
+		           let lastScrollTop = 0;
+		           let navbarHeight = $("header").outerHeight();
+		            $(window).scroll(function(event){
+		                didScroll = true;
+		            });
+		            setInterval(function() {
+		                if (didScroll) {
+		                    hasScrolled();
+		                    didScroll = false;
+		                }
+		            }); // 스크롤이 멈춘 후 동작이 실행되기 까지의 딜레이
+		            function hasScrolled() {
+		              if($(this).width() > 700) {       
+		              let st = $(this).scrollTop(); // 현재 window의 scrollTop 값
+		                  if ($(window).scrollTop() > 50){
+		                      $(".logo-area").slideUp("fast"); // header 숨기기
+		                      $(".text-logo-area").addClass("visible");
+		                  } else {
+		                      if($(window).scrollTop() < 200) {
+		                          $(".logo-area").slideDown("fast"); // header 보이기
+		                          $(".text-logo-area").removeClass("visible");
+		                  }
+		               }
+		            }
+		         }
+		         });
+		     //==================================================================
+		     //=헤더부분 스크립트 이부분 꼭 넣으세요
+		     //==================================================================
 </script>
 
 </head>
 <body>
+  <header>
+  <jsp:include page ="/resources/asset/cmn/main_header.jsp" flush="false"/>
+  </header>
+  
+  <div id="contents">
   <!-- div container -->   
   <div class="container">   
     <!-- 제목 -->
     <div class="page-header">
-       <h2>${title}</h2>
+       <h2>충전소 리뷰 게시판</h2>
     </div>
     <!-- 제목 ------------------------------------------------------------------->
     <!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select)--> 
@@ -259,13 +300,14 @@
     
     <!-- 테이블 목록 -->
     <div class="table-responsive">
-    <table id="boardTable" class="table table-striped table-bordered table-hover">
+    <table id="rvboardTable" class="table table-striped table-bordered table-hover">
       <thead class="bg-primary">
         <tr>
           <th class="text-center col-sm-1 col-md-1 col-lg-1">번호</th>
-          <th class="text-center col-sm-6 col-md-6 col-lg-8">제목</th>
-          <th class="text-center col-sm-2 col-md-2 col-lg-1">작성자</th>
-          <th class="text-center col-sm-2 col-md-2 col-lg-1">등록일</th>
+          <th class="text-center col-sm-2 col-md-2 col-lg-2">충전소명</th>
+          <th class="text-center col-sm-6 col-md-6 col-lg-6">제목</th>
+          <th class="text-center col-sm-1 col-md-1 col-lg-1">작성자</th>
+          <th class="text-center col-sm-1 col-md-1 col-lg-1">등록일</th>
           <th class="text-center col-sm-1 col-md-1 col-lg-1">조회수</th>
           <th style='display:none;'>SEQ</th>
         </tr>
@@ -276,11 +318,12 @@
              <c:forEach var="vo" items="${list }" >
 			        <tr>
 			          <td class="text-center col-sm-1 col-md-1 col-lg-1"><c:out value="${vo.num }"></c:out></td>
-			          <td class="text-left col-sm-6 col-md-6 col-lg-8"><c:out value="${vo.title }"></c:out></td>
-			          <td class="text-center col-sm-2 col-md-2 col-lg-1"><c:out value="${vo.modId }"></c:out></td>
-			          <td class="text-center col-sm-2 col-md-2 col-lg-1"><c:out value="${vo.modDt }"></c:out></td>
+			          <td class="text-center col-sm-2 col-md-2 col-lg-2"><c:out value="${vo.csnm }"></c:out></td>
+			          <td class="text-left col-sm-6 col-md-6 col-lg-6"><c:out value="${vo.title }"></c:out></td>
+			          <td class="text-center col-sm-1 col-md-1 col-lg-1"><c:out value="${vo.modId }"></c:out></td>
+			          <td class="text-center col-sm-1 col-md-1 col-lg-1"><c:out value="${vo.modDt }"></c:out></td>
 			          <td class="text-right col-sm-1 col-md-1 col-lg-1"><c:out value="${vo.readCnt }"></c:out></td>
-			          <td style='display:none;'><c:out value="${vo.seq }"></c:out></td>
+			          <td style='display:none;'><c:out value="${vo.bdSeq }"></c:out></td>
 			        </tr>              
              </c:forEach>
           </c:when>
@@ -307,7 +350,11 @@
     <!-- 페이징--- -------------------------------------------------------------->    
   </div>   
   <!-- div container ---------------------------------------------------------->
-       
+</div>
+
+<footer>
+  <jsp:include page="/resources/asset/cmn/main_footer.jsp" flush="false" />
+</footer>  
 </body>
 </html>
 
