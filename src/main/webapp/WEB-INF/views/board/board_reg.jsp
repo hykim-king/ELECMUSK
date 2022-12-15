@@ -16,7 +16,24 @@
  --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%  
+    //공지사항(10) / 자유게시판 구분(20)
+    String categoryValue = request.getParameter("category");
+    String title = "";
+    if("1".equals(categoryValue)){
+      title = "자유게시판";
+    }else if("2".equals(categoryValue)){
+      title = "결함 게시판";
+    }else if("3".equals(categoryValue)){
+      title = "뉴스";
+    }else if("5".equals(categoryValue)){
+      title = "공지사항";
+    }
+    
+    request.setAttribute("title", title);
+    request.setAttribute("categoryValue", categoryValue);
+%>    
 <c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
 <c:set var="RES" value="/resources" ></c:set>
 <c:set var="CP_RES" value="${CP}${RES}" ></c:set>
@@ -91,11 +108,13 @@
         } 
         if(confirm("등록 하시겠습니까?") == false)return;
         
+        let categoryValue = ${categoryValue};
+        
         let method    = "POST";
         let url       = "/board/doSave.do";
         let async     = true;
         let params    = {
-        		category : 1,
+        		category : categoryValue,
             title : $("#title").val(),
             regId : $("#regId").val(),
             contents : $("#contentstextarea").val(),
@@ -160,7 +179,9 @@
  //==================================================================
 	 
   function moveToList(){
-	  window.location.href="${CP}/board/boardView.do";
+
+    let categoryValue = ${categoryValue};
+	  window.location.href="${CP}/board/boardView.do?category="+categoryValue;
   }
 	 
 </script>
@@ -180,7 +201,7 @@
       <h2>게시등록</h2>
     </div>
     <!------------------------------------ 제목 -->
-    <input type="hidden" class="form-control" id="category" name="category" value="1">
+    
     <!------------------------------------- 버튼 -->
     <div class="row text-right">
        <input type="button" class="btn btn-primary btn-sm" value="등록" id="doSave">

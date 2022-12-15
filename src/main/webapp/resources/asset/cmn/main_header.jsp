@@ -77,6 +77,18 @@
 			let link = "${CP}/elecmusk/view.do"
 			location.href = link;
 		});
+    $("#board01,#logo").on("click", function() {
+      let link = "${CP}/board/boardView.do?category=1"
+      location.href = link;
+    });
+    $("#board02,#logo").on("click", function() {
+      let link = "${CP}/board/boardView.do?category=2"
+      location.href = link;
+    });
+    $("#board03,#logo").on("click", function() {
+      let link = "${CP}/board/boardView.do?category=3"
+      location.href = link;
+    });
 
 	});
 </script>
@@ -116,9 +128,9 @@
 				<li id="main_home" name="main_home">Home</li>
 				<li>BOARD
 					<ul class="sub-menu nav nav-stacked">
-						<li><a href="#">Board 1</a></li>
-						<li><a href="#">Board 2</a></li>
-						<li><a href="#">Board 3</a></li>
+						<li><a href="#" id="board01">자유게시판</a></li>
+						<li><a href="#" id="board02">결함 게시판</a></li>
+						<li><a href="#" id="board03">공지사항</a></li>
 					</ul>
 				</li>
 				<li>EVCARS

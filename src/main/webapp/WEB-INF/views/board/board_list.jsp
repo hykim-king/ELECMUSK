@@ -17,6 +17,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%  
+    //공지사항(10) / 자유게시판 구분(20)
+    String categoryValue = request.getParameter("category");
+    String title = "";
+    if("1".equals(categoryValue)){
+      title = "자유게시판";
+    }else if("2".equals(categoryValue)){
+      title = "결함 게시판";
+    }else if("3".equals(categoryValue)){
+    	title = "뉴스";
+    }else if("5".equals(categoryValue)){
+    	title = "공지사항";
+    }
+    
+    request.setAttribute("title", title);
+    request.setAttribute("categoryValue", categoryValue);
+%>
 <c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
 <c:set var="RES" value="/resources" ></c:set>
 <c:set var="CP_RES" value="${CP}${RES}" ></c:set>
@@ -68,7 +85,9 @@
 	  $("#moveToReg").on("click",function(){
 		  console.log("doSave");
 		  
-		  window.location.href = "${CP}/board/moveToReg.do";
+		  let categoryValue = ${categoryValue};
+		  
+		  window.location.href = "${CP}/board/moveToReg.do?category="+categoryValue;
 		  
 	  });//========================================등록화면 이동끝
 	  
@@ -117,10 +136,15 @@
   function doRetrieve(page){
     console.log("doRetrive().page: "+page);
     
+    let categoryValue = ${categoryValue};
+    
+    console.log("악"+categoryValue);
+    
     let method = "GET";
     let url    = "/board/doRetrieve.do";
     let async  = true;
     let params = {
+    		category  : categoryValue,
         searchDiv : $('#searchDiv').val(),
         searchWord: $('#searchWord').val(),
         pageSize  : $('#pageSize').val(),
@@ -158,6 +182,7 @@
           htmlData += "  <td class='text-center col-sm-2 col-dm-2 col-lg-2'>"+<c:out value='value.modDt'></c:out>+"</td>";
           htmlData += "  <td class='text-right col-sm-1 col-dm-1 col-lg-1'>"+<c:out value='value.readCnt'></c:out>+"</td>";
           htmlData += "  <td class='text-right col-sm-1 col-dm-1 col-lg-1' style='display: none;'>"+<c:out value='value.bdSeq '/>+"</td>";
+          htmlData += "  <td class='text-right col-sm-1 col-dm-1 col-lg-1' >"+<c:out value='value.category '/>+"</td>";
           htmlData += "</tr>";
           //<td style='display: none;'>"+<c:out value='value.bdSeq '/>+"</td>
         });
@@ -287,27 +312,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th class="text-center col-sm-1 col-dm-1 col-lg-1">1</th>
-          <th class="text-left col-sm-6 col-dm-6 col-lg-6">디자인 작업</th>
-          <th class="text-center col-sm-2 col-dm-2 col-lg-2">LEE</th>
-          <th class="text-center col-sm-2 col-dm-2 col-lg-2">2022.11.28</th>
-          <th class="text-right col-sm-1 col-dm-1 col-lg-1">1</th>
-        </tr>
-        <tr>
-          <th class="text-center col-sm-1 col-dm-1 col-lg-1">2</th>
-          <th class="text-left col-sm-6 col-dm-6 col-lg-6">디자인 작업</th>
-          <th class="text-center col-sm-2 col-dm-2 col-lg-2">LEE</th>
-          <th class="text-center col-sm-2 col-dm-2 col-lg-2">2022.11.28</th>
-          <th class="text-right col-sm-1 col-dm-1 col-lg-1">1</th>
-        </tr>
-        <tr>
-          <th class="text-center col-sm-1 col-dm-1 col-lg-1">3</th>
-          <th class="text-left col-sm-6 col-dm-6 col-lg-6">디자인 작업</th>
-          <th class="text-center col-sm-2 col-dm-2 col-lg-2">LEE</th>
-          <th class="text-center col-sm-2 col-dm-2 col-lg-2">2022.11.28</th>
-          <th class="text-right col-sm-1 col-dm-1 col-lg-1">1</th>
-        </tr>
+
       </tbody>
     </table>
     </div>
