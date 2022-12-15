@@ -82,8 +82,8 @@ public class UserDaoImpl implements UserDao {
 		LOG.debug("inVO: " + inVO);
 
 		List<UserVO> list = new ArrayList<UserVO>();
+		
 		String statement = NAMESPACE + DOT + "doRetrieve";
-
 		LOG.debug("statement: " + statement);
 
 		list = sqlSessionTemplate.selectList(statement, search);
@@ -122,33 +122,35 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public UserVO findIdByEmail(UserVO inVO) throws SQLException {
+	public List<UserVO> findIdByEmail(UserVO inVO) throws SQLException {
 		LOG.debug("param: " + inVO);
 
+		List<UserVO> list = new ArrayList<UserVO>();
+		
 		String statement = NAMESPACE + DOT + "findIdByEmail";
 		LOG.debug("statement: " + statement);
 		
-		UserVO userVO = sqlSessionTemplate.selectOne(statement, inVO);
-		LOG.debug("userVO: " + userVO);
+		list = sqlSessionTemplate.selectList(statement, inVO);
 		
-		//아이디만 차있는 userVO가 넘어감. 나중에 필요하면 String return하게 해도 됨
-		//실패하면 null이 반환됨
-		return userVO;
+		LOG.debug("list: "+list);
+		
+		return list;
 	}
 
 	@Override
-	public UserVO findIdByNameBirth(UserVO inVO) throws SQLException {
+	public List<UserVO> findIdByNameBirth(UserVO inVO) throws SQLException {
 		LOG.debug("param: " + inVO);
 
+		List<UserVO> list = new ArrayList<UserVO>();
+		
 		String statement = NAMESPACE + DOT + "findIdByNameBirth";
 		LOG.debug("statement: " + statement);
 		
-		UserVO userVO = sqlSessionTemplate.selectOne(statement, inVO);
-		LOG.debug("userVO: " + userVO);
+		list = sqlSessionTemplate.selectList(statement, inVO);
 		
-		//이메일만 차있는 userVO가 넘어감. 나중에 필요하면 String return하게 해도 됨
-		//실패하면 null이 반환됨
-		return userVO;
+		LOG.debug("list: "+list);
+		
+		return list;
 	}
 
 	@Override
@@ -161,8 +163,7 @@ public class UserDaoImpl implements UserDao {
 		UserVO userVO = sqlSessionTemplate.selectOne(statement, inVO);
 		LOG.debug("userVO: " + userVO);
 		
-		//이메일만 차있는 userVO가 넘어감. 나중에 필요하면 String return하게 해도 됨
-		//실패하면 null이 반환됨
+		//비밀번호만 들어있는 userVO가 리턴됨. 없으면??
 		return userVO;
 	}
 }

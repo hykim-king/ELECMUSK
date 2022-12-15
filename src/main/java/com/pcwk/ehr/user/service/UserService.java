@@ -87,18 +87,18 @@ public interface UserService {
 	/**
 	 * 이메일로 아이디 찾기. 이메일만 맞추면 아이디 알려줌
 	 * @param inVO
-	 * @return UserVO(아이디만있고 나머지는 Null)
+	 * @return List<UserVO>(아이디만 있음)
 	 * @throws SQLException
 	 */
-	UserVO findIdByEmail(UserVO inVO) throws SQLException;
+	List<UserVO> findIdByEmail(UserVO inVO) throws SQLException;
 	
 	/**
 	 * 이름과 생일로 아이디 찾기. 이름과 생일을 맞추면 아이디를 알려줌
 	 * @param inVO
-	 * @return UserVO(아이디만 있고 나머지는 Null)
+	 * @return List<UserVO>(아이디만 있음)
 	 * @throws SQLException
 	 */
-	UserVO findIdByNameBirth(UserVO inVO) throws SQLException;
+	List<UserVO> findIdByNameBirth(UserVO inVO) throws SQLException;
 	
 	/**
 	 * 비밀번호찾기 질문/답변으로 비밀번호 찾기. 아이디와 질문과 답변 모두 일치해야 알려줌

@@ -1,6 +1,7 @@
 package com.pcwk.ehr.user.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -63,4 +64,62 @@ public class UserController {
 		return jsonString;
 	}
 	
+	@RequestMapping(value="/findIdByEmail.do",method = RequestMethod.GET
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String findIdByEmail(UserVO inVO) throws SQLException{
+		String jsonString = "";
+		
+		if(null==inVO.getEmail()) {
+			inVO.setEmail("");
+		}
+		
+		LOG.debug("inVO: "+inVO);
+		
+		List<UserVO> list = userService.findIdByEmail(inVO);
+		
+		jsonString = new Gson().toJson(list);
+		
+		LOG.debug("jsonString: "+jsonString);
+		
+		return jsonString;
+	}
+	
+	@RequestMapping(value="/findIdByNameBirth.do",method = RequestMethod.GET
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String findIdByNameBirth(UserVO inVO) throws SQLException{
+		String jsonString = "";
+		
+		if(null==inVO.getEmail()) {
+			inVO.setEmail("");
+		}
+		
+		LOG.debug("inVO: "+inVO);
+		
+		List<UserVO> list = userService.findIdByNameBirth(inVO);
+		
+		jsonString = new Gson().toJson(list);
+		
+		LOG.debug("jsonString: "+jsonString);
+		
+		return jsonString;
+	}
+	
+	@RequestMapping(value="/findPwByBackup.do",method = RequestMethod.GET
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String findPwByBackup(UserVO inVO) throws SQLException{
+		String jsonString = "";
+		
+		LOG.debug("으아아앙inVO: "+inVO);
+		
+		UserVO outVO = userService.findPwByBackup(inVO);
+		
+		jsonString = new Gson().toJson(outVO);
+		
+		LOG.debug("jsonString: "+jsonString);
+		
+		return jsonString;
+	}
 }

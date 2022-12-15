@@ -93,12 +93,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserVO findIdByEmail(UserVO inVO) throws SQLException {
+	public List<UserVO> findIdByEmail(UserVO inVO) throws SQLException {
 		return userDao.findIdByEmail(inVO);
 	}
 
 	@Override
-	public UserVO findIdByNameBirth(UserVO inVO) throws SQLException {
+	public List<UserVO> findIdByNameBirth(UserVO inVO) throws SQLException {
 		return userDao.findIdByNameBirth(inVO);
 	}
 

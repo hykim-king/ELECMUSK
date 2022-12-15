@@ -133,7 +133,7 @@ FROM member
     <result column="name"             property="name"          />
     <result column="birth"            property="birth"         />
     <result column="email"            property="email"         />
-    <result column="backup_question"  property="backupQusetion"/>
+    <result column="backup_question"  property="backupQuestion"/> 
     <result column="backup_answer"    property="backupAnswer"  />
     <result column="point"            property="point"         />
     <result column="join_date"        property="joinDate"      />
@@ -170,7 +170,7 @@ FROM member
     SELECT password
     FROM member
     WHERE id = #{userId}
-    AND backup_question = #{backupQusetion}
+    AND backup_question = #{backupQuestion}
     AND backup_answer = #{backupAnswer}
   </select>
   

@@ -67,8 +67,8 @@ public class LoginController {
 		if(null != inVO && inVO.getEmail() == null) {
 			inVO.setEmail("");
 		}
-		if(null != inVO && inVO.getBackupQusetion() == null) {
-			inVO.setBackupQusetion("");
+		if(null != inVO && inVO.getBackupQuestion() == null) {
+			inVO.setBackupQuestion("");;
 		}
 		if(null != inVO && inVO.getBackupAnswer() == null) {
 			inVO.setBackupAnswer("");
@@ -131,7 +131,7 @@ public class LoginController {
 			session.setAttribute("userInfo", loginSuccessVO);
 			
 		}else if(20==loginStatus) {
-			message= inVO.getUserId() + "id가 존재하지 않습니다.";
+			message= "id "+inVO.getUserId() + "은(는) 존재하지 않습니다.";
 		}else if(30 == loginStatus) {
 			message = "비밀번호를 확인하세요.";
 		}else {
@@ -147,4 +147,6 @@ public class LoginController {
 		
 		return jsonString;
 	}
+	
+	
 }

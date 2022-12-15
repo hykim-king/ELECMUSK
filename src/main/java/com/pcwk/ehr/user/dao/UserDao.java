@@ -15,10 +15,10 @@ public interface UserDao extends WorkDiv<UserVO> {
 	int passwordCheck(UserVO inVO) throws SQLException;
 	
 	//이메일로 아이디 찾기
-	UserVO findIdByEmail(UserVO inVO) throws SQLException;
+	List<UserVO> findIdByEmail(UserVO inVO) throws SQLException;
 	
 	//이름+생년월일로 아이디 찾기
-	UserVO findIdByNameBirth(UserVO inVO) throws SQLException;
+	List<UserVO> findIdByNameBirth(UserVO inVO) throws SQLException;
 	
 	//비밀번호찾기질문으로 비밀번호 찾기
 	UserVO findPwByBackup(UserVO inVO) throws SQLException;

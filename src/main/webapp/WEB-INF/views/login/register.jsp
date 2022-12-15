@@ -74,7 +74,7 @@ h5{
          eUtil.ISEmpty($("#birthDay").val())
         ){
     		  birth = "";
-    		 }
+    	}
     	
     	let backupQuestion = $("#backupQuestion").val();
     	let backupAnswer = $("#backupAnswer").val();
