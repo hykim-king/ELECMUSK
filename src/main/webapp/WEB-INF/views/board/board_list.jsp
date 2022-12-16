@@ -278,7 +278,7 @@
           <option value="">전체</option>
           <option value="10">작성자</option>
           <option value="20">제목</option>
-          <option value="20">내용</option>
+          <option value="30">내용</option>
         </select>
         <input type="text" class="form-control input-sm" 
         name="searchWord" id="searchWord"
