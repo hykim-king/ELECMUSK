@@ -46,8 +46,8 @@ public class UserServiceImpl implements UserService {
 			return 20;
 		}
 		
-		flag = userDao.passwordCheck(inVO);
-		if (1 != flag) {
+		UserVO outVO = userDao.passwordCheck(inVO);
+		if (null == outVO) {
 			LOG.debug("비밀번호 불일치");
 			return 40;
 		}
@@ -61,9 +61,14 @@ public class UserServiceImpl implements UserService {
 	public int idCheck(UserVO inVO) throws SQLException {
 		return userDao.idCheck(inVO);
 	}
+	
+	@Override
+	public int nicknameCheck(UserVO inVO) throws SQLException {
+		return userDao.nicknameCheck(inVO);
+	}
 
 	@Override
-	public int passwordCheck(UserVO inVO) throws SQLException {
+	public UserVO passwordCheck(UserVO inVO) throws SQLException {
 		return userDao.passwordCheck(inVO);
 	}
 

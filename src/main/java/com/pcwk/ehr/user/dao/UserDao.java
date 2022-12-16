@@ -11,8 +11,11 @@ public interface UserDao extends WorkDiv<UserVO> {
 	//id 확인(회원가입시는 중복체크, 로그인시는 아이디존재여부)
 	int idCheck(UserVO inVO) throws SQLException;
 	
+	//닉네임 확인
+	int nicknameCheck(UserVO inVO) throws SQLException;
+	
 	//아이디와 비번이 DB와 맞는지 확인
-	int passwordCheck(UserVO inVO) throws SQLException;
+	UserVO passwordCheck(UserVO inVO) throws SQLException;
 	
 	//이메일로 아이디 찾기
 	List<UserVO> findIdByEmail(UserVO inVO) throws SQLException;

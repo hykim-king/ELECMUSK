@@ -37,12 +37,20 @@ public interface UserService {
 	int idCheck(UserVO inVO) throws SQLException;
 	
 	/**
-	 * 아이디와 비밀번호 동시에 확인
+	 * id 중복확인, 로그인과 회원가입시에 쓰임
 	 * @param inVO
-	 * @return 아이디와 비밀번호가 둘다 맞으면 1, 아니면 0
+	 * @return 중복이 있으면 1, 아니라면 0
 	 * @throws SQLException
 	 */
-	int passwordCheck(UserVO inVO) throws SQLException;
+	int nicknameCheck(UserVO inVO) throws SQLException;
+	
+	/**
+	 * 아이디와 비밀번호 동시에 확인
+	 * @param inVO
+	 * @return 아이디와 비밀번호가 둘다 맞으면 멤버 시퀀스가 있는 UserVO반환 없으면 null
+	 * @throws SQLException
+	 */
+	UserVO passwordCheck(UserVO inVO) throws SQLException;
 	
 	/**
 	 * 신규 등록

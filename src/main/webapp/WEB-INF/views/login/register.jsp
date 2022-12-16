@@ -40,6 +40,7 @@ h5{
   $(document).ready(function(){
     console.log("document.ready");
     
+    //메인버튼(로그인) 클릭
     $("#mainButton").on("click",function(){
     	console.log("메인버튼 클릭");
     	
@@ -121,7 +122,7 @@ h5{
     			name : $("#name").val(),
     			birth : birth,
     			email : $("#email").val(),
-    			backupQusetion : backupQuestion,
+    			backupQuestion : backupQuestion,
     			backupAnswer : backupAnswer
     	};
     	
