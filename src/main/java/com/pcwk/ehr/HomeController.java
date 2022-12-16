@@ -61,6 +61,15 @@ public class HomeController {
 		return "elecmusk/evCar";
 	}
 	
+	@RequestMapping(value = "/regevcar.do", method = RequestMethod.GET)
+	public String regEvCar() {
+		LOG.debug("┌───────────────────────────────────────────┐");
+		LOG.debug("│                   evCar                   │");
+		LOG.debug("└───────────────────────────────────────────┘");		
+		
+		return "elecmusk/reg_evcar";
+	}
+	
 	@RequestMapping(value = "/evChart.do", method = RequestMethod.GET)
 	public String evChart() {
 		LOG.debug("┌───────────────────────────────────────────┐");

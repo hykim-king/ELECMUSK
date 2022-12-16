@@ -34,7 +34,7 @@
 		
 		
 		$("#evCarSave").on("click",function(){
-			window.location.href = "${CP}/elecmusk/evCarSelectOne.do";
+			window.location.href = "${CP}/elecmusk/regevcar.do";
 		});
 		
 		$("#keywordRetrive").on("click",function(){

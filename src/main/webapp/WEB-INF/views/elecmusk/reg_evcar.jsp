@@ -64,131 +64,114 @@
       });
   //==================================================================
   //=헤더부분 스크립트 이부분 꼭 넣으세요
-  //==================================================================		
+  //==================================================================
 		
-		$("#evCarDelete").on("click",function(){
-			if(confirm("삭제 하시겠습니까?") == false) return;
-		  let method  = "GET";
-		  let url     = "/elecmusk/evCarDelete.do";
+		$("#evCarSave").on("click",function(){
+			console.log("등록");
+			checkText();
+			
+			if(confirm("등록 하시겠습니까?") == false) return;
+		  let method  = "POST";
+		  let url     = "/elecmusk/evCarSave.do";
 		  let async   = true;
 		  let params  ={
-		      carNo    : $("#carNo").val()
+		      imgUrl    : $("#imgUrl").val(),
+		      carName   : $("#carName").val(),
+		      carPrice   : $("#carPrice").val(),
+		      manufacture   : $("#manufacture").val(),
+		      productYear   : $("#productYear").val(),
+		      appearance   : $("#appearance").val(),
+		      carModel   : $("#carModel").val(),
+		      maxDistance   : $("#maxDistance").val(),
+		      batteryType   : $("#batteryType").val(),
+		      batteryCapa   : $("#batteryCapa").val(),
+		      maxSpeed   : $("#maxSpeed").val(),
+		      outPut   : $("#outPut").val()
 		  };
 		  PClass.callAjax(method,url,async,params,function(data){
-			  let parsedJson = JSON.parse(data);
-		    if("1" == parsedJson.msgId){
-		      alert(parsedJson.msgContents);
-		      moveToList();
-		    }else{
-		      alert(parsedJson.msgContents);
-		    }
-		  });
-		});// delete end -----------------------------------------------------------
-		
-		$("#evCarList").on("click",function(){
-			moveToList();
-		});
-		
-		$("#evCarUpdate").on("click",function(){
-			checkText();
-		  if(confirm("수정하시겠습니까?") == false) return;
-	    let method  = "POST";
-	    let url     = "/elecmusk/evCarUpdate.do";
-	    let async   = true;
-	    let params  ={
-	    		carNo     : $("#carNo").val(),
-	    		imgUrl    : $("#imgUrl").val(),
-	    		carName   : $("#carName").val(),
-	    		carPrice   : $("#carPrice").val(),
-	    		manufacture   : $("#manufacture").val(),
-	    		productYear   : $("#productYear").val(),
-	    		appearance   : $("#appearance").val(),
-	    		carModel   : $("#carModel").val(),
-	    		maxDistance   : $("#maxDistance").val(),
-	    		batteryType   : $("#batteryType").val(),
-	    		batteryCapa   : $("#batteryCapa").val(),
-	    		maxSpeed   : $("#maxSpeed").val(),
-	    		outPut   : $("#outPut").val()
-	    };
-	    PClass.callAjax(method,url,async,params,function(data){
-	    	console.log(data);
+			  console.log(data);
+			  
 	      let parsedJson = JSON.parse(data);
+	      
 	      if("1" == parsedJson.msgId){
 	        alert(parsedJson.msgContents);
 	        moveToList();
 	      }else{
 	        alert(parsedJson.msgContents);
-	      }	        	
-	    });
-		});// update end -----------------------------------------------------------
+	      }
+		  });
+		  
+		}); //save end -------------------------------------------------------------
 		
-   $("#doSaveFile").on("click",function(){
-       console.log("doSaveFile");
-       
-       let fileInput = $("#file01")[0];
-       console.log("fileInput: "+fileInput);
-       
-       if(fileInput.files.length === 0){
-         alert("파일을 선택해 주셔요.");
-         return;
-       }
-       
-       console.log("fileInput.files.length: "+fileInput.files.length);
-       
-       //javascript : <form></form>
-       let formData = new FormData();
-       
-       for(let i=0;i<fileInput.files.length;i++){
-         formData.append("image"+i,fileInput.files[i]);
-       }
-       
-       //image란 이름으로, 파일객체 지정
-       
-       
-       //contentType : default값은 "application/x-www-form-urlencoded; charset=UTF-8"
-       //-->multipart/form-data로 전송되도록 false설정
-       //processData : true -> query string으로 데이터 전달! ex)http://localhost:8089?title = 1234
-       
-       console.log("data:formData: "+formData);
-       
-       $.ajax({ 
-          type: "POST",
-          url: "${CP}/file/ajaxUpload.do",
-          processData: false, //
-          contentType: false,
-          asyn: "true",
-          //dataType: "html",
-          data: formData,
-          success:function(data){ //통신 성공
-            console.log(data);
-          
-            let htmlData = "";
-            let imgPath = "";
-            
-            $("#imgArea").empty();
-            
-            if(null != data && data.length > 0) {
-                  $.each(data, function(index, value) {
-                  ///ehr/resources/asset/imgs/evcar_imgs/G70.png
-                  imgPath = "/ehr"+value.imageViewPath+"/"+value.saveFileName;
-                  htmlData += "    <img src='"+imgPath+"' style='width:100%;' '>";
-                  });
-            }
-            $("#imgArea").append(htmlData);  
-            $("#imgUrl").val(imgPath);
+		$("#evCarList").on("click",function(){
+			moveToList();
+		});
+		
+		$("#doSaveFile").on("click",function(){
+	    console.log("doSaveFile");
+	    
+	    let fileInput = $("#file01")[0];
+	    console.log("fileInput: "+fileInput);
+	    
+	    if(fileInput.files.length === 0){
+	      alert("파일을 선택해 주셔요.");
+	      return;
+	    }
+	    
+	    console.log("fileInput.files.length: "+fileInput.files.length);
+	    
+	    //javascript : <form></form>
+	    let formData = new FormData();
+	    
+	    for(let i=0;i<fileInput.files.length;i++){
+	      formData.append("image"+i,fileInput.files[i]);
+	    }
+	    
+	    //image란 이름으로, 파일객체 지정
+	    
+	    
+	    //contentType : default값은 "application/x-www-form-urlencoded; charset=UTF-8"
+	    //-->multipart/form-data로 전송되도록 false설정
+	    //processData : true -> query string으로 데이터 전달! ex)http://localhost:8089?title = 1234
+	    
+	    console.log("data:formData: "+formData);
+	    
+	    $.ajax({ 
+	       type: "POST",
+	       url: "${CP}/file/ajaxUpload.do",
+	       processData: false, //
+	       contentType: false,
+	       asyn: "true",
+	       //dataType: "html",
+	       data: formData,
+	       success:function(data){ //통신 성공
+	         console.log(data);
+	       
+	         let htmlData = "";
+	         let imgPath = "";
+	         
+	         if(null != data && data.length > 0) {
+	               $.each(data, function(index, value) {
+	            	 ///ehr/resources/asset/imgs/evcar_imgs/G70.png
+	               imgPath = "/ehr"+value.imageViewPath+"/"+value.saveFileName;
+	               htmlData += "    <img src='"+imgPath+"' style='width:100%;' '>";
+	               });
+	         }
+	         $("#imgArea").append(htmlData);  
+	         $("#imgUrl").val(imgPath);
 
-          },
-          error:function(data){//실패
-          
-          },
-          complete:function(data){//성공, 실패 관계 없이 출력
-          
-          }
+	       },
+	       error:function(data){//실패
+	       
+	       },
+	       complete:function(data){//성공, 실패 관계 없이 출력
+	       
+	       }
 
-       });
-       
-       
-     });//-----------------------------doSaveFile 끝		
+	    });
+	    
+	    
+	  });//-----------------------------doSaveFile 끝		
 		
 	});//document End ------------------------------------------------------------
 	
@@ -259,26 +242,25 @@
     <!-- 제목 ------------------------------------------------------------------->
     <!--버튼  -->
     <form action="${CP}/file/upload.do" method="post" enctype="multipart/form-data" class="form-horizontal">   
-    <div class="row text-right">
-      <input type="button" class="btn btn-primary btn-sm" value="수정" id="evCarUpdate">
-      <input type="button" class="btn btn-primary btn-sm" value="삭제" id="evCarDelete">
-      <input type="button" class="btn btn-primary btn-sm" value="목록" id="evCarList">
-    </div>
-    <div class="form-group">
-      <label for="file01" >이미지</label>
-      <input type="file" class="form-control" id="file01" name="file01" placeholder="파일을 입력해주세요" maxlength="100">
-      <input type="button" class="btn btn-primary btn-sm" value="사진등록" id="doSaveFile">
-    </div>   
-    </form> 
+	    <div class="row text-right">
+	      <input type="button" class="btn btn-primary btn-sm" value="등록" id="evCarSave">
+	      <input type="button" class="btn btn-primary btn-sm" value="목록" id="evCarList">
+	    </div>
+      <div class="form-group">
+        <label for="file01" >이미지</label>
+        <input type="file" class="form-control" id="file01" name="file01" placeholder="파일을 입력해주세요" maxlength="100">
+	      <input type="button" class="btn btn-primary btn-sm" value="사진등록" id="doSaveFile">
+      </div>
+    </form>
     <!--버튼 -------------------------------------------------------------------->
     
     <!-- 폼 -->
     <form action="#" class="form-horizontal"> 
     <input type="hidden" id="carNo" name="carNo" value="${vo.carNo}">  
-    <input type="hidden" id="imgUrl" name="imgUrl" value="${vo.imgUrl}">  
+    <input type="hidden" id="imgUrl" name="imgUrl">  
     <table style="width: 100%;">
       <tr>
-        <td style="width:50%;" id="imgArea"><img src="<c:out value="${vo.imgUrl}"/>" style="width:100%;"></td>
+        <td style="width:50%;" id="imgArea"></td>
         <td>
 		      <div class="form-group">
 		        <label for="title" >제목</label>
