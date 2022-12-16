@@ -10,6 +10,27 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
+   <!-- 
+     fileUpload.jsp -> FileController.java
+     return 파일 경로 정보
+         일반 파일: c:\upload\2022\12
+         이미지 파일: C:\DCOM_0725\06_Spring\WorkSpace\SW_SH22_01\src\main\webapp\resources\upload\2022\12
+         이미지 업로드 경로 : WorkSpace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0
+     
+     1. 파일 rename : YYYYMMDD_UUID
+     2. 이미지파일: 썸네일
+     
+     maxUploadsize: 최대 업로드 가능한 바이트 크기. -1은 제한이 없음을 의미. 기본값: -1
+     defaultEncoding: 요청을 파싱할 때 사용할 캐릭터 인코딩. 지정하지 않을 경우, 
+     maxInMemorySize: 디스크에 임시 파일을 생성하기 전에 메모리에 보관할 수 있는 최대 바이트 크기. 기본값은 1024바이트
+    -->
+   <!-- 파일 업로드 -->
+   <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+     <property name="defaultEncoding" value="UTF-8"/>
+     <property name="maxUploadSize" value="52428800"/>
+     <property name="maxInMemorySize" value="52428800"/>
+   </bean>
+
 	<!-- mybatis 설정 -->
 	<!-- mybatis db연결 객체 생성 -->
 	<bean id="sqlSessionTemplate"

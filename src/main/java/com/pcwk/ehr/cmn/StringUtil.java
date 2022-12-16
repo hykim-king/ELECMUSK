@@ -40,11 +40,20 @@ public class StringUtil {
 	}
 	
 	/**
+	 * 날짜 패턴
+	 * @param pattern
+	 * @return
+	 */
+	public static String getCurrentDate(String pattern) {
+		return LocalDateTime.now().format(DateTimeFormatter.ofPattern(pattern));
+	}
+	
+	/**
 	 * 현재날자
 	 * @return YYYYMMDD
 	 */
 	public static String getCurrentDate() {		
-		return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		return getCurrentDate("yyyyMMdd");
 	}
 	
 	

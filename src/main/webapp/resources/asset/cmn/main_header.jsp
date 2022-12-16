@@ -23,7 +23,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 
-		$("#header-area").click(function() {
+		$(".menu-bar").click(function() {
 			$(".sub-menu").css("opacity", "1");
 			$(".sub-menu").css("z-index", "1");
 			$(".sub-menu").css("display", "block");
