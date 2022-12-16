@@ -18,17 +18,16 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-     //공지사항(10)/자유게시판 구분(20)
-     String divValue = request.getParameter("div");
+     String categoryValue = request.getParameter("category");
      String title = "";
-     if("20".equals(divValue)){
-       title = "자유게시판 상세";
+     if("9".equals(categoryValue)){
+         title = "충전소 리뷰게시판";
      }else{
-       title = "공지사항 상세";
+         title = "";
      }
      
      request.setAttribute("title", title);
-     request.setAttribute("divValue", divValue);
+     request.setAttribute("categoryValue", categoryValue);
 %>
     
 <c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
@@ -41,20 +40,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon" href="${CP}/favicon.ico">   
 <!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="${CP_RES}/css/bootstrap.min.css">
+<link rel="stylesheet" href="${CP_RES}/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="${CP_RES}/main_home.css">
 
 <!-- jQuery -->
-<script src="${CP_RES}/js/jquery-1.12.4.js"></script>
+<script src="${CP_RES}/bootstrap/js/jquery-1.12.4.js"></script>
 <!-- callAjax -->
-<script src="${CP_RES}/js/callAjax.js"></script>
-<!-- String, Number, Date Util -->
-<script src="${CP_RES}/js/eUtil.js"></script>
-
+<script src="${CP_RES}/bootstrap/js/callAjax.js"></script>
+<!-- String, Number, Date Util  -->
+<script src="${CP_RES}/bootstrap/js/eUtil.js"></script>
 <!-- paging -->
-<script src="${CP_RES}/js/jquery.bootpag.js"></script>
-
+<script src="${CP_RES}/bootstrap/js/jquery.bootpag.js"></script>
 <!-- bootstrap js -->
-<script src="${CP_RES}/js/bootstrap.min.js"></script>
+<script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
 
 <meta charset="UTF-8">
 <title>${title}</title>
@@ -136,12 +134,12 @@
 		  console.log("doDelete");
 		  
 		  //div,seq 전달
-      if(eUtil.ISEmpty($("#div").val()) == true){
+      if(eUtil.ISEmpty($("#category").val()) == true){
           alert("구분을 입력 하세요.");
           return;
       }
 		  
-      if(eUtil.ISEmpty($("#seq").val()) == true){
+      if(eUtil.ISEmpty($("#bdSeq").val()) == true){
           alert("SEQ를 입력 하세요.");
           return;
       }
@@ -149,11 +147,11 @@
       if(confirm("삭제 하시겠습니까?")==false)return;
       
       let method = "GET";
-      let url = "/board/doDelete.do";
+      let url = "/review/doDelete.do";
       let async = true;
       let params = {
-    		  div: $("#div").val(),
-    		  seq: $("#seq").val()
+    		  category: $("#category").val(),
+    		  bdSeq: $("#bdSeq").val()
       };
       
       PClass.callAjax(method,url,async,params,function(data){
@@ -175,15 +173,56 @@
   });
   
   function moveToList(){
-	    window.location.href= "${CP}/board/boardView.do?div="+$("#div").val();
+	    window.location.href= "${CP}/review/rvboardView.do?category="+${vo.category };
 	  }
   
+  //==================================================================
+  //=헤더부분 스크립트 이부분 꼭 넣으세요
+  //==================================================================
   
+   $(function() {
+       let didScroll;
+       let lastScrollTop = 0;
+       let navbarHeight = $("header").outerHeight();
+        $(window).scroll(function(event){
+            didScroll = true;
+        });
+        setInterval(function() {
+            if (didScroll) {
+                hasScrolled();
+                didScroll = false;
+            }
+        }); // 스크롤이 멈춘 후 동작이 실행되기 까지의 딜레이
+        function hasScrolled() {
+          if($(this).width() > 700) {       
+          let st = $(this).scrollTop(); // 현재 window의 scrollTop 값
+              if ($(window).scrollTop() > 50){
+                  $(".logo-area").slideUp("fast"); // header 숨기기
+                  $(".text-logo-area").addClass("visible");
+              } else {
+                  if($(window).scrollTop() < 200) {
+                      $(".logo-area").slideDown("fast"); // header 보이기
+                      $(".text-logo-area").removeClass("visible");
+              }
+           }
+        }
+     }
+     });
+ //==================================================================
+ //=헤더부분 스크립트 이부분 꼭 넣으세요
+ //==================================================================
   
 </script>
 
 </head>
 <body>
+
+  <!------------------------------------------------- 헤더 -->
+  <header>
+  <jsp:include page ="/resources/asset/cmn/main_header.jsp" flush="false"/>
+  </header>
+  <!------------------------------------------------- 헤더끝 -->
+  <div id="contents">
   <!-- div container -->   
   <div class="container">
     <!-- 제목 -->
@@ -201,8 +240,8 @@
 
     <!-- 폼 -->
     <form action="#" class="form-horizontal">   
-      <input type="hidden" name="div" id="div" value="${vo.getDiv()}">
-      <input type="hidden" name="seq" id="seq" value="${vo.seq}">
+<input type="hidden" class="form-control" id="category" name="category" value="${vo.category }">
+    <input type="hidden" class="form-control" id="bdSeq" name="bdSeq" value="${vo.bdSeq }">
 	    <div class="form-group">
 		    <label for="title" >제목</label>
 		    <input type="text" class="form-control" id="title" name="title"
@@ -244,8 +283,8 @@
       </div>
             
       <div class="form-group">
-        <label for="contents" >내용</label>
-        <textarea class="form-control" rows="10" id="contents" name="contents"><c:out value="${vo.contents}"/></textarea>
+        <label for="contentstextarea" >내용</label>
+        <textarea class="form-control" rows="10" id="contentstextarea" name="contentstextarea"><c:out value="${vo.contents}"/></textarea>
       </div>      	    
     </form>
     <!--폼   -------------------------------------------------------------------->
@@ -253,7 +292,7 @@
   <!-- div container ---------------------------------------------------------->
      
      
-     
+     </div>
 </body>
 </html>
 

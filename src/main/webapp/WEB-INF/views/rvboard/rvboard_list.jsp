@@ -19,16 +19,16 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%
      //공지사항(10)/자유게시판 구분(20)
-     String divValue = request.getParameter("div");
+     String categoryValue = request.getParameter("category");
      String title = "";
-     if("40".equals(divValue)){
+     if("9".equals(categoryValue)){
     	 title = "충전소 리뷰게시판";
      }else{
     	 title = "";
      }
      
      request.setAttribute("title", title);
-     request.setAttribute("divValue", divValue);
+     request.setAttribute("categoryValue", categoryValue);
 %>
 <c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
 <c:set var="RES" value="/resources" ></c:set>
@@ -58,7 +58,7 @@
 <script >
   $(document).ready(function(){
 	  console.log("document.ready");
-
+	  doRetrive(1);
 	  //paging
 	  renderingPage('${pageTotal}',1);
 	  //테이블 클릭
@@ -72,7 +72,7 @@
 		  
 		  if(confirm("상세 조회를 하시겠습니까?")==false)return;
 		  //div,seql
-		  window.location.href = "${CP}/rvboard/doSelectOne.do?div="+$("#div").val()+"&seq="+boardSeq;
+		  window.location.href = "${CP}/rvboard/doSelectOne.do?category="+$("#category").val()+"&seq="+boardSeq;
 		  
 		  
 		//#boardTable>tbody
@@ -80,11 +80,11 @@
 	  
 	  //등록화면으로 이동
 	  $("#moveToReg").on("click",function(){
-		  
+		  let categoryValue = ${categoryValue};
 		  console.log('moveToReg');
-		  console.log('div:'+$("#div").val());
+		  console.log('category:'+$("#category").val());
 		  
-		  window.location.href = "${CP}/rvboard/moveToReg.do?div="+$("#div").val();
+		  window.location.href = "${CP}/review/moveToReg.do?category="+categoryValue;
 		  
 		//moveToReg
 	  });
@@ -115,19 +115,19 @@
 	  console.log('doRetrive() page:'+page);
 	  
 	  let method  ="GET";
-	  let url     ="/rvboard/doRetrive.do";
+	  let url     ="/review/doRetrieve.do";
 	  let async   =true;
 	  
 	  //전체
 	  let searchDivValue = $('#searchDiv').val();
-	  
+	  let categoryValue = ${categoryValue};
 	  if('ALL' == searchDivValue){
 		  searchDivValue = "";
 	  }
 	  
 	  let params  = {
-			  div: $("#div").val(),
-			  searchDiv  : searchDivValue,
+			  category: categoryValue,
+			  searchDiv  : $('#searchDiv').val(),
 			  searchWord : $('#searchWord').val(),
 			  pageSize : $('#pageSize').val(),
 			  pageNo:page			  
@@ -160,11 +160,12 @@
 				  htmlData += "<tr>";
 				  htmlData += "    <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.num'/>+"</td>";    
 				  htmlData += "    <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+<c:out value='value.csnm'/>+"</td>";    
-				  htmlData += "    <td class='text-left col-sm-6 col-md-6 col-lg-6'>"+<c:out value='value.title'/>+"</td>";
+				  htmlData += "  <td class='text-left col-sm-6 col-dm-6 col-lg-6'><a href='#' onClick='doSelectOne("+<c:out value='value.bdSeq '/>+")'>"+<c:out value='value.title'></c:out>+"</a></td>";
 				  htmlData += "    <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.nickName'/>+"</td>";
 				  htmlData += "    <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.modDt'/>+"</td>";
 				  htmlData += "    <td class='text-right col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.readCnt'/>+"</td>";
-				  htmlData += "    <td style='display:none;'>"+<c:out value='value.bdSeq'/>+"</td>";
+		          htmlData += "  <td class='text-right col-sm-1 col-dm-1 col-lg-1' style='display: none;'>"+<c:out value='value.bdSeq '/>+"</td>";
+		          htmlData += "  <td class='text-right col-sm-1 col-dm-1 col-lg-1' style='display: none;'>"+<c:out value='value.category '/>+"</td>";
 				  htmlData += "</tr>";
 				  
 			  });
@@ -257,6 +258,16 @@
 		     //==================================================================
 		     //=헤더부분 스크립트 이부분 꼭 넣으세요
 		     //==================================================================
+  //=============================doSelectOne함수
+  function doSelectOne(boardSeq){
+       let url = "${CP}/review/doSelectOne.do";
+
+    url = url + "?bdSeq="+boardSeq;
+    console.log("url : "+url);
+    location.href = url;
+  //=============================doSelectOne함수 끝  
+
+  }
 </script>
 
 </head>
@@ -275,22 +286,23 @@
     <!-- 제목 ------------------------------------------------------------------->
     <!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select)--> 
     <form action="#" class="form-inline text-right" >
-      <input type="hidden" name="div" id="div" value="${divValue}" >  
       <div class="form-group">
-				<select class="form-control input-sm" name="searchDiv" id="searchDiv">
-          <c:forEach var="code" items="${BOARD_SEARCH}">
-            <option value='<c:out value="${code.detCode }"/>' >
-              <c:out value="${code.detName }" />
-            </option>
-          </c:forEach>
-				</select>
-				<input type="text" class="form-control input-sm" name="searchWord" id="searchWord" placeholder="검색어를 입력하세요">
+        <select class="form-control input-sm" name="searchDiv" id="searchDiv">
+          <option value="">전체</option>
+          <option value="10">작성자</option>
+          <option value="20">제목</option>
+          <option value="30">내용</option>
+          <option value="40">충전소</option>
+        </select>
+        <input type="text" class="form-control input-sm" 
+        name="searchWord" id="searchWord"
+        placeholder="검색어를 입력하세요.">
         <select class="form-control input-sm" name="pageSize" id="pageSize">
-          <c:forEach var="code" items="${PAGE_SIZE}">
-            <option value='<c:out value="${code.detCode }"/>'>
-              <c:out value="${code.detName }" />
-            </option>
-          </c:forEach>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
         </select>
         <input type="button" class="btn btn-primary btn-sm" value="조회" id="doRetrive">
         <input type="button" class="btn btn-primary btn-sm" value="등록" id="moveToReg">				      
@@ -313,29 +325,6 @@
         </tr>
       </thead>
       <tbody>
-        <c:choose>
-          <c:when test="${list.size()>0 }">
-             <c:forEach var="vo" items="${list }" >
-			        <tr>
-			          <td class="text-center col-sm-1 col-md-1 col-lg-1"><c:out value="${vo.num }"></c:out></td>
-			          <td class="text-center col-sm-2 col-md-2 col-lg-2"><c:out value="${vo.csnm }"></c:out></td>
-			          <td class="text-left col-sm-6 col-md-6 col-lg-6"><c:out value="${vo.title }"></c:out></td>
-			          <td class="text-center col-sm-1 col-md-1 col-lg-1"><c:out value="${vo.modId }"></c:out></td>
-			          <td class="text-center col-sm-1 col-md-1 col-lg-1"><c:out value="${vo.modDt }"></c:out></td>
-			          <td class="text-right col-sm-1 col-md-1 col-lg-1"><c:out value="${vo.readCnt }"></c:out></td>
-			          <td style='display:none;'><c:out value="${vo.bdSeq }"></c:out></td>
-			        </tr>              
-             </c:forEach>
-          </c:when>
-          <c:otherwise>
-            <tr>
-              <td class="text-center col-sm-12 col-md-12 col-lg-12" colspan="99">
-                  No data found
-              </td>
-            </tr>
-          </c:otherwise>
-        </c:choose>
-      
      
             
       </tbody>

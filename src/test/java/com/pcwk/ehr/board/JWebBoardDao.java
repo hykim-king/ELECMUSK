@@ -55,7 +55,11 @@ public class JWebBoardDao {
 		LOG.debug("boardDao:"+dao);
 		LOG.debug("==============================");
 		
-		boardVO01 = new BoardVO(6, "lyk01", 1, "이영관 test01", "test01", 1, 1, "허승휘 충전소", "date", "lyk01", "date", "lyk01");
+		boardVO01 = new BoardVO(6, "lyk01", 9, "이영관 test01", "test01", 1, 1, "허승휘 충전소", "date", "lyk01", "date", "lyk01");
+		boardVO02 = new BoardVO(6, "lyk01", 9, "이영관 test01", "test01", 1, 1, "허승휘 충전소", "date", "lyk01", "date", "lyk01");
+		boardVO03 = new BoardVO(6, "lyk01", 9, "이영관 test01", "test01", 1, 1, "허승휘 충전소", "date", "lyk01", "date", "lyk01");
+		boardVO04 = new BoardVO(6, "lyk01", 9, "이영관 test01", "test01", 1, 1, "허승휘 충전소", "date", "lyk01", "date", "lyk01");
+		boardVO05 = new BoardVO(6, "lyk01", 9, "이영관 test01", "test01", 1, 1, "허승휘 충전소", "date", "lyk01", "date", "lyk01");
 		
 		
 		searchVO = new SearchVO(10, 1, "10", "01","1");
@@ -78,7 +82,7 @@ public class JWebBoardDao {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void updateReadCnt() throws SQLException{
 		//1. 삭제
 		//2. 등록
@@ -105,14 +109,14 @@ public class JWebBoardDao {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void doRetrieve()throws SQLException{
 		
 		List<BoardVO> list = dao.doRetrieve(searchVO);
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void doSelectOne()throws SQLException{
 		BoardVO outVO123 = dao.doSelectOne(boardVO01);
 		LOG.debug("outVO123: "+outVO123);
@@ -126,12 +130,16 @@ public class JWebBoardDao {
 		
 		//1 한건등록
 		dao.doSave(boardVO01);
+		dao.doSave(boardVO02);
+		dao.doSave(boardVO03);
+		dao.doSave(boardVO04);
+		dao.doSave(boardVO05);
 		
 	}
 	
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void doUpdate()throws SQLException{
 		dao.doSave(boardVO01);
 		
@@ -143,7 +151,7 @@ public class JWebBoardDao {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void doDelete()throws SQLException{
 		boardVO01.setBdSeq(1);
 		dao.doDelete(boardVO01);	
@@ -151,7 +159,7 @@ public class JWebBoardDao {
 	
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void bean() {
 		assertNotNull(dao);
 

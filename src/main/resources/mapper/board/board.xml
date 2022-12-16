@@ -24,6 +24,9 @@
         <when test=" '30' ==searchDiv and '' != searchWord">
          and contents LIKE '%' || #{searchWord} || '%'
         </when>
+        <when test=" '40' ==searchDiv and '' != searchWord">
+         and csnm LIKE '%' || #{searchWord} || '%'
+        </when>
       </choose>
   </sql>
   

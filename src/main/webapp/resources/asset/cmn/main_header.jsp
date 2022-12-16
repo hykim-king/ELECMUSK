@@ -69,7 +69,7 @@
 			location.href = link;
 		});
 		$("#rvboard").on("click", function() {
-			let link = "${CP}/review/rvboardView.do"
+			let link = "${CP}/review/rvboardView.do?category=9"
 			location.href = link;
 		});
 

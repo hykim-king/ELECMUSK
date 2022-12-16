@@ -148,7 +148,7 @@ public class RvBoardController {
 		
 		//1번 공지, 2번 자유게시판
 		if(null != inVO && null == inVO.getCategory()) {
-			inVO.setCategory(StringUtil.nvl(inVO.getCategory(),"4"));
+			inVO.setCategory(StringUtil.nvl(inVO.getCategory(),"9"));
 		}
 		LOG.debug("┌──────────────────────────────┐");
 		LOG.debug("│inVO = "+inVO);
@@ -180,7 +180,7 @@ public class RvBoardController {
 			inVO.setModId("");
 		}
 
-		
+		  
 		LOG.debug("┌──────────────────────────────┐");
 		LOG.debug("│inVO = "+inVO);
 		LOG.debug("└──────────────────────────────┘");
@@ -228,7 +228,6 @@ public class RvBoardController {
 		if(null!=inVO && inVO.getModId()==null) {
 			inVO.setModId("");
 		}
-		
 		
 		//제목
 		if(null != inVO && inVO.getTitle() ==null) {
@@ -322,4 +321,29 @@ public class RvBoardController {
 		
 		return jsonString;
 	}
+	@RequestMapping(value = "/doDelete.do",method = RequestMethod.GET
+			,produces = "application/json;charset=UTF-8")
+@ResponseBody
+public String doDelete(BoardVO inVO) throws SQLException {
+	String jsonString = "";
+	LOG.debug("┌──────────────────────────────┐");
+	LOG.debug("│inVO = "+inVO);
+	int flag = boardService.doDelete(inVO);
+	
+	LOG.debug("│flag = "+flag);
+	
+	String message = "";
+	if(flag == 1) {
+		message = "삭제 되었습니다.";
+	}else {
+		message = "삭제 실패";
+	}
+	
+	jsonString = new Gson().toJson(new MessageVO(String.valueOf(flag), message));
+	
+	LOG.debug("│jsonString = "+jsonString);
+	LOG.debug("└──────────────────────────────┘");
+	
+	return jsonString;
+}
 }
