@@ -22,7 +22,7 @@
 			#{name},
 			#{birth},
 			#{email},
-			#{backupQusetion},
+			#{backupQuestion},
 			#{backupAnswer}
 		)
 	</insert>
@@ -35,8 +35,10 @@
         name = #{name},
         birth = #{birth},
         email = #{email},
-        backup_question = #{backupQusetion},
-        backup_answer = #{backupAnswer}
+        backup_question = #{backupQuestion},
+        backup_answer = #{backupAnswer},
+        point = #{point},
+        status = #{status}
     WHERE member_seq = #{mSeq}
   </update>
   
@@ -53,7 +55,7 @@
     nickname,
     password,
     name,
-    birth,
+    TO_CHAR(birth,'YYYYMMDD'),
     email,
     backup_question,
     backup_answer,
@@ -77,7 +79,7 @@ FROM member
 	        t2.name as name,
 	        TO_CHAR(t2.birth,'YYYYMMDD') as birth,
 	        t2.email as email,
-	        t2.backup_question as backupQusetion,
+	        t2.backup_question as backupQuestion,
 	        t2.backup_answer as backupAnswer,
 	        t2.point as point,
 	        TO_CHAR(t2.join_date,'YYYYMMDD') as joinDate,
@@ -146,8 +148,14 @@ FROM member
     WHERE id = #{userId}
   </select>
   
-  <select id="passwordCheck" parameterType="UserVO" resultType="int">
+  <select id="nicknameCheck" parameterType="UserVO" resultType="int">
     SELECT COUNT(*)
+    FROM member
+    WHERE nickname = #{nickname}
+  </select>
+  
+  <select id="passwordCheck" parameterType="UserVO" resultMap="userMap">
+    SELECT member_seq
     FROM member
     WHERE id = #{userId}
     AND password = #{userPw}

@@ -34,7 +34,7 @@ public class FileController {
 	
 	final String FILE_PATH = "c:\\upload"; //일반 파일
 																								//resources/upload/2022/12/20221208a5227265b63e42ef983bd2a71b369dd1.png
-	final String IMG_PATH  = "C:\\DCOM_0725\\06_Spring\\WorkSpace\\SW_SH26\\src\\main\\webapp\\resources\\upload"; //이미지 파일
+	final String IMG_PATH  = "C:\\Users\\ITSC\\git\\ELECMUSK\\src\\main\\webapp\\resources\\upload"; //이미지 파일
 	
 	String IMG_VIEW_PATH = "/resources/upload";
 	
@@ -265,7 +265,9 @@ public class FileController {
 	 * @return modelAndView
 	 * @throws IOException
 	 */
-	@RequestMapping( value = "/upload.do", method = RequestMethod.POST)
+	@RequestMapping( value = "/upload.do", method = RequestMethod.POST
+		      ,produces = "application/json;charset=UTF-8")
+	@ResponseBody
 	public ModelAndView upload(ModelAndView modelAndView, MultipartHttpServletRequest mReg) throws IOException {
 		LOG.debug("┌──────────────────────────────");
 		LOG.debug("│=upload=");
@@ -342,7 +344,7 @@ public class FileController {
 		}
 		
 		modelAndView.addObject("list", list);
-		modelAndView.setViewName("file/fileUpload");
+		modelAndView.setViewName("elecmusk/reg_evcar");
 		return modelAndView;
 	}
 }

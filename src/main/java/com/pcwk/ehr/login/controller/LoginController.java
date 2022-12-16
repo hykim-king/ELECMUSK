@@ -1,6 +1,7 @@
 package com.pcwk.ehr.login.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -94,10 +95,59 @@ public class LoginController {
 		return jsonString;
 	}
 	
+	@RequestMapping(value="/doUpdate.do", method = RequestMethod.POST
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody // 메세지만 뿌려줄건 바디 추가해야함
+	public String doUpdate(UserVO inVO) throws SQLException {
+		String jsonString = "";
+		
+		
+		//null처리가 필요없음. 꽉꽉받음
+		LOG.debug("inVO: "+inVO);
+		
+		int flag = userService.doUpdate(inVO);
+		
+		String message = "";
+		if (1 == flag) {
+			message = inVO.getNickname() + "으로 닉네임이 변경되었습니다.";
+		} else {
+			message = "닉네임 변경에 실패했습니다.";
+		}
+		
+		MessageVO messageVO = new MessageVO(String.valueOf(flag),message);
+		
+		jsonString = new Gson().toJson(messageVO);
+		
+		LOG.debug("doSave의 결과로 생성된 jsonstring: "+jsonString);
+		
+		return jsonString;
+	}
+	
+	@RequestMapping(value="/renewSession.do", method = RequestMethod.POST
+			,produces = "application/json;charset=UTF-8")
+	public String renewSession(UserVO inVO,HttpSession session) throws SQLException{
+		
+		LOG.debug("inVO: "+inVO);
+		
+		//10 성공, 20 아이디 존재X ,30 아이디 입력X, 40 비밀번호 틀림, 50 비밀번호 입력X
+		
+		UserVO outVO = userService.doSelectOne(inVO);
+		
+		MessageVO messageVO = new MessageVO();
+		
+		if(null !=session.getAttribute("userInfo")) {
+			session.removeAttribute("userInfo");//이건 실제 삭제하는 건 아님. 옵션
+			session.invalidate();//이게 실제로 세션을 지우는 것
+			LOG.debug("session.invalidate");
+		}
+		
+		return "user/myPage";
+	}
+	
 	@RequestMapping(value="/doLogin.do", method = RequestMethod.POST
 			,produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String doLogin(UserVO inVO,HttpSession session ) throws SQLException{
+	public String doLogin(UserVO inVO,HttpSession session) throws SQLException{
 		String jsonString = "";
 		
 		LOG.debug("inVO: "+inVO);
@@ -125,14 +175,16 @@ public class LoginController {
 		if(10==loginStatus) {
 			message = inVO.getUserId() + "로그인 되었습니다.";
 			
-			UserVO loginSuccessVO = userService.doSelectOne(inVO);
+			UserVO loginSuccessVO = userService.doSelectOne(userService.passwordCheck(inVO));
+			
+			LOG.debug("loginSuccessVO: "+loginSuccessVO);
 			
 			//세션 던진 부분. 이름 userInfo로 수업과 똑같이 던졌음
 			session.setAttribute("userInfo", loginSuccessVO);
 			
 		}else if(20==loginStatus) {
 			message= "id "+inVO.getUserId() + "은(는) 존재하지 않습니다.";
-		}else if(30 == loginStatus) {
+		}else if(40 == loginStatus) {
 			message = "비밀번호를 확인하세요.";
 		}else {
 			message = "알 수 없는 오류. 님 멀한거에여";
@@ -148,5 +200,146 @@ public class LoginController {
 		return jsonString;
 	}
 	
+	@RequestMapping(value="/idCheck.do",method = RequestMethod.GET
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String idCheck(UserVO inVO) throws SQLException {
+		String jsonString = "";
+		
+		LOG.debug("inVO: "+inVO);
+		int cnt = userService.idCheck(inVO);
+		
+		LOG.debug("cnt: "+cnt);
+		
+		String message = "";
+		
+		if(1 <= cnt) {
+			message = "아이디 "+inVO.getUserId()+"은(는) 중복되었습니다.";
+		}else {
+			message = "아이디 "+inVO.getUserId()+"은(는) 사용가능합니다.";
+		}
+		
+		jsonString = new Gson().toJson(new MessageVO(String.valueOf(cnt),message));
+		
+		LOG.debug("idCheck의 jsonString: "+jsonString);
+		
+		return jsonString;
+	}
 	
+	@RequestMapping(value="/nicknameCheck.do",method = RequestMethod.GET
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String nicknameCheck(UserVO inVO) throws SQLException {
+		String jsonString = "";
+		
+		LOG.debug("inVO: "+inVO);
+		int cnt = userService.nicknameCheck(inVO);
+		
+		LOG.debug("cnt: "+cnt);
+		
+		String message = "";
+		
+		if(1 <= cnt) {
+			message = "닉네임 "+inVO.getNickname()+"은(는) 중복되었습니다.";
+		}else {
+			message = "닉네임 "+inVO.getNickname()+"은(는) 사용가능합니다.";
+		}
+		
+		jsonString = new Gson().toJson(new MessageVO(String.valueOf(cnt),message));
+		
+		LOG.debug("nicknameCheck의 jsonString: "+jsonString);
+		
+		return jsonString;
+	}
+	
+	@RequestMapping(value="/passwordCheck.do",method = RequestMethod.GET
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String passwordCheck(UserVO inVO) throws SQLException {
+		String jsonString = "";
+		
+		LOG.debug("inVO: "+inVO);
+		UserVO resultVO = userService.passwordCheck(inVO);
+		
+		LOG.debug("resultVO: "+resultVO);
+		
+		String message = "";
+		
+		MessageVO messageVO = new MessageVO(); 
+		
+		if(null != resultVO) {
+			messageVO.setMsgId("1");
+			message = "비밀번호가 일치합니다.";
+		}else {
+			messageVO.setMsgId("0");
+			message = "비밀번호가 일치하지 않습니다.";
+		}
+		
+		messageVO.setMsgContents(message);
+		
+		jsonString = new Gson().toJson(messageVO);
+		
+		LOG.debug("passwordCheck의 jsonString: "+jsonString);
+		
+		return jsonString;
+	}
+	
+	@RequestMapping(value="/findIdByEmail.do",method = RequestMethod.GET
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String findIdByEmail(UserVO inVO) throws SQLException{
+		String jsonString = "";
+		
+		if(null==inVO.getEmail()) {
+			inVO.setEmail("");
+		}
+		
+		LOG.debug("inVO: "+inVO);
+		
+		List<UserVO> list = userService.findIdByEmail(inVO);
+		
+		jsonString = new Gson().toJson(list);
+		
+		LOG.debug("jsonString: "+jsonString);
+		
+		return jsonString;
+	}
+	
+	@RequestMapping(value="/findIdByNameBirth.do",method = RequestMethod.GET
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String findIdByNameBirth(UserVO inVO) throws SQLException{
+		String jsonString = "";
+		
+		if(null==inVO.getEmail()) {
+			inVO.setEmail("");
+		}
+		
+		LOG.debug("inVO: "+inVO);
+		
+		List<UserVO> list = userService.findIdByNameBirth(inVO);
+		
+		jsonString = new Gson().toJson(list);
+		
+		LOG.debug("jsonString: "+jsonString);
+		
+		return jsonString;
+	}
+	
+	@RequestMapping(value="/findPwByBackup.do",method = RequestMethod.GET
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String findPwByBackup(UserVO inVO) throws SQLException{
+		String jsonString = "";
+		
+		LOG.debug("으아아앙inVO: "+inVO);
+		
+		UserVO outVO = userService.findPwByBackup(inVO);
+		
+		jsonString = new Gson().toJson(outVO);
+		
+		LOG.debug("jsonString: "+jsonString);
+		
+		return jsonString;
+	}
 }

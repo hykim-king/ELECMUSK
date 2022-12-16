@@ -37,7 +37,7 @@
 <!-- bootstrap js -->
 <script src="${CP_RES}/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
-<title>브트스트랩_등록</title>
+<title>파일 업,다운로드</title>
 <script >
 $(document).ready(function(){
     console.log("document.ready");
@@ -198,8 +198,6 @@ $(document).ready(function(){
 	      </c:choose>
       </tbody>
     </table>
-    <img alt="이미지2" src="file:///C:/DCOM_0725/06_Spring/WorkSpace/SW_SH23_01/src/main/webapp/resources/upload/2022/12/20221208a5227265b63e42ef983bd2a71b369dd1.png">
-    <img alt="이미지1" src="${CP}/resources/upload/2022/12/20221208a5227265b63e42ef983bd2a71b369dd1.png">
     <form action="${CP}/file/download.do" name="filedownloadFrm" method="post">
       <input type="text" name="orgFileName" id="orgFileName">
       <input type="text" name="saveFileName" id="saveFileName">

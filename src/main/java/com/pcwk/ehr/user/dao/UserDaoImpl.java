@@ -106,19 +106,33 @@ public class UserDaoImpl implements UserDao {
 		//flag=1이면 있음, 0이면 없음.
 		return flag;
 	}
+	
+	@Override
+	public int nicknameCheck(UserVO inVO) throws SQLException {
+		LOG.debug("param: " + inVO);
+		
+		String statement = NAMESPACE + DOT + "nicknameCheck";
+		LOG.debug("statement: " + statement);
+		
+		int flag = sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("flag: " + flag);
+		
+		//flag=1이면 있음, 0이면 없음.
+		return flag;
+	}
 
 	@Override
-	public int passwordCheck(UserVO inVO) throws SQLException {
+	public UserVO passwordCheck(UserVO inVO) throws SQLException {
 		LOG.debug("param: " + inVO);
 
 		String statement = NAMESPACE + DOT + "passwordCheck";
 		LOG.debug("statement: " + statement);
 		
-		int flag = sqlSessionTemplate.selectOne(statement, inVO);
-		LOG.debug("flag: " + flag);
+		UserVO outVO = sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("outVO: " + outVO);
 
-		//flag가 1이면 아이디와 비밀번호가 맞음, 0이면 안맞음.
-		return flag;
+		//mSeq만 들어있는 UserVO 리턴. 없으면?? null이겠지?
+		return outVO;
 	}
 
 	@Override

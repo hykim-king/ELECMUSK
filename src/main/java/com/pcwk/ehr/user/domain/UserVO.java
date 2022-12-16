@@ -17,7 +17,7 @@ public class UserVO extends DTO {
 	private int status; // 상태(회원/비활성화/관리자)
 
 	public UserVO() {
-	};
+	}
 
 	/**
 	 * 필수정보 4개만 넣고 만드는 생성자. 순서대로 아이디, 닉네임, 비밀번호, 이름
@@ -33,15 +33,13 @@ public class UserVO extends DTO {
 		this.nickname = nickname;
 		this.userPw = userPw;
 		this.name = name;
-		this.email = "";
 		this.birth = "";
+		this.email = "";
 		this.backupQuestion = "";
 		this.backupAnswer = "";
-		/*
-		 * this.point = 0; this.joinDate = ""; this.status = 1;
-		 */
+		this.point = 0;
+		this.status = 1;
 	}
-
 	public UserVO(int mSeq, String userId, String nickname, String userPw, String name, String birth, String email,
 			String backupQuestion, String backupAnswer, int point, String joinDate, int status) {
 		super();
@@ -161,6 +159,7 @@ public class UserVO extends DTO {
 				+ ", name=" + name + ", birth=" + birth + ", email=" + email + ", backupQuestion=" + backupQuestion
 				+ ", backupAnswer=" + backupAnswer + ", point=" + point + ", joinDate=" + joinDate + ", status="
 				+ status + ", toString()=" + super.toString() + "]";
-	}
+	};
 
+	
 }

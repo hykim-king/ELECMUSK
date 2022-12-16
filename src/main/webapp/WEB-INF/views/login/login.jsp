@@ -87,7 +87,8 @@
 					if ("10" == parsedJson.msgId) {
 						alert(parsedJson.msgContents);
 
-						window.location.href = "${CP}/elecmusk/view.do";
+						//window.location.href = "${CP}/elecmusk/view.do";
+						window.location.href = "${CP}/elecmusk/myPage.do";
 					}
 
 				},
