@@ -52,7 +52,7 @@ public class JWebChargingFeeDao {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void doSelectOne() throws SQLException{
 		dao.doDelete(chargingfee01);
 		dao.doSave(chargingfee01);
@@ -60,7 +60,7 @@ public class JWebChargingFeeDao {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void doUpdate() throws SQLException{
 		dao.doDelete(chargingfee01);
 		dao.doSave(chargingfee01);
@@ -75,7 +75,7 @@ public class JWebChargingFeeDao {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void doSave() throws SQLException{
 		dao.doDelete(chargingfee01);
 		dao.doSave(chargingfee01);
@@ -83,7 +83,7 @@ public class JWebChargingFeeDao {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void doDelete() throws SQLException{
 		dao.doDelete(chargingfee01);
 		dao.doSave(chargingfee01);
@@ -100,7 +100,7 @@ public class JWebChargingFeeDao {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void beans() {
 		LOG.debug("┌─────────────────────────────────────┐");
 		LOG.debug("│context:" + context);

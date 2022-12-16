@@ -4,7 +4,7 @@ import com.pcwk.ehr.evcar.cmn.evDTO;
 
 public class ChargingFeeVO extends evDTO {
 	
-	private int provider_no;		//충전기순번
+	private int provider_seq;		//충전기순번
 	private String image;			//이미지경로
 	private String enterprenuer;	//사업자명
 	private int rapid_below100;		//급속100kW미만요금
@@ -13,10 +13,10 @@ public class ChargingFeeVO extends evDTO {
 	
 	public ChargingFeeVO() {}
 
-	public ChargingFeeVO(int provider_no, String image, String enterprenuer, int rapid_below100, int rapid_above100,
+	public ChargingFeeVO(int provider_seq, String image, String enterprenuer, int rapid_below100, int rapid_above100,
 			int slow_fee) {
 		super();
-		this.provider_no = provider_no;
+		this.provider_seq = provider_seq;
 		this.image = image;
 		this.enterprenuer = enterprenuer;
 		this.rapid_below100 = rapid_below100;
@@ -24,12 +24,12 @@ public class ChargingFeeVO extends evDTO {
 		this.slow_fee = slow_fee;
 	}
 
-	public int getProvider_no() {
-		return provider_no;
+	public int getProvider_seq() {
+		return provider_seq;
 	}
 
-	public void setProvider_no(int provider_no) {
-		this.provider_no = provider_no;
+	public void setProvider_seq(int provider_seq) {
+		this.provider_seq = provider_seq;
 	}
 
 	public String getImage() {
@@ -74,10 +74,11 @@ public class ChargingFeeVO extends evDTO {
 
 	@Override
 	public String toString() {
-		return "ChargingFeeVO [provider_no=" + provider_no + ", image=" + image + ", enterprenuer=" + enterprenuer
+		return "ChargingFeeVO [provider_seq=" + provider_seq + ", image=" + image + ", enterprenuer=" + enterprenuer
 				+ ", rapid_below100=" + rapid_below100 + ", rapid_above100=" + rapid_above100 + ", slow_fee=" + slow_fee
 				+ "]";
 	}
+
 	
 	
 }

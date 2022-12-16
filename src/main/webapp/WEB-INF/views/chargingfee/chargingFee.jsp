@@ -29,11 +29,6 @@
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="${CP_RES}/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="${CP_RES}/main_home.css"> 
-<style>
-.chargerTable{
-  width: 100%
-}
-</style>
 <!-- jQuery -->
 <script src="${CP_RES}/bootstrap/js/jquery-1.12.4.js"></script>
 <!-- callAjax -->
@@ -52,7 +47,15 @@
     doRetrieve();
     showSlow();
     
-    
+    //등록화면으로 이동
+    $("#moveToReg").on("click",function(){
+      
+      console.log('moveToReg');
+      
+      window.location.href = "${CP}/chargingfee/moveToReg.do";
+      
+    //moveToReg
+    });
     
   });//document
     
@@ -87,7 +90,7 @@
               //console.log(index+","+value.uId);
               htmlData +=" <tr> ";
               htmlData +="   <td width='20%' height='10%' class='text-center'><img src='"+<c:out value = 'value.image'/>+"' alt='image' style='width:50px; height:50px;' class='img-rounded'>"+<c:out value = 'value.enterprenuer'/> +"</td> ";        
-              htmlData +="   <td width='20%' height='10%' class='text-center'>"+ value.rapid_above100 +"원</td> ";        
+              htmlData +="   <td width='20%' height='10%' class='text-center'><a href='#' onClick='doSelectOne("+<c:out value='value.provider_seq '/>+")'>"+ value.rapid_above100 +"원</td> ";        
               htmlData +="   <td width='20%' height='10%' class='text-center'>"+ value.rapid_below100 +"원</td> ";        
               htmlData +=" </tr> ";
             });
@@ -102,7 +105,8 @@
       $("#rapidTable>tbody").append(htmlData);
         
     
-        });
+      
+      });
             
 }
     
@@ -135,7 +139,7 @@
               //console.log(index+","+value.uId);
               htmlData +=" <tr> ";
               htmlData +="   <td width='20%' height='10%' class='text-center'><img src='"+<c:out value = 'value.image'/>+"' alt='image' style='width:50px; height:50px;' class='img-rounded'>"+<c:out value = 'value.enterprenuer'/> +"</td> ";        
-              htmlData +="   <td width='20%' height='10%' class='text-center'>"+ value.slow_fee +"원</td> ";        
+              htmlData +="   <td width='20%' height='10%' class='text-center'><a href='#' onClick='doSelectOne("+<c:out value='value.provider_seq '/>+")'>"+ value.slow_fee +"원</td> ";        
               htmlData +=" </tr> ";
             });
             //데이터가 없는 경우
@@ -190,7 +194,13 @@
      //==================================================================
      //=헤더부분 스크립트 이부분 꼭 넣으세요
      //==================================================================
-    
+      function doSelectOne(provider_seq){
+	     let url = "${CP}/chargingfee/doSelectOne.do";
+	
+	    url = url + "?provider_seq="+provider_seq;
+	    console.log("url : "+url);
+	    location.href = url;
+	    }
 </script>
 
 </head>
@@ -209,13 +219,14 @@
     <!-- 제목 ------------------------------------------------------------------->
   <!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select) ---------------------------------------->
     <form action="#" class="form-inline text-right">
-      <input type="hidden" name="div" id="div" value="${requestScope.divValue}">
-      
+      <div class="form-group">
+        <!------------------------------------- 버튼 -->
+          <input type="button" class="btn btn-info btn-sm" value="등록" id="moveToReg">
+        <!------------------------------------- 버튼 -->
+      </div>
       <ul class="nav nav-tabs text-left">
         <li role="presentation" class="active" id="showRapid"><a href="">급속요금</a></li>
       </ul>
-      
-
     </form>
     <!-- 검색 ----------------------------------------------------------------------------->
   

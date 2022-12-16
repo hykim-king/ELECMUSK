@@ -5,7 +5,7 @@
 <mapper namespace="com.pcwk.ehr.chargingfee">
 
   <resultMap type="ChargingFeeVO" id="chargingfeeMap">
-    <result column="provider_no" property="provider_no"/>
+    <result column="provider_seq" property="provider_seq"/>
     <result column="enterprenuer" property="enterprenuer"/>
     <result column="rapid_below100" property="rapid_below100"/>
     <result column="rapid_above100" property="rapid_above100"/>
@@ -23,14 +23,14 @@
   
   <select id="doSelectOne" parameterType="ChargingFeeVO" resultMap="chargingfeeMap">
   SELECT
-	    provider_no,
+	    provider_seq,
 	    image,
 	    enterprenuer,
 	    rapid_below100,
 	    rapid_above100,
 	    slow_fee
 	FROM charging_fee
-	WHERE provider_no = #{provider_no}
+	WHERE provider_seq = #{provider_seq}
   </select>
   
   <update id="doUpdate" parameterType="ChargingFeeVO">
@@ -40,19 +40,19 @@
 	    rapid_below100 = #{rapid_below100},
 	    rapid_above100 = #{rapid_above100},
 	    slow_fee = #{slow_fee}
-	WHERE provider_no = #{provider_no}
+	WHERE provider_seq = #{provider_seq}
   </update>
   
   <insert id="doSave" parameterType="ChargingFeeVO">
   INSERT INTO charging_fee (
-	    provider_no,
+	    provider_seq,
 	    image,
 	    enterprenuer,
 	    rapid_below100,
 	    rapid_above100,
 	    slow_fee
 	) VALUES (
-	    #{provider_no},
+	    provider_seq.nextval,
 	    #{image},
 	    #{enterprenuer},
 	    #{rapid_below100},
@@ -63,7 +63,7 @@
   
   <delete id="doDelete" parameterType="ChargingFeeVO">
   DELETE FROM charging_fee
-  WHERE provider_no = #{provider_no}
+  WHERE provider_seq = #{provider_seq}
   </delete>
 
   <select id="doRetrieve" parameterType="ChargingFeeVO" resultMap="chargingfeeMap">
@@ -71,7 +71,7 @@
 	SELECT A.*, B.*
 	FROM(
 	    SELECT TT1.rnum as num,
-	           TT1.provider_no,
+	           TT1.provider_seq,
 	           TT1.image,
 	           TT1.enterprenuer,
 	           TT1.rapid_below100,
@@ -84,7 +84,7 @@
 	            FROM charging_fee
 	            --WHERE(10:사업자명)
 	            <include refid="searchCondition"></include>
-	            ORDER BY provider_no ASC
+	            ORDER BY provider_seq ASC
 	        )T1
 	        <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} -1) + #{pageSize} ]]>
 	    )TT1
@@ -101,7 +101,7 @@
   
   
   <select id="showSlow" parameterType="ChargingFeeVO" resultMap="chargingfeeMap">
-  SELECT provider_no,
+  SELECT provider_seq,
 	       image,
 	       enterprenuer,
 	       slow_fee
