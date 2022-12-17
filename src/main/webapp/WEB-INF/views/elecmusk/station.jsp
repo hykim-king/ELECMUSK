@@ -51,6 +51,8 @@
 <title>충전소 찾기</title>
 <script >
 $(document).ready(function(){
+	
+	doRetrieve();
     
     $(function() {
       let didScroll;
@@ -81,9 +83,46 @@ $(document).ready(function(){
     }
     });
 });
+
+function doRetrieve(page){
+    console.log('doRetrieve() page:'+page);
+    
+    let method = "GET";
+    let url = "/station/doRetrieve.do";
+    let async = true;
+    let params = {
+        searchDiv : $('#searchDiv').val(),
+        searchWord : $('#searchWord').val(),
+        pageSize : $('#pageSize').val(),
+        pageNo : page
+    };
+        
+    PClass.callAjax(method,url,async,params,function(sdata){
+      console.log("sdata:"+sdata);
+      
+      let parsedJson = JSON.parse(sdata);
+      
+      let htmlData = "";
+      
+      
+    if(null != parsedJson && parsedJson.length > 0){
+      
+      $.each(parsedJson, function(index,value){
+          console.log("seq: "+value.station_seq);
+        });
+        //데이터가 없는 경우
+      }else{
+      }
+    
+  
+    });//PClass.callAjax
+        
+}
+
+
+
+
 const API_KEY='m8mhLoQ0Q98g4kewmJc%2B3l2PboIiGXBoq8WLOkx1QNqRJzBDzbH2rCRhsBNwTFjbI77pAcduxM3M9%2FwrB%2BKS6Q%3D%3D';
-
-
 async function getData(){//전기차 충전소 정보 api 받기
     const url = `https://api.odcloud.kr/api/EvInfoServiceV2/v1/getEvSearchList?page=1&perPage=4000&serviceKey=m8mhLoQ0Q98g4kewmJc%2B3l2PboIiGXBoq8WLOkx1QNqRJzBDzbH2rCRhsBNwTFjbI77pAcduxM3M9%2FwrB%2BKS6Q%3D%3D`;
     const response = await fetch(url);
@@ -101,39 +140,29 @@ async function getData(){//전기차 충전소 정보 api 받기
                                            spot.longi,              //경도
                                            //spot.spot.statUpdatetime, //업데이트시간
                                     ]);
-
-
+    //console.log("locations",locations);
     console.log("locations",locations);
-
     drawMap(locations);
 }
-
 function drawMap(locations){
     //매개변수의 형태
     //locations=[["충전소명칭",위도,경도],
     //          ["충전소명칭",위도,경도]
     //          ]
-
     //// 첫 시작 위치 - GPS기능 추가 전
     const myLatLng = { lat: 37.554075322663984, lng: 126.93576681191617 }; 
-
     
    
     
-
     
-
-
     //구글지도 생성
     const map = new google.maps.Map(document.getElementById("map"),{
         zoom:15,
         center: myLatLng,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
     });
-
     //마커 클릭시 생성되는 인포윈도우
     const infowindow = new google.maps.InfoWindow();
-
     
     let marker, i;
     
@@ -159,21 +188,13 @@ function drawMap(locations){
                     
                     
                     infowindow.setContent("충전소명 : "+locations[i][7]+"<br>"+//충전소명칭
-                                        
                                           "주소 : "+locations[i][0]+"<br>"+//주소
-
                                           "충전기타입 : "+locations[i][3]+"<br>"+//충전기타입 
-
                                           "충전상태 : "+locations[i][4]+"<br>"+//충전기상태 
-
                                           "충전기 : "+locations[i][5]+"<br>"+//충전방식 
-
                                           "위도 : "+locations[i][8]+"<br>"+//위도
-
                                           "경도 : "+locations[i][9]+"<br>"+//경도
-                                          
                                           "<input type='button' class='btn btn-success btn-sm' value='리뷰보기' id='moveToList' style='float:left;'>"+
-                                          
                                           "<input type='button' class='btn btn-primary btn-sm' value='리뷰쓰기' id='moveToReg' style='float:right;'>"
                                           
                                           );
@@ -182,17 +203,13 @@ function drawMap(locations){
             })(marker, i)
         );
     }
-
 }
-
 getData();
-
-
 </script>
 
 </head>
 <body>
-	<header>
+  <header>
   <jsp:include page ="/resources/asset/cmn/main_header.jsp" flush="false"/>
   </header>
   
