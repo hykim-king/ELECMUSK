@@ -49,7 +49,7 @@ public class JWebStationDao {
 
 		search = new StationVO(9999, "aaaa", "9", 9999, "aa99", "99", "9", 9999, "aaaa", "9999", "9999", "");
 
-		searchVO = new evSearchVO(10, 1, "", "", "", "", "", "", "", "","");
+		searchVO = new evSearchVO(10, 1, "", "", "", "", "", "", "", "","","","","");
 	}
 
 	@Test

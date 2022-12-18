@@ -4,19 +4,107 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pcwk.ehr.station">
 
-  <sql id="searchCondition">
+    <sql id="addrKeyword">
       <choose>
-        <when test=" '10' == searchDiv and '' != searchWord ">
-         AND csnm     LIKE #{searchWord} || '%'
+        <when test=" '서울' == addrKeyword">
+          AND addr LIKE #{addrKeyword} || '%'
         </when>
-        <when test=" '20' == searchDiv and '' != searchWord ">
-         AND chargetp LIKE #{searchWord} || '%'
+        <when test=" '인천' == addrKeyword">
+          AND addr LIKE #{addrKeyword} || '%'
         </when>
-        <when test=" '30' == searchDiv and '' != searchWord ">
-         AND cptp     LIKE #{searchWord} || '%'
+        <when test=" '경기' == addrKeyword">
+          AND addr LIKE #{addrKeyword} || '%'
+        </when>
+        <when test=" '강원' == addrKeyword">
+          AND addr LIKE #{addrKeyword} || '%'
+        </when>
+        <when test=" '대전' == addrKeyword">
+          AND addr LIKE #{addrKeyword} || '%'
+        </when>
+        <when test=" '세종' == addrKeyword">
+          AND addr LIKE #{addrKeyword} || '%'
+        </when>
+        <when test=" '대구' == addrKeyword">
+          AND addr LIKE #{addrKeyword} || '%'
+        </when>
+        <when test=" '울산' == addrKeyword">
+          AND addr LIKE #{addrKeyword} || '%'
+        </when>
+        <when test=" '광주' == addrKeyword">
+          AND addr LIKE #{addrKeyword} || '%'
+        </when>
+        <when test=" '부산' == addrKeyword">
+          AND addr LIKE #{addrKeyword} || '%'
+        </when>
+        <when test=" '제주' == addrKeyword">
+          AND addr LIKE #{addrKeyword} || '%'
+        </when>
+        <when test=" '경상북도' == addrKeyword">
+          AND addr LIKE #{addrKeyword} || '%'
+        </when>
+        <when test=" '경상남도' == addrKeyword">
+          AND addr LIKE #{addrKeyword} || '%'
+        </when>
+        <when test=" '전라북도' == addrKeyword">
+          AND addr LIKE #{addrKeyword} || '%'
+        </when>
+        <when test=" '전라남도' == addrKeyword">
+          AND addr LIKE #{addrKeyword} || '%'
+        </when>
+        <when test=" '충청북도' == addrKeyword">
+          AND addr LIKE #{addrKeyword} || '%'
+        </when>
+        <when test=" '충청남도' == addrKeyword">
+          AND addr LIKE #{addrKeyword} || '%'
         </when>
       </choose>
-  </sql>
+    </sql>
+    
+    <sql id="cpnmKeyword">
+      <choose>
+        <when test=" '완속' == cpnmKeyword">
+          AND cpnm LIKE #{cpnmKeyword} || '%'
+        </when>
+        <when test=" '급속' == cpnmKeyword">
+          AND cpnm LIKE #{cpnmKeyword} || '%'
+        </when>
+      </choose>
+    </sql>
+
+    <sql id="cptpKeyword">
+      <choose>
+        <when test=" '1' == cptpKeyword">
+          AND cptp = #{cptpKeyword}
+        </when>
+        <when test=" '2' == cptpKeyword">
+          AND cptp = #{cptpKeyword}
+        </when>
+        <when test=" '3' == cptpKeyword">
+          AND cptp = #{cptpKeyword}
+        </when>
+        <when test=" '4' == cptpKeyword">
+          AND cptp = #{cptpKeyword}
+        </when>
+        <when test=" '5' == cptpKeyword">
+          AND cptp = #{cptpKeyword}
+        </when>
+        <when test=" '6' == cptpKeyword">
+          AND cptp = #{cptpKeyword}
+        </when>
+        <when test=" '7' == cptpKeyword">
+          AND cptp = #{cptpKeyword}
+        </when>
+        <when test=" '8' == cptpKeyword">
+          AND cptp = #{cptpKeyword}
+        </when>
+        <when test=" '9' == cptpKeyword">
+          AND cptp = #{cptpKeyword}
+        </when>
+        <when test=" '10' == cptpKeyword">
+          AND cptp = #{cptpKeyword}
+        </when>
+      </choose>
+    </sql>
   
    <!-- resultMap -->
   <!-- 
@@ -57,7 +145,7 @@
 	WHERE station_seq = #{station_seq}
   </update>
 	
-	<select id="doRetrieve" parameterType="SearchVO" resultMap="stationMap">
+	<select id="doRetrieve" parameterType="evSearchVO" resultMap="stationMap">
 		--paging
 		SELECT A.*, B.*
 		FROM(
@@ -79,8 +167,10 @@
 		        FROM(
 		            SELECT *
 		            FROM station_data
-		            --WHERE(10:충전소명, 20:충전기타입(완속/급속), 30:충전방식)
-		            <include refid="searchCondition"></include>
+		            <![CDATA[WHERE station_seq >= 0]]>
+		            <include refid="addrKeyword"></include>
+		            <include refid="cpnmKeyword"></include>
+		            <include refid="cptpKeyword"></include>
 		            ORDER BY station_seq DESC
 		        )T1
 		        <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} -1) + #{pageSize} ]]>
@@ -91,8 +181,6 @@
 		(
 		    SELECT COUNT(*) totalCnt
 		    FROM station_data
-		    --WHERE(10:충전소명, 20:충전기타입(완속/급속), 30:충전방식)
-		    <include refid="searchCondition"></include>
 		)B	
 			
 	</select>

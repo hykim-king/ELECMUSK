@@ -48,7 +48,7 @@ public class JWebChargingFeeDao {
 		
 		search = new ChargingFeeVO(99, "aa", "aa", 99, 99, 99);
 		
-		searchVO = new evSearchVO(10, 1, "", "", "", "", "", "", "", "","");
+		searchVO = new evSearchVO(10, 1, "", "", "", "", "", "", "", "","","","","");
 	}
 	
 	@Test

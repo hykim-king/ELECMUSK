@@ -42,12 +42,19 @@ public class StationController {
 		LOG.debug("┌───────────────────────────────────────────┐");
 		LOG.debug("│                 View()                    │");
 		LOG.debug("└───────────────────────────────────────────┘");	
-		return "elecmusk/station";
+		return "elecmusk/GoogleMap";
 	}
 	
 	@RequestMapping(value="/moveToReg.do", method = RequestMethod.GET)
 	public String moveToReg(Model model, evSearchVO inVO) throws SQLException{
-		String VIEW_NAME = "rvboard/rvboard_reg";
+		String VIEW_NAME = "station/station_reg";
+		
+		return VIEW_NAME;
+	}
+	
+	@RequestMapping(value="/moveToList.do", method = RequestMethod.GET)
+	public String moveToList(Model model, evSearchVO inVO) throws SQLException{
+		String VIEW_NAME = "station/station";
 		
 		return VIEW_NAME;
 	}
@@ -94,7 +101,7 @@ public class StationController {
 	
 	@RequestMapping(value="/stationView.do",method = RequestMethod.GET)
 	public String stationView(Model model, evSearchVO inVO) throws SQLException{
-		String viewPage = "elecmusk/station";
+		String viewPage = "elecmusk/GoogleMap";
 		//검색 Default값 설정
 		
 		//페이지 번호
@@ -144,7 +151,7 @@ public class StationController {
 		jsonString = new Gson().toJson(outVO);
 		LOG.debug("|jsonString="+jsonString);
 		LOG.debug("└=============================┘");		
-		return "rvboard/rvboard_mod";
+		return "station/station_mod";
 	}
 	
 	@RequestMapping(value="/doUpdate.do",method = RequestMethod.POST

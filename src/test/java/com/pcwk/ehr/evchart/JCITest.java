@@ -42,7 +42,7 @@ public class JCITest {
 		LOG.debug("=context= : "+context);
 		LOG.debug("=EvCarDao= : "+evDao);
 		LOG.debug("=================================");	
-		searchVO = new evSearchVO(10, 1,"","", "", "", "", "","", "","");
+		searchVO = new evSearchVO(10, 1,"","", "", "", "", "","", "","","","","");
 	}
 	
 	@Test

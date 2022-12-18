@@ -54,33 +54,14 @@ $(document).ready(function(){
 	
 	doRetrieve();
     
-    $(function() {
-      let didScroll;
-      let lastScrollTop = 0;
-      let navbarHeight = $("header").outerHeight();
-       $(window).scroll(function(event){
-           didScroll = true;
-       });
-       setInterval(function() {
-           if (didScroll) {
-               hasScrolled();
-               didScroll = false;
-           }
-       }); // 스크롤이 멈춘 후 동작이 실행되기 까지의 딜레이
-       function hasScrolled() {
-         if($(this).width() > 700) {       
-         let st = $(this).scrollTop(); // 현재 window의 scrollTop 값
-             if ($(window).scrollTop() > 50){
-                 $(".logo-area").slideUp("fast"); // header 숨기기
-                 $(".text-logo-area").addClass("visible");
-             } else {
-                 if($(window).scrollTop() < 200) {
-                     $(".logo-area").slideDown("fast"); // header 보이기
-                     $(".text-logo-area").removeClass("visible");
-             }
-          }
-       }
-    }
+    //충전소 목록 이동
+    $("#moveToList").on("click",function(){
+      
+      console.log('moveToList');
+      
+      window.location.href = "${CP}/station/moveToList.do";
+      
+    //moveToReg
     });
 });
 
@@ -109,6 +90,9 @@ function doRetrieve(page){
       
       $.each(parsedJson, function(index,value){
           console.log("seq: "+value.station_seq);
+          console.log("csnm: "+value.csnm);
+          console.log("lat: "+value.lat);
+          console.log("longi: "+value.longi);
         });
         //데이터가 없는 경우
       }else{
@@ -118,6 +102,7 @@ function doRetrieve(page){
     });//PClass.callAjax
         
 }
+
 
 
 
@@ -145,6 +130,10 @@ async function getData(){//전기차 충전소 정보 api 받기
     drawMap(locations);
 }
 function drawMap(locations){
+	
+	  doRetrieve();
+	  
+	  
     //매개변수의 형태
     //locations=[["충전소명칭",위도,경도],
     //          ["충전소명칭",위도,경도]
@@ -205,6 +194,42 @@ function drawMap(locations){
     }
 }
 getData();
+
+//==================================================================
+//=헤더부분 스크립트 이부분 꼭 넣으세요
+//==================================================================
+
+ $(function() {
+     let didScroll;
+     let lastScrollTop = 0;
+     let navbarHeight = $("header").outerHeight();
+      $(window).scroll(function(event){
+          didScroll = true;
+      });
+      setInterval(function() {
+          if (didScroll) {
+              hasScrolled();
+              didScroll = false;
+          }
+      }); // 스크롤이 멈춘 후 동작이 실행되기 까지의 딜레이
+      function hasScrolled() {
+        if($(this).width() > 700) {       
+        let st = $(this).scrollTop(); // 현재 window의 scrollTop 값
+            if ($(window).scrollTop() > 50){
+                $(".logo-area").slideUp("fast"); // header 숨기기
+                $(".text-logo-area").addClass("visible");
+            } else {
+                if($(window).scrollTop() < 200) {
+                    $(".logo-area").slideDown("fast"); // header 보이기
+                    $(".text-logo-area").removeClass("visible");
+            }
+         }
+      }
+   }
+   });
+//==================================================================
+//=헤더부분 스크립트 이부분 꼭 넣으세요
+//==================================================================
 </script>
 
 </head>
@@ -219,6 +244,18 @@ getData();
       <!-- div container -->
   <div class="container">
     <h1>충전소 데이터</h1>
+    
+    <!---------------------------------------- 검색 : 검색 구분(select) 검색어(input) 페이지 사이즈(select) -->
+    <form action="#" class="form-inline text-right">
+      <div class="form-group">
+          
+        <!------------------------------------- 버튼 -->
+          <input type="button" class="btn btn-info btn-sm" value="충전소 관리" id="moveToList">
+        <!------------------------------------- 버튼 -->
+      </div>
+    </form>
+    <!---------------------------------------- 검색 -->
+    
     <script src="GoogleMap.js"></script>
     <div id="map"></div>
     <!-- 구글 지도 생성 -->

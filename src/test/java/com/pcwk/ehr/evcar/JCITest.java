@@ -53,7 +53,7 @@ public class JCITest {
 		evDao04 = new EvCarVO(30, "차이름04", "url", "200", "menu", 2022, "appe", "model", "dis", "batteryTP", "battery", 100, "out");
 		evDao05 = new EvCarVO(31, "차이름05", "url", "200", "menu", 2022, "appe", "model", "dis", "batteryTP", "battery", 100, "out");
 		search =  new EvCarVO(31, "차이름05", "url", "200", "menu", 2022, "appe", "model", "dis", "batteryTP", "battery", 100, "out");
-		searchVO = new evSearchVO(10, 1, "", "", "", "", "", "", "", "","");
+		searchVO = new evSearchVO(10, 1, "", "", "", "", "", "", "", "","","","","");
 	}
 	
 	@Test

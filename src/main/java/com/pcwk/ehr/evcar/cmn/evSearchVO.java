@@ -13,12 +13,15 @@ public class evSearchVO extends evDTO{
 	private String submodelKeyword; // 보조금차종 키워드
 	private String madebyKeyword; //생산지 키워드
 	private String subsidyKeyword; //보조금 키워드
+	private String addrKeyword;//충전소 주소 키워드
+	private String cpnmKeyword;//충전소 충전기타입 키워드
+	private String cptpKeyword;//충전소 충전방식 키워드
 	
 	public evSearchVO() {}
 
 	public evSearchVO(int pageSize, int pageNo, String searchDiv, String searchWord, String manufactureKeyword,
 			String appearanceKeyword, String modelKeyword, String batteryTypeKeyword, String submodelKeyword,
-			String madebyKeyword, String subsidyKeyword) {
+			String madebyKeyword, String subsidyKeyword, String addrKeyword, String cpnmKeyword, String cptpKeyword) {
 		super();
 		this.pageSize = pageSize;
 		this.pageNo = pageNo;
@@ -31,6 +34,9 @@ public class evSearchVO extends evDTO{
 		this.submodelKeyword = submodelKeyword;
 		this.madebyKeyword = madebyKeyword;
 		this.subsidyKeyword = subsidyKeyword;
+		this.addrKeyword = addrKeyword;
+		this.cpnmKeyword = cpnmKeyword;
+		this.cptpKeyword = cptpKeyword;
 	}
 
 	public int getPageSize() {
@@ -121,18 +127,39 @@ public class evSearchVO extends evDTO{
 		this.subsidyKeyword = subsidyKeyword;
 	}
 
+	public String getAddrKeyword() {
+		return addrKeyword;
+	}
+
+	public void setAddrKeyword(String addrKeyword) {
+		this.addrKeyword = addrKeyword;
+	}
+
+	public String getCpnmKeyword() {
+		return cpnmKeyword;
+	}
+
+	public void setCpnmKeyword(String cpnmKeyword) {
+		this.cpnmKeyword = cpnmKeyword;
+	}
+
+	public String getCptpKeyword() {
+		return cptpKeyword;
+	}
+
+	public void setCptpKeyword(String cptpKeyword) {
+		this.cptpKeyword = cptpKeyword;
+	}
+
 	@Override
 	public String toString() {
 		return "evSearchVO [pageSize=" + pageSize + ", pageNo=" + pageNo + ", searchDiv=" + searchDiv + ", searchWord="
 				+ searchWord + ", manufactureKeyword=" + manufactureKeyword + ", appearanceKeyword=" + appearanceKeyword
 				+ ", modelKeyword=" + modelKeyword + ", batteryTypeKeyword=" + batteryTypeKeyword + ", submodelKeyword="
-				+ submodelKeyword + ", madebyKeyword=" + madebyKeyword + ", subsidyKeyword=" + subsidyKeyword + "]";
+				+ submodelKeyword + ", madebyKeyword=" + madebyKeyword + ", subsidyKeyword=" + subsidyKeyword
+				+ ", addrKeyword=" + addrKeyword + ", cpnmKeyword=" + cpnmKeyword + ", cptpKeyword=" + cptpKeyword
+				+ "]";
 	}
-
-	
-	
-
-	
 
 	
 }
