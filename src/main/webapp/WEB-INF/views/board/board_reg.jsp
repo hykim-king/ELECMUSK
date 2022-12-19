@@ -116,8 +116,9 @@
         let params    = {
         		category : categoryValue,
             title : $("#title").val(),
-            regId : $("#regId").val(),
+            nickName : $("#nickName").val(),
             contents : $("#contentstextarea").val(),
+            regId :$("#regId").val()
         }
         PClass.callAjax(method,url,async,params,function(data){
         	console.log(data);
@@ -204,6 +205,7 @@
     
     <!------------------------------------- 버튼 -->
     <div class="row text-right">
+       <input type="text" id="regId" name="regId" value="${sessionScope.userInfo.userId}">
        <input type="button" class="btn btn-primary btn-sm" value="등록" id="doSave">
        <input type="button" class="btn btn-primary btn-sm" value="목록" id="boardView">
     </div>
@@ -217,7 +219,7 @@
       </div>
       <div class="form-group">
         <label for="regId">등록자</label>
-        <input type="text" class="form-control" id="regId" name="regId" placeholder="등록자 입력하세요" maxlength="100">
+        <input type="text" class="form-control" id="nickName" name="nickName" placeholder="등록자 입력하세요" value="${sessionScope.userInfo.nickname}" readonly="readonly" maxlength="100">
       </div>
       <div class="form-group">
         <label for="contentstextarea">내용</label>

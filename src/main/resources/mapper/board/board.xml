@@ -57,13 +57,25 @@
                 tt1.mod_id AS modId
         FROM(
             SELECT  ROWNUM AS RNUM, t1.*
-            FROM (select *
-                  FROM BOARD
-                  --WHERE 조건 (검색구분:''(전체),10(nickname),20(title),30(contents), 검색어)
-                  WHERE category = #{category}
-                  <include refid="searchcondition"/>
-                  ORDER BY reg_dt DESC
-            )T1
+            FROM (SELECT  a1.bd_seq,
+					                a2.member_seq,
+					                a1.category,
+					                a1.title,
+					                a1.csnm,
+					                a2.nickname,
+					                a1.reg_dt,
+					                a1.reg_id,
+					                a1.read_cnt,
+					                a1.mod_dt,
+					                a1.mod_id,
+					                a1.recommendation,
+					                a1.contents
+					        FROM board a1 , member a2
+					        WHERE a1.reg_id = a2.id
+					        and a1.category = #{category}
+					        <include refid="searchcondition"/>
+					        ORDER BY reg_dt DESC
+					    )t1
             --종료 번호<![CDATA[
             WHERE ROWNUM <= #{pageSize} * (#{pageNo} - 1) + #{pageSize}
         )TT1

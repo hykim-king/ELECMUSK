@@ -62,6 +62,8 @@
 <script >
   $(document).ready(function(){
 	  console.log("document.ready");
+	  ifidsame();
+	  
 	  
 	  $("#doDelete").on("click",function(){
 		  console.log("document.ready");
@@ -88,56 +90,7 @@
 	  });//==============================================삭제 끝
 	  
 	  
-	  $("#doUpdate").on("click",function(){
-		  console.log("doUpdate");
-	      //div
-	      if(eUtil.ISEmpty( $("#category").val()) == true){
-	        alert("구분을 입력하세요.");
-	        return;
-	      }
-	      //제목
-	      if(eUtil.ISEmpty( $("#title").val()) == true){
-	        alert("제목을 입력하세요.");
-	        $("#title").focus();
-	        return;
-	      }
-	      //수정자
-	      if(eUtil.ISEmpty( $("#modId").val()) == true){
-	        alert("수정자를 입력하세요.");
-	        $("#modId").focus();
-	        return;
-	      }
-	      //내용
-	      if(eUtil.ISEmpty( $("#contentstextarea").val()) == true){
-	        alert("내용을 입력하세요.");
-	        $("#contentstextarea").focus();
-	        return;
-	      }
-	      
-	      if(confirm("수정하시겠습니까?") == false)return;
-	      
-	      let method  = "POST";
-	      let url     = "/board/doUpdate.do";
-	      let async   = true;
-	      let params  ={
-	    		  category   : $("#category").val(),
-	    		  bdSeq      : $("#bdSeq").val(),
-	          title      : $("#title").val(),
-	          modId      : $("#modId").val(),
-	          contents   : $("#contentstextarea").val()
-	      };
-	      PClass.callAjax(method,url,async,params,function(data){
-	        console.log(data);
-	        let parsedJson = JSON.parse(data);
-	        if("1" == parsedJson.msgId){
-	          alert(parsedJson.msgContents);
-	          moveToList();
-	        }else{
-	          alert(parsedJson.msgContents);
-	        }
-	      });
-	      
-	  });//==========================================doUpdate끝
+
 	  
     //================================글자수 재한 보여주기(0/2000)
     $("#contentstextarea").on("keyup",function(e){
@@ -215,6 +168,67 @@
   };
 //===================================목록으로 이동 끝
 	 
+	function ifidsame(){
+
+	 
+   $("#doUpdate").on("click",function(){
+	   if($("#regId").val()==("${sessionScope.userInfo.userId}")) {
+      console.log("doUpdate");
+        //div
+        if(eUtil.ISEmpty( $("#category").val()) == true){
+          alert("구분을 입력하세요.");
+          return;
+        }
+        //제목
+        if(eUtil.ISEmpty( $("#title").val()) == true){
+          alert("제목을 입력하세요.");
+          $("#title").focus();
+          return;
+        }
+        //수정자
+        if(eUtil.ISEmpty( $("#modId").val()) == true){
+          alert("수정자를 입력하세요.");
+          $("#modId").focus();
+          return;
+        }
+        //내용
+        if(eUtil.ISEmpty( $("#contentstextarea").val()) == true){
+          alert("내용을 입력하세요.");
+          $("#contentstextarea").focus();
+          return;
+        }
+        
+        if(confirm("수정하시겠습니까?") == false)return;
+        
+        let method  = "POST";
+        let url     = "/board/doUpdate.do";
+        let async   = true;
+        let params  ={
+            category   : $("#category").val(),
+            bdSeq      : $("#bdSeq").val(),
+            title      : $("#title").val(),
+            modId      : $("#modId").val(),
+            contents   : $("#contentstextarea").val()
+        };
+        PClass.callAjax(method,url,async,params,function(data){
+          console.log(data);
+          let parsedJson = JSON.parse(data);
+          if("1" == parsedJson.msgId){
+            alert(parsedJson.msgContents);
+            moveToList();
+          }else{
+            alert(parsedJson.msgContents);
+          }
+        });
+        
+		 }else{
+			 alert("alskdj")
+		 }
+    });//==========================================doUpdate끝
+	
+}
+	 
+	 
 </script>
 
 </head>
@@ -231,10 +245,10 @@
     <div class="page-header">
       <h2>게시등록</h2>
     </div>
-    category:${categoryValue }
     <!------------------------------------ 제목 -->
     <input type="hidden" class="form-control" id="category" name="category" value="${vo.category }">
     <input type="hidden" class="form-control" id="bdSeq" name="bdSeq" value="${vo.bdSeq }">
+    <input type="text" class="form-control" id="regId" name="regId" value="${vo.regId }">
     <!------------------------------------- 버튼 -->
     <div class="row text-right">
        <input type="button" class="btn btn-primary btn-sm" value="수정" id="doUpdate">
@@ -247,11 +261,12 @@
     <form action="#" class="form-horizontal">
       <div class="form-group">
         <label for="title">제목</label>
+        ${sessionScope.userInfo.userId}<br/>
         <input type="text" class="form-control" id="title" name="title" placeholder="제목 입력하세요" maxlength="100" value="${vo.title }">
       </div>
       <div class="form-group">
         <label for="regId">등록자</label>
-        <input type="text" class="form-control" id="regId" name="regId" placeholder="등록자 입력하세요" maxlength="100" readonly="readonly" value="${vo.nickName }">
+        <input type="text" class="form-control" id="nickName" name="nickName" placeholder="등록자 입력하세요" maxlength="100" readonly="readonly" value="${vo.nickName }">
       </div>
       <div class="form-group">
         <label for="contentstextarea">내용</label>

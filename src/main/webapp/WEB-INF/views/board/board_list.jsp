@@ -270,12 +270,13 @@
       <h2>게시목록</h2>
     </div>
     <!------------------------------------ 제목 -->
-    
+                  ${sessionScope.userInfo.status}<br>
+              ${sessionScope.userInfo}<br>
     <!---------------------------------------- 검색 : 검색 구분(select) 검색어(input) 페이지 사이즈(select) -->
     <form action="#" class="form-inline text-right">
       <div class="form-group">
         <select class="form-control input-sm" name="searchDiv" id="searchDiv">
-          <option value="">전체</option>
+          <option value="50">전체</option>
           <option value="10">작성자</option>
           <option value="20">제목</option>
           <option value="30">내용</option>
