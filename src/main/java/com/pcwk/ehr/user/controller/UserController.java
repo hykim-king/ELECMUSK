@@ -118,5 +118,32 @@ public class UserController {
 		
 		return jsonString;
 	}
+	
+	@RequestMapping(value="/deleteUser.do", method = RequestMethod.POST
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody // 메세지만 뿌려줄건 바디 추가해야함
+	public String deleteUser(UserVO inVO) throws SQLException {
+		String jsonString = "";
+		
+		//null처리가 필요없음. 닉네임이랑 mSeq만받으니
+		LOG.debug("inVO: "+inVO);
+		
+		int flag = userService.withdraw(inVO);
+		
+		String message = "";
+		if (1 == flag) {
+			message = "정상적으로 회원탈퇴 되었습니다.";
+		} else {
+			message = "회원탈퇴에 실패했습니다.";
+		}
+		
+		MessageVO messageVO = new MessageVO(String.valueOf(flag),message);
+		
+		jsonString = new Gson().toJson(messageVO);
+		
+		LOG.debug("회원탈퇴로 생성된 jsonstring: "+jsonString);
+		
+		return jsonString;
+	}
 
 }

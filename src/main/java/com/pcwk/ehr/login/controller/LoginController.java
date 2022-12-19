@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.pcwk.ehr.cmn.MessageVO;
+import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.user.domain.UserVO;
 import com.pcwk.ehr.user.service.UserService;
 
@@ -74,6 +75,8 @@ public class LoginController {
 		if(null != inVO && inVO.getBackupAnswer() == null) {
 			inVO.setBackupAnswer("");
 		}
+		
+		inVO.setNickname("Temp"+StringUtil.getPK());
 		
 		LOG.debug("null 처리후 inVO: "+inVO);
 		

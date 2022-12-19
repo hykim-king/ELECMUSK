@@ -124,4 +124,12 @@ public interface UserService {
 	
 	//이메일 변경 
 	int updateEmail (UserVO inVO) throws SQLException;
+	
+	/**
+	 * 회원 탈퇴(정지). 본인이 탈퇴 혹은 관리자가 계정을 정지시키기
+	 * @param inVO
+	 * @return 성공하면 1, 실패하면0
+	 * @throws SQLException
+	 */
+	int withdraw (UserVO inVO) throws SQLException;
 }

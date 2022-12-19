@@ -114,10 +114,9 @@ h5{
     	if(confirm("입력하신 정보로 회원가입 하시겠습니까?")==false){
     		return;
     	}
-    	
+      
     	let params = { 
     			userId : $("#userId").val(),
-    			nickname : $("#userId").val(),
     			userPw : $("#password").val(),
     			name : $("#name").val(),
     			birth : birth,
@@ -135,8 +134,16 @@ h5{
     		   dataType: "html",
     		   data: params,
     		   success:function(data){ //통신 성공
-    		    console.log(data);
-    		    alert(data);
+    		     console.log(data);
+    		     let parsedJson = JSON.parse(data);
+    		     
+    		     if("1" == parsedJson.msgId){
+    		    	 let message = "성공적으로 회원가입 되었습니다.";
+    		    	 message    += "최초 닉네임이 임시 닉네임으로 되어있으니 우측 상단 마이페이지에서 수정하시기바랍니다.";
+    		       alert(message);
+             }else{
+               alert(parsedJson.msgContents);
+             }
     		    window.location.href="${CP}/elecmusk/login.do";
     		   },
     		   error:function(data){//실패

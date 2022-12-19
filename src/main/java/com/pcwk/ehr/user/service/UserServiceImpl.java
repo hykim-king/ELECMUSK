@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.user.dao.UserDao;
 import com.pcwk.ehr.user.domain.UserVO;
 
@@ -126,4 +127,41 @@ public class UserServiceImpl implements UserService {
 	public int updateEmail (UserVO inVO) throws SQLException{
 		return userDao.updateEmail(inVO);
 	}
+
+	@Override
+	public int withdraw(UserVO inVO) throws SQLException {
+		
+		LOG.debug("inVO: "+inVO);
+		
+		UserVO outVO = userDao.doSelectOne(inVO);
+		
+		LOG.debug("정지해서 수정 전 유저정보: "+outVO);
+		
+		outVO.setmSeq(inVO.getmSeq());
+		outVO.setUserId("Deleted_User"+outVO.getUserId()+StringUtil.getCurrentDate());
+		outVO.setNickname("Deleted_User"+outVO.getNickname()+StringUtil.getCurrentDate());
+		outVO.setStatus(0);
+		
+		if(outVO != null && outVO.getBirth() == null) {
+			outVO.setBirth("");
+		}
+		if(outVO != null && outVO.getEmail() == null) {
+			outVO.setEmail("");
+		}
+		if(outVO != null && outVO.getBackupQuestion() == null) {
+			outVO.setBackupQuestion("");
+		}
+		if(outVO != null && outVO.getBackupAnswer() == null) {
+			outVO.setBackupAnswer("");
+		}
+		if(outVO != null && outVO.getJoinDate() == null) {
+			outVO.setJoinDate("");
+		}
+		
+		int flag = userDao.doUpdate(outVO);
+		
+		return flag;
+	}
+	
+	
 }

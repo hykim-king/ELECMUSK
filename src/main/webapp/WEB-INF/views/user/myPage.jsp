@@ -320,7 +320,40 @@ h4{
     $("#withdraw").on("click",function(){
       console.log("띠용??");
       
+      if(confirm("유예기간 없이 사용자 정보가 삭제됩니다.\n진행하시겠습니까?")==false){
+          return;
+      }
+ 
+      let params = {
+    		  mSeq : ${sessionScope.userInfo.mSeq}
+      } 
       
+      $.ajax({ 
+          type: "POST",
+          url: "/ehr/elecmusk/deleteUser.do",
+          asyn: "true",
+          dataType: "html",
+          data: params,
+          success:function(data){ //통신 성공
+            console.log(data);
+                   
+            let parsedJson = JSON.parse(data);
+           
+            if("1" == parsedJson.msgId){
+              alert(parsedJson.msgContents);
+              renewSession();
+            }else{
+              alert(parsedJson.msgContents);
+            }
+          }, 
+          error:function(data){//실패
+          
+          },
+          complete:function(data){//성공, 실패 관계 없이 출력
+          
+          }
+
+       });
       
       
     });//버튼(회원탈퇴) 클릭 종료
