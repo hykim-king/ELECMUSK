@@ -5,7 +5,12 @@
 <c:set var="CP" value="${pageContext.request.contextPath}"/>
 <c:set var="resources" value="/resources"/>
 <c:set var="CP_RES"    value="${CP}${resources}" />
-<footer>
+<style>
+  #footerArea{
+    width: 100%;
+  }
+</style>
+  <div id="footerArea">
     <p>&nbsp;</p>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
@@ -13,4 +18,4 @@
     <p>&nbsp;</p>  
     <p>&nbsp;</p>  
     <p>&nbsp;</p>  
-</footer>
+  </div>

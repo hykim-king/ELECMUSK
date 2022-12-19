@@ -43,54 +43,60 @@
 			$(".sub-menu>li").css("z-index", "-1");
 			$(".sub-menu>li>a").css("z-index", "-1");
 		});
-
-		$("#main_home").on("click", function() {
-			let link = "${CP}/elecmusk/view.do"
-			location.href = link;
-		});
-		$("#carsData").on("click", function() {
-			let link = "${CP}/elecmusk/evcar.do"
-			location.href = link;
-		});
-		$("#subsidyData").on("click", function() {
-			let link = "${CP}/subsidy/view.do"
-			location.href = link;
-		});
-		$("#chargerData").on("click", function() {
-			let link = "${CP}/charger/view.do"
-			location.href = link;
-		});
-		$("#feeData").on("click", function() {
-			let link = "${CP}/chargingfee/view.do"
-			location.href = link;
-		});
-		$("#stationSearch").on("click", function() {
-			let link = "${CP}/station/view.do"
-			location.href = link;
-		});
-		$("#rvboard").on("click", function() {
-			let link = "${CP}/review/rvboardView.do?category=9"
-			location.href = link;
-		});
-
-		$("#mainhome,#logo").on("click", function() {
-			let link = "${CP}/elecmusk/view.do"
-			location.href = link;
-		});
-    $("#board01").on("click", function() {
-      let link = "${CP}/board/boardView.do?category=1"
-      location.href = link;
-    });
-    $("#board02").on("click", function() {
-      let link = "${CP}/board/boardView.do?category=2"
-      location.href = link;
-    });
-    $("#board03").on("click", function() {
-      let link = "${CP}/board/boardView.do?category=3"
-      location.href = link;
-    });
+		
+		onlyLoginUserUse();
 
 	});
+	
+	function onlyLoginUserUse() {
+		if(${null != sessionScope.userInfo.status && not empty sessionScope.userInfo}){
+	    $("#main_home").on("click", function() {
+	        let link = "${CP}/elecmusk/view.do"
+	        location.href = link;
+	     });
+	     $("#carsData").on("click", function() {
+	       let link = "${CP}/elecmusk/evcar.do"
+	       location.href = link;
+	     });
+	     $("#subsidyData").on("click", function() {
+	       let link = "${CP}/subsidy/view.do"
+	       location.href = link;
+	     });
+	     $("#chargerData").on("click", function() {
+	       let link = "${CP}/charger/view.do"
+	       location.href = link;
+	     });
+	     $("#feeData").on("click", function() {
+	       let link = "${CP}/chargingfee/view.do"
+	       location.href = link;
+	     });
+	     $("#stationSearch").on("click", function() {
+	       let link = "${CP}/station/view.do"
+	       location.href = link;
+	     });
+	     $("#rvboard").on("click", function() {
+	       let link = "${CP}/review/rvboardView.do?category=9"
+	       location.href = link;
+	     });
+	
+	     $("#mainhome,#logo").on("click", function() {
+	       let link = "${CP}/elecmusk/view.do"
+	       location.href = link;
+	     });
+	     $("#board01").on("click", function() {
+	       let link = "${CP}/board/boardView.do?category=1"
+	       location.href = link;
+	     });
+	     $("#board02").on("click", function() {
+	       let link = "${CP}/board/boardView.do?category=2"
+	       location.href = link;
+	     });
+	     $("#board03").on("click", function() {
+	       let link = "${CP}/board/boardView.do?category=3"
+	       location.href = link;
+	     });
+		}
+	}
 </script>
 <style>
 #header-area{
