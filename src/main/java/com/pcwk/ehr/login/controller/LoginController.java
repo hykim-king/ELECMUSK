@@ -101,47 +101,46 @@ public class LoginController {
 	public String doUpdate(UserVO inVO) throws SQLException {
 		String jsonString = "";
 		
-		
-		//null처리가 필요없음. 꽉꽉받음
+		//null처리가 필요없도록 꽉꽉 받으세여
 		LOG.debug("inVO: "+inVO);
 		
 		int flag = userService.doUpdate(inVO);
 		
 		String message = "";
 		if (1 == flag) {
-			message = inVO.getNickname() + "으로 닉네임이 변경되었습니다.";
+			message = "무언가 바꾸기 성공!!";
 		} else {
-			message = "닉네임 변경에 실패했습니다.";
+			message = "무언가 바꾸기 실패!!";
 		}
 		
 		MessageVO messageVO = new MessageVO(String.valueOf(flag),message);
 		
 		jsonString = new Gson().toJson(messageVO);
 		
-		LOG.debug("doSave의 결과로 생성된 jsonstring: "+jsonString);
+		LOG.debug("doUpdate의 결과로 생성된 jsonstring: "+jsonString);
 		
 		return jsonString;
 	}
 	
-	@RequestMapping(value="/renewSession.do", method = RequestMethod.POST
-			,produces = "application/json;charset=UTF-8")
-	public String renewSession(UserVO inVO,HttpSession session) throws SQLException{
+	@RequestMapping(value="/renewSession.do",produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String renewSession(HttpSession session) throws SQLException{
+		String jsonString = "";
+		UserVO inVO = (UserVO)session.getAttribute("userInfo");
 		
 		LOG.debug("inVO: "+inVO);
 		
-		//10 성공, 20 아이디 존재X ,30 아이디 입력X, 40 비밀번호 틀림, 50 비밀번호 입력X
-		
-		UserVO outVO = userService.doSelectOne(inVO);
-		
-		MessageVO messageVO = new MessageVO();
+		UserVO outVO = null;
 		
 		if(null !=session.getAttribute("userInfo")) {
 			session.removeAttribute("userInfo");//이건 실제 삭제하는 건 아님. 옵션
-			session.invalidate();//이게 실제로 세션을 지우는 것
-			LOG.debug("session.invalidate");
+			outVO = userService.doSelectOne(inVO);
+			session.setAttribute("userInfo", outVO);
 		}
 		
-		return "user/myPage";
+		jsonString = new Gson().toJson(outVO);
+		
+		return jsonString;
 	}
 	
 	@RequestMapping(value="/doLogin.do", method = RequestMethod.POST
@@ -199,6 +198,20 @@ public class LoginController {
 		
 		return jsonString;
 	}
+	
+	@RequestMapping(value="/doLogout.do")
+	public String doLogout(HttpSession session) {
+		LOG.debug("doLougout");
+		if(null != session.getAttribute("userInfo")) {
+			session.removeAttribute("userInfo");
+			session.invalidate();
+			LOG.debug("세션 invalidate성공");
+		}
+			
+		return "elecmusk/main_home";
+	}
+	
+	
 	
 	@RequestMapping(value="/idCheck.do",method = RequestMethod.GET
 			,produces = "application/json;charset=UTF-8")

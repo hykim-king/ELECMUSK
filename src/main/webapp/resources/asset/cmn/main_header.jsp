@@ -95,8 +95,16 @@
 	       let link = "${CP}/board/boardView.do?category=3"
 	       location.href = link;
 	     });
+	     $("#doLogout").on("click", function() {
+	       let link = "${CP}/elecmusk/doLogout.do";
+	       location.href = link;
+	     });
+	     $("#moveToMyPage").on("click", function() {
+	       let link = "${CP}/elecmusk/myPage.do";
+	       location.href = link;
+	     });
 		}
-	}
+	} 
 </script>
 <style>
 #header-area{
@@ -111,8 +119,8 @@
     <c:choose>
       <c:when test="${null != sessionScope.userInfo && not empty sessionScope.userInfo}">
         ${sessionScope.userInfo}<br>
-        <a href="#">[Logout]</a>
-	      <a href="#">[Mypage]</a>
+        <a href="#" id = "doLogout">[Logout]</a>
+	      <a href="#" id = "moveToMyPage">[Mypage]</a>
       </c:when>
       <c:otherwise>
 	      <a href="${CP}/elecmusk/login.do">[Login]</a>

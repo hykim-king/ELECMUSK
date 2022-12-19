@@ -26,7 +26,14 @@ public interface UserDao extends WorkDiv<UserVO> {
 	//비밀번호찾기질문으로 비밀번호 찾기
 	UserVO findPwByBackup(UserVO inVO) throws SQLException;
 	
+	//닉변
+	int updateNickname (UserVO inVO) throws SQLException;
 	
+	//비번 변경
+	int updatePassword (UserVO inVO) throws SQLException;
+	
+	//이메일 변경 
+	int updateEmail (UserVO inVO) throws SQLException;
 	
 	
 }

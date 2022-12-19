@@ -112,6 +112,18 @@ public class UserServiceImpl implements UserService {
 		return userDao.findPwByBackup(inVO);
 	}
 
+	@Override
+	public int updateNickname (UserVO inVO) throws SQLException{
+		return userDao.updateNickname(inVO);
+	}
 	
-
+	@Override
+	public int updatePassword (UserVO inVO) throws SQLException{
+		return userDao.updatePassword(inVO);
+	}
+	
+	@Override 
+	public int updateEmail (UserVO inVO) throws SQLException{
+		return userDao.updateEmail(inVO);
+	}
 }

@@ -38,5 +38,85 @@ public class UserController {
 		return "user/userMng";
 	}
 	
+	@RequestMapping(value="/updateNickname.do", method = RequestMethod.POST
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody // 메세지만 뿌려줄건 바디 추가해야함
+	public String updateNickname(UserVO inVO) throws SQLException {
+		String jsonString = "";
+		
+		//null처리가 필요없음. 닉네임이랑 mSeq만받으니
+		LOG.debug("inVO: "+inVO);
+		
+		int flag = userService.updateNickname(inVO);
+		
+		String message = "";
+		if (1 == flag) {
+			message = inVO.getNickname() + "으로 닉네임이 변경되었습니다.";
+		} else {
+			message = "닉네임 변경에 실패했습니다.";
+		}
+		
+		MessageVO messageVO = new MessageVO(String.valueOf(flag),message);
+		
+		jsonString = new Gson().toJson(messageVO);
+		
+		LOG.debug("닉네임 변경으로 생성된 jsonstring: "+jsonString);
+		
+		return jsonString;
+	}
+	
+	@RequestMapping(value="/updatePassword.do", method = RequestMethod.POST
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody // 메세지만 뿌려줄건 바디 추가해야함
+	public String updatePassword(UserVO inVO) throws SQLException {
+		String jsonString = "";
+		
+		//null처리가 필요없음. 닉네임이랑 mSeq만받으니
+		LOG.debug("inVO: "+inVO);
+		
+		int flag = userService.updatePassword(inVO);
+		
+		String message = "";
+		if (1 == flag) {
+			message = "비밀번호가 변경되었습니다.";
+		} else {
+			message = "비밀번호 변경에 실패했습니다.";
+		}
+		
+		MessageVO messageVO = new MessageVO(String.valueOf(flag),message);
+		
+		jsonString = new Gson().toJson(messageVO);
+		
+		LOG.debug("비밀번호 변경으로 생성된 jsonstring: "+jsonString);
+		
+		return jsonString;
+	}
+	
+	@RequestMapping(value="/updateEmail.do", method = RequestMethod.POST
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody // 메세지만 뿌려줄건 바디 추가해야함
+	public String updateEmail(UserVO inVO) throws SQLException {
+		String jsonString = "";
+		
+		//null처리가 필요없음. 닉네임이랑 mSeq만받으니
+		LOG.debug("inVO: "+inVO);
+		
+		int flag = userService.updateEmail(inVO);
+		
+		String message = "";
+		if (1 == flag) {
+			message = inVO.getEmail()+"로 이메일이 변경되었습니다.";
+		} else {
+			message = "이메일 변경에 실패했습니다.";
+		}
+		
+		MessageVO messageVO = new MessageVO(String.valueOf(flag),message);
+		
+		jsonString = new Gson().toJson(messageVO);
+		
+		LOG.debug("이메일 변경으로 생성된 jsonstring: "+jsonString);
+		
+		return jsonString;
+	}
 
 }

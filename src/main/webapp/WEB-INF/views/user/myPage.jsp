@@ -45,12 +45,19 @@ h4{
   $(document).ready(function(){
     console.log("document.ready");
    
-  //메인버튼(로그인) 클릭
+  //새로고침 버튼
+  $("#renew").on("click",function(){
+	  console.log("엥");
+	  renewSession();
+	  console.log("${session.userInfo.nickname}");
+  }); 
+    
+  //메인버튼(닉네임 바꾸기) 클릭
     $("#updateNickname").on("click",function(){
       console.log("닉네임 바꾸기 버튼 클릭");
       
       if($("#nicknameCheckYN").val() == "0"){
-        alert("닉네임 중복 체크  해주세요.");
+        alert("닉네임 중복 체크를  해주세요.");
         $("#idCheck").focus();
         return;
       }
@@ -59,31 +66,21 @@ h4{
         alert("바꿀 닉네임을 입력 하세요.");
         $("#nickname").focus();
         return;
-      }
-      
+      } 
       if(confirm("닉네임이 "+$("#nickname").val()+"로 바뀌게됩니다.\n진행하시겠습니까?")==false){
         return;
       }
       
       let params = { 
     		  mSeq : ${sessionScope.userInfo.mSeq}, 
-          userId : "${sessionScope.userInfo.userId}",
-          nickname : $("#nickname").val(),
-          userPw : "${sessionScope.userInfo.userPw}",
-          name : "${sessionScope.userInfo.name}",
-          birth : "${sessionScope.userInfo.birth}",
-          email : "${sessionScope.userInfo.email}",
-          backupQuestion : "${sessionScope.userInfo.backupQuestion}",
-          backupAnswer : "${sessionScope.userInfo.backupAnswer}",
-          point : ${sessionScope.userInfo.point},
-          status : ${sessionScope.userInfo.status} 
-      }; 
-         
+          nickname : $("#nickname").val()
+      };  
+          
       console.log(params);
       
       $.ajax({ 
            type: "POST",
-           url: "/ehr/elecmusk/doUpdate.do",
+           url: "/ehr/elecmusk/updateNickname.do",
            asyn: "true",
            dataType: "html",
            data: params,
@@ -95,7 +92,8 @@ h4{
             if("1" == parsedJson.msgId){
             	alert(parsedJson.msgContents);
             	//변경이 있고나면 세션을 다시만들어야함.
-            	
+            	//했음!! 세션도 다시만들고 새로고침도 함.
+            	renewSession();
             }else{
             	alert(parsedJson.msgContents);
             }
@@ -110,53 +108,7 @@ h4{
 
         });
       
-    });//메인버튼(가입) 클릭
-    
-    //현재 비밀번호 확인
-    $("#prePasswordCheck").on("click",function(){
-      console.log("중복확인 클릭");
-      
-      if(eUtil.ISEmpty( $("#prePassword").val())){
-          alert("현재 비밀번호를 입력하세요.");
-          $("#prePassword").focus();
-          return;
-        }
-      
-      let userId = "${sessionScope.userInfo.userId}";
-      
-      $.ajax({ 
-         type: "GET",
-         url: "/ehr/elecmusk/passwordCheck.do",
-         asyn: "true",
-         dataType: "html",
-         data:{ 
-        	 userId : userId,
-        	 userPw : $("#prePassword").val()
-         },
-         success:function(data){ //통신 성공
-         
-           let parsedJson = JSON.parse(data);
-         
-           if("1" == parsedJson.msgId){
-             alert(parsedJson.msgContents);
-             $("#passwordCheckYN").val("1");
-             $("#prePassword").prop("disabled",true);
-           }else{
-             alert(parsedJson.msgContents);
-             $("#passwordCheckYN").val("0");
-           }
-          
-         },
-         error:function(data){//실패
-         
-         },
-         complete:function(data){//성공, 실패 관계 없이 출력
-         
-         }
-
-      });
-      
-    });//현재 비밀번호 확인버튼 클릭
+    });//메인버튼(닉네임 바꾸기) 클릭
     
   //닉네임 중복확인
     $("#nicknameCheck").on("click",function(){
@@ -207,21 +159,188 @@ h4{
       $("#nickname").prop("disabled",false);
       
     });//닉네임 재설정 끝
+    
+    //현재 비밀번호 확인
+    $("#prePasswordCheck").on("click",function(){
+      console.log("중복확인 클릭");
+      
+      if(eUtil.ISEmpty( $("#prePassword").val())){
+          alert("현재 비밀번호를 입력하세요.");
+          $("#prePassword").focus();
+          return;
+        }
+      
+      let userId = "${sessionScope.userInfo.userId}";
+      
+      $.ajax({ 
+         type: "GET",
+         url: "/ehr/elecmusk/passwordCheck.do",
+         asyn: "true",
+         dataType: "html",
+         data:{ 
+        	 userId : userId,
+        	 userPw : $("#prePassword").val()
+         },
+         success:function(data){ //통신 성공
+         
+           let parsedJson = JSON.parse(data);
+         
+           if("1" == parsedJson.msgId){
+             alert(parsedJson.msgContents);
+             $("#passwordCheckYN").val("1");
+             $("#prePassword").prop("disabled",true);
+           }else{
+             alert(parsedJson.msgContents);
+             $("#passwordCheckYN").val("0");
+           }
+          
+         },
+         error:function(data){//실패
+         
+         }, 
+         complete:function(data){//성공, 실패 관계 없이 출력
+         
+         }
+
+      });
+      
+    });//현재 비밀번호 확인버튼 클릭 
+    
+    //버튼(비밀번호 바꾸기) 클릭
+    $("#updatePassword").on("click",function(){
+    	console.log("에잉!!");
+    	
+    	if($("#passwordCheckYN").val()=="0"){
+    		$("#prePassword").focus();
+    		alert("현재 비밀번호 확인을 해주세요"); 
+    		return;
+    	}
+    	if(eUtil.ISEmpty($("#changedPassword").val())){
+    		alert("바꿀 비밀번호를 입력해주세요");
+    		$("#changedPassword").focus();
+    		return;
+    	}
+    	if(eUtil.ISEmpty($("#passwordCheck").val())){
+    		alert("비밀번호 확인을 입력해주세요");
+    		$("#passwordCheck").focus();
+    		return; 
+    	}
+    	if($("#passwordCheck").val()!=$("#changedPassword").val()){
+    		alert("변경할 비밀번호와 비밀번호 확인이 일치하지 않습니다.\n확인해서 다시 한 번 입력해주세요.");
+    		return;
+    	}
+    	
+    	if(confirm("비밀번호가 변경됩니다.\n진행하시겠습니까?")==false){
+    		return;
+    	}
+    	 
+      let params = {
+          mSeq : ${sessionScope.userInfo.mSeq}, 
+          userPw : $("#changedPassword").val()
+      };      	
+    	
+    	$.ajax({ 
+    		   type: "POST",
+    		   url: "/ehr/elecmusk/updatePassword.do",
+    		   asyn: "true",
+    		   dataType: "html",
+    		   data: params,
+    		   success:function(data){ //통신 성공
+    			   console.log(data);
+    	              
+             let parsedJson = JSON.parse(data);
+            
+             if("1" == parsedJson.msgId){
+               alert(parsedJson.msgContents);
+               renewSession();
+             }else{
+               alert(parsedJson.msgContents);
+             }
+    		   }, 
+    		   error:function(data){//실패
+    		   
+    		   },
+    		   complete:function(data){//성공, 실패 관계 없이 출력
+    		   
+    		   }
+
+    		});
+    	
+    });//버튼(비밀번호 바꾸기) 종료
+    
+    //버튼(이메일바꾸기) 클릭
+    $("#updateEmail").on("click",function(){
+    	console.log("에잉!!");
+    	
+    	if(eUtil.ISEmpty($("#email").val())){
+    		alert("변경할 이메일을 입력해주세요");
+    		$("#email").focus();
+    		return; 
+    	}
+    	
+    	if(confirm("이메일이 변경됩니다.\n진행하시겠습니까?")==false){
+    		return;
+    	}
+    	 
+      let params = {
+          mSeq : ${sessionScope.userInfo.mSeq}, 
+          email : $("#email").val() 
+      };      	
+    	 
+    	$.ajax({ 
+    		   type: "POST",
+    		   url: "/ehr/elecmusk/updateEmail.do",
+    		   asyn: "true",
+    		   dataType: "html",
+    		   data: params,
+    		   success:function(data){ //통신 성공
+    			   console.log(data);
+    	              
+             let parsedJson = JSON.parse(data);
+            
+             if("1" == parsedJson.msgId){
+               alert(parsedJson.msgContents);
+               renewSession();
+             }else{
+               alert(parsedJson.msgContents);
+             }
+    		   }, 
+    		   error:function(data){//실패
+    		   
+    		   },
+    		   complete:function(data){//성공, 실패 관계 없이 출력
+    		   
+    		   }
+
+    		});
+    	
+    });//버튼(이메일 바꾸기) 종료
+    
+    //버튼(회원탈퇴) 클릭
+    $("#withdraw").on("click",function(){
+      console.log("띠용??");
+      
+      
+      
+      
+    });//버튼(회원탈퇴) 클릭 종료
+    
   });//document.ready
   
   //세션 다시만들기 함수
   function renewSession(){
 	  $.ajax({ 
-		   type: "POST",
-		   url: "/elecmusk/renewSession.do",
+		   type: "GET",
+		   url: "/ehr/elecmusk/renewSession.do",
 		   asyn: "true",
 		   dataType: "html",
 		   data:{
 			   mSeq : ${sessionScope.userInfo.mSeq}
-		   },   
+		   },    
 		   success:function(data){ //통신 성공
-			   alert(data);
-		   },
+			   //alert(data);
+			   window.location.href="${CP}/elecmusk/myPage.do";
+		   }, 
 		   error:function(data){//실패
 		   
 		   },
@@ -271,7 +390,7 @@ h4{
 			<form class="form-horizontal">
 			  <input type="hidden" name="passwordCheckYN" id="passwordCheckYN" value="0">
 				<div class="form-group" >
-					<label for="prepassword" class="col-sm-3 control-label">현재 비밀번호 확인</label>
+					<label for="prePassword" class="col-sm-3 control-label">현재 비밀번호 확인</label>
 					<div class="col-sm-6">
 						<input type="password" class="form-control" id="prePassword" placeholder="현재 비밀번호">
 					</div>
@@ -316,7 +435,6 @@ h4{
 			<h4 class="text-center">회원 탈퇴</h4>
 			<button type="button" class="btn btn-default btn-lg btn-block" id="withdraw">탈퇴</button>
 		</div>
-
 
 	</div>
 	<!-- div container ------------------------------------------->

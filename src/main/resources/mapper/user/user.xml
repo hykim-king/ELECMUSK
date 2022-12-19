@@ -181,5 +181,22 @@ FROM member
     AND backup_question = #{backupQuestion}
     AND backup_answer = #{backupAnswer}
   </select>
-  
+
+	<update id="updateNickname" parameterType="UserVO">
+		UPDATE member
+		SET nickname = #{nickname}
+		WHERE member_seq = #{mSeq}
+	</update>
+
+	<update id="updatePassword" parameterType="UserVO">
+		UPDATE member
+		SET password = #{userPw}
+		WHERE member_seq = #{mSeq}
+	</update>
+
+	<update id="updateEmail" parameterType="UserVO">
+		UPDATE member
+		SET email = #{email}
+		WHERE member_seq = #{mSeq}
+	</update>
 </mapper>  

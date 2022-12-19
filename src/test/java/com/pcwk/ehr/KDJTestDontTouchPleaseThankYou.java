@@ -133,6 +133,17 @@ public class KDJTestDontTouchPleaseThankYou {
 	}
 	
 	@Test
+	public void updateThings() throws Exception{
+		userVO1.setmSeq(1000225);
+		userVO1.setNickname("떼잉");
+		userVO1.setEmail("떼잉");
+		userVO1.setUserPw("떼잉");
+		userDao.updateNickname(userVO1);
+		userDao.updateEmail(userVO1);
+		userDao.updatePassword(userVO1);
+	}
+	
+	@Test
 	public void beans() {
 		LOG.debug("userDao"+userDao);
 		

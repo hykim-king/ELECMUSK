@@ -180,4 +180,40 @@ public class UserDaoImpl implements UserDao {
 		//비밀번호만 들어있는 userVO가 리턴됨. 없으면??
 		return userVO;
 	}
+
+	public int updateNickname(UserVO inVO) throws SQLException {
+		LOG.debug("param: " + inVO);
+
+		String statement = NAMESPACE + DOT + "updateNickname";
+		LOG.debug("statement: " + statement);
+
+		int flag = sqlSessionTemplate.update(statement, inVO);
+		LOG.debug("flag: " + flag);
+
+		return flag;
+	}
+	
+	public int updatePassword(UserVO inVO) throws SQLException {
+		LOG.debug("param: " + inVO);
+		
+		String statement = NAMESPACE + DOT + "updatePassword";
+		LOG.debug("statement: " + statement);
+		
+		int flag = sqlSessionTemplate.update(statement, inVO);
+		LOG.debug("flag: " + flag);
+		
+		return flag;
+	}
+	
+	public int updateEmail(UserVO inVO) throws SQLException {
+		LOG.debug("param: " + inVO);
+		
+		String statement = NAMESPACE + DOT + "updateEmail";
+		LOG.debug("statement: " + statement);
+		
+		int flag = sqlSessionTemplate.update(statement, inVO);
+		LOG.debug("flag: " + flag);
+		
+		return flag;
+	}
 }
