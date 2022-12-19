@@ -102,10 +102,16 @@
 <div class="container-fluid">
   <!-- login-area -->
     <div class="login-area">
-      <a href="#">[Mypage]</a>
-      <input type="text" placeholder="아이디" required="required">
-      <input type="password" placeholder="비밀번호" required="required">
-      <button>로그인</button>
+    <c:choose>
+      <c:when test="${null != sessionScope.userInfo && not empty sessionScope.userInfo}">
+        ${sessionScope.userInfo}<br>
+        <a href="#">[Logout]</a>
+	      <a href="#">[Mypage]</a>
+      </c:when>
+      <c:otherwise>
+	      <a href="${CP}/elecmusk/login.do">[Login]</a>
+      </c:otherwise>
+    </c:choose>
     </div>
   <!-- login-area end ------------------------------------------------------->
 

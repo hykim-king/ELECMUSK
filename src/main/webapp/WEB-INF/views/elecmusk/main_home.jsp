@@ -110,8 +110,9 @@ $(document).ready(function(){
         <jsp:include page ="/resources/asset/cmn/evChart.jsp" flush="false"/>
       </div>
       <div id="contents-2">
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
+    ${sessionScope.userInfo}<br>
+    ${sessionScope.userInfo.name}<br>
+
       </div>
       <div id="contents-3">
         <p>&nbsp;</p>

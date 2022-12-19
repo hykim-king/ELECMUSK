@@ -266,8 +266,16 @@
 			      </select>
           </td>
           <td>
+              ${sessionScope.userInfo.status}<br>
+              ${sessionScope.userInfo}<br>
             <input type="button" class="btn btn-primary btn-sm" value="조회" id="keywordRetrive">
-            <input type="button" class="btn btn-primary btn-sm" value="등록" id="evCarSave">
+            <c:choose>
+              <c:when test="${1 <= sessionScope.userInfo.status && not empty sessionScope.userInfo}">
+		            <input type="button" class="btn btn-primary btn-sm" value="등록" id="evCarSave">
+              </c:when>
+              <c:otherwise>
+              </c:otherwise>
+            </c:choose>
           </td>
         </tr>
       </tbody>
