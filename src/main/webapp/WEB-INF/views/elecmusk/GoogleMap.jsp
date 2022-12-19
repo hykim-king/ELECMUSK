@@ -250,7 +250,14 @@ getData();
       <div class="form-group">
           
         <!------------------------------------- 버튼 -->
-          <input type="button" class="btn btn-info btn-sm" value="충전소 관리" id="moveToList">
+            <c:choose>
+              <c:when test="${2 <= sessionScope.userInfo.status && not empty sessionScope.userInfo}">
+              ${sessionScope.userInfo}<br>
+                <input type="button" class="btn btn-info btn-sm" value="관리자 메뉴" id="moveToList">
+              </c:when>
+              <c:otherwise>
+              </c:otherwise>
+            </c:choose>
         <!------------------------------------- 버튼 -->
       </div>
     </form>
