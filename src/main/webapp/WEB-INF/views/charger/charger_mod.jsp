@@ -80,7 +80,7 @@
         let parsedJson = JSON.parse(data);
         if("1" == parsedJson.msgId){
           alert(parsedJson.msgContents);
-          moveToList();
+          moveToManagerPage();
         }else{
           alert(parsedJson.msgContents);
         }
@@ -155,7 +155,7 @@
 	        
 	        if("1"==parsedJson.msgId){
 	          alert(parsedJson.msgContents);
-	          moveToList();
+	          moveToManagerPage();
 	        }else{
 	          alert(parsedJson.msgContents);
 	        }
@@ -169,9 +169,9 @@
   });
   
   
-  function moveToList(){
-    window.location.href= "${CP}/charger/view.do";
-  }
+  function moveToManagerPage(){
+      window.location.href="${CP}/charger/moveToManagerPage.do";
+    };
 </script>
 
 </head>
