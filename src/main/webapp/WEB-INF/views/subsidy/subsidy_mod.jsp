@@ -57,6 +57,16 @@
   $(document).ready(function(){
 	  console.log("document.ready");
 	  
+	    //관리자메뉴 이동
+      $("#moveToManagerPage").on("click",function(){
+        
+        console.log('moveToManagerPage');
+        
+        window.location.href = "${CP}/subsidy/moveToManagerPage.do";
+        
+      //moveToManagerPage
+      });
+	  
 	  //삭제
 	  $("#doDelete").on("click", function(){
 		  if(confirm("삭제 하시겠습니까?")==false)return;
@@ -165,7 +175,7 @@
   <div class="container">
     <!-- 제목 -->
     <div class="page-header">
-       <h2>데이터 수정</h2>
+       <h2>보조금 데이터 수정</h2>
     </div>
     <!-- 제목 ------------------------------------------------------------------->
     <input type="hidden" class="form-control" id="subsidy_seq" name="subsidy_seq" value="${vo.subsidy_seq }">
@@ -173,7 +183,7 @@
     <div class="row text-right">
       <input type="button" class="btn btn-warning btn-sm" value="수정" id="doUpdate">
       <input type="button" class="btn btn-danger btn-sm" value="삭제" id="doDelete">
-      <input type="button" class="btn btn-primary btn-sm" value="목록" id="moveToList">
+      <input type="button" class="btn btn-primary btn-sm" value="목록" id="moveToManagerPage">
     </div>
     <!--버튼 -------------------------------------------------------------------->
     <!-- 폼 -->

@@ -46,6 +46,16 @@
   $(document).ready(function(){
 	  console.log("document.ready");
 	  
+	     //관리자메뉴 이동
+      $("#moveToManagerPage").on("click",function(){
+        
+        console.log('moveToManagerPage');
+        
+        window.location.href = "${CP}/charger/moveToManagerPage.do";
+        
+      //moveToManagerPage
+      });
+	  
 	  
 	//등록
 	    $("#doSave").on("click",function(){
@@ -126,17 +136,10 @@
 	      
 	    });
 	  
-   //목록으로 이동
-    $("#chargerView").on("click",function(){
-      console.log("chargerView");
-      moveToList();
-    //boardView  
-    });
+
   });
   
-  function moveToList(){
-	    window.location.href= "${CP}/charger/view.do";
-	}
+
   //==================================================================
   //=헤더부분 스크립트 이부분 꼭 넣으세요
   //==================================================================
@@ -186,7 +189,7 @@
   <div class="container">
     <!-- 제목 -->
     <div class="page-header">
-       <h2>충전기 등록</h2>
+       <h2>충전기 데이터 등록</h2>
     </div>
     <!-- 제목 ------------------------------------------------------------------->
     <!--버튼  -->
@@ -194,8 +197,7 @@
         <label for="inputEmail3" class="col-sm-2 col-md-2 col-lg-2 control-label"></label>
         <div class="col-sm-10 col-md-10 col-lg-10">
           <input type="button" class="btn btn-info btn-sm" value="등록"  id="doSave" >
-          <input type="button" class="btn btn-primary btn-sm" value="목록"  id="chargerView" >
-
+          <input type="button" class="btn btn-primary btn-sm" value="목록"  id="moveToManagerPage" >
         </div>
     </div>
     <!--버튼 -------------------------------------------------------------------->

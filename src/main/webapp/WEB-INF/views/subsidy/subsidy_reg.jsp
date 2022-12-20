@@ -46,6 +46,16 @@
   $(document).ready(function(){
 	  console.log("document.ready");
 	  
+	   //관리자메뉴 이동
+	    $("#moveToManagerPage").on("click",function(){
+	      
+	      console.log('moveToManagerPage');
+	      
+	      window.location.href = "${CP}/subsidy/moveToManagerPage.do";
+	      
+	    //moveToManagerPage
+	    });
+	  
 	  
 	//등록
 	    $("#doSave").on("click",function(){
@@ -112,17 +122,8 @@
 	      
 	    });
 	  
-   //목록으로 이동
-    $("#subsidyView").on("click",function(){
-      console.log("subsidyView");
-      moveToList();
-    //boardView  
-    });
   });
-  
-  function moveToList(){
-	    window.location.href= "${CP}/subsidy/view.do";
-	}
+
   //==================================================================
   //=헤더부분 스크립트 이부분 꼭 넣으세요
   //==================================================================
@@ -180,7 +181,7 @@
         <label for="inputEmail3" class="col-sm-2 col-md-2 col-lg-2 control-label"></label>
         <div class="col-sm-10 col-md-10 col-lg-10">
           <input type="button" class="btn btn-info btn-sm" value="등록"  id="doSave" >
-          <input type="button" class="btn btn-primary btn-sm" value="목록"  id="subsidyView" >
+          <input type="button" class="btn btn-primary btn-sm" value="목록"  id="moveToManagerPage" >
 
         </div>
     </div>

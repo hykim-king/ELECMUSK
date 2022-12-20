@@ -45,16 +45,25 @@
   $(document).ready(function(){
     console.log("document.ready");
     doRetrieve();
-    showSlow();
     
-    //관리자메뉴 이동
-    $("#moveToManagerPage").on("click",function(){
+    //등록화면으로 이동
+    $("#moveToReg").on("click",function(){
       
-      console.log('moveToManagerPage');
+      console.log('moveToReg');
       
-      window.location.href = "${CP}/chargingfee/moveToManagerPage.do";
+      window.location.href = "${CP}/chargingfee/moveToReg.do";
       
-    //moveToManagerPage
+    //moveToReg
+    });
+    
+    //사용자화면 이동
+    $("#moveToView").on("click",function(){
+      
+      console.log('moveToView');
+      
+      window.location.href = "${CP}/chargingfee/moveToView.do";
+      
+    //moveToView
     });
     
   });//document
@@ -89,9 +98,12 @@
           $.each(parsedJson, function(index,value){
               //console.log(index+","+value.uId);
               htmlData +=" <tr> ";
-              htmlData +="   <td width='20%' height='10%' class='text-center'><img src='"+<c:out value = 'value.image'/>+"' alt='image' style='width:50px; height:50px;' class='img-rounded'>"+<c:out value = 'value.enterprenuer'/> +"</td> ";        
-              htmlData +="   <td width='20%' height='10%' class='text-center'>"+ value.rapid_above100 +"원</td> ";        
-              htmlData +="   <td width='20%' height='10%' class='text-center'>"+ value.rapid_below100 +"원</td> ";        
+              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+ value.num +"</td> ";        
+              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'><img src='"+<c:out value = 'value.image'/>+"' alt='image' style='width:50px; height:50px;' class='img-rounded'>"+"</td> ";        
+              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'><a href='#' onClick='doSelectOne("+<c:out value='value.provider_seq '/>+")'>"+ value.enterprenuer +"</td> ";        
+              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+ value.rapid_above100 +"원</td> ";        
+              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+ value.rapid_below100 +"원</td> ";        
+              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+ value.slow_fee +"원</td> ";        
               htmlData +=" </tr> ";
             });
             //데이터가 없는 경우
@@ -110,52 +122,7 @@
             
 }
     
-    function showSlow(page){
-        console.log('showSlow() page:'+page);
-        
-        let method = "GET";
-        let url = "/chargingfee/showSlow.do";
-        let async = true;
-        let params  = {
-            searchDiv : $('#searchDiv').val(),
-            searchWord: $("#searchWord").val(),
-            pageSize : $("#pageSize").val(),
-            pageNo: page
-        };
-            
-        PClass.callAjax(method,url,async,params,function(data){
-          console.log("data:"+data);
-          
-          let parsedJson = JSON.parse(data);
-          
-          let htmlData = "";
-          
-          //table 데이터 삭제
-          $("#slowTable>tbody").empty();
-          
-          if(null != parsedJson && parsedJson.length > 0){
-          
-          $.each(parsedJson, function(index,value){
-              //console.log(index+","+value.uId);
-              htmlData +=" <tr> ";
-              htmlData +="   <td width='20%' height='10%' class='text-center'><img src='"+<c:out value = 'value.image'/>+"' alt='image' style='width:50px; height:50px;' class='img-rounded'>"+<c:out value = 'value.enterprenuer'/> +"</td> ";        
-              htmlData +="   <td width='20%' height='10%' class='text-center'><a href='#' onClick='doSelectOne("+<c:out value='value.provider_seq '/>+")'>"+ value.slow_fee +"원</td> ";        
-              htmlData +=" </tr> ";
-            });
-            //데이터가 없는 경우
-          }else{
-            htmlData +=" <tr> ";
-            htmlData +="   <td colspan='99' class='text-center col-sm-12 col-md-12 col-lg-12'>no data found</td> ";
-            htmlData +=" </tr> ";
-          }
-        
-      //table 데이터 출력
-      $("#slowTable>tbody").append(htmlData);
-        
-    
-        });
-            
-      }
+
       
     
       
@@ -194,7 +161,13 @@
      //==================================================================
      //=헤더부분 스크립트 이부분 꼭 넣으세요
      //==================================================================
-
+      function doSelectOne(provider_seq){
+	     let url = "${CP}/chargingfee/doSelectOne.do";
+	
+	    url = url + "?provider_seq="+provider_seq;
+	    console.log("url : "+url);
+	    location.href = url;
+	    }
 </script>
 
 </head>
@@ -208,37 +181,35 @@
   <div class="container">
     <!-- 제목 -->
     <div class="page-header">
-       <h2>충전요금 정보</h2>
+       <h2>충전요금 데이터 관리</h2>
     </div>
     <!-- 제목 ------------------------------------------------------------------->
+    <!-- 코멘트 -->
+    <p>수정,삭제를 원하시면 "사업자명"을 클릭하세요</p>
+    <!-- 코멘트 --------------------------------------------------------------->
   <!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select) ---------------------------------------->
     <form action="#" class="form-inline text-right">
       <div class="form-group">
         <!------------------------------------- 버튼 -->
-          <c:choose>
-              <c:when test="${2 <= sessionScope.userInfo.status && not empty sessionScope.userInfo}">
-              ${sessionScope.userInfo}<br>
-                <input type="button" class="btn btn-info btn-sm" value="관리자메뉴" id="moveToManagerPage">
-              </c:when>
-              <c:otherwise>
-              </c:otherwise>
-            </c:choose>
+          <input type="button" class="btn btn-success btn-sm" value="나가기" id="moveToView">
+          <input type="button" class="btn btn-info btn-sm" value="등록" id="moveToReg">
         <!------------------------------------- 버튼 -->
       </div>
-      <ul class="nav nav-tabs text-left">
-        <li role="presentation" class="active" id="showRapid"><a href="">급속요금</a></li>
-      </ul>
+
     </form>
     <!-- 검색 ----------------------------------------------------------------------------->
   
-  <!-- 충전기 테이블 목록 ---------------------------------------------------------------------------->
+  <!-- 충전요금 테이블 목록 ---------------------------------------------------------------------------->
     <div class="table-responsive">
     <table class="table table-bordered table-striped table-hover rapidTable" id="rapidTable">
       <thead class="bg-success">
         <tr>
-          <th class="text-center"><strong>사업자명</strong></th>
-          <th class="text-center"><strong>급속100kW이상요금</strong></th>
-          <th class="text-center"><strong>급속100kW미만요금</strong></th>
+          <th class="text-center col-sm-2 col-md-2 col-lg-2"><strong>순번</strong></th>
+          <th class="text-center col-sm-2 col-md-2 col-lg-2"><strong>이미지</strong></th>
+          <th class="text-center col-sm-2 col-md-2 col-lg-2"><strong>사업자명</strong></th>
+          <th class="text-center col-sm-2 col-md-2 col-lg-2"><strong>급속100kW이상요금</strong></th>
+          <th class="text-center col-sm-2 col-md-2 col-lg-2"><strong>급속100kW미만요금</strong></th>
+          <th class="text-center col-sm-2 col-md-2 col-lg-2"><strong>완속요금</strong></th>
         </tr>
       </thead>
       <tbody>
@@ -248,26 +219,7 @@
     </div>
   <!-- 테이블 목록 ----------------------------------------------------------------------------->
   
-  <ul class="nav nav-tabs text-left">
-    <li role="presentation" class="active" id="showSlow"><a href="">완속요금</a></li>
-  </ul>
-      
-  <!-- 충전기 테이블 목록 ---------------------------------------------------------------------------->
-    <div class="table-responsive">
-    <table class="table table-bordered table-striped table-hover slowTable" id="slowTable">
-      <thead class="bg-success">
-        <tr>
-          <th class="text-center"><strong>사업자명</strong></th>
-          <th class="text-center"><strong>완속요금</strong></th>
-        </tr>
-      </thead>
-      <tbody>
-        
-      </tbody>
-    </table>
-    </div>
-  <!-- 테이블 목록 ----------------------------------------------------------------------------->
-    
+  <
     <!-- 페이징 -->
     <div class="text-center col-sm-12 col-md-12 col-lg-12">
       <div id="page-selection" class="text-center page"></div>    

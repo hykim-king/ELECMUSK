@@ -51,15 +51,25 @@
 	  console.log("document.ready");
 	  doRetrieve();
 	  
-	//관리자메뉴 이동
-  $("#moveToManagerPage").on("click",function(){
-    
-    console.log('moveToManagerPage');
-    
-    window.location.href = "${CP}/charger/moveToManagerPage.do";
-    
-  //moveToManagerPage
-  });
+	    //등록화면으로 이동
+	    $("#moveToReg").on("click",function(){
+	      
+	      console.log('moveToReg');
+	      
+	      window.location.href = "${CP}/charger/moveToReg.do";
+	      
+	    //moveToReg
+	    });
+	    
+	    //사용자화면 이동
+	    $("#moveToView").on("click",function(){
+	      
+	      console.log('moveToView');
+	      
+	      window.location.href = "${CP}/charger/moveToView.do";
+	      
+	    //moveToView
+	    });
 	  
   });//document
 	  
@@ -93,34 +103,21 @@
           $.each(parsedJson, function(index,value){
               //console.log(index+","+value.uId);
               htmlData +=" <tr> ";
-              htmlData +=" <div>"
-              htmlData +="   <td width='33%' rowspan='4'><img src='"+<c:out value = 'value.image'/>+"' alt='Responsive image' style='width:100%; height:100%;' class='img-rounded img-responsive'></td> ";        
-              htmlData +=" </div>"
-              htmlData +=" <tr> ";
-              htmlData +="   <td width='11%' height='12.5%' class='text-center'><strong>충전기명</strong> </td> ";        
-              htmlData +="   <td width='22%' height='12.5%' class='text-center'>"+<c:out value = 'value.connector'/> +"</td> ";        
-              htmlData +="   <td width='11%' height='12.5%' class='text-center'><strong>충전전류</strong> </td> ";        
-              htmlData +="   <td width='22%' height='12.5%' class='text-center'>"+ value.ev_current +"</td> ";        
-              htmlData +=" </tr> ";
-              htmlData +=" <tr> ";
-              htmlData +="   <td width='11%' height='12.5%' class='text-center'><strong>충전전압</strong> </td> ";        
-              htmlData +="   <td width='22%' height='12.5%' class='text-center'>"+ value.ev_voltage +"</td> ";        
-              htmlData +="   <td width='11%' height='12.5%' class='text-center'><strong>충전전력</strong> </td> ";        
-              htmlData +="   <td width='22%' height='12.5%' class='text-center'>"+ value.ev_power +"</td> ";        
-              htmlData +=" </tr> ";
-              htmlData +=" <tr> ";
-              htmlData +="   <td width='11%' height='12.5%' class='text-center'><strong>충전레벨</strong> </td> ";        
-              htmlData +="   <td width='22%' height='12.5%' class='text-center'>"+ value.ev_level +"</td> ";        
-              htmlData +="   <td width='11%' height='12.5%' class='text-center'><strong>지원차량</strong> </td> ";        
-              htmlData +="   <td width='22%' height='12.5%' class='text-center'>"+ value.ev_support +"</td> ";        
-              htmlData +=" </tr> ";
+              htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.num'/>+"</td> "; 
+              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'><img src='"+<c:out value = 'value.image'/>+"' alt='Responsive image' style='width:100%; height:100%;' class='img-rounded img-responsive'></td> "; 
+              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'><a href='#' onClick='doSelectOne("+<c:out value='value.charger_seq '/>+")'>"+<c:out value='value.connector'/>+"</td> "; 
+              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+<c:out value='value.ev_current'/>+"</td> "; 
+              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+<c:out value='value.ev_voltage'/>+"</td> "; 
+              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+<c:out value='value.ev_power'/>+"</td> "; 
+              htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.ev_level'/>+"</td> "; 
+              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+<c:out value='value.ev_support'/>+"</td> "; 
               htmlData +=" </tr> ";
             });
             //데이터가 없는 경우
           }else{
-            htmlData +=" <tr> ";
-            htmlData +="   <td colspan='99' class='text-center col-sm-12 col-md-12 col-lg-12'>no data found</td> ";
-            htmlData +=" </tr> ";
+              htmlData +=" <tr> ";
+              htmlData +="   <td colspan='99' class='text-center col-sm-12 col-md-12 col-lg-12'>no data found</td> ";
+              htmlData +=" </tr> ";
           }
         
       //table 데이터 출력
@@ -169,7 +166,15 @@
 	   //=헤더부분 스크립트 이부분 꼭 넣으세요
 	   //==================================================================
 		   
+      //=============================doSelectOne함수
+  function doSelectOne(charger_seq){
+     let url = "${CP}/charger/doSelectOne.do";
 
+    url = url + "?charger_seq="+charger_seq;
+    console.log("url : "+url);
+    location.href = url;
+     }
+  //=============================doSelectOne함수 끝 
   
 </script>
 
@@ -184,21 +189,18 @@
   <div class="container">
     <!-- 제목 -->
     <div class="page-header">
-       <h2>충전기 정보</h2>
+       <h2>충전기 데이터 관리</h2>
     </div>
     <!-- 제목 ------------------------------------------------------------------->
+    <!-- 코멘트 -->
+    <p>수정,삭제를 원하시면 "충전기명"을 클릭하세요</p>
+    <!-- 코멘트 --------------------------------------------------------------->
   <!---------------------------------------- 검색 : 검색 구분(select) 검색어(input) 페이지 사이즈(select) -->
     <form action="#" class="form-inline text-right">
       <div class="form-group">
         <!------------------------------------- 버튼 -->
-          <c:choose>
-              <c:when test="${2 <= sessionScope.userInfo.status && not empty sessionScope.userInfo}">
-              ${sessionScope.userInfo}<br>
-                <input type="button" class="btn btn-info btn-sm" value="관리자메뉴" id="moveToManagerPage">
-              </c:when>
-              <c:otherwise>
-              </c:otherwise>
-            </c:choose>
+          <input type="button" class="btn btn-success btn-sm" value="나가기" id="moveToView">
+          <input type="button" class="btn btn-info btn-sm" value="등록" id="moveToReg">
         <!------------------------------------- 버튼 -->
       </div>
     </form>
@@ -209,6 +211,18 @@
   <!-- 충전기 테이블 목록 ---------------------------------------------------------------------------->
     <div class="table-responsive">
     <table class="table table-bordered table-striped table-hover chargerTable" id="chargerTable">
+      <thead>
+        <tr>
+          <th class="text-center col-sm-1 col-md-1 col-lg-1">순번</th>        
+          <th class="text-center col-sm-2 col-md-2 col-lg-2">이미지</th>        
+          <th class="text-center col-sm-2 col-md-2 col-lg-2">충전기명</th>        
+          <th class="text-center col-sm-2 col-md-2 col-lg-2">충전전류</th>        
+          <th class="text-center col-sm-2 col-md-2 col-lg-2">충전전압</th>        
+          <th class="text-center col-sm-2 col-md-2 col-lg-2">충전전력</th>        
+          <th class="text-center col-sm-1 col-md-1 col-lg-1">충전레벨</th>        
+          <th class="text-center col-sm-2 col-md-2 col-lg-2">지원차량</th>        
+        </tr>
+      </thead>
       <tbody>
         
       </tbody>

@@ -21,7 +21,6 @@ import com.pcwk.ehr.code.service.CodeService;
 import com.pcwk.ehr.evcar.cmn.evMessageVO;
 import com.pcwk.ehr.evcar.cmn.evSearchVO;
 import com.pcwk.ehr.evcar.cmn.evStringUtil;
-import com.pcwk.ehr.subsidy.domain.SubsidyVO;
 
 @Controller("chargerController")
 @RequestMapping("charger")
@@ -45,9 +44,23 @@ public class ChargerController {
 		return "charger/charger";
 	}
 	
+	@RequestMapping(value="/moveToView.do", method = RequestMethod.GET)
+	public String moveToView(Model model, evSearchVO inVO) throws SQLException{
+		String VIEW_NAME = "charger/charger";
+		
+		return VIEW_NAME;
+	}
+	
 	@RequestMapping(value="/moveToReg.do", method = RequestMethod.GET)
 	public String moveToReg(Model model, evSearchVO inVO) throws SQLException{
 		String VIEW_NAME = "charger/charger_reg";
+		
+		return VIEW_NAME;
+	}
+	
+	@RequestMapping(value="/moveToManagerPage.do", method = RequestMethod.GET)
+	public String moveToManagerPage(Model model, evSearchVO inVO) throws SQLException{
+		String VIEW_NAME = "charger/charger_list";
 		
 		return VIEW_NAME;
 	}

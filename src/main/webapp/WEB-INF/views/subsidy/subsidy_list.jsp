@@ -53,14 +53,24 @@
 		  doRetrieve();
 	  });
 	  
-	  //관리자메뉴 이동
-    $("#moveToManagerPage").on("click",function(){
+	  //등록화면으로 이동
+    $("#moveToReg").on("click",function(){
       
-      console.log('moveToManagerPage');
+      console.log('moveToReg');
       
-      window.location.href = "${CP}/subsidy/moveToManagerPage.do";
+      window.location.href = "${CP}/subsidy/moveToReg.do";
       
-    //moveToManagerPage
+    //moveToReg
+    });
+	  
+	  //사용자화면 이동
+    $("#moveToView").on("click",function(){
+      
+      console.log('moveToView');
+      
+      window.location.href = "${CP}/subsidy/moveToView.do";
+      
+    //moveToView
     });
 	  
 	  
@@ -119,7 +129,7 @@
               htmlData +=" <tr> ";
               htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.model +"</td> ";        
               htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.manufacturer +"</td> ";        
-              htmlData +="   <td class='text-center col-sm-5 col-md-5 col-lg-5'>"+value.name +"</td> ";        
+              htmlData +="   <td class='text-center col-sm-5 col-md-5 col-lg-5'><a href='#' onClick='doSelectOne("+<c:out value='value.subsidy_seq '/>+")'>"+value.name +"</td> ";        
               htmlData +="   <td class='text-center col-sm-3 col-md-3 col-lg-3'>"+value.subsidy +"</td> ";        
               htmlData +=" </tr> ";
             });
@@ -206,7 +216,15 @@
 	   //==================================================================
 	   //=헤더부분 스크립트 이부분 꼭 넣으세요
 	   //==================================================================
+	    //=============================doSelectOne함수
+  function doSelectOne(subsidy_seq){
+     let url = "${CP}/subsidy/doSelectOne.do";
 
+    url = url + "?subsidy_seq="+subsidy_seq;
+    console.log("url : "+url);
+    location.href = url;
+	   }
+  //=============================doSelectOne함수 끝  
 </script>
 
 </head>
@@ -220,34 +238,19 @@
   <div class="container">
     <!-- 제목 -->
     <div class="page-header">
-       <h2>보조금 정보</h2>
+       <h2>보조금 데이터 관리</h2>
     </div>
     <!-- 제목 ------------------------------------------------------------------->
-    <!-- 문단  -->
-    <dl>
-      <dt>보조금 지원 대상</dt>
-      <dd>* 중앙행정기관을 제외한 개인, 법인, 공공기관, 지방자치단체, 지방공기업 등</dd>
-      <dd>* 국고보조금 외 지방보조금을 추가로 지원하는 지방자치단체는 관할 자치단체 내 거주 등 자격조건 부여 가능</dd>
-      <br>
-      <dt>보조금 지원 차량</dt>
-      <dd>* 아래의 사항을 충족하는 전기자동차</dd>
-      <dd>-<자동차관리법>, <대기환경보전법>, <소음및진동관리법> 등 관계법령에 따라 자동차와 관련된 각종 인증을 모두 완료한 차량 </dd>
-      <dd>-<전기자동차 보급대상 평가에 관한 규정>에 따른 전기차의 평가항목 및 기준에 적합한 차량</dd>
-    </dl>
-    
-    <!-- 문단  ------------------------------------------------------->
+    <!-- 코멘트 -->
+    <p>수정,삭제를 원하시면 "차종"을 클릭하세요</p>
+    <!-- 코멘트 --------------------------------------------------------------->
     <!---------------------------------------- 검색 : 검색 구분(select) 검색어(input) 페이지 사이즈(select) -->
     <form action="#" class="form-inline text-right">
       <div class="form-group">
+          
         <!------------------------------------- 버튼 -->
-              <c:choose>
-              <c:when test="${2 <= sessionScope.userInfo.status && not empty sessionScope.userInfo}">
-              ${sessionScope.userInfo}<br>
-                <input type="button" class="btn btn-info btn-sm" value="관리자메뉴" id="moveToManagerPage">
-              </c:when>
-              <c:otherwise>
-              </c:otherwise>
-            </c:choose>
+          <input type="button" class="btn btn-success btn-sm" value="나가기" id="moveToView">
+          <input type="button" class="btn btn-info btn-sm" value="등록" id="moveToReg">
         <!------------------------------------- 버튼 -->
       </div>
     </form>

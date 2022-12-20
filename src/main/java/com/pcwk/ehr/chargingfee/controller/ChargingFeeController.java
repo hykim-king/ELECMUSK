@@ -44,9 +44,23 @@ public class ChargingFeeController {
 		return "chargingfee/chargingFee";
 	}
 	
+	@RequestMapping(value="/moveToView.do", method = RequestMethod.GET)
+	public String moveToView(Model model, evSearchVO inVO) throws SQLException{
+		String VIEW_NAME = "chargingfee/chargingFee";
+		
+		return VIEW_NAME;
+	}
+	
 	@RequestMapping(value="/moveToReg.do", method = RequestMethod.GET)
 	public String moveToReg(Model model, evSearchVO inVO) throws SQLException{
 		String VIEW_NAME = "chargingfee/chargingfee_reg";
+		
+		return VIEW_NAME;
+	}
+	
+	@RequestMapping(value="/moveToManagerPage.do", method = RequestMethod.GET)
+	public String moveToManagerPage(Model model, evSearchVO inVO) throws SQLException{
+		String VIEW_NAME = "chargingfee/chargingfee_list";
 		
 		return VIEW_NAME;
 	}
