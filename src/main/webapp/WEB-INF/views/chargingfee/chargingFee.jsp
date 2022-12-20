@@ -134,6 +134,15 @@
           $("#slowTable>tbody").empty();
           
           if(null != parsedJson && parsedJson.length > 0){
+        	  
+              totalCnt = parsedJson[0].totalCnt;
+              pageTotal = Math.ceil( totalCnt/$("#pageSize").val());
+              console.log("----------------------------");
+              console.log("-totalCnt:"+totalCnt);
+              console.log("-pageSize:"+$("#pageSize").val());
+              console.log("-pageTotal:"+pageTotal);
+              console.log("-page:"+page);
+              console.log("----------------------------");
           
           $.each(parsedJson, function(index,value){
               //console.log(index+","+value.uId);
@@ -151,12 +160,46 @@
         
       //table 데이터 출력
       $("#slowTable>tbody").append(htmlData);
+      
+      //paging
+      $("#page-selection").empty();//페이저 삭제
+      renderingPage(pageTotal,page);
         
     
         });
             
       }
       
+    //paging
+    function renderingPage(pageTotal, page){
+      console.log("pageTotal:"+pageTotal);
+      console.log("page:"+page);
+      
+      pageTotal = parseInt(pageTotal);
+      
+      //연결된 EventHandler제거
+      $('#page-selection').unbind('page');
+      
+      $('#page-selection').bootpag({
+          total: pageTotal,
+          page: page,
+          maxVisible: 10,
+          leaps: true,
+          firstLastUse: true,
+          first: '←',
+          last: '→',
+          wrapClass: 'pagination',
+          activeClass: 'active',
+          disabledClass: 'disabled',
+          nextClass: 'next',
+          prevClass: 'prev',
+          lastClass: 'last',
+          firstClass: 'first'
+      }).on("page", function(event, num){
+          console.log("num:"+num);
+          doRetrieve(num);
+      });  
+    }  
     
       
       //==================================================================
@@ -225,6 +268,7 @@
             </c:choose>
         <!------------------------------------- 버튼 -->
       </div>
+      <input type="hidden" id="pageSize" name="pageSize" value="10">
       <ul class="nav nav-tabs text-left">
         <li role="presentation" class="active" id="showRapid"><a href="">급속요금</a></li>
       </ul>

@@ -144,7 +144,7 @@
 	      
 	        if("1" == parsedJson.msgId){
 	          alert(parsedJson.msgContents);
-	          moveToList();
+	          moveToManagerPage();
 	        }else{
 	          alert(parsedJson.msgContents);
 	        }
@@ -155,16 +155,14 @@
 	    });
 	  
    //목록으로 이동
-    $("#stationView").on("click",function(){
-      console.log("stationView");
-      moveToList();
-    //boardView  
+    $("#moveToManagerPage").on("click",function(){
+      console.log("moveToManagerPage");
+      moveToManagerPage();
+    //관리자메뉴  
     });
   });
   
-  function moveToList(){
-	    window.location.href= "${CP}/station/moveToList.do";
-	}
+
   //==================================================================
   //=헤더부분 스크립트 이부분 꼭 넣으세요
   //==================================================================
@@ -201,6 +199,10 @@
  //=헤더부분 스크립트 이부분 꼭 넣으세요
  //==================================================================
 	 
+  function moveToManagerPage(){
+    window.location.href="${CP}/station/moveToManagerPage.do";
+  };
+	 
 </script>
 
 </head>
@@ -214,7 +216,8 @@
   <div class="container">
     <!-- 제목 -->
     <div class="page-header">
-       <h2>보조금 등록</h2>
+       <h1 style="color: orange;">관리자메뉴</h1><br>
+       <h2>충전소 데이터 등록</h2>
     </div>
     <!-- 제목 ------------------------------------------------------------------->
     <!--버튼  -->
@@ -222,7 +225,7 @@
         <label for="inputEmail3" class="col-sm-2 col-md-2 col-lg-2 control-label"></label>
         <div class="col-sm-10 col-md-10 col-lg-10">
           <input type="button" class="btn btn-info btn-sm" value="등록"  id="doSave" >
-          <input type="button" class="btn btn-primary btn-sm" value="목록"  id="stationView" >
+          <input type="button" class="btn btn-primary btn-sm" value="목록"  id="moveToManagerPage" >
 
         </div>
     </div>

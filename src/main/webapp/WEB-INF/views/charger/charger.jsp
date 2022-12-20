@@ -89,6 +89,15 @@
 
           
           if(null != parsedJson && parsedJson.length > 0){
+        	  
+              totalCnt = parsedJson[0].totalCnt;
+              pageTotal = Math.ceil( totalCnt/$("#pageSize").val());
+              console.log("----------------------------");
+              console.log("-totalCnt:"+totalCnt);
+              console.log("-pageSize:"+$("#pageSize").val());
+              console.log("-pageTotal:"+pageTotal);
+              console.log("-page:"+page);
+              console.log("----------------------------");
           
           $.each(parsedJson, function(index,value){
               //console.log(index+","+value.uId);
@@ -125,12 +134,45 @@
         
       //table 데이터 출력
       $("#chargerTable>tbody").append(htmlData);
+      
+      //paging
+      $("#page-selection").empty();//페이저 삭제
+      renderingPage(pageTotal,page);
         
     
         });
 	          
 }
-      
+	     //paging
+	     function renderingPage(pageTotal, page){
+	       console.log("pageTotal:"+pageTotal);
+	       console.log("page:"+page);
+	       
+	       pageTotal = parseInt(pageTotal);
+	       
+	       //연결된 EventHandler제거
+	       $('#page-selection').unbind('page');
+	       
+	       $('#page-selection').bootpag({
+	           total: pageTotal,
+	           page: page,
+	           maxVisible: 10,
+	           leaps: true,
+	           firstLastUse: true,
+	           first: '←',
+	           last: '→',
+	           wrapClass: 'pagination',
+	           activeClass: 'active',
+	           disabledClass: 'disabled',
+	           nextClass: 'next',
+	           prevClass: 'prev',
+	           lastClass: 'last',
+	           firstClass: 'first'
+	       }).on("page", function(event, num){
+	           console.log("num:"+num);
+	           doRetrieve(num);
+	       });  
+	     }  
 	  
 	    
 	    //==================================================================
@@ -187,6 +229,7 @@
        <h2>충전기 정보</h2>
     </div>
     <!-- 제목 ------------------------------------------------------------------->
+    <input type="hidden" id="pageSize" name="pageSize" value="10">
   <!---------------------------------------- 검색 : 검색 구분(select) 검색어(input) 페이지 사이즈(select) -->
     <form action="#" class="form-inline text-right">
       <div class="form-group">

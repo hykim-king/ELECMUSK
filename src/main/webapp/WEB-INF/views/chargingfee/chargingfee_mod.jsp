@@ -80,7 +80,7 @@
         let parsedJson = JSON.parse(data);
         if("1" == parsedJson.msgId){
           alert(parsedJson.msgContents);
-          moveToList();
+          moveToManagerPage();
         }else{
           alert(parsedJson.msgContents);
         }
@@ -136,7 +136,7 @@
 	        
 	        if("1"==parsedJson.msgId){
 	          alert(parsedJson.msgContents);
-	          moveToList();
+	          moveToManagerPage();
 	        }else{
 	          alert(parsedJson.msgContents);
 	        }
@@ -150,9 +150,9 @@
   });
   
   
-  function moveToList(){
-    window.location.href= "${CP}/chargingfee/view.do";
-  }
+  function moveToManagerPage(){
+    window.location.href="${CP}/chargingfee/moveToManagerPage.do";
+  };
 </script>
 
 </head>
@@ -166,6 +166,7 @@
   <div class="container">
     <!-- 제목 -->
     <div class="page-header">
+       <h1 style="color: orange;">관리자메뉴</h1><br>
        <h2>충전요금 데이터 수정</h2>
     </div>
     <!-- 제목 ------------------------------------------------------------------->

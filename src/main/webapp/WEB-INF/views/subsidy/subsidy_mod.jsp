@@ -62,7 +62,7 @@
         
         console.log('moveToManagerPage');
         
-        window.location.href = "${CP}/subsidy/moveToManagerPage.do";
+        moveToManagerPage();
         
       //moveToManagerPage
       });
@@ -80,7 +80,7 @@
         let parsedJson = JSON.parse(data);
         if("1" == parsedJson.msgId){
           alert(parsedJson.msgContents);
-          moveToList();
+          moveToManagerPage();
         }else{
           alert(parsedJson.msgContents);
         }
@@ -141,7 +141,7 @@
 	        
 	        if("1"==parsedJson.msgId){
 	          alert(parsedJson.msgContents);
-	          moveToList();
+	          moveToManagerPage();
 	        }else{
 	          alert(parsedJson.msgContents);
 	        }
@@ -150,18 +150,13 @@
 	      
 	    });
 	
-	    //목록으로 이동
-	    $("#moveToList").on("click",function(){
-	      console.log("moveToList");
-	      moveToList();
-	    });
 	    
   });
   
   
-  function moveToList(){
-    window.location.href= "${CP}/subsidy/view.do";
-  }
+  function moveToManagerPage(){
+      window.location.href="${CP}/subsidy/moveToManagerPage.do";
+   };
 </script>
 
 </head>
@@ -175,6 +170,7 @@
   <div class="container">
     <!-- 제목 -->
     <div class="page-header">
+       <h1 style="color: orange;">관리자메뉴</h1><br>
        <h2>보조금 데이터 수정</h2>
     </div>
     <!-- 제목 ------------------------------------------------------------------->

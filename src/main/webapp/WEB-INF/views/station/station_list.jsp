@@ -58,7 +58,7 @@
       
       console.log('moveToMap');
       
-      window.location.href = "${CP}/station/view.do";
+      window.location.href = "${CP}/station/moveToMap.do";
       
     //moveToReg
     });
@@ -127,9 +127,9 @@
           $.each(parsedJson, function(index,value){
               //console.log(index+","+value.uId);
               htmlData +=" <tr> ";
-              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+<c:out value='value.num'/> +"</td> ";        
+              htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.num'/> +"</td> ";        
               htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+<c:out value='value.addr'/> +"</td> ";        
-              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'><a href='#' onClick='doSelectOne("+<c:out value='value.station_seq '/>+")'>"+<c:out value='value.csnm'/> +"</td> ";        
+              htmlData +="   <td class='text-center col-sm-3 col-md-3 col-lg-3'><a href='#' onClick='doSelectOne("+<c:out value='value.station_seq '/>+")'>"+<c:out value='value.csnm'/> +"</td> ";        
               htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.csid'/> +"</td> ";        
               htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.chargetp'/> +"</td> ";        
               htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.cpid'/> +"</td> ";        
@@ -246,7 +246,8 @@
   <div class="container">
     <!-- 제목 -->
     <div class="page-header">
-       <h2>충전소 데이터 조회</h2>
+       <h1 style="color: orange;">관리자메뉴</h1><br>
+       <h2>충전소 데이터 관리</h2>
     </div>
     <!-- 제목 ------------------------------------------------------------------->
 
@@ -276,7 +277,7 @@
         <tr>
           <td>
             <label>키워드</label>
-            <input type="hidden" id="pageSize" name="pageSize" value="20">
+            <input type="hidden" id="pageSize" name="pageSize" value="10">
           </td>
           <td>
             <select id="addrKeyword" name="addrKeyword">
@@ -340,7 +341,7 @@
         <tr>
           <th class="text-center col-sm-1 col-md-1 col-lg-1">번호</th>        
           <th class="text-center col-sm-2 col-md-2 col-lg-2">주소</th>        
-          <th class="text-center col-sm-2 col-md-2 col-lg-2">충전소명</th>        
+          <th class="text-center col-sm-3 col-md-3 col-lg-3 bg-warning">충전소명</th>        
           <th class="text-center col-sm-1 col-md-1 col-lg-1">충전소ID</th>        
           <th class="text-center col-sm-1 col-md-1 col-lg-1">충전기타입</th>        
           <th class="text-center col-sm-1 col-md-1 col-lg-1">충전기ID</th>        

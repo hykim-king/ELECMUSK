@@ -77,7 +77,7 @@
 	       location.href = link;
 	     });
 	     $("#stationSearch").on("click", function() {
-	       let link = "${CP}/station/view.do"
+	       let link = "${CP}/station/moveToMap.do"
 	       location.href = link;
 	     });
 	     $("#rvboard").on("click", function() {

@@ -45,6 +45,13 @@ public class StationController {
 		return "elecmusk/GoogleMap";
 	}
 	
+	@RequestMapping(value="/moveToMap.do", method = RequestMethod.GET)
+	public String moveToMap(Model model, evSearchVO inVO) throws SQLException{
+		String VIEW_NAME = "station/GoogleMap";
+		
+		return VIEW_NAME;
+	}
+	
 	@RequestMapping(value="/moveToReg.do", method = RequestMethod.GET)
 	public String moveToReg(Model model, evSearchVO inVO) throws SQLException{
 		String VIEW_NAME = "station/station_reg";
@@ -52,9 +59,9 @@ public class StationController {
 		return VIEW_NAME;
 	}
 	
-	@RequestMapping(value="/moveToList.do", method = RequestMethod.GET)
-	public String moveToList(Model model, evSearchVO inVO) throws SQLException{
-		String VIEW_NAME = "station/station";
+	@RequestMapping(value="/moveToManagerPage.do", method = RequestMethod.GET)
+	public String moveToManagerPage(Model model, evSearchVO inVO) throws SQLException{
+		String VIEW_NAME = "station/station_list";
 		
 		return VIEW_NAME;
 	}

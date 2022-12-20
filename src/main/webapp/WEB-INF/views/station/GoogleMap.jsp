@@ -55,11 +55,11 @@ $(document).ready(function(){
 	doRetrieve();
     
     //충전소 목록 이동
-    $("#moveToList").on("click",function(){
+    $("#moveToManagerPage").on("click",function(){
       
-      console.log('moveToList');
+      console.log('moveToManagerPage');
       
-      window.location.href = "${CP}/station/moveToList.do";
+      window.location.href = "${CP}/station/moveToManagerPage.do";
       
     //moveToReg
     });
@@ -253,7 +253,7 @@ getData();
             <c:choose>
               <c:when test="${2 <= sessionScope.userInfo.status && not empty sessionScope.userInfo}">
               ${sessionScope.userInfo}<br>
-                <input type="button" class="btn btn-info btn-sm" value="관리자 메뉴" id="moveToList">
+                <input type="button" class="btn btn-info btn-sm" value="관리자 메뉴" id="moveToManagerPage">
               </c:when>
               <c:otherwise>
               </c:otherwise>

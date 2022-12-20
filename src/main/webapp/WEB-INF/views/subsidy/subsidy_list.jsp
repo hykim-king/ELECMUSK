@@ -127,10 +127,12 @@
           $.each(parsedJson, function(index,value){
               //console.log(index+","+value.uId);
               htmlData +=" <tr> ";
+              htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+value.num +"</td> ";        
               htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.model +"</td> ";        
+              htmlData +="   <td class='text-center col-sm-4 col-md-4 col-lg-4'><a href='#' onClick='doSelectOne("+<c:out value='value.subsidy_seq '/>+")'>"+value.name +"</td> ";        
+              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.subsidy +"</td> ";        
               htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.manufacturer +"</td> ";        
-              htmlData +="   <td class='text-center col-sm-5 col-md-5 col-lg-5'><a href='#' onClick='doSelectOne("+<c:out value='value.subsidy_seq '/>+")'>"+value.name +"</td> ";        
-              htmlData +="   <td class='text-center col-sm-3 col-md-3 col-lg-3'>"+value.subsidy +"</td> ";        
+              htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+value.madeby +"</td> ";        
               htmlData +=" </tr> ";
             });
             //데이터가 없는 경우
@@ -238,11 +240,12 @@
   <div class="container">
     <!-- 제목 -->
     <div class="page-header">
+       <h1 style="color: orange;">관리자메뉴</h1><br>
        <h2>보조금 데이터 관리</h2>
     </div>
     <!-- 제목 ------------------------------------------------------------------->
     <!-- 코멘트 -->
-    <p>수정,삭제를 원하시면 "차종"을 클릭하세요</p>
+    <p>수정,삭제를 원하시면 "자동차명"을 클릭하세요</p>
     <!-- 코멘트 --------------------------------------------------------------->
     <!---------------------------------------- 검색 : 검색 구분(select) 검색어(input) 페이지 사이즈(select) -->
     <form action="#" class="form-inline text-right">
@@ -312,10 +315,12 @@
     <table class="table table-striped table-hover" id="subsidyTable">
       <thead class="bg-success">
         <tr>
-          <th class="text-center col-sm-2 col-md-2 col-lg-2">구분</th>        
-          <th class="text-center col-sm-2 col-md-2 col-lg-2">제조/수입사</th>        
-          <th class="text-center col-sm-5 col-md-5 col-lg-5">차종</th>        
-          <th class="text-center col-sm-3 col-md-3 col-lg-3">지원금액(만원)</th>        
+          <th class="text-center col-sm-1 col-md-1 col-lg-1">순번</th>        
+          <th class="text-center col-sm-2 col-md-2 col-lg-2">차종</th>        
+          <th class="text-center col-sm-4 col-md-4 col-lg-4 bg-warning">자동차명</th>        
+          <th class="text-center col-sm-2 col-md-2 col-lg-2">보조금</th>        
+          <th class="text-center col-sm-2 col-md-2 col-lg-2">제조사</th>        
+          <th class="text-center col-sm-1 col-md-1 col-lg-1">생산지</th>        
         </tr>
       </thead>
       <tbody>

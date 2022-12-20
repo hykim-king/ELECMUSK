@@ -61,6 +61,12 @@
 	    $("#doSave").on("click",function(){
 	      console.log("doSave");
 	    
+	      if(eUtil.ISEmpty($("#image").val()) == true){
+           alert("이미지를 추가 하세요.");
+           $("#image").focus();
+           return;
+        }
+	      
 	      if(eUtil.ISEmpty($("#enterprenuer").val()) == true){
 	        alert("사업자명을 입력 하세요.");
 	        $("#enterprenuer").focus();
@@ -92,6 +98,7 @@
 	      let url    = "/chargingfee/doSave.do";
 	      let async  = true;
 	      let params = {
+	    		  image : $("#image").val(),
 	    		  enterprenuer : $("#enterprenuer").val(),
 	    		  rapid_below100 : $("#rapid_below100").val(),
 	    		  rapid_above100 : $("#rapid_above100").val(),
@@ -106,7 +113,7 @@
 	      
 	        if("1" == parsedJson.msgId){
 	          alert(parsedJson.msgContents);
-	          moveToList();
+	          moveToManagerPage();
 	        }else{
 	          alert(parsedJson.msgContents);
 	        }
@@ -117,7 +124,77 @@
 	    });
 	  
 
+  
+  $("#doSaveFile").on("click",function(){
+      console.log("doSaveFile");
+      
+      let fileInput = $("#file01")[0];
+      console.log("fileInput: "+fileInput);
+      
+      if(fileInput.files.length === 0){
+        alert("파일을 선택해 주셔요.");
+        return;
+      }
+      
+      console.log("fileInput.files.length: "+fileInput.files.length);
+      
+      //javascript : <form></form>
+      let formData = new FormData();
+      
+      for(let i=0;i<fileInput.files.length;i++){
+        formData.append("image"+i,fileInput.files[i]);
+      }
+      
+      //image란 이름으로, 파일객체 지정
+      
+      
+      //contentType : default값은 "application/x-www-form-urlencoded; charset=UTF-8"
+      //-->multipart/form-data로 전송되도록 false설정
+      //processData : true -> query string으로 데이터 전달! ex)http://localhost:8089?title = 1234
+      
+      console.log("data:formData: "+formData);
+      
+      $.ajax({ 
+         type: "POST",
+         url: "${CP}/file/ajaxUpload.do",
+         processData: false, //
+         contentType: false,
+         asyn: "true",
+         //dataType: "html",
+         data: formData,
+         success:function(data){ //통신 성공
+           console.log(data);
+         
+           let htmlData = "";
+           let imgPath = "";
+           
+           if(null != data && data.length > 0) {
+                 $.each(data, function(index, value) {
+                 ///ehr/resources/asset/imgs/evcar_imgs/G70.png
+                 imgPath = "/ehr"+value.imageViewPath+"/"+value.saveFileName;
+                 htmlData += "    <img src='"+imgPath+"' style='width:100%;' '>";
+                 });
+           }
+           $("#imgArea").append(htmlData);  
+           $("#image").val(imgPath);
+
+         },
+         error:function(data){//실패
+         
+         },
+         complete:function(data){//성공, 실패 관계 없이 출력
+         
+         }
+
+      });
+      
+      
+    });//-----------------------------doSaveFile 끝  
+    
   });
+    function moveToManagerPage(){
+        window.location.href="${CP}/chargingfee/moveToManagerPage.do";
+    };
   
 
   //==================================================================
@@ -156,6 +233,8 @@
  //=헤더부분 스크립트 이부분 꼭 넣으세요
  //==================================================================
 	 
+
+	 
 </script>
 
 </head>
@@ -169,6 +248,7 @@
   <div class="container">
     <!-- 제목 -->
     <div class="page-header">
+       <h1 style="color: orange;">관리자메뉴</h1><br>
        <h2>충전요금 데이터 등록</h2>
     </div>
     <!-- 제목 ------------------------------------------------------------------->
@@ -179,11 +259,19 @@
           <input type="button" class="btn btn-info btn-sm" value="등록"  id="doSave" >
           <input type="button" class="btn btn-primary btn-sm" value="목록"  id="moveToManagerPage" >
         </div>
+        <div class="form-group">
+          <label for="file01" class="col-sm-2 col-md-2 col-lg-2 control-label">이미지</label>
+          <div class="col-sm-10 col-md-10 col-lg-10">
+          <input type="file" class="form-control" id="file01" name="file01" placeholder="파일을 입력해주세요" maxlength="100">
+          <input type="button" class="btn btn-primary btn-sm" value="사진등록" id="doSaveFile">
+          </div>
+        </div>
     </div>
     <!--버튼 -------------------------------------------------------------------->
         <!-- 폼 -->
     <form action="#" class="form-horizontal"> 
     <input type="hidden" id="provider_seq" name="provider_seq" value="${vo.provider_seq}"> 
+    <input type="hidden" id="image" name="image">
       <div class="form-group">
         <label for="enterprenuer" class="col-sm-2 col-md-2 col-lg-2 control-label">사업자명</label>
         <div class="col-sm-10 col-md-10 col-lg-10">

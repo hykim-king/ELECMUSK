@@ -185,10 +185,10 @@
   <div class="container">
     <!-- 제목 -->
     <div class="page-header">
+       <h1 style="color: orange;">관리자메뉴</h1><br>
        <h2>충전기 데이터 수정</h2>
     </div>
     <!-- 제목 ------------------------------------------------------------------->
-    <input type="hidden" class="form-control" id="charger_seq" name="charger_seq" value="${vo.charger_seq }">
     <!--버튼  -->
     <div class="row text-right">
       <input type="button" class="btn btn-warning btn-sm" value="수정" id="doUpdate">
@@ -198,7 +198,8 @@
     <!--버튼 -------------------------------------------------------------------->
     <!-- 폼 -->
     <form action="#" class="form-horizontal">   
-
+    <input type="hidden" class="form-control" id="charger_seq" name="charger_seq" value="${vo.charger_seq }">
+    <input type="hidden" id="image" name="image" value="${vo.image}">
       <div class="form-group">
         <label for="connector" >충전기명</label>
         <input type="text" class="form-control" id="connector" name="connector" 
