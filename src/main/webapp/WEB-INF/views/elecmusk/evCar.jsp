@@ -216,7 +216,7 @@
   <div id="contents">
   <input type="hidden" id="pageSize" name="pageSize" value="6">
     <div class="select-area">
-    <table>
+    <table class="selectTable">
       <thead>
         <th>&nbsp;</th>
         <th>제조사</th>

@@ -31,30 +31,15 @@ public class EvCarDaoImpl implements EvCarDao {
 		evSearchVO search = (evSearchVO) inVO;
 		List<EvCarVO> list = new ArrayList<EvCarVO>();
 		String statement = NAMESPACE+DOT+"doRetrieve";
-		LOG.debug("┌───────────────────────────────────┐");
-		LOG.debug("│param : "+ inVO);
-		LOG.debug("│statement : "+ statement);
 		list = sqlSessionTemplate.selectList(statement, search);
-		for(EvCarVO vo : list) {
-			LOG.debug("│vo : "+ vo);
-		}
-		LOG.debug("└───────────────────────────────────┘");
 		return list;
 	}
 
 	@Override
 	public int doSave(EvCarVO inVO) throws SQLException {
 		int flag = 0;
-		LOG.debug("┌--------------------------------┐");
-		LOG.debug("|param:"+inVO );		
-		
 		String statement = NAMESPACE+DOT+"evCarSave";
-		
-		LOG.debug("|statement:"+statement );
-		
 		flag = sqlSessionTemplate.insert(statement, inVO);
-		LOG.debug("|flag:"+flag );
-		LOG.debug("└--------------------------------┘");	
 		
 		return flag;
 	}
@@ -66,17 +51,8 @@ public class EvCarDaoImpl implements EvCarDao {
 
 	@Override
 	public int doDelete(EvCarVO inVO) throws SQLException {
-		LOG.debug("┌--------------------------------┐");
-		LOG.debug("|param:"+inVO );
-
-		
 		String statement = NAMESPACE+DOT+"evCarDelete";
-		LOG.debug("|statement:"+statement );
-
-		
 		int flag = sqlSessionTemplate.delete(statement, inVO);
-		LOG.debug("|flag:"+flag );
-		LOG.debug("└--------------------------------┘");		
 		return flag;
 	}
 

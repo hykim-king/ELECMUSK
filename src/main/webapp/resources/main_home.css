@@ -2,7 +2,6 @@
   body, header, div, footer, ul, li, p, h1 {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
   }
   
   li {
@@ -176,14 +175,6 @@
     margin: 10px;
   }
   
-  /* footer ----------------------------------------------------------------- */
-  footer {
-    width: 100%;
-    border: 1px solid;
-    background-color: #eee;
-    text-align: center;
-  }
-  
   /* 중간화면 슬라이드 배너 사라짐 */
   @media screen and (min-width:1px) and (max-width: 1200px) {
   /* 메뉴 옆 text-logo area --------------------------------------------------- */
@@ -316,12 +307,6 @@
     background-color: red;
     margin: 10px;
   } 
-  footer {
-    width: 100%;
-    border: 1px solid;
-    background-color: #eee;
-    text-align: center;
-  }  
   }
   /* end -------------------------------------------------------------------- */
   

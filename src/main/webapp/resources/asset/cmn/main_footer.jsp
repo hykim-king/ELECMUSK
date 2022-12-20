@@ -6,11 +6,18 @@
 <c:set var="resources" value="/resources"/>
 <c:set var="CP_RES"    value="${CP}${resources}" />
 <style>
-  #footerArea{
+  footer {
     width: 100%;
+    border: 1px solid;
+    background-color: #eee;
+    text-align: center;
   }
 </style>
-  <div id="footerArea">
+<html>
+<head>
+</head>
+<body>
+<footer>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
@@ -18,4 +25,6 @@
     <p>&nbsp;</p>  
     <p>&nbsp;</p>  
     <p>&nbsp;</p>  
-  </div>
+</footer>
+</body>
+</html>

@@ -44,16 +44,22 @@
 			$(".sub-menu>li>a").css("z-index", "-1");
 		});
 		
+    $("#main_home").on("click", function() {
+        let link = "${CP}/elecmusk/view.do"
+        location.href = link;
+     });
+
+     $("#mainhome,#logo").on("click", function() {
+       let link = "${CP}/elecmusk/view.do"
+       location.href = link;
+     });
+		
 		onlyLoginUserUse();
 
 	});
 	
 	function onlyLoginUserUse() {
 		if(${null != sessionScope.userInfo.status && not empty sessionScope.userInfo}){
-	    $("#main_home").on("click", function() {
-	        let link = "${CP}/elecmusk/view.do"
-	        location.href = link;
-	     });
 	     $("#carsData").on("click", function() {
 	       let link = "${CP}/elecmusk/evcar.do"
 	       location.href = link;
@@ -76,11 +82,6 @@
 	     });
 	     $("#rvboard").on("click", function() {
 	       let link = "${CP}/review/rvboardView.do?category=9"
-	       location.href = link;
-	     });
-	
-	     $("#mainhome,#logo").on("click", function() {
-	       let link = "${CP}/elecmusk/view.do"
 	       location.href = link;
 	     });
 	     $("#board01").on("click", function() {
@@ -118,9 +119,9 @@
     <div class="login-area">
     <c:choose>
       <c:when test="${null != sessionScope.userInfo && not empty sessionScope.userInfo}">
-        ${sessionScope.userInfo}<br>
-        <a href="#" id = "doLogout">[Logout]</a>
-	      <a href="#" id = "moveToMyPage">[Mypage]</a>
+	      <p>환영합니다. <b>${sessionScope.userInfo.userId}</b>님
+        <a id = "doLogout">[Logout]</a>
+	      <a id = "moveToMyPage">[Mypage]</a></p>
       </c:when>
       <c:otherwise>
 	      <a href="${CP}/elecmusk/login.do">[Login]</a>
@@ -137,6 +138,7 @@
 	<!-- logo-area end--------------------------------------------------------->
 
 	<div class="header-area" id="header-area">
+	<input type="hidden" id="status" name="status" value="${sessionScope.userInfo.status}">
   
 		<div class="text-logo-area">
 			<img src="${CP_RES}/asset/imgs/home_imgs/EVerything_logo_text.png" id="text-logo">
@@ -148,32 +150,32 @@
 				<li id="main_home" name="main_home">Home</li>
 				<li>BOARD
 					<ul class="sub-menu nav nav-stacked">
-						<li><a href="#" id="board01">자유게시판</a></li>
-						<li><a href="#" id="board02">결함 게시판</a></li>
-						<li><a href="#" id="board03">공지사항</a></li>
+						<li><a id="board01">자유게시판</a></li>
+						<li><a id="board02">결함 게시판</a></li>
+						<li><a id="board03">공지사항</a></li>
 					</ul>
 				</li>
 				<li>EVCARS
 					<ul class="sub-menu nav nav-stacked">
-						<li><a href="#" id="carsData" name="carsData">Cars data</a></li>
-						<li><a href="#" id="subsidyData" name="subsidyData">Subsidy
+						<li><a id="carsData" name="carsData">Cars data</a></li>
+						<li><a id="subsidyData" name="subsidyData">Subsidy
 								data</a></li>
-						<li><a href="#" id="chargerData" name="chargerData">Charger
+						<li><a id="chargerData" name="chargerData">Charger
 								data</a></li>
-						<li><a href="#" id="feeData" name="feeData">Charging Fee</a></li>
-						<li><a href="#">Statistical info</a></li>
+						<li><a id="feeData" name="feeData">Charging Fee</a></li>
+						<li><a>Statistical info</a></li>
 					</ul>
 				</li>
 				<li>STATION
 					<ul class="sub-menu nav nav-stacked">
-						<li><a href="#" id="stationSearch" name="stationSearch">Station</a></li>
-						<li><a href="#" id="rvboard" name="rvboard">Review board</a></li>
+						<li><a id="stationSearch" name="stationSearch">Station</a></li>
+						<li><a id="rvboard" name="rvboard">Review board</a></li>
 					</ul>
 				</li>
 				<li>NEWS
 					<ul class="sub-menu nav nav-stacked">
-						<li><a href="#">Menu 1</a></li>
-						<li><a href="#">Menu 2</a></li>
+						<li><a>Menu 1</a></li>
+						<li><a>Menu 2</a></li>
 					</ul>
 				</li>
 			</ul>

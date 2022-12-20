@@ -21,10 +21,6 @@
 <link rel="stylesheet" href="${CP_RES}/main_home.css">
 <!-- jQuery -->
 <script src="${CP_RES}/bootstrap/js/jquery-1.12.4.js"></script>
-<!-- callAjax -->
-<script src="${CP_RES}/bootstrap/js/callAjax.js"></script>
-<!-- String, Number, Date Util  -->
-<script src="${CP_RES}/bootstrap/js/eUtil.js"></script>
 <!-- bootstrap js -->
 <script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
@@ -91,10 +87,10 @@ $(document).ready(function(){
 </head>
 <body>
   <header>
-  <jsp:include page ="${CO}/resources/asset/cmn/main_header.jsp" flush="false"/>
+    <jsp:include page ="/resources/asset/cmn/main_header.jsp" flush="false"/>
   </header>
-  <div id="contents">
   
+  <div id="contents">
    <div id="imgslide" class="all">
     <div class="imgbox">
       <ul class="slide">
@@ -121,14 +117,11 @@ $(document).ready(function(){
         <p>&nbsp;</p>
         <p>&nbsp;</p>
       </div>
-      
     </div>
-
-    
   </div>
-<footer>
-<jsp:include page ="/resources/asset/cmn/main_footer.jsp" flush="false"/>
-</footer>
+  </div>
+  
+	 <jsp:include page ="/resources/asset/cmn/main_footer.jsp" flush="false"/>
 </body>
 </html>
 </fmt:bundle>

@@ -39,3 +39,9 @@
 .masterArea{
 	text-align: right;
 }
+
+.selectTable, th, td{
+	text-align:center;
+	padding-left: 5px;
+	padding-right: 5px;
+}

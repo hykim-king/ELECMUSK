@@ -32,9 +32,6 @@ public class evChartDaoImpl implements evChartDao {
 		List<evChartVO> list = new ArrayList<evChartVO>();
 		String statement = NAMESPACE+DOT+"doRetrieve";
 		list = sqlSessionTemplate.selectList(statement, search);
-		for(evChartVO vo : list) {
-			LOG.debug("│vo : "+ vo);
-		}
 		return list;
 	}
 

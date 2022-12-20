@@ -94,14 +94,9 @@ public class HomeController {
 			inVO.setPageNo(1);
 		}
 		
-		LOG.debug("┌=============================┐");	
-		LOG.debug("|inVO="+inVO);
-		
 		List<evChartVO> list = evChartService.doRetrieve(inVO);
 		
 		jsonString=new Gson().toJson(list);
-		LOG.debug("|jsonString="+jsonString);
-		LOG.debug("└=============================┘");		
 		
 		return jsonString;
 	}
@@ -123,24 +118,10 @@ public class HomeController {
 			inVO.setPageNo(1);
 		}
 		
-		LOG.debug("┌=============================┐");	
-		LOG.debug("|inVO="+inVO);
 		
 		List<EvCarVO> list = evCarService.doRetrieve(inVO);
 		
 		jsonString=new Gson().toJson(list);
-		/*
-		JSON 값																	
-		
-		문자열 (string)			{ "site":"cafe" }                                                                                       											
-		숫자 (number)				{ "year":2022}                                                                                  											
-		객체 (object)				{"UserVO":{"msgId":"1","msgContents":"p99_01수정 되었습니다.","totalCnt":0,"num":0}}                                                                                      											
-		배열 (array)					                                                                                        											
-		참거짓 (boolean)			{ "member":true }                                                                                       											
-		널 (null)					{ "point":null }        											
-		*/
-		LOG.debug("|jsonString="+jsonString);
-		LOG.debug("└=============================┘");		
 		
 		return jsonString;
 	}
@@ -277,8 +258,6 @@ public class HomeController {
 		
 		MessageVO outMsg = new MessageVO();
 		int flag = evCarService.doUpdate(inVO);
-		LOG.debug("┌──────────────────────────────┐");
-		LOG.debug("│flag = "+flag);
 		
 		String message = "";
 		if(flag == 1) {
