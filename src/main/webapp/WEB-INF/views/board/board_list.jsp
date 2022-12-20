@@ -267,7 +267,7 @@
   <div class="container">
     <!----------------------------------- 제목 -->
     <div class="page-header">
-      <h2>게시목록</h2>
+      <h2>${title}</h2>
     </div>
     <!------------------------------------ 제목 -->
                   ${sessionScope.userInfo.status}<br>

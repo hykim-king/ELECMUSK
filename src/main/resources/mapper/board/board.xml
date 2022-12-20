@@ -16,7 +16,7 @@
   <sql id="searchcondition">
       <choose>
         <when test=" '10' ==searchDiv and '' != searchWord">
-         and nickName LIKE '%' || #{searchWord} || '%'
+         and a2.nickName LIKE '%' || #{searchWord} || '%'
         </when>
         <when test=" '20' ==searchDiv and '' != searchWord">
          and title LIKE '%' || #{searchWord} || '%'
@@ -62,7 +62,7 @@
 					                a1.category,
 					                a1.title,
 					                a1.csnm,
-					                a2.nickname,
+					                a2.nickname as nickName,
 					                a1.reg_dt,
 					                a1.reg_id,
 					                a1.read_cnt,
@@ -85,8 +85,9 @@
     CROSS JOIN
     (
       SELECT COUNT(*) totalCnt
-      FROM BOARD
-      WHERE category = #{category}
+      FROM board a1 , member a2
+      WHERE a1.reg_id = a2.id
+      and category = #{category}
       <include refid="searchcondition"/>
     )B
   </select>
