@@ -93,7 +93,7 @@
 	       location.href = link;
 	     });
 	     $("#board03").on("click", function() {
-	       let link = "${CP}/board/boardView.do?category=3"
+	       let link = "${CP}/board/boardView.do?category=5"
 	       location.href = link;
 	     });
 	     $("#doLogout").on("click", function() {
