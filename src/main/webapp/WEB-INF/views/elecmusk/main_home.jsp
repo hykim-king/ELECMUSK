@@ -21,6 +21,12 @@
 <link rel="stylesheet" href="${CP_RES}/main_home.css">
 <!-- jQuery -->
 <script src="${CP_RES}/bootstrap/js/jquery-1.12.4.js"></script>
+<!-- callAjax -->
+<script src="${CP_RES}/bootstrap/js/callAjax.js"></script>
+<!-- String, Number, Date Util  -->
+<script src="${CP_RES}/bootstrap/js/eUtil.js"></script>
+<!-- paging -->
+<script src="${CP_RES}/bootstrap/js/jquery.bootpag.js"></script>
 <!-- bootstrap js -->
 <script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
@@ -105,9 +111,9 @@ $(document).ready(function(){
       <div id="contents-1">
         <jsp:include page ="/resources/asset/cmn/evChart.jsp" flush="false"/>
       </div>
-      <div id="contents-2">
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
+      <div id="contents-2" style="border-top:1px solid;">
+          <h3>최근 게시물</h3>
+          <jsp:include page ="/resources/asset/cmn/recentboardlist.jsp" flush="false"/>
       </div>
       <div id="contents-3">
         <p>&nbsp;</p>

@@ -46,7 +46,6 @@ public class BoardController {
 		
 		return VIEW_NAME;
 	}
-
 	
 	/**
 	 * doUpdate
