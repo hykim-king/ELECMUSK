@@ -112,7 +112,7 @@ $(document).ready(function(){
         <jsp:include page ="/resources/asset/cmn/evChart.jsp" flush="false"/>
       </div>
       <div id="contents-2" style="border-top:1px solid;">
-          <h3>최근 게시물</h3>
+
           <jsp:include page ="/resources/asset/cmn/recentboardlist.jsp" flush="false"/>
       </div>
       <div id="contents-3">

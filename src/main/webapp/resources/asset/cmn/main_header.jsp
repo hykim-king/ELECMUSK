@@ -147,7 +147,7 @@
 		<!-- menu-area -->
 		<div id="menu-area" class="container-fluid text-center">
 			<ul class="menu-bar breadcrumb nav text-center">
-				<li id="main_home" name="main_home">Home</li>
+				<li id="main_home" name="main_home"><span class="glyphicon glyphicon-home"></span></li>
 				<li>BOARD
 					<ul class="sub-menu nav nav-stacked">
 						<li><a id="board01">자유게시판</a></li>

@@ -272,12 +272,26 @@
   
   //=============================doSelectOne함수
   function doSelectOne(boardSeq){
-	   let url = "${CP}/board/doSelectOne.do";
-
-    url = url + "?bdSeq="+boardSeq;
-    console.log("url : "+url);
-    location.href = url;
+	  if(${null != sessionScope.userInfo.status && not empty sessionScope.userInfo}){
+		  let url = "${CP}/board/doSelectOne.do";
+	
+	    url = url + "?bdSeq="+boardSeq;
+	    console.log("url : "+url);
+	    location.href = url;
+	  }
   //=============================doSelectOne함수 끝  
+  }
+  
+  //=============================moveToboard함수
+  function moveToboard(category){
+	  if(${null != sessionScope.userInfo.status && not empty sessionScope.userInfo}){
+		  let url = "${CP}/board/boardView.do";
+	
+	    url = url + "?category="+category;
+	    console.log("url : "+url);
+	    location.href = url;
+	  }
+  //=============================moveToboard함수 끝  
   }
 </script>
 <style>
@@ -286,18 +300,18 @@
     color: #000;
   }
   a:hover{
-    text-decoration: underline;;
+    text-decoration: underline;
   }
 </style>
 </head>
 <body>
   
-  <!-------------------------------------- div container -->
+   <h3>최근 게시물</h3>
+   <hr>
   <div class="recentboardArea" style="display: flex; ">
-    <!-------------------------------------------------- 테이블 목록 -->
-    
+  
     <div class="table-freeresponsive" style="width:100%; margin: 5px; padding: 5px;">
-    <h3 style="border: 1px solid; padding:5px; border-radius: 10px;">자유 게시판</h3>
+    <a onclick="moveToboard(1)"><h3 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3)">자유 게시판</h3></a>
     <table class="table" id="freeTable">
       <tbody>
       </tbody>
@@ -305,7 +319,7 @@
     </div>
     
     <div class="table-flawresponsive" style="width:100%; margin: 5px; padding: 5px;">
-    <h3 style="border: 1px solid; padding:5px; border-radius: 10px;">결함 게시판</h3>
+    <a onclick="moveToboard(2)"><h3 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3)">결함 게시판</h3></a>
     <table class="table" id="flawTable">
       <tbody>
       </tbody>
@@ -313,7 +327,7 @@
     </div>
     
     <div class="table-noticeresponsive" style="width:100%; margin: 5px; padding: 5px;">
-    <h3 style="border: 1px solid; padding:5px; border-radius: 10px;">공지 사항</h3>
+    <a onclick="moveToboard(5)"><h3 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3)">공지 사항</h3></a>
     <table class="table" id="noticeTable">
       <tbody>
       </tbody>

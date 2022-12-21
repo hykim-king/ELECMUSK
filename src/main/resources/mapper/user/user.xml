@@ -106,6 +106,39 @@ FROM member
 	)B
   </select>
   
+  <select id="pointRank" parameterType="SearchVO" resultType="UserVO">
+		SELECT A.*,B.*
+		FROM
+		        (
+		                SELECT
+		                t2.rnum as num,
+		                t2.member_seq as mSeq,
+		                t2.id as userId,
+		                t2.nickname as nickname,
+		                t2.point as point,
+		                t2.status as status
+		                FROM
+		                (
+		                        SELECT ROWNUM as RNUM, T1.*
+		                        FROM
+		                        (
+		                                SELECT *
+		                                FROM member
+		                                <![CDATA[WHERE status >= 1]]>
+		                                ORDER BY member.point asc
+		                        )T1
+		                    <![CDATA[WHERE ROWNUM <= 10]]>
+		                )T2
+		                <![CDATA[WHERE RNUM >= 1]]>
+		)A
+		CROSS JOIN
+		(
+		        SELECT COUNT(*) as totalCnt
+		        FROM member
+		        <![CDATA[WHERE status >= 1]]>
+		)B
+  </select>
+  
   <sql id="searchCondition">
     <where>
          <choose>

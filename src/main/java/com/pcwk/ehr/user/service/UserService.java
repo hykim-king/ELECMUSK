@@ -132,4 +132,12 @@ public interface UserService {
 	 * @throws SQLException
 	 */
 	int withdraw (UserVO inVO) throws SQLException;
+	
+	/**
+	 * 포인트랭킹
+	 * @param inVO
+	 * @return
+	 * @throws SQLException
+	 */
+	List<UserVO> pointRank(UserVO inVO) throws SQLException;
 }

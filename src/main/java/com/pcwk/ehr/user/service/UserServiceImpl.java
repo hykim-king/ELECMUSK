@@ -162,6 +162,11 @@ public class UserServiceImpl implements UserService {
 		
 		return flag;
 	}
+
+	@Override
+	public List<UserVO> pointRank(UserVO inVO) throws SQLException {
+		return userDao.pointRank(inVO);
+	}
 	
 	
 }
