@@ -181,7 +181,7 @@
           htmlData += "  <td class='text-center col-sm-2 col-dm-2 col-lg-2'>"+<c:out value='value.modDt'></c:out>+"</td>";
           htmlData += "  <td class='text-right col-sm-1 col-dm-1 col-lg-1'>"+<c:out value='value.readCnt'></c:out>+"</td>";
           htmlData += "  <td class='text-right col-sm-1 col-dm-1 col-lg-1' style='display: none;'>"+<c:out value='value.bdSeq '/>+"</td>";
-          htmlData += "  <td class='text-right col-sm-1 col-dm-1 col-lg-1' >"+<c:out value='value.category '/>+"</td>";
+          htmlData += "  <td class='text-right col-sm-1 col-dm-1 col-lg-1' style='display: none;'>"+<c:out value='value.category '/>+"</td>";
           htmlData += "</tr>";
           //<td style='display: none;'>"+<c:out value='value.bdSeq '/>+"</td>
         });
@@ -270,8 +270,6 @@
       <h2>${title}</h2>
     </div>
     <!------------------------------------ 제목 -->
-                  ${sessionScope.userInfo.status}<br>
-              ${sessionScope.userInfo}<br>
     <!---------------------------------------- 검색 : 검색 구분(select) 검색어(input) 페이지 사이즈(select) -->
     <form action="#" class="form-inline text-right">
       <div class="form-group">
