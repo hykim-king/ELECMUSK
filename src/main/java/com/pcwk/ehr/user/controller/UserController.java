@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.pcwk.ehr.chart.domain.evChartVO;
 import com.pcwk.ehr.cmn.MessageVO;
+import com.pcwk.ehr.cmn.SearchVO;
+import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.evcar.cmn.evSearchVO;
 import com.pcwk.ehr.user.domain.UserVO;
 import com.pcwk.ehr.user.service.UserService;
@@ -144,6 +146,47 @@ public class UserController {
 		jsonString = new Gson().toJson(messageVO);
 		
 		LOG.debug("회원탈퇴로 생성된 jsonstring: "+jsonString);
+		
+		return jsonString;
+	}
+	
+	@RequestMapping(value="/doUserRetrieve.do",method=RequestMethod.GET
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String doRetrieve(SearchVO inVO) throws SQLException{
+		String jsonString = "";
+		
+		LOG.debug("Retrieve SearchVO인 inVO: "+inVO);
+		
+		if (0 == inVO.getPageSize()) {
+			inVO.setPageSize(10);
+		}
+
+		// 페이지 번호(default =1)
+		if (0 == inVO.getPageNo()) {
+			inVO.setPageNo(1);
+		}
+
+		// 검색구분(default ="")
+		if (null == inVO.getSearchDiv()) {
+			inVO.setSearchDiv(StringUtil.nvl(inVO.getSearchDiv()));
+		}
+
+		// 검색어(default ="")
+		if (null == inVO.getSearchWord()) {
+			inVO.setSearchWord(StringUtil.nvl(inVO.getSearchWord()));
+		}		
+
+		LOG.debug("┌=============================┐");
+		LOG.debug("|inVO=" + inVO);
+
+		List<UserVO> list = userService.doRetrieve(inVO);
+		
+		LOG.debug("list: "+list);
+		
+		jsonString = new Gson().toJson(list);
+		
+		LOG.debug("jsonString: "+jsonString);
 		
 		return jsonString;
 	}

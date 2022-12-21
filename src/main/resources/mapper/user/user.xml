@@ -66,6 +66,26 @@ FROM member
    WHERE member_seq = #{mSeq}
   </select>
   
+  <!-- 목록조회 용 검색조건 -->
+  <sql id="searchCondition">
+       <where>
+          <choose>
+             <when test=" '10' == searchDiv and '' != searchWord  ">
+                id  LIKE '%' || #{searchWord} || '%'
+             </when>
+             <when test=" '20' == searchDiv and '' != searchWord  ">
+                nickname  LIKE '%' || #{searchWord} || '%'
+             </when>
+             <when test=" '30' == searchDiv and '' != searchWord  ">
+                name LIKE '%' || #{searchWord} || '%'
+             </when>                                              
+             <when test=" '40' == searchDiv and '' != searchWord  ">
+                email LIKE '%' || #{searchWord} || '%'
+             </when>                                              
+          </choose>
+       </where>  
+  </sql>
+
   <select id="doRetrieve" parameterType="SearchVO" resultType="UserVO">
 	SELECT A.*,B.*
 	FROM
@@ -138,22 +158,7 @@ FROM member
 		        <![CDATA[WHERE status >= 1]]>
 		)B
   </select>
-  
-  <sql id="searchCondition">
-    <where>
-         <choose>
-           <when test="'10' == searchDiv and ''!= searchWord">
-             id  Like '%' || #{searchWord} || '%'
-           </when>
-           <when test="'20' == searchDiv and ''!= searchWord">
-             nickname  Like '%' || #{searchWord} || '%'
-           </when>
-           <when test="'30' == searchDiv and ''!= searchWord">
-             name  Like '%' || #{searchWord} || '%'
-           </when>
-         </choose>
-       </where>
-  </sql>
+
   
   <!-- resultMap -->
   <!-- selectOne용 

@@ -21,7 +21,7 @@
 
 <!-- bootstrap js -->
 <script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
-<title>제목</title>
+<title>회원가입</title>
 <style type="text/css">
 #mainButton {
   width: 48%;

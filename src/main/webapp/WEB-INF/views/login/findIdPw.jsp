@@ -21,7 +21,7 @@
 
 <!-- bootstrap js -->
 <script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
-<title>제목</title>
+<title>아이디/비밀번호 찾기</title>
 <style type="text/css">
 .btn {
   width: 48%;
