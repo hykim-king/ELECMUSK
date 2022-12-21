@@ -222,7 +222,7 @@
         });
         
 		 }else{
-			 alert("alskdj")
+			 alert("본인 계시물이 아닙니다")
 		 }
     });//==========================================doUpdate끝
 	
@@ -248,7 +248,7 @@
     <!------------------------------------ 제목 -->
     <input type="hidden" class="form-control" id="category" name="category" value="${vo.category }">
     <input type="hidden" class="form-control" id="bdSeq" name="bdSeq" value="${vo.bdSeq }">
-    <input type="text" class="form-control" id="regId" name="regId" value="${vo.regId }">
+    <input type="hidden" class="form-control" id="regId" name="regId" value="${vo.regId }">
     <!------------------------------------- 버튼 -->
     <div class="row text-right">
        <input type="button" class="btn btn-primary btn-sm" value="수정" id="doUpdate">
@@ -261,7 +261,6 @@
     <form action="#" class="form-horizontal">
       <div class="form-group">
         <label for="title">제목</label>
-        ${sessionScope.userInfo.userId}<br/>
         <input type="text" class="form-control" id="title" name="title" placeholder="제목 입력하세요" maxlength="100" value="${vo.title }">
       </div>
       <div class="form-group">

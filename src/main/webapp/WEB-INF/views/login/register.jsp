@@ -138,7 +138,7 @@ h5{
     		     let parsedJson = JSON.parse(data);
     		     
     		     if("1" == parsedJson.msgId){
-    		    	 let message = "성공적으로 회원가입 되었습니다.";
+    		    	 let message = "성공적으로 회원가입 되었습니다.\n";
     		    	 message    += "최초 닉네임이 임시 닉네임으로 되어있으니 우측 상단 마이페이지에서 수정하시기바랍니다.";
     		       alert(message);
              }else{
@@ -224,7 +224,7 @@ h5{
       <div class="form-group">
         <label for="userId" class="col-sm-3 control-label">아이디*</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="userId" placeholder="아이디">
+          <input type="text" class="form-control" id="userId" placeholder="아이디" maxlength="20">
         </div>
         <div class="col-sm-2">
           <input type="button" class="form-control" value="중복확인" id="idCheck">

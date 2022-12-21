@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.pcwk.ehr.chart.domain.evChartVO;
 import com.pcwk.ehr.cmn.MessageVO;
+import com.pcwk.ehr.evcar.cmn.evSearchVO;
 import com.pcwk.ehr.user.domain.UserVO;
 import com.pcwk.ehr.user.service.UserService;
 
@@ -142,6 +144,19 @@ public class UserController {
 		jsonString = new Gson().toJson(messageVO);
 		
 		LOG.debug("회원탈퇴로 생성된 jsonstring: "+jsonString);
+		
+		return jsonString;
+	}
+	
+	@RequestMapping(value = "/pointRank.do",method=RequestMethod.GET
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody //비동기 처리를 하는 경우, HTTP 요청 부분의 body부분이 그대로 브라우저에 전달된다.	
+	public String pointRank(UserVO inVO) throws SQLException  {
+		String jsonString = "";
+		
+		List<UserVO> list = userService.pointRank(inVO);
+		
+		jsonString=new Gson().toJson(list);
 		
 		return jsonString;
 	}

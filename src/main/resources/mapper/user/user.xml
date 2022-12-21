@@ -106,6 +106,39 @@ FROM member
 	)B
   </select>
   
+  <select id="pointRank" parameterType="SearchVO" resultType="UserVO">
+		SELECT A.*,B.*
+		FROM
+		        (
+		                SELECT
+		                t2.rnum as num,
+		                t2.member_seq as mSeq,
+		                t2.id as userId,
+		                t2.nickname as nickname,
+		                t2.point as point,
+		                t2.status as status
+		                FROM
+		                (
+		                        SELECT ROWNUM as RNUM, T1.*
+		                        FROM
+		                        (
+		                                SELECT *
+		                                FROM member
+		                                <![CDATA[WHERE status >= 1]]>
+		                                ORDER BY member.point DESC
+		                        )T1
+		                    <![CDATA[WHERE ROWNUM <= 10]]>
+		                )T2
+		                <![CDATA[WHERE RNUM >= 1]]>
+		)A
+		CROSS JOIN
+		(
+		        SELECT COUNT(*) as totalCnt
+		        FROM member
+		        <![CDATA[WHERE status >= 1]]>
+		)B
+  </select>
+  
   <sql id="searchCondition">
     <where>
          <choose>
@@ -162,20 +195,23 @@ FROM member
   </select>
   
   <select id="findIdByEmail" parameterType="UserVO" resultMap="userMap">
-    SELECT id
+    SELECT id,
+           status
     FROM member
     WHERE email = #{email}
   </select>
   
   <select id="findIdByNameBirth" parameterType="UserVO" resultMap="userMap">
-    SELECT id
+    SELECT id,
+           status
     FROM member
     WHERE name = #{name}
     AND birth = #{birth}
   </select>
   
   <select id="findPwByBackup" parameterType="UserVO" resultMap="userMap">
-    SELECT password
+    SELECT password,
+           status
     FROM member
     WHERE id = #{userId}
     AND backup_question = #{backupQuestion}

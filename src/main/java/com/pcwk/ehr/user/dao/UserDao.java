@@ -35,5 +35,6 @@ public interface UserDao extends WorkDiv<UserVO> {
 	//이메일 변경 
 	int updateEmail (UserVO inVO) throws SQLException;
 	
-	
+	//포인트랭킹
+	List<UserVO> pointRank(UserVO inVO) throws SQLException;
 }

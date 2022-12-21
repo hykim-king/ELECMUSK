@@ -216,4 +216,20 @@ public class UserDaoImpl implements UserDao {
 		
 		return flag;
 	}
+
+	@Override
+	public List<UserVO> pointRank(UserVO inVO) throws SQLException {
+		LOG.debug("param: " + inVO);
+
+		List<UserVO> list = new ArrayList<UserVO>();
+		
+		String statement = NAMESPACE + DOT + "pointRank";
+		LOG.debug("statement: " + statement);
+		
+		list = sqlSessionTemplate.selectList(statement, inVO);
+		
+		LOG.debug("list: "+list);
+		
+		return list;
+	}
 }

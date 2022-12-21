@@ -154,7 +154,7 @@ public class LoginController {
 		
 		LOG.debug("inVO: "+inVO);
 		
-		//10 성공, 20 아이디 존재X ,30 아이디 입력X, 40 비밀번호 틀림, 50 비밀번호 입력X
+		//10 성공, 20 아이디 존재X ,30 아이디 입력X, 40 비밀번호 틀림, 50 비밀번호 입력X, 60 : 상태값 0
 
 		MessageVO outMessage = new MessageVO();
 		
@@ -181,6 +181,13 @@ public class LoginController {
 			
 			LOG.debug("loginSuccessVO: "+loginSuccessVO);
 			
+			//탈퇴 회원 로그인 가능하긴함
+			if(0==loginSuccessVO.getStatus()) {
+				outMessage.setMsgId("60");
+				outMessage.setMsgContents("탈퇴(정지)회원입니다.");
+				return new Gson().toJson(outMessage);
+			}
+			
 			//세션 던진 부분. 이름 userInfo로 수업과 똑같이 던졌음
 			session.setAttribute("userInfo", loginSuccessVO);
 			
@@ -191,7 +198,9 @@ public class LoginController {
 		}else {
 			message = "알 수 없는 오류. 님 멀한거에여";
 		}
-				
+			
+		
+		
 		outMessage.setMsgId(String.valueOf(loginStatus));
 		outMessage.setMsgContents(message);
 		
@@ -314,6 +323,12 @@ public class LoginController {
 		
 		List<UserVO> list = userService.findIdByEmail(inVO);
 		
+		for(int i = list.size()-1; i >= 0; i--) {
+			if(0==list.get(i).getStatus()) {
+				list.remove(i);
+			}
+		}
+		
 		jsonString = new Gson().toJson(list);
 		
 		LOG.debug("jsonString: "+jsonString);
@@ -335,6 +350,12 @@ public class LoginController {
 		
 		List<UserVO> list = userService.findIdByNameBirth(inVO);
 		
+		for(int i = list.size()-1; i >= 0; i--) {
+			if(0==list.get(i).getStatus()) {
+				list.remove(i);
+			}
+		}
+		
 		jsonString = new Gson().toJson(list);
 		
 		LOG.debug("jsonString: "+jsonString);
@@ -351,6 +372,10 @@ public class LoginController {
 		LOG.debug("으아아앙inVO: "+inVO);
 		
 		UserVO outVO = userService.findPwByBackup(inVO);
+		
+		if(outVO.getStatus()==0) {
+			outVO = null;
+		}
 		
 		jsonString = new Gson().toJson(outVO);
 		

@@ -142,6 +142,9 @@ public class UserServiceImpl implements UserService {
 		outVO.setNickname("Deleted_User"+outVO.getNickname()+StringUtil.getCurrentDate());
 		outVO.setStatus(0);
 		
+		if(outVO != null && outVO.getName() == null) {
+			outVO.setName("");
+		}
 		if(outVO != null && outVO.getBirth() == null) {
 			outVO.setBirth("");
 		}
@@ -161,6 +164,11 @@ public class UserServiceImpl implements UserService {
 		int flag = userDao.doUpdate(outVO);
 		
 		return flag;
+	}
+
+	@Override
+	public List<UserVO> pointRank(UserVO inVO) throws SQLException {
+		return userDao.pointRank(inVO);
 	}
 	
 	

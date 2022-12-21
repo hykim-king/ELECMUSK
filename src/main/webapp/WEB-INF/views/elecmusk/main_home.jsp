@@ -108,20 +108,21 @@ $(document).ready(function(){
   </div>
   
     <div id="contents-area">
-      <div id="contents-1">
+      <div id="contents-1" style="border-top:1px solid rgba(0,0,0,0.2);">
+        <jsp:include page ="/resources/asset/cmn/recentboardlist.jsp" flush="false"/>
+      </div>
+      <div id="contents-2" style="border-top:1px solid rgba(0,0,0,0.2);">
+          <h3>&nbsp;</h3>
+          <h3>&nbsp;</h3>
+          <h3>&nbsp;</h3>
+          <h3>&nbsp;</h3>
+          <h3>&nbsp;</h3>
+      </div>
+      <div id="contents-3" style="border-top:1px solid rgba(0,0,0,0.2);">
+        <jsp:include page ="/resources/asset/cmn/pointRank.jsp" flush="false"/>
+      </div>
+      <div id="contents-4" style="border-top:1px solid rgba(0,0,0,0.2);">
         <jsp:include page ="/resources/asset/cmn/evChart.jsp" flush="false"/>
-      </div>
-      <div id="contents-2" style="border-top:1px solid;">
-          <h3>최근 게시물</h3>
-          <jsp:include page ="/resources/asset/cmn/recentboardlist.jsp" flush="false"/>
-      </div>
-      <div id="contents-3">
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-      </div>
-      <div id="contents-4">
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
       </div>
     </div>
   </div>
