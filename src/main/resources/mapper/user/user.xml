@@ -195,20 +195,23 @@ FROM member
   </select>
   
   <select id="findIdByEmail" parameterType="UserVO" resultMap="userMap">
-    SELECT id
+    SELECT id,
+           status
     FROM member
     WHERE email = #{email}
   </select>
   
   <select id="findIdByNameBirth" parameterType="UserVO" resultMap="userMap">
-    SELECT id
+    SELECT id,
+           status
     FROM member
     WHERE name = #{name}
     AND birth = #{birth}
   </select>
   
   <select id="findPwByBackup" parameterType="UserVO" resultMap="userMap">
-    SELECT password
+    SELECT password,
+           status
     FROM member
     WHERE id = #{userId}
     AND backup_question = #{backupQuestion}

@@ -325,9 +325,9 @@ h4{
       }
  
       let params = {
-    		  mSeq : ${sessionScope.userInfo.mSeq}
-      } 
-      
+    		  mSeq : ${sessionScope.userInfo.mSeq} 
+      }  
+       
       $.ajax({ 
           type: "POST",
           url: "/ehr/elecmusk/deleteUser.do",
@@ -341,7 +341,7 @@ h4{
            
             if("1" == parsedJson.msgId){
               alert(parsedJson.msgContents);
-              renewSession();
+              window.location.href="${CP}/elecmusk/doLogout.do";
             }else{
               alert(parsedJson.msgContents);
             }
@@ -372,7 +372,7 @@ h4{
 		   },    
 		   success:function(data){ //통신 성공
 			   //alert(data);
-			   window.location.href="${CP}/elecmusk/myPage.do";
+			   window.location.href="${CP}/elecmusk/view.do";
 		   }, 
 		   error:function(data){//실패
 		   
@@ -382,7 +382,8 @@ h4{
 		   }
 
 		});
-  }
+  }//세션 다시만들기 함수 끝
+  
 </script>
 
 </head>
@@ -406,7 +407,7 @@ h4{
 				<div class="form-group">
 					<label for="nickname" class="col-sm-3 control-label">바꿀 닉네임</label>
 					<div class="col-sm-6">
-						<input type="text" class="form-control" id="nickname"	placeholder="닉네임">
+						<input type="text" class="form-control" id="nickname"	placeholder="닉네임" maxlength="20">
 					</div>
 					<div class="col-sm-2">
 						<input type="button" class="form-control" value="중복확인" id="nicknameCheck">

@@ -142,6 +142,9 @@ public class UserServiceImpl implements UserService {
 		outVO.setNickname("Deleted_User"+outVO.getNickname()+StringUtil.getCurrentDate());
 		outVO.setStatus(0);
 		
+		if(outVO != null && outVO.getName() == null) {
+			outVO.setName("");
+		}
 		if(outVO != null && outVO.getBirth() == null) {
 			outVO.setBirth("");
 		}
