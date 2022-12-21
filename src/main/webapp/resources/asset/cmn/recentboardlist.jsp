@@ -124,7 +124,7 @@
           //htmlData += "  <td class='text-left col-sm-6 col-dm-6 col-lg-6'><a href='#' onClick='doSelectOne("+<c:out value='value.bdSeq '/>+")'>"+<c:out value='value.title'></c:out>+"</a></td>";
           htmlData += "<tr>";
           htmlData += "  <td class='text-center col-sm-1 col-dm-1 col-lg-1'>"+<c:out value='value.num'></c:out>+"</td>";
-          htmlData += "  <td class='text-left col-sm-6 col-dm-6 col-lg-6'><a href='#' onClick='doSelectOne("+<c:out value='value.bdSeq '/>+")'>"+<c:out value='value.title'></c:out>+"</a></td>";
+          htmlData += "  <td class='text-left col-sm-6 col-dm-6 col-lg-6'><a onClick='doSelectOne("+<c:out value='value.bdSeq '/>+")'>"+<c:out value='value.title'></c:out>+"</a></td>";
           htmlData += "  <td style='display: none;'>"+<c:out value='value.bdSeq '/>+"</td>";
           htmlData += "</tr>";
           //<td style='display: none;'>"+<c:out value='value.bdSeq '/>+"</td>
@@ -184,7 +184,7 @@
           //htmlData += "  <td class='text-left col-sm-6 col-dm-6 col-lg-6'><a href='#' onClick='doSelectOne("+<c:out value='value.bdSeq '/>+")'>"+<c:out value='value.title'></c:out>+"</a></td>";
           htmlData += "<tr>";
           htmlData += "  <td class='text-center col-sm-1 col-dm-1 col-lg-1'>"+<c:out value='value.num'></c:out>+"</td>";
-          htmlData += "  <td class='text-left col-sm-6 col-dm-6 col-lg-6'><a href='#' onClick='doSelectOne("+<c:out value='value.bdSeq '/>+")'>"+<c:out value='value.title'></c:out>+"</a></td>";
+          htmlData += "  <td class='text-left col-sm-6 col-dm-6 col-lg-6'><a onClick='doSelectOne("+<c:out value='value.bdSeq '/>+")'>"+<c:out value='value.title'></c:out>+"</a></td>";
           htmlData += "  <td style='display: none;'>"+<c:out value='value.bdSeq '/>+"</td>";
           htmlData += "</tr>";
           //<td style='display: none;'>"+<c:out value='value.bdSeq '/>+"</td>
@@ -244,7 +244,7 @@
           //htmlData += "  <td class='text-left col-sm-6 col-dm-6 col-lg-6'><a href='#' onClick='doSelectOne("+<c:out value='value.bdSeq '/>+")'>"+<c:out value='value.title'></c:out>+"</a></td>";
           htmlData += "<tr>";
           htmlData += "  <td class='text-center col-sm-1 col-dm-1 col-lg-1'>"+<c:out value='value.num'></c:out>+"</td>";
-          htmlData += "  <td class='text-left col-sm-6 col-dm-6 col-lg-6'><a href='#' onClick='doSelectOne("+<c:out value='value.bdSeq '/>+")'>"+<c:out value='value.title'></c:out>+"</a></td>";
+          htmlData += "  <td class='text-left col-sm-6 col-dm-6 col-lg-6'><a onClick='doSelectOne("+<c:out value='value.bdSeq '/>+")'>"+<c:out value='value.title'></c:out>+"</a></td>";
           htmlData += "  <td style='display: none;'>"+<c:out value='value.bdSeq '/>+"</td>";
           htmlData += "</tr>";
           //<td style='display: none;'>"+<c:out value='value.bdSeq '/>+"</td>
@@ -298,20 +298,14 @@
   a {
     text-decoration: none;
     color: #000;
-  }
-  a:hover{
-    text-decoration: underline;
+    cursor:pointer;
   }
 </style>
 </head>
 <body>
-  
-   <h3>최근 게시물</h3>
-   <hr>
   <div class="recentboardArea" style="display: flex; ">
-  
     <div class="table-freeresponsive" style="width:100%; margin: 5px; padding: 5px;">
-    <a onclick="moveToboard(1)"><h3 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3)">자유 게시판</h3></a>
+    <h4 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3); cursor:pointer;" onclick="moveToboard(1)">자유 게시판(최신)</h4>
     <table class="table" id="freeTable">
       <tbody>
       </tbody>
@@ -319,7 +313,7 @@
     </div>
     
     <div class="table-flawresponsive" style="width:100%; margin: 5px; padding: 5px;">
-    <a onclick="moveToboard(2)"><h3 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3)">결함 게시판</h3></a>
+    <h4 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3); cursor:pointer;" onclick="moveToboard(2)">결함 게시판(최신)</h4>
     <table class="table" id="flawTable">
       <tbody>
       </tbody>
@@ -327,7 +321,7 @@
     </div>
     
     <div class="table-noticeresponsive" style="width:100%; margin: 5px; padding: 5px;">
-    <a onclick="moveToboard(5)"><h3 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3)">공지 사항</h3></a>
+    <h4 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3); cursor:pointer;" onclick="moveToboard(5)">공지 사항(최신)</h4>
     <table class="table" id="noticeTable">
       <tbody>
       </tbody>

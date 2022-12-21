@@ -116,13 +116,13 @@ $(document).ready(function(){
           <h3>&nbsp;</h3>
           <h3>&nbsp;</h3>
           <h3>&nbsp;</h3>
-          <h3>&nbsp;</h3>
+          <h3>&nbsp;</h3>       
       </div>
       <div id="contents-3" style="border-top:1px solid rgba(0,0,0,0.2);">
-        <jsp:include page ="/resources/asset/cmn/pointRank.jsp" flush="false"/>
+          <jsp:include page ="/resources/asset/cmn/evChart.jsp" flush="false"/>
       </div>
       <div id="contents-4" style="border-top:1px solid rgba(0,0,0,0.2);">
-        <jsp:include page ="/resources/asset/cmn/evChart.jsp" flush="false"/>
+          <jsp:include page ="/resources/asset/cmn/pointRank.jsp" flush="false"/>
       </div>
     </div>
   </div>
