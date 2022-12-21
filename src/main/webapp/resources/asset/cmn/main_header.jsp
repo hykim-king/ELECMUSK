@@ -59,7 +59,7 @@
 	});
 	
 	function onlyLoginUserUse() {
-		if(${null != sessionScope.userInfo.status && not empty sessionScope.userInfo}){
+		if(${null != sessionScope.userInfo && not empty sessionScope.userInfo}){
 	     $("#carsData").on("click", function() {
 	       let link = "${CP}/elecmusk/evcar.do"
 	       location.href = link;
@@ -133,7 +133,7 @@
 	<!-- logo-area -->
 	<div class="logo-area text-center">
 		<img src="${CP_RES}/asset/imgs/home_imgs/EVerything_logo.png"
-			id="logo">
+			id="logo" style="cursor:pointer;">
 	</div>
 	<!-- logo-area end--------------------------------------------------------->
 
@@ -147,15 +147,15 @@
 		<!-- menu-area -->
 		<div id="menu-area" class="container-fluid text-center">
 			<ul class="menu-bar breadcrumb nav text-center">
-				<li id="main_home" name="main_home"><span class="glyphicon glyphicon-home"></span></li>
-				<li>BOARD
+				<li id="main_home" name="main_home" style="cursor:pointer;"><span class="glyphicon glyphicon-home"></span></li>
+				<li style="cursor:pointer;">BOARD
 					<ul class="sub-menu nav nav-stacked">
 						<li><a id="board01">자유게시판</a></li>
 						<li><a id="board02">결함 게시판</a></li>
 						<li><a id="board03">공지사항</a></li>
 					</ul>
 				</li>
-				<li>EVCARS
+				<li style="cursor:pointer;">EVCARS
 					<ul class="sub-menu nav nav-stacked">
 						<li><a id="carsData" name="carsData">Cars data</a></li>
 						<li><a id="subsidyData" name="subsidyData">Subsidy
@@ -166,13 +166,13 @@
 						<li><a>Statistical info</a></li>
 					</ul>
 				</li>
-				<li>STATION
+				<li style="cursor:pointer;">STATION
 					<ul class="sub-menu nav nav-stacked">
 						<li><a id="stationSearch" name="stationSearch">Station</a></li>
 						<li><a id="rvboard" name="rvboard">Review board</a></li>
 					</ul>
 				</li>
-				<li>NEWS
+				<li style="cursor:pointer;">NEWS
 					<ul class="sub-menu nav nav-stacked">
 						<li><a>Menu 1</a></li>
 						<li><a>Menu 2</a></li>

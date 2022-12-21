@@ -385,12 +385,11 @@
 <body>
 <div>
 <div id="graphArea">
-  <select id="selectGraph" name="selectGraph" onchange="selectGraphVal()" style="margin:50px;">
+  <select id="selectGraph" name="selectGraph" onchange="selectGraphVal()" style="margin:30px;">
     <option value="10">대전 이북 통계</option>
     <option value="20">대전 이남 통계</option>
     <option value="30" selected="selected">전국 통계</option>
-  </select>
-  
+  </select>  
   <figure class="highcharts-figure">
   <div id="chartArea1"></div>
 </figure>

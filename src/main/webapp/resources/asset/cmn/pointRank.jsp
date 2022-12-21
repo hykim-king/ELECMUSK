@@ -99,7 +99,7 @@
     		  htmlData += "<tr>                                                                                        ";
     		  htmlData += "<td class='text-center col-sm-1 col-dm-1 col-lg-1'>"+<c:out value='value.num'/>+"</td>      ";
     		  htmlData += "<td class='text-center col-sm-3 col-dm-3 col-lg-3'>"+<c:out value='value.nickname'/>+"</td> ";
-    		  htmlData += "<td class='text-center col-sm-3 col-dm-3 col-lg-3'>"+<c:out value='value.point'/>+"</td>    ";
+    		  htmlData += "<td class='text-center col-sm-3 col-dm-3 col-lg-3'>"+<c:out value='value.point'/>+" 포인트</td>    ";
     		  htmlData += "</tr>                                                                                       ";
     	  });
       }
@@ -121,7 +121,7 @@
   <div class="pointRankArea" style="display: flex; ">
     
     <div class="table-freeresponsive" style="width:100%; margin: 5px; padding: 5px;">
-    <h3 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3)">포인트 랭킹</h3>
+    <h4 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3)">포인트 랭킹</h4>
     <table class="table" id="pointRankArea">
       <thead>
         <th class="text-center col-sm-1 col-dm-1 col-lg-1">순위</th>

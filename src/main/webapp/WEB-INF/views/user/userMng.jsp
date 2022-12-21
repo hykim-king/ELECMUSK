@@ -18,11 +18,14 @@
 
 <!-- 페이징 추가할 때 추가 -->
 
+<!-- String, Number, Date Util -->
+<script src="${CP_RES}/bootstrap/js/eUtil.js"></script>
+
 <!-- bootstrap js -->
 <script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
 
 <meta charset="UTF-8">
-<title>제목</title>
+<title>회원관리</title>
 <style type="text/css">
 #container{
   margin-bottom: 100px;
@@ -46,7 +49,84 @@ h4{
   $(document).ready(function(){
     console.log("document.ready");
     
-  });
+    $("#doRetrive").on("click",function(){
+    	console.log("조회버튼 클릭");
+    	doRetrieve(1);
+    });
+    
+    
+  });//document.ready
+  
+  function doRetrieve(page){
+	  console.log("doRetrieve");
+	  
+	  $.ajax({ 
+		   type: "GET",
+		   url: "/ehr/elecmusk/doUserRetrieve.do",
+		   asyn: "true",
+		   dataType: "html",
+		   data:{
+			   searchDiv : $("#searchDiv").val(),
+         searchWord: $("#searchWord").val(),
+			   pageSize : $("#pageSize").val(),
+			   pageNo : page
+		   },
+		   success:function(data){ //통신 성공
+		    console.log(data);
+		   
+		    let parsedJson = JSON.parse(data);
+		    
+		    let htmlData = "";
+		    let totalCnt = 0;
+		    let pageTotal = 0;
+		    
+		    //데이터 지워주고
+		    $("#userTable>tbody").empty();
+		    
+		    if(null!=parsedJson && parsedJson.length>0){
+		    	
+		    	totalCnt = parsedJson[0].totalCnt;
+		    	pageTotal = pageTotal = Math.ceil( totalCnt/$("#pageSize").val() );
+          console.log("=totalCnt="+totalCnt);
+          console.log("=pageSize="+$("#pageSize").val());
+          console.log("=pageTotal="+pageTotal);
+          console.log("=page="+page);	
+          
+          $.each(parsedJson,function(index,value){
+              htmlData +=" <tr>";
+              htmlData +=" <td class='text-center col-sm-1 col-md-1 col-lg-1'><input type='checkbox' name='chk' value='"+value.uId+"' /></td>";
+              htmlData += "<td class='text-center col-sm-1 col-md-1 col-lg-1'>"+"mSeq문자열로"+"</td>";
+              htmlData += "<td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.userId+"</td>";
+              htmlData += "<td class='text-center col-sm-1 col-md-1 col-lg-1'>"+value.nickname+"</td>";
+              htmlData += "<td class='text-center col-sm-1 col-md-1 col-lg-1'>"+value.name+"</td>";
+              htmlData += "<td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.birth+"</td>";
+              htmlData += "<td class='text-center col-sm-1 col-md-1 col-lg-1'>"+value.email+"</td>";
+              htmlData += "<td class='text-center col-sm-1 col-md-1 col-lg-1'>"+"포인트 문자열로"+"</td>";
+              htmlData += "<td class='text-center col-sm-1 col-md-1 col-lg-1'>"+value.joinDate+"</td>";
+              htmlData += "<td class='text-center col-sm-1 col-md-1 col-lg-1'>"+"status문자열로"+"</td>";
+              htmlData +=" </tr>";                  
+          });
+          
+        //if 끝.
+		    }else{
+              htmlData +=" <tr>"; 
+              htmlData +="   <td colspan='99' class='text-center  col-sm-12 col-md-12 col-lg-12'>no data found</td>";
+              htmlData +=" </tr>";
+	      }
+		    
+		    $("#userTable>tbody").append(htmlData);
+		    
+		    
+		   },
+		   error:function(data){//실패
+		   
+		   },
+		   complete:function(data){//성공, 실패 관계 없이 출력
+		   
+		   }
+
+		});
+  }
 </script>
 
 </head>
@@ -75,9 +155,8 @@ h4{
 					<option value="30">30</option>
 					<option value="50">50</option>
 					<option value="100">100</option>
-				</select> <input type="button" class="btn btn-primary btn-sm" value="조회"
-					id="doRetrive"> <input type="button"
-					class="btn btn-primary btn-sm" value="삭제" id="upDeleteAll">
+				</select> <input type="button" class="btn btn-primary btn-sm" value="조회" id="doRetrive"> 
+					<input type="button" class="btn btn-primary btn-sm" value="삭제" id="upDeleteAll">
 			</div>
 			<!-- 검색부분 ----------------------------------------->
 

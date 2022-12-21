@@ -21,7 +21,7 @@
 
 <!-- bootstrap js -->
 <script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
-<title>제목</title>
+<title>마이 페이지</title>
 <style type="text/css">
 #container{
   margin-bottom: 100px;
