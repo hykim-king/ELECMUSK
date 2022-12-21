@@ -125,7 +125,7 @@ FROM member
 		                                SELECT *
 		                                FROM member
 		                                <![CDATA[WHERE status >= 1]]>
-		                                ORDER BY member.point asc
+		                                ORDER BY member.point DESC
 		                        )T1
 		                    <![CDATA[WHERE ROWNUM <= 10]]>
 		                )T2

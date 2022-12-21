@@ -31,10 +31,6 @@
 <link rel="stylesheet" href="${CP_RES}/main_home.css">
 <!-- jQuery -->
 <script src="${CP_RES}/bootstrap/js/jquery-1.12.4.js"></script>
-<!-- callAjax -->
-<script src="${CP_RES}/bootstrap/js/callAjax.js"></script>
-<!-- String, Number, Date Util  -->
-<script src="${CP_RES}/bootstrap/js/eUtil.js"></script>
 <!-- paging -->
 <script src="${CP_RES}/bootstrap/js/jquery.bootpag.js"></script>
 <!-- bootstrap js -->
@@ -123,7 +119,7 @@
 </head>
 <body>
   <div class="pointRankArea" style="display: flex; ">
-  
+    
     <div class="table-freeresponsive" style="width:100%; margin: 5px; padding: 5px;">
     <h3 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3)">포인트 랭킹</h3>
     <table class="table" id="pointRankArea">

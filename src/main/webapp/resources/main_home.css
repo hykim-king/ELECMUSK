@@ -152,7 +152,6 @@
   }
   
   #contents-1 {
-    border: 1px solid;  
     margin: 10px;
   }
   
@@ -162,14 +161,10 @@
   }
   
   #contents-3 {
-    border: 1px solid;  
-    background-color: red;
     margin: 10px;
   }
   
   #contents-4 {
-    border: 1px solid;
-    background-color: blue;
     margin: 10px;
   }
   
@@ -283,7 +278,6 @@
   }
   
   #contents-1 {
-    border: 1px solid;  
     margin: 10px;
   }
   
@@ -292,14 +286,10 @@
   }
   
   #contents-3 {
-    border: 1px solid;  
-    background-color: pink;
     margin: 10px;
   }
   
   #contents-4 {
-    border: 1px solid;
-    background-color: red;
     margin: 10px;
   } 
   }
