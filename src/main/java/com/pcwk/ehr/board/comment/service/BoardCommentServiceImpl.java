@@ -1,4 +1,4 @@
-package com.pcwk.ehr.board.comment.dao.service;
+package com.pcwk.ehr.board.comment.service;
 
 import java.sql.SQLException;
 import java.util.List;

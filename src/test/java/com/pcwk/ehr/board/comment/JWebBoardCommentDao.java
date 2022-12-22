@@ -21,106 +21,60 @@ import com.pcwk.ehr.board.comment.dao.BoardCommentDao;
 import com.pcwk.ehr.board.comment.domain.BoardCommentVO;
 import com.pcwk.ehr.board.cmn.SearchVO;
 
-
-@RunWith(SpringJUnit4ClassRunner.class)//spring-test lib에 있음!
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml",
-								   "file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"})
+@RunWith(SpringJUnit4ClassRunner.class) // spring-test lib에 있음!
+@ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/root-context.xml",
+		"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" })
 public class JWebBoardCommentDao {
 	final Logger LOG = LogManager.getLogger(getClass());
-	
-	@Autowired //테스트 오브젝트가 만들어지고 나면 스프링 테스트 컨텍스트에 의해 자동으로 값으 주입된다.
-	ApplicationContext context;
-	
+
 	@Autowired
 	BoardCommentDao dao;
-	
-	BoardCommentVO boardCommentVO1;
-	BoardCommentVO boardCommentVO2;
-	BoardCommentVO boardCommentVO3;
-	
-	BoardCommentVO search;
-	
-	SearchVO searchVO;
-	
-	
 
-	
+	BoardCommentVO boardCommentVO1;
+
+	SearchVO searchVO;
+
 	@Before
 	public void setUp() throws Exception {
-		LOG.debug("==============================");
-		LOG.debug("context:"+context);
-		LOG.debug("BoardCommentVO:"+dao);
-		LOG.debug("==============================");
-		
-		boardCommentVO1 = new BoardCommentVO(0,0,"asd","");
-		
-		boardCommentVO2 = new BoardCommentVO(0,0,"asd","");
-		boardCommentVO3 = new BoardCommentVO(0,0,"asd","");
-		
-		
-		searchVO = new SearchVO(0, 1, "asd","01","");
+
+		boardCommentVO1 = new BoardCommentVO(99999999, 1, 2, 3, "contents", "사용X");
+
 	}
-	
-	public void isSameUser(BoardCommentVO actUser, BoardCommentVO addUser) {
-		assertEquals(actUser.getCmSeq(), addUser.getCmSeq());
-		assertEquals(actUser.getBdSeq(), addUser.getBdSeq());
-		assertEquals(actUser.getContents(), addUser.getContents());
-		assertEquals(actUser.getRegDt(), addUser.getRegDt());
-	}
-	
-	
+
 	@Test
-	
-	public void doRetrieve()throws SQLException{
-		
+	public void doRetrieve() throws Exception {
 		List<BoardCommentVO> list = dao.doRetrieve(searchVO);
 	}
-	
-	@Test
-	@Ignore //완 
-	public void doSelectOne()throws SQLException{
-		BoardCommentVO outVO123 = dao.doSelectOne(boardCommentVO1);
-		LOG.debug("outVO123: "+outVO123);
-		
-		
-	}
-	
-	@Test  //완 
-	@Ignore
-	public void doSave()throws SQLException{
-		
-		dao.doSave(boardCommentVO1);
-		dao.doSave(boardCommentVO2);
-		dao.doSave(boardCommentVO3);
-	}
-	
 
-	@Test //완
-	@Ignore
-		public void doUpdate()throws SQLException{
-		dao.doSave(boardCommentVO1);
-		
-		String up = "__uptest";
-		
-       boardCommentVO1.setContents(boardCommentVO1.getContents()+up);
-		
-		dao.doUpdate(boardCommentVO1);
-	}
-	
-	@Test 
-	@Ignore //완
-	public void doDelete()throws SQLException{
-		dao.doDelete(boardCommentVO1);	
-		dao.doDelete(boardCommentVO2);	
-		dao.doDelete(boardCommentVO3);	
-	}
-	
-	
 	@Test
 	@Ignore
+	public void doUpdate() throws Exception {
+		boardCommentVO1.setCmSeq(1000002);
+		boardCommentVO1.setContents("ㅋㅋㅄ");
+
+		dao.doUpdate(boardCommentVO1);
+
+	}
+
+	@Test
+	@Ignore
+	public void doDelete() throws Exception {
+		boardCommentVO1.setCmSeq(1000001);
+		int flag = dao.doDelete(boardCommentVO1);
+
+	}
+
+	@Test
+	@Ignore
+	public void doSave() throws Exception {
+		LOG.debug("doSave");
+		dao.doSave(boardCommentVO1);
+
+	}
+
+	@Test
 	public void bean() {
 		assertNotNull(dao);
-		assertNotNull(context);
 	}
 
 }
