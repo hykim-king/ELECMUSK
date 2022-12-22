@@ -31,8 +31,7 @@
 			$(".sub-menu>li>a").css("display", "block");
 			$(".sub-menu>li").css("z-index", "1");
 			$(".sub-menu>li>a").css("z-index", "1");
-			$(".sub-menu").slideDown("fast");
-			$()
+			$(".sub-menu").slideDown("slow");
 		}).mouseleave(function() {
 			$(".sub-menu").slideUp("fast");
 			$(".sub-menu").css("opacity", "0");
@@ -146,17 +145,17 @@
 
 		<!-- menu-area -->
 		<div id="menu-area" class="container-fluid text-center">
-			<ul class="menu-bar breadcrumb nav text-center">
+			<ul class="menu-bar nav text-center" style="font-weight: bold;">
 				<li id="main_home" name="main_home" style="cursor:pointer;"><span class="glyphicon glyphicon-home"></span></li>
 				<li style="cursor:pointer;">BOARD
-					<ul class="sub-menu nav nav-stacked">
+					<ul class="sub-menu nav">
 						<li><a id="board01">자유게시판</a></li>
 						<li><a id="board02">결함 게시판</a></li>
 						<li><a id="board03">공지사항</a></li>
 					</ul>
 				</li>
 				<li style="cursor:pointer;">EVCARS
-					<ul class="sub-menu nav nav-stacked">
+					<ul class="sub-menu nav">
 						<li><a id="carsData" name="carsData">Cars data</a></li>
 						<li><a id="subsidyData" name="subsidyData">Subsidy
 								data</a></li>
@@ -167,13 +166,13 @@
 					</ul>
 				</li>
 				<li style="cursor:pointer;">STATION
-					<ul class="sub-menu nav nav-stacked">
+					<ul class="sub-menu nav">
 						<li><a id="stationSearch" name="stationSearch">Station</a></li>
 						<li><a id="rvboard" name="rvboard">Review board</a></li>
 					</ul>
 				</li>
 				<li style="cursor:pointer;">NEWS
-					<ul class="sub-menu nav nav-stacked">
+					<ul class="sub-menu nav">
 						<li><a>Menu 1</a></li>
 						<li><a>Menu 2</a></li>
 					</ul>

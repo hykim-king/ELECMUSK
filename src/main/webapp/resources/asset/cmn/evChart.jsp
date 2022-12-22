@@ -34,12 +34,6 @@
 
 <!-- jQuery -->
 <script src="${CP_RES}/bootstrap/js/jquery-1.12.4.js"></script>
-<!-- callAjax -->
-<script src="${CP_RES}/bootstrap/js/callAjax.js"></script>
-<!-- String, Number, Date Util  -->
-<script src="${CP_RES}/bootstrap/js/eUtil.js"></script>
-<!-- paging -->
-<script src="${CP_RES}/bootstrap/js/jquery.bootpag.js"></script>
 <!-- bootstrap js -->
 <script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
 <!-- highchart -->
