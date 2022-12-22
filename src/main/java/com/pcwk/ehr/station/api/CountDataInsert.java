@@ -23,6 +23,8 @@ public class CountDataInsert {
 		String path = CountDataInsert.class.getResource("").getPath();//현재 클래스의 절대경로
 		File filePath = new File(path+"CountByMonth.json");//데이터 per Month
 		//File filePath = new File(path+"CountByYear.json");//데이터 per Year
+		//File filePath = new File("C:\\Users\\허승휘\\git\\ELECMUSK\\src\\main\\java\\com\\pcwk\\ehr\\station\\api\\CountByMonth.json");
+		//File filePath = new File("C:\\Users\\허승휘\\git\\ELECMUSK\\src\\main\\java\\com\\pcwk\\ehr\\station\\api\\CountByYear.json");
 
 		//데이터 담을 변수
 		Long ulsan = 0L;

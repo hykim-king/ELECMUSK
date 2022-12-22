@@ -239,6 +239,7 @@
     <!---------------------------------------- 검색 : 검색 구분(select) 검색어(input) 페이지 사이즈(select) -->
     <form action="#" class="form-inline text-right">
       <div class="form-group">
+        
         <!------------------------------------- 버튼 -->
               <c:choose>
               <c:when test="${2 <= sessionScope.userInfo.status && not empty sessionScope.userInfo}">
