@@ -31,8 +31,6 @@
 <link rel="stylesheet" href="${CP_RES}/main_home.css">
 <!-- jQuery -->
 <script src="${CP_RES}/bootstrap/js/jquery-1.12.4.js"></script>
-<!-- paging -->
-<script src="${CP_RES}/bootstrap/js/jquery.bootpag.js"></script>
 <!-- bootstrap js -->
 <script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
@@ -93,7 +91,7 @@
       let parsedJson = JSON.parse(data);
       
       let htmlData = "";
-      
+      let pointRankis;
       if(null != parsedJson && parsedJson.length > 0){
     	  $.each(parsedJson,function(index,value){
     		  htmlData += "<tr>                                                                                        ";

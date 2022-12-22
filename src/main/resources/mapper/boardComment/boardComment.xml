@@ -5,31 +5,42 @@
 <mapper namespace="com.pcwk.ehr.board.comment">
   
   <!-- 조회 retrieve-->
-  <select id="doRetrieve" resultType="BoardCommentVO" parameterType="SearchVO">
-
+  <select id="doRetrieve" resultType="BoardCommentVO" parameterType="com.pcwk.ehr.board.comment.domain.BoardCommentSearchVO">
     --페이징
     SELECT A.*,B.*
     FROM (
-        SELECT  tt1.RNUM as num,
+        SELECT  tt1.RNUM as num, 
                 tt1.cm_seq as cmSeq,
-                tt1.contents,
+                tt1.contents
                 --당일이면 시:분 , 그렇지 않으면 년/월/일
                 DECODE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'), TO_CHAR(TT1.reg_dt, 'YYYY-MM-DD'),--DECODE
                                                        TO_CHAR(TT1.reg_dt, 'HH24:MI'),--위가 같으면 이걸
-                                                       TO_CHAR(TT1.reg_dt, 'YYYY-MM-DD')) as regDt, --다르면 이걸
+                                                       TO_CHAR(TT1.reg_dt, 'YYYY-MM-DD')) as regDt --다르면 이걸
         FROM(
             SELECT  ROWNUM AS RNUM, t1.*
             FROM (select *
                   FROM BD_COMMENT
-                  --WHERE 조건 (검색구분:''(전체),10(nickname),20(title),30(contents), 검색어)
-                  WHERE category = #{category}
+                  --WHERE 조건 있으면 추가
+                  WHERE bd_seq = #{bdSeq}
                   ORDER BY reg_dt DESC
             )T1
             --종료 번호<![CDATA[
-            WHERE ROWNUM <= #{pageSize} * (#{pageNo} - 1) + #{pageSize}
+            WHERE ROWNUM <= #{pageSize} * #{pageNo}
         )TT1
         --시작 번호
         WHERE RNUM >= #{pageSize} * (#{pageNo} - 1) +1  ]]>
+    )A
+    CROSS JOIN
+    (
+      SELECT COUNT(*) totalCnt
+      FROM BD_COMMENT
+      WHERE bd_seq = #{bdSeq}
+    )B
+    CROSS JOIN
+    (
+      SELECT NICKNAME
+      FROM MEMBER
+      WHERE TT1.REG_SEQ = 
     )
   </select>
   
@@ -40,7 +51,8 @@
   <![CDATA[
     SELECT CM_SEQ as CMSEQ,      
            contents,            
-           TO_CHAR(reg_dt,'yyyy-mm-dd hh24:mi:ss') AS regDt
+           TO_CHAR(reg_dt,'yyyy-mm-dd hh24:mi:ss') AS regDt,
+           nickname
     FROM BD_COMMENT   
     WHERE cm_seq = #{cmSeq}
   ]]>  
@@ -55,13 +67,15 @@
   
 	<insert id="doSave" parameterType="BoardCommentVO">
   INSERT INTO BD_COMMENT (
-      BD_SEQ,              
+      BD_SEQ,
+      NICKNAME,              
       CM_SEQ,              
       CONTENTS,            
       REG_DT                     
   )VALUES (
-			BOARD_SEQ.nextval,
-			#{cmSeq},
+			#{bdSeq},
+			#{nickname},
+			COMMENT_SEQ.nextval,
 			#{contents},
 		   SYSDATE
 			)

@@ -205,7 +205,7 @@
     
     <!------------------------------------- 버튼 -->
     <div class="row text-right">
-       <input type="text" id="regId" name="regId" value="${sessionScope.userInfo.userId}">
+       <input type="hidden" id="regId" name="regId" value="${sessionScope.userInfo.userId}">
        <input type="button" class="btn btn-primary btn-sm" value="등록" id="doSave">
        <input type="button" class="btn btn-primary btn-sm" value="목록" id="boardView">
     </div>
