@@ -13,7 +13,9 @@
 	    birth,
 	    email,
 	    backup_question,
-	    backup_answer
+	    backup_answer,
+	    point,
+	    status
 ) VALUES (
 			MEMBER_SEQ.nextval,
 			#{userId},
@@ -23,7 +25,9 @@
 			#{birth},
 			#{email},
 			#{backupQuestion},
-			#{backupAnswer}
+			#{backupAnswer},
+			#{point},
+			#{status}
 		)
 	</insert>
 
@@ -55,7 +59,7 @@
     nickname,
     password,
     name,
-    TO_CHAR(birth,'YYYYMMDD'),
+    TO_CHAR(birth,'YYYYMMDD') as birth,
     email,
     backup_question,
     backup_answer,
@@ -71,17 +75,17 @@ FROM member
        <where>
           <choose>
              <when test=" '10' == searchDiv and '' != searchWord  ">
-                id  LIKE '%' || #{searchWord} || '%'
+                MEMBER_SEQ  LIKE '%' || #{searchWord} || '%'
              </when>
              <when test=" '20' == searchDiv and '' != searchWord  ">
-                nickname  LIKE '%' || #{searchWord} || '%'
+                id  LIKE '%' || #{searchWord} || '%'
              </when>
              <when test=" '30' == searchDiv and '' != searchWord  ">
-                name LIKE '%' || #{searchWord} || '%'
-             </when>                                              
+                nickname  LIKE '%' || #{searchWord} || '%'
+             </when>
              <when test=" '40' == searchDiv and '' != searchWord  ">
-                email LIKE '%' || #{searchWord} || '%'
-             </when>                                              
+                name LIKE '%' || #{searchWord} || '%'
+             </when>                                    
           </choose>
        </where>  
   </sql>

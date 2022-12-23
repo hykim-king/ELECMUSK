@@ -12,6 +12,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="${CP}/favicon.ico">   
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="${CP_RES}/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="${CP_RES}/main_home.css">
 
 <!-- jQuery -->
 <script src="${CP_RES}/bootstrap/js/jquery-1.12.4.js"></script>
@@ -23,6 +24,10 @@
 <script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
 <title>회원가입</title>
 <style type="text/css">
+#contents{
+  margin-bottom: 100px;
+}
+
 #mainButton {
   width: 48%;
   margin: auto;
@@ -52,7 +57,7 @@ h5{
         $("#userId").focus();
         return;
     	}
-    	if($("#idCheckYN").val() == "0"){
+    	if($("#idCheckYN").val() != "1"){
         alert("아이디중복 체크  해주세요.");
         $("#idCheck").focus();
         return;
@@ -212,9 +217,13 @@ h5{
 
 </head>
 <body>
-
-  <!-- div container -->
-  <div class="container">
+  <!------------------------------------------------- 헤더 -->
+  <header>
+    <jsp:include page ="/resources/asset/cmn/main_header.jsp" flush="false"/>
+  </header>
+  <!------------------------------------------------- 헤더끝 -->
+  <!-- div contents -->
+  <div id="contents">
     <div class="page-header text-center">
       <h2>회원가입</h2>
     </div>
@@ -302,7 +311,9 @@ h5{
     <button type="button" class="btn btn-default btn-lg btn-block" id="mainButton">가입</button>
 
   </div>
-  <!-- div container ------------------------------------------->
-
+  <!-- div contents ------------------------------------------->
+  <footer>
+    <jsp:include page="/resources/asset/cmn/main_footer.jsp" flush="false" />
+  </footer>
 </body>
 </html>

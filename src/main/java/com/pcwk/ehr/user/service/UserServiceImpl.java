@@ -24,16 +24,17 @@ public class UserServiceImpl implements UserService {
 	public UserServiceImpl() {}
 	
 	@Override
-	public int multiDelete(List<UserVO> users) throws SQLException {
+	public int multiBan(List<UserVO> users) throws SQLException {
 		int cnt = 0;
 		try {
 			for(UserVO vo: users) {
-				cnt += userDao.doDelete(vo);
+				cnt += withdraw(vo);
 			}
 		}catch (Exception e) {
 			LOG.debug("삭제중 예외가 발생해 롤백합니다.: "+e.getMessage());
 			LOG.debug("삭제중 예외가 발생해 롤백합니다.: "+e.getMessage());
 			LOG.debug("삭제중 예외가 발생해 롤백합니다.: "+e.getMessage());
+			cnt = 0;
 			throw e;
 		}
 		return cnt;
@@ -138,8 +139,22 @@ public class UserServiceImpl implements UserService {
 		LOG.debug("정지해서 수정 전 유저정보: "+outVO);
 		
 		outVO.setmSeq(inVO.getmSeq());
-		outVO.setUserId("Deleted_User"+outVO.getUserId()+StringUtil.getCurrentDate());
-		outVO.setNickname("Deleted_User"+outVO.getNickname()+StringUtil.getCurrentDate());
+		
+		if(outVO.getUserId().length()>12) {
+			if (!(outVO.getUserId().substring(0, 12).equals("Deleted_User"))) {
+				outVO.setUserId("Deleted_User" + StringUtil.getCurrentDate() + outVO.getUserId());
+			}
+		}else {
+			outVO.setUserId("Deleted_User" + StringUtil.getCurrentDate() + outVO.getUserId());
+		}
+		if (outVO.getNickname().length() > 12) {
+			if (!(outVO.getNickname().substring(0, 12).equals("Deleted_User"))) {
+				outVO.setNickname("Deleted_User" + StringUtil.getCurrentDate() + outVO.getNickname());
+			}
+		}else {
+			outVO.setNickname("Deleted_User" + StringUtil.getCurrentDate() + outVO.getNickname());
+		}
+		
 		outVO.setStatus(0);
 		
 		if(outVO != null && outVO.getName() == null) {

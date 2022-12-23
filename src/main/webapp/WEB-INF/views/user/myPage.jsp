@@ -12,6 +12,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="${CP}/favicon.ico">   
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="${CP_RES}/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="${CP_RES}/main_home.css">
 
 <!-- jQuery -->
 <script src="${CP_RES}/bootstrap/js/jquery-1.12.4.js"></script>
@@ -23,7 +24,7 @@
 <script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
 <title>마이 페이지</title>
 <style type="text/css">
-#container{
+#contents{
   margin-bottom: 100px;
 }
 
@@ -45,12 +46,12 @@ h4{
   $(document).ready(function(){
     console.log("document.ready");
    
-  //새로고침 버튼
+  //새로고침 버튼 - 뺐음 필요할 수도 있으니 남김
   $("#renew").on("click",function(){
 	  console.log("엥");
 	  renewSession();
 	  console.log("${session.userInfo.nickname}");
-  }); 
+  });//새로고침 버튼
     
   //메인버튼(닉네임 바꾸기) 클릭
     $("#updateNickname").on("click",function(){
@@ -144,7 +145,7 @@ h4{
          
          },
          complete:function(data){//성공, 실패 관계 없이 출력
-         
+          
          }
 
       });
@@ -388,9 +389,13 @@ h4{
 
 </head>
 <body>
-
-	<!-- div container -->
-	<div class="container" id="container">
+  <!------------------------------------------------- 헤더 -->
+  <header>
+    <jsp:include page ="/resources/asset/cmn/main_header.jsp" flush="false"/>
+  </header>
+  <!------------------------------------------------- 헤더끝 -->
+  <!-- div contents -->
+  <div id="contents">
 		<div class="page-header text-center">
 			<h2>마이 페이지</h2>
 		</div>
@@ -470,8 +475,11 @@ h4{
 			<button type="button" class="btn btn-default btn-lg btn-block" id="withdraw">탈퇴</button>
 		</div>
 
-	</div>
-	<!-- div container ------------------------------------------->
-
+  </div>
+  <!-- div contents ------------------------------------------->
+  <footer>
+    <jsp:include page="/resources/asset/cmn/main_footer.jsp" flush="false" />
+  </footer>
+  
 </body>
 </html>

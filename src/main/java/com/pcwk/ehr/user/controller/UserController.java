@@ -1,7 +1,10 @@
 package com.pcwk.ehr.user.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -191,6 +194,80 @@ public class UserController {
 		return jsonString;
 	}
 	
+	@RequestMapping(value = "/multiBan.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String multiBan(HttpServletRequest req) throws SQLException {
+		String jsonString = "";
+		
+		String mSeqString = req.getParameter("mSeqString");
+		LOG.debug("mSeqString: "+mSeqString);
+		
+		String[] mSeqArray = mSeqString.split(",");
+		
+		List<UserVO> list = new ArrayList<UserVO>();
+		
+		for(String mSeq : mSeqArray) {
+			UserVO tempVO = new UserVO();
+			tempVO.setmSeq(Integer.parseInt(mSeq));
+			list.add(tempVO);
+		}
+		
+		LOG.debug("list: "+list);
+		
+		int flag = userService.multiBan(list);
+		
+		MessageVO messageVO = new MessageVO();
+		messageVO.setMsgId(flag+"");
+		messageVO.setMsgContents(flag+"건의 유저가 정지되었습니다.");
+		
+		jsonString = new Gson().toJson(messageVO);
+		
+		return jsonString;
+	}
+	
+	@RequestMapping(value = "/doSelectOne.do", method = RequestMethod.GET
+			, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String doSelectOne(UserVO inVO) throws SQLException{
+		String jsonString = "";
+		
+		UserVO outVO = userService.doSelectOne(inVO);
+		
+		LOG.debug("outVO: "+outVO);
+		
+		jsonString = new Gson().toJson(outVO);
+		
+		
+		return jsonString;
+	}
+	
+	@RequestMapping(value="/doUserUpdate.do", method = RequestMethod.POST
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody // 메세지만 뿌려줄건 바디 추가해야함
+	public String doUpdate(UserVO inVO) throws SQLException {
+		String jsonString = "";
+		
+		//null처리가 필요없도록 꽉꽉 받으세여
+		LOG.debug("inVO: "+inVO);
+		
+		int flag = userService.doUpdate(inVO);
+		
+		String message = "";
+		if (1 == flag) {
+			message = "수정 성공!!";
+		} else {
+			message = "수정 실패!!";
+		}
+		
+		MessageVO messageVO = new MessageVO(String.valueOf(flag),message);
+		
+		jsonString = new Gson().toJson(messageVO);
+		
+		LOG.debug("doUpdate의 결과로 생성된 jsonstring: "+jsonString);
+		
+		return jsonString;
+	}
+		
 	@RequestMapping(value = "/pointRank.do",method=RequestMethod.GET
 			,produces = "application/json;charset=UTF-8")
 	@ResponseBody //비동기 처리를 하는 경우, HTTP 요청 부분의 body부분이 그대로 브라우저에 전달된다.	
