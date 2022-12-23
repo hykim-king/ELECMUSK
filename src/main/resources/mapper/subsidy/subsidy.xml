@@ -13,23 +13,6 @@
     <result column="madeby" property="madeby"/>
   </resultMap>
   
-    <sql id="searchCondition_subsidy">
-      <choose>
-        <when test=" '10' == searchDiv and '' != searchWord ">
-         AND name LIKE #{searchWord} || '%'
-        </when>
-        <when test=" '20' == searchDiv and '' != searchWord ">
-         AND model LIKE #{searchWord} || '%'
-        </when>
-        <when test=" '30' == searchDiv and '' != searchWord ">
-         AND manufacturer LIKE #{searchWord} || '%'
-        </when>
-        <when test=" '40' == searchDiv and '' != searchWord ">
-         AND madeby LIKE #{searchWord} || '%'
-        </when>
-      </choose>
-    </sql>
-    
     <sql id="submodelKeyword">
       <choose>
         <when test=" '승용차' == submodelKeyword">

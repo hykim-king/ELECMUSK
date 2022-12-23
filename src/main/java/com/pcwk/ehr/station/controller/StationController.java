@@ -65,6 +65,20 @@ public class StationController {
 		
 		return VIEW_NAME;
 	}
+
+	@RequestMapping(value="/moveToRvList.do", method = RequestMethod.GET)
+	public String moveToRvList(Model model, evSearchVO inVO) throws SQLException{
+		String VIEW_NAME = "rvboard/rvboard_list";
+		
+		return VIEW_NAME;
+	}
+
+	@RequestMapping(value="/moveToRvReg.do", method = RequestMethod.GET)
+	public String moveToRvReg(Model model, evSearchVO inVO) throws SQLException{
+		String VIEW_NAME = "rvboard/rvboard_reg";
+		
+		return VIEW_NAME;
+	}
 	
 	/**
 	 * 목록조회

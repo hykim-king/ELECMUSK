@@ -106,21 +106,21 @@
               htmlData +="   <td width='33%' rowspan='4'><img src='"+<c:out value = 'value.image'/>+"' alt='Responsive image' style='width:100%; height:100%;' class='img-rounded img-responsive'></td> ";        
               htmlData +=" </div>"
               htmlData +=" <tr> ";
-              htmlData +="   <td width='11%' height='12.5%' class='text-center'><strong>충전기명</strong> </td> ";        
+              htmlData +="   <td width='11%' height='12.5%' class='text-center' style='background-color:lightgreen;'><strong>충전기명</strong> </td> ";        
               htmlData +="   <td width='22%' height='12.5%' class='text-center'>"+<c:out value = 'value.connector'/> +"</td> ";        
-              htmlData +="   <td width='11%' height='12.5%' class='text-center'><strong>충전전류</strong> </td> ";        
+              htmlData +="   <td width='11%' height='12.5%' class='text-center' style='background-color:lightgreen;'><strong>충전전류</strong> </td> ";        
               htmlData +="   <td width='22%' height='12.5%' class='text-center'>"+ value.ev_current +"</td> ";        
               htmlData +=" </tr> ";
               htmlData +=" <tr> ";
-              htmlData +="   <td width='11%' height='12.5%' class='text-center'><strong>충전전압</strong> </td> ";        
+              htmlData +="   <td width='11%' height='12.5%' class='text-center' style='background-color:lightgreen;'><strong>충전전압</strong> </td> ";        
               htmlData +="   <td width='22%' height='12.5%' class='text-center'>"+ value.ev_voltage +"</td> ";        
-              htmlData +="   <td width='11%' height='12.5%' class='text-center'><strong>충전전력</strong> </td> ";        
+              htmlData +="   <td width='11%' height='12.5%' class='text-center' style='background-color:lightgreen;'><strong>충전전력</strong> </td> ";        
               htmlData +="   <td width='22%' height='12.5%' class='text-center'>"+ value.ev_power +"</td> ";        
               htmlData +=" </tr> ";
               htmlData +=" <tr> ";
-              htmlData +="   <td width='11%' height='12.5%' class='text-center'><strong>충전레벨</strong> </td> ";        
+              htmlData +="   <td width='11%' height='12.5%' class='text-center' style='background-color:lightgreen;'><strong>충전레벨</strong> </td> ";        
               htmlData +="   <td width='22%' height='12.5%' class='text-center'>"+ value.ev_level +"</td> ";        
-              htmlData +="   <td width='11%' height='12.5%' class='text-center'><strong>지원차량</strong> </td> ";        
+              htmlData +="   <td width='11%' height='12.5%' class='text-center' style='background-color:lightgreen;'><strong>지원차량</strong> </td> ";        
               htmlData +="   <td width='22%' height='12.5%' class='text-center'>"+ value.ev_support +"</td> ";        
               htmlData +=" </tr> ";
               htmlData +=" </tr> ";
@@ -236,7 +236,6 @@
         <!------------------------------------- 버튼 -->
           <c:choose>
               <c:when test="${2 <= sessionScope.userInfo.status && not empty sessionScope.userInfo}">
-              ${sessionScope.userInfo}<br>
                 <input type="button" class="btn btn-info btn-sm" value="관리자메뉴" id="moveToManagerPage">
               </c:when>
               <c:otherwise>

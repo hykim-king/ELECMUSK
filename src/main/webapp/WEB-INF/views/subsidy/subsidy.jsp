@@ -239,10 +239,10 @@
     <!---------------------------------------- 검색 : 검색 구분(select) 검색어(input) 페이지 사이즈(select) -->
     <form action="#" class="form-inline text-right">
       <div class="form-group">
+        
         <!------------------------------------- 버튼 -->
               <c:choose>
               <c:when test="${2 <= sessionScope.userInfo.status && not empty sessionScope.userInfo}">
-              ${sessionScope.userInfo}<br>
                 <input type="button" class="btn btn-info btn-sm" value="관리자메뉴" id="moveToManagerPage">
               </c:when>
               <c:otherwise>

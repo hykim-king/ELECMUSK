@@ -63,6 +63,29 @@ $(document).ready(function(){
       
     //moveToReg
     });
+    
+    
+    
+    //리뷰게시판 목록 이동
+    $("#moveToRvList").on("click",function(){
+      
+      console.log('moveToRvList');
+      
+      window.location.href = "${CP}/review/rvboardView.do?category=9";
+      
+    //moveToList
+    });
+    //리뷰게시판 등록으로 이동
+    $("#moveToRvReg").on("click",function(){
+      
+      console.log('moveToRvReg');
+      
+      window.location.href = "${CP}/review/moveToReg.do?category=9";
+      
+    //moveToList
+    });
+    
+    
 });
 
 function doRetrieve(page){
@@ -78,12 +101,18 @@ function doRetrieve(page){
         pageNo : page
     };
         
-    PClass.callAjax(method,url,async,params,function(sdata){
+    PClass.callAjax(method,url,async,params,function(data){
       console.log("sdata:"+sdata);
       
       let parsedJson = JSON.parse(sdata);
       
       let htmlData = "";
+      
+      let stdata = new Array();
+      
+      let lat = [];
+      let longi = [];
+      
       
       
     if(null != parsedJson && parsedJson.length > 0){
@@ -93,6 +122,18 @@ function doRetrieve(page){
           console.log("csnm: "+value.csnm);
           console.log("lat: "+value.lat);
           console.log("longi: "+value.longi);
+          
+          //배열에 위도 정보 담기
+          lat.push(value.lat);
+          //배열에 경도 정보 담기
+          longi.push(value.longi);
+          
+          stdata.push(value);
+          console.log("stdata: "+stdata);
+          
+          
+          
+          
         });
         //데이터가 없는 경우
       }else{
@@ -150,8 +191,42 @@ function drawMap(locations){
         center: myLatLng,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
     });
+    
+    
+    
+    
+    
+ // 현재 위치 표시
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(function(position){
+        let pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        map.setCenter(pos);
+      }, function(){
+        handleLocationError(false, infoWindow, map.getCenter());
+      });
+    }else {
+      handleLocationError(false, infoWindow, map.getCenter());
+    }
+
+    function handleLocationError(browerHasGeolocation, infoWindow, pos){
+      infoWindow.setPosition(pos);
+      infoWindow.setContent(browserHasGeolocation ?
+                            '오류: 지오로케이션 연결 실패' :
+                            '오류: 브라우저에서 지오로케이션을 지원하지 않음');
+    }
+    
+    
+    
+    
     //마커 클릭시 생성되는 인포윈도우
-    const infowindow = new google.maps.InfoWindow();
+    const infowindow = new google.maps.InfoWindow({
+    		backgroundColor: "#eee",
+   	    borderColor: "#2db400",
+   	    borderWidth: 5		
+    });
     
     let marker, i;
     
@@ -176,15 +251,14 @@ function drawMap(locations){
                     });
                     
                     
-                    infowindow.setContent("충전소명 : "+locations[i][7]+"<br>"+//충전소명칭
-                                          "주소 : "+locations[i][0]+"<br>"+//주소
-                                          "충전기타입 : "+locations[i][3]+"<br>"+//충전기타입 
-                                          "충전상태 : "+locations[i][4]+"<br>"+//충전기상태 
-                                          "충전기 : "+locations[i][5]+"<br>"+//충전방식 
-                                          "위도 : "+locations[i][8]+"<br>"+//위도
-                                          "경도 : "+locations[i][9]+"<br>"+//경도
-                                          "<input type='button' class='btn btn-success btn-sm' value='리뷰보기' id='moveToList' style='float:left;'>"+
-                                          "<input type='button' class='btn btn-primary btn-sm' value='리뷰쓰기' id='moveToReg' style='float:right;'>"
+                    infowindow.setContent("<div>"+
+                    		                  "<h3 class='StationNm'>"+locations[i][7]+"</h3><br>"+
+                    		                  "<p class='StationAddr'>주소 : "+locations[i][0]+"</p><br>"+
+                    		                  "<p>충전기타입 : "+locations[i][3]+"</p><br>"+
+                    		                  "<p>충전상태 : "+locations[i][4]+"</p><br>"+
+                    		                  "<p>충전기 : "+locations[i][5]+"</p><br>"+
+                                          "<input type='button' class='btn btn-success btn-sm' value='리뷰보기' id='moveToRvList' style='float:left;'>"+
+                                          "<input type='button' class='btn btn-primary btn-sm' value='리뷰쓰기' id='moveToRvReg' style='float:right;'>"
                                           
                                           );
                     infowindow.open(map, marker);
@@ -243,16 +317,17 @@ getData();
   
       <!-- div container -->
   <div class="container">
-    <h1>충전소 데이터</h1>
+    <h1>충전소 찾기</h1>
     
     <!---------------------------------------- 검색 : 검색 구분(select) 검색어(input) 페이지 사이즈(select) -->
     <form action="#" class="form-inline text-right">
       <div class="form-group">
+      <input type='button' class='btn btn-success btn-sm' value='리뷰보기' id='moveToRvList' style='float:left;'>
+      <input type='button' class='btn btn-primary btn-sm' value='리뷰쓰기' id='moveToRvReg' style='float:left;'>
           
         <!------------------------------------- 버튼 -->
             <c:choose>
               <c:when test="${2 <= sessionScope.userInfo.status && not empty sessionScope.userInfo}">
-              ${sessionScope.userInfo}<br>
                 <input type="button" class="btn btn-info btn-sm" value="관리자 메뉴" id="moveToManagerPage">
               </c:when>
               <c:otherwise>
