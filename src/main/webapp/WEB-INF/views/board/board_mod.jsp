@@ -65,7 +65,7 @@
 	  ifidsame();
 	  
 	  
-	  $("#doDelete").on("click",function(){
+	  $("#adminDelete").on("click",function(){
 		  console.log("document.ready");
 		  
 		  if(confirm("삭제 하시겠습니까?") == false)return;
@@ -170,6 +170,35 @@
 	 
 	function ifidsame(){
 
+  $("#doDelete").on("click",function(){
+      console.log("document.ready");
+      if($("#regId").val()==("${sessionScope.userInfo.userId}")) {
+      
+	      if(confirm("삭제 하시겠습니까?") == false)return;
+	      let method = "GET";
+	      let url    = "/board/doDelete.do";
+	      let async  = true;
+	      let params ={
+	          category: $("#category").val(),
+	          bdSeq: $("#bdSeq").val()
+	      };
+	      PClass.callAjax(method,url,async,params,function(data){
+	      console.log(data);
+	      let parsedJson = JSON.parse(data);
+	      if("1" == parsedJson.msgId){
+	        alert(parsedJson.msgContents);
+	        moveToList();
+	      }else{
+	        alert(parsedJson.msgContents);
+	      }
+	        
+	      });//=========================================PClass.callAjax끝
+      }else{
+    	  alert("본인 게시글이 아닙니다.");
+      }
+    });//==============================================삭제 끝
+	
+	
 	 
    $("#doUpdate").on("click",function(){
 	   if($("#regId").val()==("${sessionScope.userInfo.userId}")) {
@@ -222,7 +251,7 @@
         });
         
 		 }else{
-			 alert("본인 계시물이 아닙니다")
+			 alert("본인 계시물이 아닙니다.")
 		 }
     });//==========================================doUpdate끝
 	
@@ -251,6 +280,11 @@
     <input type="hidden" class="form-control" id="regId" name="regId" value="${vo.regId }">
     <!------------------------------------- 버튼 -->
     <div class="row text-right">
+      <c:choose>
+        <c:when test="${2 <= sessionScope.userInfo.status && not empty sessionScope.userInfo}">
+	       <input type="button" class="btn btn-primary btn-sm" value="관리자 삭제" id="adminDelete">
+	      </c:when>
+      </c:choose>
        <input type="button" class="btn btn-primary btn-sm" value="수정" id="doUpdate">
        <input type="button" class="btn btn-primary btn-sm" value="삭제" id="doDelete">
        <input type="button" class="btn btn-primary btn-sm" value="목록" id="boardView">
