@@ -132,6 +132,7 @@
   .login-area {
     position: relative;
     right: 50px;
+    padding-top:5px;
     top: 0;
     text-align: right;
   }

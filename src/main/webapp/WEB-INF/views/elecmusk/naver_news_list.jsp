@@ -115,13 +115,13 @@
 		                htmlData += "<table id='newsTable' class='table table-striped table-bordered' style='width:30%; margin:10px;'>                               ";
 		                htmlData += "  <tbody>                                                                                                                       ";
 		                htmlData += "    <tr>                                                                                                                        ";
-		                htmlData += "      <td class='text-center col-sm-4 col-md-4 col-lg-4'>"+<c:out value='value.title'/>+"</td>                                  ";
+		                htmlData += "      <td class='text-center col-sm-6 col-md-6 col-lg-6'>"+<c:out value='value.title'/>+"</td>                                  ";
 		                htmlData += "    </tr>                                                                                                                       ";
 		                htmlData += "    <tr>                                                                                                                        ";
-		                htmlData += "      <td class='text-left col-sm-4 col-md-4 col-lg-4'>"+<c:out value='value.description'/>+"</td>                              ";
+		                htmlData += "      <td class='text-left col-sm-6 col-md-6 col-lg-6'>"+<c:out value='value.description'/>+"</td>                              ";
 		                htmlData += "    </tr>                                                                                                                       ";
 		                htmlData += "    <tr>                                                                                                                        ";
-		                htmlData += "      <td class='text-center col-sm-4 col-md-4 col-lg-4'><a href='"+<c:out value='value.link'/>+"' target='blank'>이동</a></td>  ";
+		                htmlData += "      <td class='text-center col-sm-6 col-md-6 col-lg-6' style='height:10px; line-height:10px;'><a href='"+<c:out value='value.link'/>+"' target='blank'>자세히 보기 <span class='glyphicon glyphicon-play'/></a></td>  ";
 		                htmlData += "    </tr>                                                                                                                       ";
 		                htmlData += "  </tbody>                                                                                                                      ";
 		                htmlData += "</table>                                                                                                                        ";

@@ -124,7 +124,7 @@
           //htmlData += "  <td class='text-left col-sm-6 col-dm-6 col-lg-6'><a href='#' onClick='doSelectOne("+<c:out value='value.bdSeq '/>+")'>"+<c:out value='value.title'></c:out>+"</a></td>";
           htmlData += "<tr>";
           htmlData += "  <td class='text-center col-sm-1 col-dm-1 col-lg-1'>"+<c:out value='value.num'></c:out>+"</td>";
-          htmlData += "  <td class='text-left col-sm-6 col-dm-6 col-lg-6'><a onClick='doSelectOne("+<c:out value='value.bdSeq '/>+")'>"+<c:out value='value.title'></c:out>+"</a></td>";
+          htmlData += "  <td class='text-left col-sm-10 col-dm-10 col-lg-10'><a onClick='doSelectOne("+<c:out value='value.bdSeq '/>+")'>"+<c:out value='value.title'></c:out>+"</a></td>";
           htmlData += "  <td style='display: none;'>"+<c:out value='value.bdSeq '/>+"</td>";
           htmlData += "</tr>";
           //<td style='display: none;'>"+<c:out value='value.bdSeq '/>+"</td>
@@ -184,7 +184,7 @@
           //htmlData += "  <td class='text-left col-sm-6 col-dm-6 col-lg-6'><a href='#' onClick='doSelectOne("+<c:out value='value.bdSeq '/>+")'>"+<c:out value='value.title'></c:out>+"</a></td>";
           htmlData += "<tr>";
           htmlData += "  <td class='text-center col-sm-1 col-dm-1 col-lg-1'>"+<c:out value='value.num'></c:out>+"</td>";
-          htmlData += "  <td class='text-left col-sm-6 col-dm-6 col-lg-6'><a onClick='doSelectOne("+<c:out value='value.bdSeq '/>+")'>"+<c:out value='value.title'></c:out>+"</a></td>";
+          htmlData += "  <td class='text-left col-sm-10 col-dm-10 col-lg-10'><a onClick='doSelectOne("+<c:out value='value.bdSeq '/>+")'>"+<c:out value='value.title'></c:out>+"</a></td>";
           htmlData += "  <td style='display: none;'>"+<c:out value='value.bdSeq '/>+"</td>";
           htmlData += "</tr>";
           //<td style='display: none;'>"+<c:out value='value.bdSeq '/>+"</td>
@@ -244,7 +244,7 @@
           //htmlData += "  <td class='text-left col-sm-6 col-dm-6 col-lg-6'><a href='#' onClick='doSelectOne("+<c:out value='value.bdSeq '/>+")'>"+<c:out value='value.title'></c:out>+"</a></td>";
           htmlData += "<tr>";
           htmlData += "  <td class='text-center col-sm-1 col-dm-1 col-lg-1'>"+<c:out value='value.num'></c:out>+"</td>";
-          htmlData += "  <td class='text-left col-sm-6 col-dm-6 col-lg-6'><a onClick='doSelectOne("+<c:out value='value.bdSeq '/>+")'>"+<c:out value='value.title'></c:out>+"</a></td>";
+          htmlData += "  <td class='text-left col-sm-10 col-dm-10 col-lg-10'><a onClick='doSelectOne("+<c:out value='value.bdSeq '/>+")'>"+<c:out value='value.title'></c:out>+"</a></td>";
           htmlData += "  <td style='display: none;'>"+<c:out value='value.bdSeq '/>+"</td>";
           htmlData += "</tr>";
           //<td style='display: none;'>"+<c:out value='value.bdSeq '/>+"</td>
@@ -256,7 +256,6 @@
         htmlData += "   No data found";
         htmlData += " </td>";
         htmlData += "</tr>";
-        
         
       }//else
       
@@ -304,32 +303,30 @@
 </head>
 <body>
   <div class="recentboardArea" style="display: flex; ">
-    <div class="table-freeresponsive" style="width:100%; margin: 5px; padding: 5px;">
+    <div class="table-freeresponsive" style="width:33%; margin: 5px; padding: 5px;">
     <h4 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3); cursor:pointer;" onclick="moveToboard(1)">자유 게시판(최신)</h4>
-    <table class="table" id="freeTable">
+    <table class="table" id="freeTable" style="border-bottom: 1px solid rgba(222,222,222,1)">
       <tbody>
       </tbody>
     </table>
     </div>
     
-    <div class="table-flawresponsive" style="width:100%; margin: 5px; padding: 5px;">
+    <div class="table-flawresponsive" style="width:33%; margin: 5px; padding: 5px;">
     <h4 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3); cursor:pointer;" onclick="moveToboard(2)">결함 게시판(최신)</h4>
-    <table class="table" id="flawTable">
+    <table class="table" id="flawTable" style="border-bottom: 1px solid rgba(222,222,222,1)">
       <tbody>
       </tbody>
     </table>
     </div>
     
-    <div class="table-noticeresponsive" style="width:100%; margin: 5px; padding: 5px;">
+    <div class="table-noticeresponsive" style="width:33%; margin: 5px; padding: 5px;">
     <h4 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3); cursor:pointer;" onclick="moveToboard(5)">공지 사항(최신)</h4>
-    <table class="table" id="noticeTable">
+    <table class="table" id="noticeTable" style="border-bottom: 1px solid rgba(222,222,222,1)">
       <tbody>
       </tbody>
     </table>
     </div>
     <!-------------------------------------------------- 테이블 목록 -->
-  
   </div>
-  <!--------------------------------------- div container --->
 </body>
 </html>
