@@ -95,6 +95,10 @@
 	       let link = "${CP}/board/boardView.do?category=5"
 	       location.href = link;
 	     });
+	     $("#news1").on("click", function() {
+         let link = "${CP}/board/boardView.do?category=3"
+         location.href = link;
+       });
 	     $("#doLogout").on("click", function() {
 	       let link = "${CP}/elecmusk/doLogout.do";
 	       location.href = link;
@@ -173,7 +177,7 @@
 				</li>
 				<li style="cursor:pointer;">NEWS
 					<ul class="sub-menu nav">
-						<li><a>Menu 1</a></li>
+						<li><a id="news1">Menu 1</a></li>
 						<li><a>Menu 2</a></li>
 					</ul>
 				</li>
