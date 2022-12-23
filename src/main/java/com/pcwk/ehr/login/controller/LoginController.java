@@ -75,8 +75,14 @@ public class LoginController {
 		if(null != inVO && inVO.getBackupAnswer() == null) {
 			inVO.setBackupAnswer("");
 		}
+		if(null != inVO && inVO.getPoint() == 0) {
+			inVO.setPoint(0);
+		}
+		if(null != inVO && inVO.getStatus() == 0) {
+			inVO.setStatus(1);
+		}
 		
-		inVO.setNickname("Temp"+StringUtil.getPK());
+		inVO.setNickname("임시닉네임");
 		
 		LOG.debug("null 처리후 inVO: "+inVO);
 		
@@ -97,34 +103,7 @@ public class LoginController {
 		
 		return jsonString;
 	}
-	
-	@RequestMapping(value="/doUpdate.do", method = RequestMethod.POST
-			,produces = "application/json;charset=UTF-8")
-	@ResponseBody // 메세지만 뿌려줄건 바디 추가해야함
-	public String doUpdate(UserVO inVO) throws SQLException {
-		String jsonString = "";
-		
-		//null처리가 필요없도록 꽉꽉 받으세여
-		LOG.debug("inVO: "+inVO);
-		
-		int flag = userService.doUpdate(inVO);
-		
-		String message = "";
-		if (1 == flag) {
-			message = "무언가 바꾸기 성공!!";
-		} else {
-			message = "무언가 바꾸기 실패!!";
-		}
-		
-		MessageVO messageVO = new MessageVO(String.valueOf(flag),message);
-		
-		jsonString = new Gson().toJson(messageVO);
-		
-		LOG.debug("doUpdate의 결과로 생성된 jsonstring: "+jsonString);
-		
-		return jsonString;
-	}
-	
+
 	@RequestMapping(value="/renewSession.do",produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String renewSession(HttpSession session) throws SQLException{
