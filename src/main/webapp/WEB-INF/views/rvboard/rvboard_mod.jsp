@@ -75,6 +75,12 @@
         return;
       }		  
       
+      //충전소명
+      if(eUtil.ISEmpty( $("#csnm").val() ) == true){
+          alert("충전소명을 입력 하세요.");
+          $("#csnm").focus();
+          return;
+      }      
       //제목
       if(eUtil.ISEmpty( $("#title").val() ) == true){
           alert("제목을 입력 하세요.");
@@ -104,6 +110,7 @@
       let params = {
     		  div: $("#div").val(),
     		  seq: $("#seq").val(),
+    		  csnm: $("#csnm").val(),
     		  title: $("#title").val(),
     		  modId: $("#modId").val(),
     		  contents:$("#contents").val()
@@ -242,6 +249,12 @@
     <form action="#" class="form-horizontal">   
 <input type="hidden" class="form-control" id="category" name="category" value="${vo.category }">
     <input type="hidden" class="form-control" id="bdSeq" name="bdSeq" value="${vo.bdSeq }">
+	    <div class="form-group">
+		    <label for="csnm" >충전소명</label>
+		    <input type="text" class="form-control" id="csnm" name="csnm"
+		     value="<c:out value='${vo.csnm }' />"
+		     placeholder="충전소명을 입력하세요" maxlength="100">
+	    </div>
 	    <div class="form-group">
 		    <label for="title" >제목</label>
 		    <input type="text" class="form-control" id="title" name="title"

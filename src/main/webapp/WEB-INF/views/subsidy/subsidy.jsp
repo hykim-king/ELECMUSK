@@ -275,7 +275,6 @@
               <option value="승용차">승용차</option>
               <option value="승합차">승합차</option>
               <option value="화물차">화물차</option>
-              
             </select>
           </td>
           <td>

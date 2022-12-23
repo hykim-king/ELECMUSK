@@ -98,7 +98,11 @@
 			  return;
 		  }
 		  
-		  
+	    if(eUtil.ISEmpty($("#csnm").val()) == true){
+          alert("충전소명을 입력 하세요.");
+          $("#csnm").focus();
+          return;
+	    }
 	    if(eUtil.ISEmpty($("#regId").val()) == true){
           alert("등록자를 입력 하세요.");
           $("#regId").focus();
@@ -119,6 +123,7 @@
       let params = {
     		  category : categoryValue,
     		  title : $("#title").val(),
+    		  csnm : $("#csnm").val(),
     		  regId : $("#regId").val(),
     		  contents : $("#contentsarea").val()
       };
@@ -213,6 +218,7 @@
    
     <!--버튼  -->
     <div class="row text-right">
+      <input type="hidden" id="regId" name="regId" value="${sessionScope.userInfo.userId}">
       <input type="button" class="btn btn-primary btn-sm" value="등록" id="doSave">
       <input type="button" class="btn btn-primary btn-sm" value="목록" id="boardView">
     </div>
@@ -227,10 +233,12 @@
 		    <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요" maxlength="100">
 	    </div>
       <div class="form-group">
+        <label for="csnm" >충전소명</label>
+        <input type="text" class="form-control" id="csnm" name="csnm" placeholder="충전소명을 입력하세요" maxlength="100">
+      </div>
+      <div class="form-group">
         <label for="regId" >등록자</label>
-        <input type="text" class="form-control" id="regId" name="regId" placeholder="등록자를 입력하세요" maxlength="100"
-          
-        >
+        <input type="text" class="form-control" id="regId" name="regId" placeholder="등록자를 입력하세요" value="${sessionScope.userInfo.nickname}" readonly="readonly" maxlength="100">
       </div>
       <div class="form-group">
         <label for="contentsarea" >내용</label>

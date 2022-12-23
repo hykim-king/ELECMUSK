@@ -8,7 +8,7 @@ public class StationVO extends evDTO {
 	private String addr;				//주소
 	private String chargetp;			//충전기타입(1:완속,2:급속)
 	private int cpid; 					//충전기ID
-	private String cpnm; 				//충전기명칭
+	private String cpnm; 				//충전기명칭(급속01,완속01)
 	private String cpstat;				//충전기상태( 1: 충전가능, 2: 충전중, 3:고장/점검, 4:통신장애, 5:통신미연결)
 	private String cptp;				//충전방식(1:B타입(5핀), 2: C타입(5핀), 3:BC타입(5핀),4: BC타입(7핀),5: DC차 데모, 6:AC 3상,
 										//		 7: DC콤보,8: DC차데모+DC콤보. 9:DC차데모+AC3상, 10: DC차데모+DC콤보, AC3상)

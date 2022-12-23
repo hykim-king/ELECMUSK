@@ -51,8 +51,8 @@
 <title>충전소 찾기</title>
 <script >
 $(document).ready(function(){
-	
-	doRetrieve();
+   
+   doRetrieve();
     
     //충전소 목록 이동
     $("#moveToManagerPage").on("click",function(){
@@ -171,10 +171,10 @@ async function getData(){//전기차 충전소 정보 api 받기
     drawMap(locations);
 }
 function drawMap(locations){
-	
-	  doRetrieve();
-	  
-	  
+   
+     doRetrieve();
+     
+     
     //매개변수의 형태
     //locations=[["충전소명칭",위도,경도],
     //          ["충전소명칭",위도,경도]
@@ -223,9 +223,9 @@ function drawMap(locations){
     
     //마커 클릭시 생성되는 인포윈도우
     const infowindow = new google.maps.InfoWindow({
-    		backgroundColor: "#eee",
-   	    borderColor: "#2db400",
-   	    borderWidth: 5		
+          backgroundColor: "#eee",
+          borderColor: "#2db400",
+          borderWidth: 5      
     });
     
     let marker, i;
@@ -250,13 +250,13 @@ function drawMap(locations){
                         pixelOffset: new google.maps.Size(0,-23)
                     });
                     
-                    
                     infowindow.setContent("<div>"+
-                    		                  "<h3 class='StationNm'>"+locations[i][7]+"</h3><br>"+
-                    		                  "<p class='StationAddr'>주소 : "+locations[i][0]+"</p><br>"+
-                    		                  "<p>충전기타입 : "+locations[i][3]+"</p><br>"+
-                    		                  "<p>충전상태 : "+locations[i][4]+"</p><br>"+
-                    		                  "<p>충전기 : "+locations[i][5]+"</p><br>"+
+                                            "<h3 class='StationNm'>"+locations[i][7]+"</h3><br>"+
+                                            "<p class='StationAddr'>주소 : "+locations[i][0]+"</p><br>"+
+                                            "<p>충전기타입 : "+locations[i][3]+"</p><br>"+
+                                            "<p>충전상태 : "+locations[i][4]+"</p><br>"+
+                                            "<p>충전기 : "+locations[i][5]+"</p><br>"+
+                                          "</div>"+
                                           "<input type='button' class='btn btn-success btn-sm' value='리뷰보기' id='moveToRvList' style='float:left;'>"+
                                           "<input type='button' class='btn btn-primary btn-sm' value='리뷰쓰기' id='moveToRvReg' style='float:right;'>"
                                           
