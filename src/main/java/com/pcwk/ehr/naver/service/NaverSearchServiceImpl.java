@@ -87,7 +87,6 @@ public class NaverSearchServiceImpl implements NaverSearchService {
 					
 				}
 			}
-
 		}
 
 		return responseDate.toString();

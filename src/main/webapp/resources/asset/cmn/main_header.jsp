@@ -99,6 +99,10 @@
          let link = "${CP}/elecmusk/naverview.do"
          location.href = link;
        });
+       $("#blog").on("click", function() {
+         let link = "${CP}/elecmusk/blogView.do"
+         location.href = link;
+       });
        $("#doLogout").on("click", function() {
          let link = "${CP}/elecmusk/doLogout.do";
          location.href = link;
@@ -174,10 +178,10 @@
             <li><a id="rvboard" name="rvboard">Review board</a></li>
           </ul>
         </li>
-        <li style="cursor:pointer;" class="menu-open" id="menu-bar">NEWS
+        <li style="cursor:pointer;" class="menu-open" id="menu-bar">정보글
           <ul class="sub-menu nav" id="sub-menu">
             <li><a id="news">뉴스</a></li>
-            <li><a>Menu 2</a></li>
+            <li><a id="blog">블로그</a></li>
           </ul>
         </li>
       </ul>

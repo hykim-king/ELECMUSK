@@ -33,7 +33,16 @@ public class NaverSearchController {
 		LOG.debug("|view:");
 		LOG.debug("└=============================┘");
 		
-		return "elecmusk/naver_search_list";
+		return "elecmusk/naver_news_list";
+	}
+	
+	@RequestMapping(value = "/blogView.do", method = RequestMethod.GET)
+	public String blogView() throws IOException {
+		LOG.debug("┌=============================┐");
+		LOG.debug("|view:");
+		LOG.debug("└=============================┘");
+		
+		return "elecmusk/naver_blog_list";
 	}
 	
 	@RequestMapping(value = "/doNaverSearch.do", method = RequestMethod.GET

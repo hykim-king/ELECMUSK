@@ -41,6 +41,7 @@
 <!-- bootstrap js -->
 <script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
+<title>뉴스</title>
 <script >
   $(document).ready(function(){
 	  console.log("document.ready");
@@ -117,7 +118,7 @@
 		                htmlData += "      <td class='text-center col-sm-4 col-md-4 col-lg-4'>"+<c:out value='value.title'/>+"</td>                                  ";
 		                htmlData += "    </tr>                                                                                                                       ";
 		                htmlData += "    <tr>                                                                                                                        ";
-		                htmlData += "      <td class='text- col-sm-4 col-md-4 col-lg-4'>"+<c:out value='value.description'/>+"</td>                                  ";
+		                htmlData += "      <td class='text-left col-sm-4 col-md-4 col-lg-4'>"+<c:out value='value.description'/>+"</td>                              ";
 		                htmlData += "    </tr>                                                                                                                       ";
 		                htmlData += "    <tr>                                                                                                                        ";
 		                htmlData += "      <td class='text-center col-sm-4 col-md-4 col-lg-4'><a href='"+<c:out value='value.link'/>+"' target='blank'>이동</a></td>  ";
