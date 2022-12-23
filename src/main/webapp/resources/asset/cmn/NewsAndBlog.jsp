@@ -108,6 +108,22 @@
   //=================================
   //조회함수 끝
   //=================================
+	  
+  function moveToBlog(){
+    if(${null != sessionScope.userInfo.status && not empty sessionScope.userInfo}){
+      let url = "${CP}/elecmusk/blogView.do";
+      location.href = url;
+    }
+  //=============================moveToboard함수 끝  
+  }
+  
+  function moveToNews(){
+    if(${null != sessionScope.userInfo.status && not empty sessionScope.userInfo}){
+      let url = "${CP}/elecmusk/naverview.do";
+      location.href = url;
+    }
+  //=============================moveToboard함수 끝  
+  }
 </script>
 <style>
   a {
@@ -122,7 +138,7 @@
   <input type="hidden" id="searchWord" value="전기차">
   <div class="recentboardArea" style="display: flex; ">
     <div class="table-freeresponsive" style="width:100%; margin: 5px; padding: 5px;">
-    <h4 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3); cursor:pointer;" onclick="moveToboard(1)">뉴스(최신)</h4>
+    <h4 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3); cursor:pointer;" onclick="moveToNews()">뉴스(최신)</h4>
     <table class="table" id="NewsTable">
       <tbody>
       </tbody>
@@ -130,7 +146,7 @@
     </div>
     
     <div class="table-flawresponsive" style="width:100%; margin: 5px; padding: 5px;">
-    <h4 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3); cursor:pointer;" onclick="moveToboard(2)">블로그(최신)</h4>
+    <h4 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3); cursor:pointer;" onclick="moveToBlog()">블로그(최신)</h4>
     <table class="table" id="BlogTable">
       <tbody>
       </tbody>
