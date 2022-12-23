@@ -328,5 +328,7 @@
   </div>
   <!--------------------------------------- div container --->
   </div>
+
+<jsp:include page ="/resources/asset/cmn/main_footer.jsp" flush="false"/>
 </body>
 </html>
