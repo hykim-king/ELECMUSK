@@ -134,19 +134,18 @@
 </style>
 </head>
 <body>
-  <input type="hidden" id="pageSize" value="10">
-  <input type="hidden" id="searchWord" value="전기차">
   <div class="recentboardArea" style="display: flex; ">
     <div class="table-freeresponsive" style="width:100%; margin: 5px; padding: 5px;">
-    <h4 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3); cursor:pointer;" onclick="moveToNews()">뉴스(최신)</h4>
+    <h4 style="border: 2px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3); cursor:pointer;" onclick="moveToNews()"><b>뉴스(최신)</b></h4>
     <table class="table" id="NewsTable" style="border-bottom: 1px solid rgba(222,222,222,1)">
       <tbody>
       </tbody>
     </table>
-    
+      <input type="hidden" id="pageSize" value="10">
+      <input type="hidden" id="searchWord" value="전기차">
     </div>
     <div class="table-flawresponsive" style="width:100%; margin: 5px; padding: 5px;">
-    <h4 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3); cursor:pointer;" onclick="moveToBlog()">블로그(최신)</h4>
+    <h4 style="border: 2px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3); cursor:pointer;" onclick="moveToBlog()"><b>블로그(최신)</b></h4>
     <table class="table" id="BlogTable" style="border-bottom: 1px solid rgba(222,222,222,1)">
       <tbody>
       </tbody>

@@ -304,7 +304,7 @@
 <body>
   <div class="recentboardArea" style="display: flex; ">
     <div class="table-freeresponsive" style="width:33%; margin: 5px; padding: 5px;">
-    <h4 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3); cursor:pointer;" onclick="moveToboard(1)">자유 게시판(최신)</h4>
+    <h4 style="border: 2px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3); cursor:pointer;" onclick="moveToboard(1)"><b>자유 게시판(최신)</b></h4>
     <table class="table" id="freeTable" style="border-bottom: 1px solid rgba(222,222,222,1)">
       <tbody>
       </tbody>
@@ -312,7 +312,7 @@
     </div>
     
     <div class="table-flawresponsive" style="width:33%; margin: 5px; padding: 5px;">
-    <h4 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3); cursor:pointer;" onclick="moveToboard(2)">결함 게시판(최신)</h4>
+    <h4 style="border: 2px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3); cursor:pointer;" onclick="moveToboard(2)"><b>결함 게시판(최신)</b></h4>
     <table class="table" id="flawTable" style="border-bottom: 1px solid rgba(222,222,222,1)">
       <tbody>
       </tbody>
@@ -320,7 +320,7 @@
     </div>
     
     <div class="table-noticeresponsive" style="width:33%; margin: 5px; padding: 5px;">
-    <h4 style="border: 3px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3); cursor:pointer;" onclick="moveToboard(5)">공지 사항(최신)</h4>
+    <h4 style="border: 2px solid rgba(200,200,200,0.4); padding:5px; border-radius: 10px; background-color: rgba(222,222,222,0.3); cursor:pointer;" onclick="moveToboard(5)"><b>공지 사항(최신)</b></h4>
     <table class="table" id="noticeTable" style="border-bottom: 1px solid rgba(222,222,222,1)">
       <tbody>
       </tbody>
