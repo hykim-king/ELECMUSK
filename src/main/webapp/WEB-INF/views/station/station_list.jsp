@@ -263,7 +263,7 @@
       <div class="form-group">
           
         <!------------------------------------- 버튼 -->
-          <input type="button" class="btn btn-success btn-sm" value="나가기" id="moveToMap">
+          <input type="button" class="btn btn-success btn-sm" value="지도" id="moveToMap">
           <input type="button" class="btn btn-info btn-sm" value="등록" id="moveToReg">
         <!------------------------------------- 버튼 -->
       </div>

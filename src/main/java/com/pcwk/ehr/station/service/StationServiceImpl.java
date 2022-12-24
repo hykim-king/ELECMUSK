@@ -48,4 +48,10 @@ public class StationServiceImpl implements StationService {
 		return stationDao.doRetrieve(inVO);
 	}
 
+
+	@Override
+	public StationVO stationCheck(StationVO inVO) throws SQLException {
+		return stationDao.stationCheck(inVO);
+	}
+
 }
