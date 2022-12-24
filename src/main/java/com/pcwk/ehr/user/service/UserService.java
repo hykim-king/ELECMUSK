@@ -18,7 +18,7 @@ public interface UserService {
 	 * @return 삭제 건수
 	 * @throws SQLException
 	 */
-	int multiDelete(List<UserVO> users) throws SQLException;
+	int multiBan(List<UserVO> users) throws SQLException;
 	
 	/**
 	 * 로그인 시 아이디 확인. 아이디와 비번을 동시에 확인함.

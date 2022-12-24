@@ -116,7 +116,7 @@
 		                htmlData += " <tr style='height:20%;'>                                                                                                                                             ";
 		                htmlData += "   <td class='text-left col-sm-2 col-md-2 col-lg-2'>"+<c:out value='value.bloggername'/>+"</td>                                                                       ";
 		                htmlData += "   <td class='text-center col-sm-4 col-md-4 col-lg-4'>"+<c:out value='value.title'/>+"</td>                                                                           ";
-		                htmlData += "   <td class='text-center col-sm-1 col-md-1 col-lg-1'><a href='"+<c:out value='value.link'/>+"' target='blank'><span class='glyphicon glyphicon-play'></span></a></td>";
+		                htmlData += "   <td class='text-center col-sm-1 col-md-1 col-lg-1'><a href='"+<c:out value='value.link'/>+"' target='blank'><span class='glyphicon glyphicon-play'/></a></td>";
 		                htmlData += " </tr>                                                                                                                                                                ";
 		                htmlData += " <tr>                                                                                                                                                                 ";
 		                htmlData += "   <td colspan='3' class='text-left col-sm-6 col-md-6 col-lg-6'>"+<c:out value='value.description'/>+"</td>                                                                 ";
