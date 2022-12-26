@@ -46,11 +46,11 @@
   $(document).ready(function(){
 	  console.log("document.ready");
 	  
-	  doRetrieve();
+	  doRetrieve(1);
 
 	  
 	  $("#keywordRetrieve").on("click",function(){
-		  doRetrieve();
+		  doRetrieve(1);
 	  });
 	  
 	  //지도화면으로 이동
@@ -88,13 +88,11 @@
 		    let url = "/station/doRetrieve.do";
 		    let async = true;
 		    let params = {
-		        searchDiv : $('#searchDiv').val(),
-		        searchWord : $('#searchWord').val(),
 		        pageSize : $('#pageSize').val(),
 		        pageNo : page,
 		        addrKeyword : $('#addrKeyword').val(),
 		        cpnmKeyword : $('#cpnmKeyword').val(),
-		        cptpKeyword : $('#cptpKeyword').val()
+		        cptpKeyword : $('#cptpKeyword').val(),
 		    };
 	          
         PClass.callAjax(method,url,async,params,function(data){

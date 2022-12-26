@@ -100,14 +100,6 @@ public class StationController {
 		if (null != inVO && inVO.getPageSize() == 0) {
 			inVO.setPageSize(10);
 		}
-		//검색구분
-		if (null != inVO && null == inVO.getSearchDiv()) {
-			inVO.setSearchDiv(evStringUtil.nvl(inVO.getSearchDiv()));
-		}
-		//검색어
-		if (null != inVO && null == inVO.getSearchWord()) {
-			inVO.setSearchWord(evStringUtil.nvl(inVO.getSearchWord()));
-		}
 		
 		LOG.debug("┌───────────────────────────────────────────┐");
 		LOG.debug("│inVO" + inVO);

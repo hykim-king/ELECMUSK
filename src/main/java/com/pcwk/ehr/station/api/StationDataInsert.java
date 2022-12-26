@@ -23,7 +23,8 @@ public class StationDataInsert {
 		PreparedStatement pstmt = null;
 		
 		String path = StationDataInsert.class.getResource("").getPath();//현재 클래스의 절대경로
-		File filePath = new File(path+"STATION_DATA.json");
+		//File filePath = new File(path+"STATION_DATA.json");
+		File filePath = new File("C:\\Users\\ITSC\\git\\ELECMUSK\\src\\main\\java\\com\\pcwk\\ehr\\station\\api\\STATION_DATA.json");
 		
 		//데이터 담을 변수
 		String addr="";

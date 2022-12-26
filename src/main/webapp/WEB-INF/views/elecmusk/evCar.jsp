@@ -121,7 +121,7 @@
              htmlData += "</tr>";
              htmlData += "<tr>";
              htmlData += "  <td>가격</td>";
-             htmlData += "  <td>"+<c:out value='value.carPrice'/>+"</td>";
+             htmlData += "  <td>"+<c:out value='value.carPrice'/>+"(만원)</td>";
              htmlData += "</tr>";
              htmlData += "<tr>";
              htmlData += "  <td>제조사</td>";
@@ -129,7 +129,7 @@
              htmlData += "</tr>";
              htmlData += "<tr>";
              htmlData += "  <td>연식</td>";
-             htmlData += "  <td>"+<c:out value='value.productYear'/>+"</td>";
+             htmlData += "  <td>"+<c:out value='value.productYear'/>+"년형</td>";
              htmlData += "</tr>";
              htmlData += "<tr>";
              htmlData += "  <td>차종</td>";
@@ -145,15 +145,15 @@
              htmlData += "</tr>";
              htmlData += "<tr>";
              htmlData += "  <td>배터리 전압</td>";
-             htmlData += "  <td>"+<c:out value='value.batteryCapa'/>+"</td>";
+             htmlData += "  <td>"+<c:out value='value.batteryCapa'/>+"kWh</td>";
              htmlData += "</tr>";
              htmlData += "<tr>";
              htmlData += "  <td>최대속도</td>";
-             htmlData += "  <td>"+<c:out value='value.maxSpeed'/>+"</td>";
+             htmlData += "  <td>"+<c:out value='value.maxSpeed'/>+"km/h</td>";
              htmlData += "</tr>";
              htmlData += "<tr>";
-             htmlData += "  <td>output</td>";
-             htmlData += "  <td>"+<c:out value='value.outPut'/>+"</td>";
+             htmlData += "  <td>출력</td>";
+             htmlData += "  <td>"+<c:out value='value.outPut'/>+"kW</td>";
              htmlData += "</tr>";
           })
         } else {

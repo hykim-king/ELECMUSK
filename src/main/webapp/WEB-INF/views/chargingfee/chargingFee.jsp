@@ -47,6 +47,16 @@
     doRetrieve();
     showSlow();
     
+    $("#showRapid").on("click",function(){
+    	$("#showRapidFee").css("display","block");
+    	$("#showSlowFee").css("display","none");
+    });
+    
+    $("#showSlow").on("click",function(){
+        $("#showRapidFee").css("display","none");
+        $("#showSlowFee").css("display","block");    	
+    });
+    
     //관리자메뉴 이동
     $("#moveToManagerPage").on("click",function(){
       
@@ -255,7 +265,7 @@
     </div>
     <!-- 제목 ------------------------------------------------------------------->
   <!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select) ---------------------------------------->
-    <form action="#" class="form-inline text-right">
+    <form action="#" class="form-inline text-left">
       <div class="form-group">
         <!------------------------------------- 버튼 -->
           <c:choose>
@@ -267,15 +277,13 @@
             </c:choose>
         <!------------------------------------- 버튼 -->
       </div>
-      <input type="hidden" id="pageSize" name="pageSize" value="10">
-      <ul class="nav nav-tabs text-left">
-        <li role="presentation" class="active" id="showRapid"><a href="">급속요금</a></li>
-      </ul>
-    </form>
-    <!-- 검색 ----------------------------------------------------------------------------->
-  
+      <input type="hidden" id="pageSize" name="pageSize" value="20">
+      <input type="button" class="btn btn-success btn-sm" value="급속요금" id="showRapid" style="margin:0px 0px 5px 5px; font-weight: bold;">
+      <input type="button" class="btn btn-success btn-sm" value="완속요금" id="showSlow" style="margin:0px 0px 5px 5px; font-weight: bold;">
+      </form>
+  <div>
   <!-- 충전기 테이블 목록 ---------------------------------------------------------------------------->
-    <div class="table-responsive">
+    <div class="table-responsive" id="showRapidFee">
     <table class="table table-bordered table-striped table-hover rapidTable" id="rapidTable">
       <thead class="bg-success">
         <tr>
@@ -285,18 +293,13 @@
         </tr>
       </thead>
       <tbody>
-      
       </tbody>
     </table>
     </div>
   <!-- 테이블 목록 ----------------------------------------------------------------------------->
-  
-  <ul class="nav nav-tabs text-left">
-    <li role="presentation" class="active" id="showSlow"><a href="">완속요금</a></li>
-  </ul>
       
   <!-- 충전기 테이블 목록 ---------------------------------------------------------------------------->
-    <div class="table-responsive">
+    <div class="table-responsive" id="showSlowFee" style="display: none;">
     <table class="table table-bordered table-striped table-hover slowTable" id="slowTable">
       <thead class="bg-success">
         <tr>
@@ -305,17 +308,13 @@
         </tr>
       </thead>
       <tbody>
-        
       </tbody>
     </table>
     </div>
-  <!-- 테이블 목록 ----------------------------------------------------------------------------->
-    
-    <!-- 페이징 -->
-    <div class="text-center col-sm-12 col-md-12 col-lg-12">
-      <div id="page-selection" class="text-center page"></div>    
-    </div>
-    <!-- 페이징--- -------------------------------------------------------------->
+  <!-- 테이블 목록 ----------------------------------------------------------------------------->        
+  </div>
+      
+      
   </div>
   <!-- div container -->
 </div>

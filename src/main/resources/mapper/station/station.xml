@@ -73,34 +73,34 @@
 
     <sql id="cptpKeyword">
       <choose>
-        <when test=" '1' == cptpKeyword">
+        <when test=" 1 == cptpKeyword">
+          AND cptp = #{cptpKeyword} 
+        </when>
+        <when test=" 2 == cptpKeyword">
           AND cptp = #{cptpKeyword}
         </when>
-        <when test=" '2' == cptpKeyword">
+        <when test=" 3 == cptpKeyword">
           AND cptp = #{cptpKeyword}
         </when>
-        <when test=" '3' == cptpKeyword">
+        <when test=" 4 == cptpKeyword">
           AND cptp = #{cptpKeyword}
         </when>
-        <when test=" '4' == cptpKeyword">
+        <when test=" 5 == cptpKeyword">
           AND cptp = #{cptpKeyword}
         </when>
-        <when test=" '5' == cptpKeyword">
+        <when test=" 6 == cptpKeyword">
           AND cptp = #{cptpKeyword}
         </when>
-        <when test=" '6' == cptpKeyword">
+        <when test=" 7 == cptpKeyword">
           AND cptp = #{cptpKeyword}
         </when>
-        <when test=" '7' == cptpKeyword">
+        <when test=" 8 == cptpKeyword">
           AND cptp = #{cptpKeyword}
         </when>
-        <when test=" '8' == cptpKeyword">
+        <when test=" 9 == cptpKeyword">
           AND cptp = #{cptpKeyword}
         </when>
-        <when test=" '9' == cptpKeyword">
-          AND cptp = #{cptpKeyword}
-        </when>
-        <when test=" '10' == cptpKeyword">
+        <when test=" 10 == cptpKeyword">
           AND cptp = #{cptpKeyword}
         </when>
       </choose>

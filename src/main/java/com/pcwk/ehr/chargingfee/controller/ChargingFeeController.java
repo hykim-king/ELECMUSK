@@ -77,7 +77,7 @@ public class ChargingFeeController {
 		}
 		//페이지 사이즈
 		if (null != inVO && inVO.getPageSize() == 0) {
-			inVO.setPageSize(10);
+			inVO.setPageSize(20);
 		}
 		//검색구분
 		if (null != inVO && null == inVO.getSearchDiv()) {
@@ -119,7 +119,7 @@ public class ChargingFeeController {
 		
 		//페이지사이즈
 		if(null !=inVO && inVO.getPageSize()==0) {
-		    inVO.setPageSize(10);
+		    inVO.setPageSize(20);
 		}
 		   
 		LOG.debug("┌=============================┐");	

@@ -73,18 +73,6 @@
 	  //수정
 	  $("#doUpdate").on("click",function(){
 		  
-		  //구분
-		  if(eUtil.ISEmpty( $("#div").val() ) == true){
-			  alert("구분을 입력 하세요.");
-			  return;
-		  }
-
-      //SEQ
-      if(eUtil.ISEmpty( $("#seq").val() ) == true){
-        alert("SEQ를 입력 하세요.");
-        return;
-      }		  
-      
       //충전소명
       if(eUtil.ISEmpty( $("#csnm").val() ) == true){
           alert("충전소명을 입력 하세요.");
@@ -98,17 +86,29 @@
           return;
       }      
       
-      //수정자
-      if(eUtil.ISEmpty( $("#modId").val() ) == true){
-          alert("수정자를 입력 하세요.");
-          $("#modId").focus();
+      //조회수
+      if(eUtil.ISEmpty( $("#readCnt").val() ) == true){
+          alert("등록자를 입력 하세요.");
+          $("#readCnt").focus();
+          return;
+      }
+      //등록일
+      if(eUtil.ISEmpty( $("#regDt").val() ) == true){
+          alert("등록자를 입력 하세요.");
+          $("#regDt").focus();
+          return;
+      }
+      //등록자
+      if(eUtil.ISEmpty( $("#regId").val() ) == true){
+          alert("등록자를 입력 하세요.");
+          $("#regId").focus();
           return;
       }
      
       //내용
-      if(eUtil.ISEmpty( $("#contents").val() ) == true){
+      if(eUtil.ISEmpty( $("#contentstextarea").val() ) == true){
           alert("내용을 입력 하세요.");
-          $("#contents").focus();
+          $("#contentstextarea").focus();
           return;
       }      
 		  
@@ -118,12 +118,14 @@
       let url    = "/board/doUpdate.do";
       let async  = true;
       let params = {
-    		  div: $("#div").val(),
-    		  seq: $("#seq").val(),
+    		  category: $("#category").val(),
+    		  bdSeq: $("#bdSeq").val(),
     		  csnm: $("#csnm").val(),
     		  title: $("#title").val(),
-    		  modId: $("#modId").val(),
-    		  contents:$("#contents").val()
+    		  readCnt: $("#readCnt").val(),
+    		  regDt: $("#regDt").val(),
+    		  regId: $("#regId").val(),
+    		  contents:$("#contentstextarea").val()
       };
       
       PClass.callAjax(method,url,async,params,function(data){
@@ -250,66 +252,87 @@
     <!--버튼  -->
     <div class="row text-right">
       <input type="button" class="btn btn-success btn-sm" value="지도" id="moveToMap">
-      <input type="button" class="btn btn-primary btn-sm" value="수정" id="doUpdate">
-      <input type="button" class="btn btn-primary btn-sm" value="삭제" id="doDelete">
+      <c:choose>
+      <c:when test="${sessionScope.userInfo.userId == vo.regId}">
+	      <input type="button" class="btn btn-primary btn-sm" value="수정" id="doUpdate">
+	      <input type="button" class="btn btn-primary btn-sm" value="삭제" id="doDelete">
+      </c:when>
+      </c:choose>
       <input type="button" class="btn btn-primary btn-sm" value="목록" id="moveToList">
     </div>
     <!--버튼 -------------------------------------------------------------------->
 
     <!-- 폼 -->
     <form action="#" class="form-horizontal">   
-<input type="hidden" class="form-control" id="category" name="category" value="${vo.category }">
-    <input type="hidden" class="form-control" id="bdSeq" name="bdSeq" value="${vo.bdSeq }">
-	    <div class="form-group">
-		    <label for="csnm" >충전소명</label>
-		    <input type="text" class="form-control" id="csnm" name="csnm"
-		     value="<c:out value='${vo.csnm }' />"
-		     placeholder="충전소명을 입력하세요" maxlength="100">
-	    </div>
-	    <div class="form-group">
-		    <label for="title" >제목</label>
-		    <input type="text" class="form-control" id="title" name="title"
-		     value="<c:out value='${vo.title }' />"
-		     placeholder="제목을 입력하세요" maxlength="100">
-	    </div>
-      <div class="form-group">
-        <label for="regId" >수정자</label>
-        <input type="text" class="form-control" id="modId" name="modId" 
-        value="<c:out value='${vo.modId }' />"
-        placeholder="등록자를 입력하세요" maxlength="100">
-      </div>
+		<input type="text" class="form-control" id="category" name="category" value="${vo.category }">
+    <input type="text" class="form-control" id="bdSeq" name="bdSeq" value="${vo.bdSeq }">
+    <input type="text" class="form-control" id="csnm" name="csnm" value="${vo.csnm }">
+     <c:choose>
+      <c:when test="${sessionScope.userInfo.userId == vo.regId}">
+		    <div class="form-group">
+			    <label for="csnm" style="display: block;">충전소명</label>
+			    <div style="border: 1px solid rgba(220,220,220,1); padding: 10px; border-radius: 5px;">
+			    ${vo.csnm }
+			    </div>
+		    </div>
+		    <div class="form-group">
+			    <label for="title" >제목</label>
+			    <input type="text" class="form-control" id="title" name="title"
+			     value="<c:out value='${vo.title }' />"
+			     placeholder="제목을 입력하세요" maxlength="100">
+		    </div>
+	      <!-- 조회수 -->
+	      <div class="form-group">
+	        <label for="regDt" >조회수</label>
+	        <input type="text" class="form-control" id="readCnt" name="readCnt" 
+	         value="<c:out value='${vo.readCnt}' />" 
+	         readonly="readonly"
+	         placeholder="조회수" maxlength="100">
+	      </div>
+	      <!-- 등록일 -->
+	      <div class="form-group">
+	        <label for="regDt" >등록일</label>
+	        <input type="text" class="form-control" id="regDt" name="regDt" 
+	         value="<c:out value='${vo.regDt }' />" 
+	         readonly="readonly"
+	         placeholder="등록일" maxlength="100">
+	      </div>
+	      <!-- 등록자 -->
+	      <div class="form-group">
+	        <label for="regId" >등록자</label>
+	        <input type="text" class="form-control" id="regId" name="regId" 
+	         value="<c:out value='${vo.regId }' />"
+	         readonly="readonly"
+	        placeholder="등록자" maxlength="100">
+	      </div>
+          <div class="form-group">
+            <label for="contentstextarea">내용</label>
+            <textarea class="form-control" rows="10" id="contentstextarea" name="contentstextarea" style="resize: none;">${vo.contents }</textarea>
+            <div class="text-right col-sm-12 col-dm-12 col-lg-12"><span id="count">0</span>/2000</div>
+          </div>   	  
+       </c:when>
+      <c:otherwise>
+	      <div class="form-group">
+	        <label for="csnm" style="display: block;">충전소명</label>
+	        <div style="border: 1px solid rgba(220,220,220,1); padding: 10px; border-radius: 5px;">
+	        ${vo.csnm }
+	        </div>
+	      </div>
+	      <div class="form-group">
+	        <label for="title" style="display: block;" >제목</label>
+	        <div style="border: 1px solid rgba(220,220,220,1); padding: 10px; border-radius: 5px;">
+	        ${vo.title }
+	        </div>
+	      </div>
+	      <div class="form-group">
+	        <label for="contentstextarea" style="display: block;">내용</label>
+	        <div style="border: 1px solid rgba(220,220,220,1); padding: 10px; height: 100%; word-break: break-all; border-radius: 5px; min-height: 300px;">
+	         ${vo.contents }
+	        </div>
+	      </div> 
+      </c:otherwise>
+      </c:choose>  
       
-      <!-- 조회수 -->
-      <div class="form-group">
-        <label for="regDt" >조회수</label>
-        <input type="text" class="form-control" id="readCnt" name="readCnt" 
-         value="<c:out value='${vo.readCnt}' />" 
-         readonly="readonly"
-         placeholder="조회수" maxlength="100">
-      </div>
-            
-      
-      <!-- 등록일 -->
-      <div class="form-group">
-        <label for="regDt" >등록일</label>
-        <input type="text" class="form-control" id="regDt" name="regDt" 
-         value="<c:out value='${vo.regDt }' />" 
-         readonly="readonly"
-         placeholder="등록일" maxlength="100">
-      </div>
-      <!-- 등록자 -->
-      <div class="form-group">
-        <label for="regId" >등록자</label>
-        <input type="text" class="form-control" id="regId" name="regId" 
-         value="<c:out value='${vo.regId }' />"
-         readonly="readonly"
-        placeholder="등록자" maxlength="100">
-      </div>
-            
-      <div class="form-group">
-        <label for="contentstextarea" >내용</label>
-        <textarea class="form-control" rows="10" id="contentstextarea" name="contentstextarea"><c:out value="${vo.contents}"/></textarea>
-      </div>      	    
     </form>
     <!--폼   -------------------------------------------------------------------->
   </div>   

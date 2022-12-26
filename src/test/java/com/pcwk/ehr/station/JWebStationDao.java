@@ -49,11 +49,11 @@ public class JWebStationDao {
 
 		search = new StationVO(9999, "aaaa", "9", 9999, "aa99", "99", "9", 9999, "aaaa", "9999", "9999", "");
 
-		searchVO = new evSearchVO(10, 1, "", "", "", "", "", "", "", "","","","","");
+		searchVO = new evSearchVO(10, 1, "", "", "", "", "", "", "", "","","","","2");
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void doSelectOne() throws SQLException {
 		dao.doDelete(station01);
 		dao.doSave(station01);
@@ -61,7 +61,7 @@ public class JWebStationDao {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void doDelete() throws SQLException {
 		dao.doDelete(station01);
 		dao.doSave(station01);
@@ -70,7 +70,7 @@ public class JWebStationDao {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void doSave() throws SQLException {
 		dao.doDelete(station01);
 		dao.doSave(station01);
@@ -80,15 +80,15 @@ public class JWebStationDao {
 	@Test
 	//@Ignore
 	public void doRetrieve() throws SQLException {
-		dao.doDelete(station01);
-
-		dao.doSave(station01);
+//		dao.doDelete(station01);
+//
+//		dao.doSave(station01);
 
 		List<StationVO> list = dao.doRetrieve(searchVO);
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void doUpdate() throws SQLException {
 		dao.doDelete(station01);
 		dao.doSave(station01);
@@ -101,7 +101,7 @@ public class JWebStationDao {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void beans() {
 		LOG.debug("┌─────────────────────────────────────┐");
 		LOG.debug("│context:" + context);

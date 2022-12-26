@@ -158,8 +158,7 @@ public class evSearchVO extends evDTO{
 				+ ", modelKeyword=" + modelKeyword + ", batteryTypeKeyword=" + batteryTypeKeyword + ", submodelKeyword="
 				+ submodelKeyword + ", madebyKeyword=" + madebyKeyword + ", subsidyKeyword=" + subsidyKeyword
 				+ ", addrKeyword=" + addrKeyword + ", cpnmKeyword=" + cpnmKeyword + ", cptpKeyword=" + cptpKeyword
-				+ "]";
+				+ ", toString()=" + super.toString() + "]";
 	}
-
 	
 }
