@@ -61,6 +61,11 @@
 <title>제목</title>
 <script >
   $(document).ready(function(){
+	  
+	  let title = $("#votitle").val().slice(5);
+	  console.log("title: "+title);
+	  $("#title").val(title);
+	  
 	  console.log("document.ready");
 	  ifidsame();
 	  
@@ -235,7 +240,7 @@
         let params  ={
             category   : $("#category").val(),
             bdSeq      : $("#bdSeq").val(),
-            title      : $("#title").val(),
+            title      : "["+$("#tag").val()+"] "+$("#title").val(),
             modId      : $("#modId").val(),
             contents   : $("#contentstextarea").val()
         };
@@ -278,6 +283,7 @@
     <input type="hidden" class="form-control" id="category" name="category" value="${vo.category }">
     <input type="hidden" class="form-control" id="bdSeq" name="bdSeq" value="${vo.bdSeq }">
     <input type="hidden" class="form-control" id="regId" name="regId" value="${vo.regId }">
+    <input type="hidden" class="form-control" id="votitle" name="votitle" value="${vo.title }">
     <!------------------------------------- 버튼 -->
     <div class="row text-right">
       <c:choose>
@@ -285,27 +291,64 @@
 	       <input type="button" class="btn btn-primary btn-sm" value="관리자 삭제" id="adminDelete">
 	      </c:when>
       </c:choose>
-       <input type="button" class="btn btn-primary btn-sm" value="수정" id="doUpdate">
-       <input type="button" class="btn btn-primary btn-sm" value="삭제" id="doDelete">
-       <input type="button" class="btn btn-primary btn-sm" value="목록" id="boardView">
+      <c:choose>
+        <c:when test="${sessionScope.userInfo.userId == vo.regId}">
+          <input type="button" class="btn btn-primary btn-sm" value="수정" id="doUpdate">
+          <input type="button" class="btn btn-primary btn-sm" value="삭제" id="doDelete">
+        </c:when>
+      </c:choose>
+      <input type="button" class="btn btn-primary btn-sm" value="목록" id="boardView">
     </div>
     <!------------------------------------- 버튼 -->
     
     <!--------------------------------------------------------- 폼 -->
     <form action="#" class="form-horizontal">
+     <c:choose>
+      <c:when test="${sessionScope.userInfo.userId == vo.regId}">
       <div class="form-group">
-        <label for="title">제목</label>
-        <input type="text" class="form-control" id="title" name="title" placeholder="제목 입력하세요" maxlength="100" value="${vo.title }">
-      </div>
-      <div class="form-group">
-        <label for="regId">등록자</label>
-        <input type="text" class="form-control" id="nickName" name="nickName" placeholder="등록자 입력하세요" maxlength="100" readonly="readonly" value="${vo.nickName }">
-      </div>
-      <div class="form-group">
-        <label for="contentstextarea">내용</label>
-        <textarea class="form-control" rows="10" id="contentstextarea" name="contentstextarea" >${vo.contents }</textarea>
-        <div class="text-right col-sm-12 col-dm-12 col-lg-12"><span id="count">0</span>/2000</div>
-      </div>
+       <c:choose>
+        <c:when test="${vo.category == '1'}">
+          <label for="title">태그</label>
+            <select class="form-control input-sm" name="tag" id="tag">
+              <option value="자유">자유</option>
+              <option value="유머">유머</option>
+              <option value="거래">거래</option>
+              <option value="건의">건의</option>
+            </select>
+          </c:when>
+        </c:choose>
+		        <label for="title">제목</label>
+		        <input type="text" class="form-control" id="title" name="title" placeholder="제목 입력하세요" maxlength="100" >
+		      </div>
+		      <div class="form-group">
+		        <label for="regId">등록자</label>
+		        <input type="text" class="form-control" id="nickName" name="nickName" placeholder="등록자 입력하세요" maxlength="100" readonly="readonly" value="${vo.nickName }">
+		      </div>
+		      <div class="form-group">
+		        <label for="contentstextarea">내용</label>
+		        <textarea class="form-control" rows="10" id="contentstextarea" name="contentstextarea" style="resize: none;">${vo.contents }</textarea>
+		        <div class="text-right col-sm-12 col-dm-12 col-lg-12"><span id="count">0</span>/2000</div>
+		      </div>
+          </c:when>
+          <c:otherwise>
+       <div class="form-group">
+	            <label for="title">제목</label>
+	            <input type="text" class="form-control" id="title" name="title" placeholder="제목 입력하세요" readonly="readonly" maxlength="100" >
+	          </div>
+	          <div class="form-group">
+	            <label for="regId" style="display: block;">등록자</label>
+	            <div style="border: 1px solid rgba(220,220,220,1); padding: 10px; border-radius: 5px;">
+	             ${vo.nickName}
+	            </div>
+	          </div>
+	          <div class="form-group">
+	            <label for="contentstextarea" style="display: block;">내용</label>
+	            <div style="border: 1px solid rgba(220,220,220,1); padding: 10px; height: 100%; word-break: break-all; border-radius: 5px; min-height: 300px;">
+	             ${vo.contents }
+	            </div>
+	          </div>
+          </c:otherwise>
+        </c:choose>
     </form>
     <!--------------------------------------------------------- 폼 -->
   
@@ -316,5 +359,6 @@
   </div>
   <!--------------------------------------- div container --->
   </div>
+  <jsp:include page ="/resources/asset/cmn/main_footer.jsp" flush="false"/>
 </body>
 </html>

@@ -63,12 +63,15 @@
 	  console.log("document.ready");
 	  doRetrieve(1);
 	  
+	  
+	  
+	  
     //===========================검색어 enter event
     $("#searchWord").on("keydown",function(e){
       
       if(13 == e.which){
         e.preventDefault();
-        doRetrive(1);
+        doRetrieve(1);
       }
     });//========================검색어 enter event 끝
 	  

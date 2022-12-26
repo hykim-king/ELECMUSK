@@ -115,7 +115,7 @@
         let async     = true;
         let params    = {
         		category : categoryValue,
-            title : $("#title").val(),
+            title : "["+$("#tag").val()+"] "+$("#title").val(),
             nickName : $("#nickName").val(),
             contents : $("#contentstextarea").val(),
             regId :$("#regId").val()
@@ -205,6 +205,8 @@
     
     <!------------------------------------- 버튼 -->
     <div class="row text-right">
+
+       <input type="hidden" class="form-control" id="nickName" name="nickName" placeholder="등록자 입력하세요" value="${sessionScope.userInfo.nickname}" readonly="readonly" maxlength="100">
        <input type="hidden" id="regId" name="regId" value="${sessionScope.userInfo.userId}">
        <input type="button" class="btn btn-primary btn-sm" value="등록" id="doSave">
        <input type="button" class="btn btn-primary btn-sm" value="목록" id="boardView">
@@ -214,16 +216,23 @@
     <!--------------------------------------------------------- 폼 -->
     <form action="#" class="form-horizontal">
       <div class="form-group">
+      <c:choose>
+        <c:when test="${categoryValue == '1'}">
+          <label for="title">태그</label>
+		        <select class="form-control input-sm" name="tag" id="tag">
+		          <option value="자유">자유</option>
+		          <option value="유머">유머</option>
+		          <option value="거래">거래</option>
+		          <option value="건의">건의</option>
+		        </select>
+	        </c:when>
+        </c:choose>
         <label for="title">제목</label>
         <input type="text" class="form-control" id="title" name="title" placeholder="제목 입력하세요" maxlength="100">
       </div>
       <div class="form-group">
-        <label for="regId">등록자</label>
-        <input type="text" class="form-control" id="nickName" name="nickName" placeholder="등록자 입력하세요" value="${sessionScope.userInfo.nickname}" readonly="readonly" maxlength="100">
-      </div>
-      <div class="form-group">
         <label for="contentstextarea">내용</label>
-        <textarea class="form-control" rows="10" id="contentstextarea" name="contentstextarea" ></textarea>
+        <textarea class="form-control" style="resize:none;" rows="10" id="contentstextarea" name="contentstextarea" ></textarea>
         <div class="text-right col-sm-12 col-dm-12 col-lg-12"><span id="count">0</span>/2000</div>
       </div>
     </form>
@@ -236,5 +245,6 @@
   </div>
   <!--------------------------------------- div container --->
   </div>
+  <jsp:include page ="/resources/asset/cmn/main_footer.jsp" flush="false"/>
 </body>
 </html>
