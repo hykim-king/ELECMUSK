@@ -20,6 +20,9 @@
 <%
      //공지사항(10)/자유게시판 구분(20)
      String categoryValue = request.getParameter("category");
+     String cpId = request.getParameter("cpId");
+     String csId = request.getParameter("csId");
+     String csnm = request.getParameter("csnm");
      String title = "";
      if("9".equals(categoryValue)){
          title = "충전소 리뷰게시판";
@@ -29,6 +32,9 @@
      
      request.setAttribute("title", title);
      request.setAttribute("categoryValue", categoryValue);
+     request.setAttribute("cpId", cpId);
+     request.setAttribute("csId", csId);
+     request.setAttribute("csnm", csnm);
 %>
 <c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
 <c:set var="RES" value="/resources" ></c:set>
@@ -124,14 +130,15 @@
       }	      
 	      
       if(confirm("등록 하시겠습니까?")==false)return;
-      let categoryValue = ${categoryValue};
       let method = "POST";
       let url    = "/review/doSave.do";
       let async  = true;
       let params = {
-    		  category : categoryValue,
+    		  category : $("#category").val(),
     		  title : $("#title").val(),
     		  csnm : $("#csnm").val(),
+    		  csId : $("#csId").val(),
+    		  cpId : $("#cpId").val(),
     		  regId : $("#regId").val(),
     		  contents : $("#contentsarea").val()
       };
@@ -165,7 +172,7 @@
   });
   
   function moveToList(){
-	  let categoryValue = ${categoryValue};
+	  let categoryValue = $("#category").val();
 	  window.location.href= "${CP}/review/rvboardView.do?category="+categoryValue;
   }
   
@@ -230,6 +237,9 @@
       <input type="button" class="btn btn-success btn-sm" value="지도" id="moveToMap">
       <input type="button" class="btn btn-primary btn-sm" value="등록" id="doSave">
       <input type="button" class="btn btn-primary btn-sm" value="목록" id="boardView">
+      <input type="hidden" value="${csId}" id="csId">
+      <input type="hidden" value="${cpId}" id="cpId">
+      <input type="hidden" value="${categoryValue}" id="category">
     </div>
     <!--버튼 -------------------------------------------------------------------->
 
@@ -243,7 +253,15 @@
 	    </div>
       <div class="form-group">
         <label for="csnm" >충전소명</label>
-        <input type="text" class="form-control" id="csnm" name="csnm" placeholder="충전소명을 입력하세요" maxlength="100">
+        <input type="text" class="form-control" id="csnm" name="csnm" value="${csnm}" read maxlength="100">
+      </div>
+      <div class="form-group">
+        <label for="csId" >충전소ID</label>
+        <input type="text" class="form-control" id="csId" name="csId" value="${csId}" readonly="readonly" maxlength="100">
+      </div>
+      <div class="form-group">
+        <label for="cpId" >충전기ID</label>
+        <input type="text" class="form-control" id="cpId" name="cpId" value="${cpId}" readonly="readonly" maxlength="100">
       </div>
       <div class="form-group">
         <label for="regId" >등록자</label>

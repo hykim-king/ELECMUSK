@@ -75,10 +75,14 @@ $(document).ready(function(){
       
     //moveToList
     });
+    
+
+    
     //리뷰게시판 등록으로 이동
     $("#moveToRvReg").on("click",function(){
       
       console.log('moveToRvReg');
+      
       
       window.location.href = "${CP}/review/moveToReg.do?category=9";
       
@@ -87,6 +91,8 @@ $(document).ready(function(){
     
     
 });
+
+
 
 function doRetrieve(page){
     console.log('doRetrieve() page:'+page);
@@ -102,16 +108,12 @@ function doRetrieve(page){
     };
         
     PClass.callAjax(method,url,async,params,function(data){
-      console.log("sdata:"+sdata);
+      console.log("data:"+data);
       
-      let parsedJson = JSON.parse(sdata);
+      let parsedJson = JSON.parse(data);
       
       let htmlData = "";
       
-      let stdata = new Array();
-      
-      let lat = [];
-      let longi = [];
       
       
       
@@ -124,12 +126,8 @@ function doRetrieve(page){
           console.log("longi: "+value.longi);
           
           //배열에 위도 정보 담기
-          lat.push(value.lat);
           //배열에 경도 정보 담기
-          longi.push(value.longi);
           
-          stdata.push(value);
-          console.log("stdata: "+stdata);
           
           
           
@@ -257,8 +255,8 @@ function drawMap(locations){
                                             "<p>충전상태 : "+locations[i][4]+"</p><br>"+
                                             "<p>충전기 : "+locations[i][5]+"</p><br>"+
                                           "</div>"+
-                                          "<input type='button' class='btn btn-success btn-sm' value='리뷰보기' id='moveToRvList' style='float:left;'>"+
-                                          "<input type='button' class='btn btn-primary btn-sm' value='리뷰쓰기' id='moveToRvReg' style='float:right;'>"
+                                          "<input type='button' class='btn btn-success btn-sm' value='리뷰보기' onclick='moveToRvList("+"\""+locations[i][7]+"\""+","+"1"+")' style='float:left;'>"+
+                                          "<input type='button' class='btn btn-primary btn-sm' value='리뷰쓰기' onclick='doSelectOne("+locations[i][2]+","+locations[i][6]+","+"\""+locations[i][7]+"\""+")' style='float:right;'>"
                                           
                                           );
                     infowindow.open(map, marker);
@@ -306,14 +304,28 @@ getData();
 //==================================================================
 	
   //=============================doSelectOne함수
-  function doSelectOne(cpid, csid){
-     let url = "${CP}/station/doSelectOne.do";
-
-    url = url + "?cpid="+cpid+"?csid="+csid;
+  //리뷰게시판 등록
+  function doSelectOne(cpId,csId,csNm){
+     let url = "${CP}/station/stationCheck.do?category=9";
+     
+     url = url + "&cpId="+cpId+"&csId="+csId+"&csnm="+csNm;
+    
     console.log("url : "+url);
     location.href = url;
   }
   //=============================doSelectOne함수 끝  
+  
+  //리뷰게시판 조회
+    function moveToRvList(csNm,maptoList){
+      let url = "${CP}/review/rvboardView.do?category=9";
+      
+      url = url + "&searchWord="+csNm+"&maptoList="+maptoList;
+
+      
+      console.log("url:"+url);
+      
+      location.href = url;      
+    };
 </script>
 
 </head>
@@ -334,7 +346,6 @@ getData();
       <div class="form-group">
       <input type='button' class='btn btn-success btn-sm' value='리뷰보기' id='moveToRvList' style='float:left;'>
       <input type='button' class='btn btn-primary btn-sm' value='리뷰쓰기' id='moveToRvReg' style='float:left;'>
-          
         <!------------------------------------- 버튼 -->
             <c:choose>
               <c:when test="${2 <= sessionScope.userInfo.status && not empty sessionScope.userInfo}">

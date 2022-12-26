@@ -93,7 +93,7 @@
 		        pageSize : $('#pageSize').val(),
 		        pageNo : page,
 		        addrKeyword : $('#addrKeyword').val(),
-		        chargetpKeyword : $('#chargetpKeyword').val(),
+		        cpnmKeyword : $('#cpnmKeyword').val(),
 		        cptpKeyword : $('#cptpKeyword').val()
 		    };
 	          
@@ -313,7 +313,6 @@
               <option value="">전체</option>
               <option value="완속">완속</option>
               <option value="급속">급속</option>
-              
             </select>
           </td>
           <td>

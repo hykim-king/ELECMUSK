@@ -15,30 +15,35 @@
 */
  --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-     //공지사항(10)/자유게시판 구분(20)
-     String categoryValue = request.getParameter("category");
-     String title = "";
-     if("9".equals(categoryValue)){
-    	 title = "충전소 리뷰게시판";
-     }else{
-    	 title = "";
-     }
-     
-     request.setAttribute("title", title);
-     request.setAttribute("categoryValue", categoryValue);
+	//공지사항(10)/자유게시판 구분(20)/
+String categoryValue = request.getParameter("category");
+String searchWord = request.getParameter("searchWord");
+String maptoList = request.getParameter("maptoList");
+String title = "";
+if ("9".equals(categoryValue)) {
+	title = "충전소 리뷰게시판";
+} else {
+	title = "";
+}
+
+request.setAttribute("title", title);
+request.setAttribute("categoryValue", categoryValue);
+request.setAttribute("searchWord", searchWord);
+request.setAttribute("maptoList", maptoList);
 %>
 <c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
-<c:set var="RES" value="/resources" ></c:set>
-<c:set var="CP_RES" value="${CP}${RES}" ></c:set>
+<c:set var="RES" value="/resources"></c:set>
+<c:set var="CP_RES" value="${CP}${RES}"></c:set>
 <!DOCTYPE html>
-<html>  
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" type="image/x-icon" href="${CP_RES}/asset/cmn/favicon.ico"> 
+<link rel="shortcut icon" type="image/x-icon"
+	href="${CP_RES}/asset/cmn/favicon.ico">
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="${CP_RES}/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="${CP_RES}/main_home.css">
@@ -55,7 +60,7 @@
 <script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
 <title>${title}</title>
-<script >
+<script>
   $(document).ready(function(){
 	  console.log("document.ready");
 	  
@@ -124,6 +129,8 @@
   });
   
   function doRetrive(page){
+	  $('#searchDiv').val("40").prop("selected", true);
+	  
 	  console.log('doRetrive() page:'+page);
 	  
 	  let method  ="GET";
@@ -194,12 +201,16 @@
 		  //데이터 출력
 		  $("#rvboardTable>tbody").append(htmlData);
 		  
+		  //mapToList 1 지우기
+		  $('#mapToList').empty();
+		  
 		  //paging
 		  $("#page-selection").empty();//페이저 삭제
 		  renderingPage(pageTotal,page);
 		  
 		//PClass.callAjax  
-	  });	  
+	  });
+   
 	  
   }
   
@@ -270,6 +281,7 @@
 		     //==================================================================
 		     //=헤더부분 스크립트 이부분 꼭 넣으세요
 		     //==================================================================
+		    	 
   //=============================doSelectOne함수
   function doSelectOne(boardSeq){
        let url = "${CP}/review/doSelectOne.do";
@@ -284,79 +296,81 @@
 
 </head>
 <body>
-  <header>
-  <jsp:include page ="/resources/asset/cmn/main_header.jsp" flush="false"/>
-  </header>
-  
-  <div id="contents">
-  <!-- div container -->   
-  <div class="container">   
-    <!-- 제목 -->
-    <div class="page-header">
-       <h2>충전소 리뷰 게시판</h2>
-    </div>
-    <!-- 제목 ------------------------------------------------------------------->
-    <!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select)--> 
-    <form action="#" class="form-inline text-right" >
-      <div class="form-group">
-        <select class="form-control input-sm" name="searchDiv" id="searchDiv">
-          <option value="">전체</option>
-          <option value="10">작성자</option>
-          <option value="20">제목</option>
-          <option value="30">내용</option>
-          <option value="40">충전소</option>
-        </select>
-        <input type="text" class="form-control input-sm" 
-        name="searchWord" id="searchWord"
-        placeholder="검색어를 입력하세요.">
-        <select class="form-control input-sm" name="pageSize" id="pageSize">
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30">30</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
-        </select>
-        <input type="button" class="btn btn-success btn-sm" value="지도" id="moveToMap">
-        <input type="button" class="btn btn-primary btn-sm" value="조회" id="doRetrive">
-        <input type="button" class="btn btn-primary btn-sm" value="등록" id="moveToReg">				      
-      </div>
-    </form> 
-    <!-- 검색 ------------------------------------------------------------------->
-    
-    <!-- 테이블 목록 -->
-    <div class="table-responsive">
-    <table id="rvboardTable" class="table table-striped table-bordered table-hover">
-      <thead class="bg-primary">
-        <tr>
-          <th class="text-center col-sm-1 col-md-1 col-lg-1">번호</th>
-          <th class="text-center col-sm-2 col-md-2 col-lg-2">충전소명</th>
-          <th class="text-center col-sm-6 col-md-6 col-lg-6">제목</th>
-          <th class="text-center col-sm-1 col-md-1 col-lg-1">작성자</th>
-          <th class="text-center col-sm-1 col-md-1 col-lg-1">등록일</th>
-          <th class="text-center col-sm-1 col-md-1 col-lg-1">조회수</th>
-          <th style='display:none;'>SEQ</th>
-        </tr>
-      </thead>
-      <tbody>
-     
-            
-      </tbody>
-    </table>
-    </div>
-    <!-- 테이블 목록 -------------------------------------------------------------->
+	<header>
+		<jsp:include page="/resources/asset/cmn/main_header.jsp" flush="false" />
+	</header>
 
-    <!-- 페이징 -->
-    <div class="text-center col-sm-12 col-md-12 col-lg-12">
-      <div id="page-selection" class="text-center page"></div>    
-    </div>
-    <!-- 페이징--- -------------------------------------------------------------->    
-  </div>   
-  <!-- div container ---------------------------------------------------------->
-</div>
+	<div id="contents">
+		<!-- div container -->
+		<div class="container">
+			<!-- 제목 -->
+			<div class="page-header">
+				<h2>충전소 리뷰 게시판</h2>
+			</div>
+			<!-- 제목 ------------------------------------------------------------------->
+			<!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select)-->
+			<form action="#" class="form-inline text-right">
+				<input type="hidden" value="${maptoList}" id="maptoList">
+				<div class="form-group">
+					<select class="form-control input-sm" name="searchDiv"
+						id="searchDiv">
+						<option value="">전체</option>
+						<option value="10">작성자</option>
+						<option value="20">제목</option>
+						<option value="30">내용</option>
+						<option value="40">충전소</option>
+					</select> <input type="text" class="form-control input-sm" name="searchWord"
+						id="searchWord" value="${searchWord}" placeholder="검색어를 입력하세요.">
+					<select class="form-control input-sm" name="pageSize" id="pageSize">
+						<option value="10">10</option>
+						<option value="20">20</option>
+						<option value="30">30</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select> <input type="button" class="btn btn-success btn-sm" value="지도"
+						id="moveToMap"> <input type="button"
+						class="btn btn-primary btn-sm" value="조회" id="doRetrive">
+					<input type="button" class="btn btn-primary btn-sm" value="등록"
+						id="moveToReg">
+				</div>
+			</form>
+			<!-- 검색 ------------------------------------------------------------------->
 
-<footer>
-  <jsp:include page="/resources/asset/cmn/main_footer.jsp" flush="false" />
-</footer>  
+			<!-- 테이블 목록 -->
+			<div class="table-responsive">
+				<table id="rvboardTable"
+					class="table table-striped table-bordered table-hover">
+					<thead class="bg-primary">
+						<tr>
+							<th class="text-center col-sm-1 col-md-1 col-lg-1">번호</th>
+							<th class="text-center col-sm-2 col-md-2 col-lg-2">충전소명</th>
+							<th class="text-center col-sm-6 col-md-6 col-lg-6">제목</th>
+							<th class="text-center col-sm-1 col-md-1 col-lg-1">작성자</th>
+							<th class="text-center col-sm-1 col-md-1 col-lg-1">등록일</th>
+							<th class="text-center col-sm-1 col-md-1 col-lg-1">조회수</th>
+							<th style='display: none;'>SEQ</th>
+						</tr>
+					</thead>
+					<tbody>
+
+
+					</tbody>
+				</table>
+			</div>
+			<!-- 테이블 목록 -------------------------------------------------------------->
+
+			<!-- 페이징 -->
+			<div class="text-center col-sm-12 col-md-12 col-lg-12">
+				<div id="page-selection" class="text-center page"></div>
+			</div>
+			<!-- 페이징--- -------------------------------------------------------------->
+		</div>
+		<!-- div container ---------------------------------------------------------->
+	</div>
+
+	<footer>
+		<jsp:include page="/resources/asset/cmn/main_footer.jsp" flush="false" />
+	</footer>
 </body>
 </html>
 
