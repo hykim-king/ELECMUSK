@@ -169,7 +169,6 @@
             <li><a id="chargerData" name="chargerData">Charger
                 data</a></li>
             <li><a id="feeData" name="feeData">Charging Fee</a></li>
-            <li><a>Statistical info</a></li>
           </ul>
         </li>
         <li style="cursor:pointer;" class="menu-open" id="menu-bar">STATION
