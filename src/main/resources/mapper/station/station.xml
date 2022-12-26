@@ -203,6 +203,25 @@
 		WHERE station_seq = #{station_seq}
 	</select>
 	
+	<select id="stationCheck" parameterType="StationVO" resultMap="stationMap">
+   SELECT
+           station_seq,
+           addr,
+           chargetp,
+           cpid,
+           cpnm,
+           cpstat,
+           cptp,
+           csid,
+           csnm,
+           lat,
+           longi,
+           statupdatetime
+    FROM station_data
+    WHERE cpid = #{cpid}
+    AND   csid = #{csid}
+	</select>
+	
 	<delete id="doDelete" parameterType="StationVO">
 	 DELETE FROM station_data
    WHERE   station_seq = #{station_seq}

@@ -52,7 +52,7 @@
 <!-- bootstrap js -->
 <script src="${CP_RES}/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
-<title>데이터 수정</title>
+<title>관리자_충전소</title>
 <script >
   $(document).ready(function(){
 	  console.log("document.ready");
@@ -218,6 +218,14 @@
        <h2>충전소 데이터 수정</h2>
     </div>
     <!-- 제목 ------------------------------------------------------------------->
+    <!-- 문단  -->
+    <dl>
+      <dt>데이터 설명</dt>
+      <dd>충전기타입(1:완속,2:급속)</dd>
+      <dd>충전기상태(1: 충전가능, 2: 충전중, 3:고장/점검, 4:통신장애, 5:통신미연결)</dd>
+      <dd>충전방식 (1:B타입(5핀), 2: C타입(5핀), 3:BC타입(5핀),4: BC타입(7핀),5: DC차 데모, 6:AC 3상, 7: DC콤보,8: DC차데모+DC콤보. 9:DC차데모+AC3상, 10: DC차데모+DC콤보, AC3상)</dd>
+    </dl>
+    <!-- 문단  ------------------------------------------------------->
     <input type="hidden" class="form-control" id="station_seq" name="station_seq" value="${vo.station_seq }">
     <!--버튼  -->
     <div class="row text-right">

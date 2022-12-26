@@ -72,4 +72,10 @@ public class StationDaoImpl implements StationDao {
 		return list;
 	}
 
+	@Override
+	public StationVO stationCheck(StationVO inVO) throws SQLException {
+		
+		return sqlSessionTemplate.selectOne(NAMESPACE+DOT+"stationCheck", inVO);
+	}
+
 }

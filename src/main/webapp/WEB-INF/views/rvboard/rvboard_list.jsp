@@ -58,7 +58,9 @@
 <script >
   $(document).ready(function(){
 	  console.log("document.ready");
+	  
 	  doRetrive(1);
+	  
 	  //paging
 	  renderingPage('${pageTotal}',1);
 	  //테이블 클릭
@@ -107,6 +109,16 @@
 		  
 		//doRetrive
 	  });  
+	  
+   //지도화면으로 이동
+    $("#moveToMap").on("click",function(){
+      
+      console.log('moveToMap');
+      
+      window.location.href = "${CP}/station/moveToMap.do";
+      
+    //moveToReg
+    });
 	
 	//document  
   });
@@ -304,6 +316,7 @@
           <option value="50">50</option>
           <option value="100">100</option>
         </select>
+        <input type="button" class="btn btn-success btn-sm" value="지도" id="moveToMap">
         <input type="button" class="btn btn-primary btn-sm" value="조회" id="doRetrive">
         <input type="button" class="btn btn-primary btn-sm" value="등록" id="moveToReg">				      
       </div>

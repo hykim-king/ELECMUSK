@@ -304,6 +304,16 @@ getData();
 //==================================================================
 //=헤더부분 스크립트 이부분 꼭 넣으세요
 //==================================================================
+	
+  //=============================doSelectOne함수
+  function doSelectOne(cpid, csid){
+     let url = "${CP}/station/doSelectOne.do";
+
+    url = url + "?cpid="+cpid+"?csid="+csid;
+    console.log("url : "+url);
+    location.href = url;
+  }
+  //=============================doSelectOne함수 끝  
 </script>
 
 </head>

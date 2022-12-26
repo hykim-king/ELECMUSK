@@ -48,4 +48,6 @@ public interface StationService {
 	    * @throws SQLException
 	    */
 	   List<StationVO> doRetrieve(evDTO inVO)throws SQLException;
+	   
+	   StationVO stationCheck(StationVO inVO) throws SQLException;
 }

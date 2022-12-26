@@ -41,7 +41,7 @@
 <!-- bootstrap js -->
 <script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
-<title>데이터 등록</title>
+<title>관리자_충전기</title>
 <script >
   $(document).ready(function(){
 	  console.log("document.ready");

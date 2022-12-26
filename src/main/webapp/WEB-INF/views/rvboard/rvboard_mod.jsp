@@ -60,6 +60,16 @@
   $(document).ready(function(){
 	  console.log("document.ready");
 	  
+   //지도화면으로 이동
+    $("#moveToMap").on("click",function(){
+      
+      console.log('moveToMap');
+      
+      window.location.href = "${CP}/station/moveToMap.do";
+      
+    //moveToReg
+    });
+	  
 	  //수정
 	  $("#doUpdate").on("click",function(){
 		  
@@ -239,6 +249,7 @@
     <!-- 제목 ------------------------------------------------------------------->
     <!--버튼  -->
     <div class="row text-right">
+      <input type="button" class="btn btn-success btn-sm" value="지도" id="moveToMap">
       <input type="button" class="btn btn-primary btn-sm" value="수정" id="doUpdate">
       <input type="button" class="btn btn-primary btn-sm" value="삭제" id="doDelete">
       <input type="button" class="btn btn-primary btn-sm" value="목록" id="moveToList">

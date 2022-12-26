@@ -21,6 +21,8 @@ import com.pcwk.ehr.board.domain.BoardVO;
 import com.pcwk.ehr.board.service.BoardService;
 import com.pcwk.ehr.code.domain.CodeVO;
 import com.pcwk.ehr.code.service.CodeService;
+import com.pcwk.ehr.station.domain.StationVO;
+import com.pcwk.ehr.station.service.StationService;
 
 @Controller("rvBoardController")
 @RequestMapping("review")
@@ -30,6 +32,9 @@ public class RvBoardController {
 	
 	@Autowired
 	BoardService boardService;
+	
+	@Autowired
+	StationService station;
 	
 	@Autowired
 	CodeService codeService;

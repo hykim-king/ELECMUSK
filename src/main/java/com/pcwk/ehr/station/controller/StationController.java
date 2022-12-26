@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.pcwk.ehr.cmn.MessageVO;
 import com.pcwk.ehr.code.domain.CodeVO;
 import com.pcwk.ehr.code.service.CodeService;
 import com.pcwk.ehr.evcar.cmn.evMessageVO;
@@ -174,6 +175,22 @@ public class StationController {
 		LOG.debug("└=============================┘");		
 		return "station/station_mod";
 	}
+
+	@RequestMapping(value="/stationCheck.do",method = RequestMethod.GET)
+	public String stationCheck(StationVO inVO, Model model)throws SQLException {
+		String jsonString = "";
+		LOG.debug("┌=============================┐");	
+		LOG.debug("|inVO="+inVO);		
+		
+		StationVO outVO = stationService.stationCheck(inVO);
+		
+		model.addAttribute("vo", outVO);
+		
+		jsonString = new Gson().toJson(outVO);
+		LOG.debug("|jsonString="+jsonString);
+		LOG.debug("└=============================┘");		
+		return "rvboard/rvboard_reg";
+	}
 	
 	@RequestMapping(value="/doUpdate.do",method = RequestMethod.POST
 			,produces ="application/json;charset=UTF-8")
@@ -250,6 +267,8 @@ public class StationController {
 		LOG.debug("└=============================┘");
 		return jsonString;
 	}
+	
+
 	
 	
 }

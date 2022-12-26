@@ -52,7 +52,7 @@
 <!-- bootstrap js -->
 <script src="${CP_RES}/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
-<title>데이터 수정</title>
+<title>관리자_보조금</title>
 <script >
   $(document).ready(function(){
 	  console.log("document.ready");

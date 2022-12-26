@@ -62,7 +62,15 @@
   $(document).ready(function(){
 	  console.log("document.ready");  
 	  
-    
+   //지도화면으로 이동
+    $("#moveToMap").on("click",function(){
+      
+      console.log('moveToMap');
+      
+      window.location.href = "${CP}/station/moveToMap.do";
+      
+    //moveToReg
+    });
       
 	  $("#contentsarea").on("keyup",function(e){
 		  
@@ -219,6 +227,7 @@
     <!--버튼  -->
     <div class="row text-right">
       <input type="hidden" id="regId" name="regId" value="${sessionScope.userInfo.userId}">
+      <input type="button" class="btn btn-success btn-sm" value="지도" id="moveToMap">
       <input type="button" class="btn btn-primary btn-sm" value="등록" id="doSave">
       <input type="button" class="btn btn-primary btn-sm" value="목록" id="boardView">
     </div>
