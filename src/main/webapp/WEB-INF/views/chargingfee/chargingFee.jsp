@@ -264,10 +264,9 @@
        <h2>충전요금 정보</h2>
     </div>
     <!-- 제목 ------------------------------------------------------------------->
-  <!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select) ---------------------------------------->
-    <form action="#" class="form-inline text-left">
+    <!------------------------------------- 관리자 버튼 ------------------------------------------------>
+    <form action="#" class="form-inline text-right">
       <div class="form-group">
-        <!------------------------------------- 버튼 -->
           <c:choose>
               <c:when test="${2 <= sessionScope.userInfo.status && not empty sessionScope.userInfo}">
                 <input type="button" class="btn btn-info btn-sm" value="관리자메뉴" id="moveToManagerPage">
@@ -275,12 +274,14 @@
               <c:otherwise>
               </c:otherwise>
             </c:choose>
-        <!------------------------------------- 버튼 -->
       </div>
+    </form>
+    <!------------------------------------- 관리자 버튼 --------------------------------------------------->
+    <form action="#" class="form-inline text-left">
       <input type="hidden" id="pageSize" name="pageSize" value="20">
       <input type="button" class="btn btn-success btn-sm" value="급속요금" id="showRapid" style="margin:0px 0px 5px 5px; font-weight: bold;">
       <input type="button" class="btn btn-success btn-sm" value="완속요금" id="showSlow" style="margin:0px 0px 5px 5px; font-weight: bold;">
-      </form>
+    </form>
   <div>
   <!-- 충전기 테이블 목록 ---------------------------------------------------------------------------->
     <div class="table-responsive" id="showRapidFee">

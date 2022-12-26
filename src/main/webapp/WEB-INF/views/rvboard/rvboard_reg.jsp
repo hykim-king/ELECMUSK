@@ -235,7 +235,7 @@
     <div class="row text-right">
       <input type="hidden" id="regId" name="regId" value="${sessionScope.userInfo.userId}">
       <input type="button" class="btn btn-success btn-sm" value="지도" id="moveToMap">
-      <input type="button" class="btn btn-primary btn-sm" value="등록" id="doSave">
+      <input type="button" class="btn btn-info btn-sm" value="등록" id="doSave">
       <input type="button" class="btn btn-primary btn-sm" value="목록" id="boardView">
       <input type="hidden" value="${csId}" id="csId">
       <input type="hidden" value="${cpId}" id="cpId">
@@ -255,14 +255,14 @@
         <label for="csnm" >충전소명</label>
         <input type="text" class="form-control" id="csnm" name="csnm" value="${csnm}" read maxlength="100">
       </div>
-      <div class="form-group">
+<%--       <div class="form-group">
         <label for="csId" >충전소ID</label>
         <input type="text" class="form-control" id="csId" name="csId" value="${csId}" readonly="readonly" maxlength="100">
       </div>
       <div class="form-group">
         <label for="cpId" >충전기ID</label>
         <input type="text" class="form-control" id="cpId" name="cpId" value="${cpId}" readonly="readonly" maxlength="100">
-      </div>
+      </div> --%>
       <div class="form-group">
         <label for="regId" >등록자</label>
         <input type="text" class="form-control" id="regId" name="regId" placeholder="등록자를 입력하세요" value="${sessionScope.userInfo.nickname}" readonly="readonly" maxlength="100">

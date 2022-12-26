@@ -55,7 +55,7 @@
 <script src="${CP_RES}/bootstrap/js/bootstrap.min.js"></script>
 
 <meta charset="UTF-8">
-<title>${title}</title>
+<title>게시글 상세</title>
 <script >
   $(document).ready(function(){
 	  console.log("document.ready");
@@ -98,6 +98,12 @@
           $("#regDt").focus();
           return;
       }
+      //수정일
+      if(eUtil.ISEmpty( $("#modDt").val() ) == true){
+          alert("수정일을 입력 하세요.");
+          $("#modDt").focus();
+          return;
+      }
       //등록자
       if(eUtil.ISEmpty( $("#regId").val() ) == true){
           alert("등록자를 입력 하세요.");
@@ -124,6 +130,7 @@
     		  title: $("#title").val(),
     		  readCnt: $("#readCnt").val(),
     		  regDt: $("#regDt").val(),
+    		  modDt: $("#modDt").val(),
     		  regId: $("#regId").val(),
     		  contents:$("#contentstextarea").val()
       };
@@ -246,7 +253,7 @@
   <div class="container">
     <!-- 제목 -->
     <div class="page-header">
-       <h2>${title}</h2>
+       <h2>게시글 상세</h2>
     </div>
     <!-- 제목 ------------------------------------------------------------------->
     <!--버튼  -->
@@ -254,8 +261,8 @@
       <input type="button" class="btn btn-success btn-sm" value="지도" id="moveToMap">
       <c:choose>
       <c:when test="${sessionScope.userInfo.userId == vo.regId}">
-	      <input type="button" class="btn btn-primary btn-sm" value="수정" id="doUpdate">
-	      <input type="button" class="btn btn-primary btn-sm" value="삭제" id="doDelete">
+	      <input type="button" class="btn btn-warning btn-sm" value="수정" id="doUpdate">
+	      <input type="button" class="btn btn-danger btn-sm" value="삭제" id="doDelete">
       </c:when>
       </c:choose>
       <input type="button" class="btn btn-primary btn-sm" value="목록" id="moveToList">
@@ -264,17 +271,19 @@
 
     <!-- 폼 -->
     <form action="#" class="form-horizontal">   
-		<input type="text" class="form-control" id="category" name="category" value="${vo.category }">
-    <input type="text" class="form-control" id="bdSeq" name="bdSeq" value="${vo.bdSeq }">
-    <input type="text" class="form-control" id="csnm" name="csnm" value="${vo.csnm }">
+		<input type="hidden" class="form-control" id="category" name="category" value="${vo.category }">
+    <input type="hidden" class="form-control" id="bdSeq" name="bdSeq" value="${vo.bdSeq }">
+    <input type="hidden" class="form-control" id="csnm" name="csnm" value="${vo.csnm }">
      <c:choose>
       <c:when test="${sessionScope.userInfo.userId == vo.regId}">
+		    <!-- 충전소명 -->
 		    <div class="form-group">
 			    <label for="csnm" style="display: block;">충전소명</label>
 			    <div style="border: 1px solid rgba(220,220,220,1); padding: 10px; border-radius: 5px;">
 			    ${vo.csnm }
 			    </div>
 		    </div>
+		    <!-- 제목 -->
 		    <div class="form-group">
 			    <label for="title" >제목</label>
 			    <input type="text" class="form-control" id="title" name="title"
@@ -296,6 +305,14 @@
 	         value="<c:out value='${vo.regDt }' />" 
 	         readonly="readonly"
 	         placeholder="등록일" maxlength="100">
+	      </div>
+	      <!-- 등록일 -->
+	      <div class="form-group">
+	        <label for="modDt" >수정일</label>
+	        <input type="text" class="form-control" id="modDt" name="modDt" 
+	         value="<c:out value='${vo.modDt }' />" 
+	         readonly="readonly"
+	         placeholder="수정일" maxlength="100">
 	      </div>
 	      <!-- 등록자 -->
 	      <div class="form-group">
@@ -322,6 +339,12 @@
 	        <label for="title" style="display: block;" >제목</label>
 	        <div style="border: 1px solid rgba(220,220,220,1); padding: 10px; border-radius: 5px;">
 	        ${vo.title }
+	        </div>
+	      </div>
+	      <div class="form-group">
+	        <label for="regId" style="display: block;" >등록자</label>
+	        <div style="border: 1px solid rgba(220,220,220,1); padding: 10px; border-radius: 5px;">
+	        ${vo.regId }
 	        </div>
 	      </div>
 	      <div class="form-group">

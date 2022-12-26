@@ -90,6 +90,9 @@ $(document).ready(function(){
     });
     
     
+
+    
+    
 });
 
 
@@ -108,7 +111,7 @@ function doRetrieve(page){
     };
         
     PClass.callAjax(method,url,async,params,function(data){
-      console.log("data:"+data);
+      //console.log("data:"+data);
       
       let parsedJson = JSON.parse(data);
       
@@ -120,17 +123,6 @@ function doRetrieve(page){
     if(null != parsedJson && parsedJson.length > 0){
       
       $.each(parsedJson, function(index,value){
-          console.log("seq: "+value.station_seq);
-          console.log("csnm: "+value.csnm);
-          console.log("lat: "+value.lat);
-          console.log("longi: "+value.longi);
-          
-          //배열에 위도 정보 담기
-          //배열에 경도 정보 담기
-          
-          
-          
-          
           
         });
         //데이터가 없는 경우
@@ -164,13 +156,14 @@ async function getData(){//전기차 충전소 정보 api 받기
                                            spot.longi,              //경도
                                            //spot.spot.statUpdatetime, //업데이트시간
                                     ]);
-    //console.log("locations",locations);
     console.log("locations",locations);
+    
+    
+    
     drawMap(locations);
 }
 function drawMap(locations){
    
-     doRetrieve();
      
      
     //매개변수의 형태
@@ -216,7 +209,7 @@ function drawMap(locations){
                             '오류: 브라우저에서 지오로케이션을 지원하지 않음');
     }
     
-    
+
     
     
     //마커 클릭시 생성되는 인포윈도우
@@ -266,6 +259,8 @@ function drawMap(locations){
     }
 }
 getData();
+
+
 
 //==================================================================
 //=헤더부분 스크립트 이부분 꼭 넣으세요
@@ -344,8 +339,6 @@ getData();
     <!---------------------------------------- 검색 : 검색 구분(select) 검색어(input) 페이지 사이즈(select) -->
     <form action="#" class="form-inline text-right">
       <div class="form-group">
-      <input type='button' class='btn btn-success btn-sm' value='리뷰보기' id='moveToRvList' style='float:left;'>
-      <input type='button' class='btn btn-primary btn-sm' value='리뷰쓰기' id='moveToRvReg' style='float:left;'>
         <!------------------------------------- 버튼 -->
             <c:choose>
               <c:when test="${2 <= sessionScope.userInfo.status && not empty sessionScope.userInfo}">
