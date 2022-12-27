@@ -111,9 +111,6 @@
          let link = "${CP}/elecmusk/myPage.do";
          location.href = link;
        });
-    } else {
-    	let link = "${CP}/elecmusk/login.do";
-    	location.href = link;
     }
   } 
 </script>
