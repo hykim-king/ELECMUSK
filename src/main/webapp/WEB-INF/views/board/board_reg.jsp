@@ -63,6 +63,12 @@
   $(document).ready(function(){
 	  console.log("document.ready");
 	  
+	  if(${categoryValue} == '1') {
+		  doSave();
+	  } else {
+		  doSaveOtherCategory();
+	  }
+	  
 	    //================================글자수 재한 보여주기(0/2000)
 	    $("#contentstextarea").on("keyup",function(e){
 	      //현재문자열 길이
@@ -86,56 +92,6 @@
 	      }
 	    });
 	    //================================글자수 재한 보여주기(0/2000)끝
-	  
-	  //=====================================doSave
-	  $("#doSave").on("click",function(){
-		  console.log("doSave");
-	      if(eUtil.ISEmpty($("#title").val())==true){
-          alert("제목을 입력 하세요.");
-          $("#title").focus();
-          return;
-        }
-        
-        if(eUtil.ISEmpty($("#regId").val())==true){
-          alert("등록자를 입력 하세요.");
-          $("#regId").focus();
-          return;
-        }
-        if(eUtil.ISEmpty($("#contentstextarea").val())==true){
-          alert("내용을 입력 하세요.");
-          $("#contentstextarea").focus();
-          return;
-        } 
-        if(confirm("등록 하시겠습니까?") == false)return;
-        
-        let categoryValue = ${categoryValue};
-        
-        let method    = "POST";
-        let url       = "/board/doSave.do";
-        let async     = true;
-        let params    = {
-        		category : categoryValue,
-            title : "["+$("#tag").val()+"] "+$("#title").val(),
-            nickName : $("#nickName").val(),
-            contents : $("#contentstextarea").val(),
-            regId :$("#regId").val()
-        }
-        PClass.callAjax(method,url,async,params,function(data){
-        	console.log(data);
-        	
-        	let parsedJson = JSON.parse(data);
-        	
-          if("1" == parsedJson.msgId){
-            alert(parsedJson.msgContents);
-            moveToList();
-          }else{
-            alert(parsedJson.msgContents);
-          }
-        	
-        	
-        });
-        
-	  });//=====================================doSave 끝
 	  
 	  $("#boardView").on("click",function(){
 		  moveToList();
@@ -179,6 +135,110 @@
  //=헤더부분 스크립트 이부분 꼭 넣으세요
  //==================================================================
 	 
+ //doSave -----------------------------------------------------------
+	function doSave() {
+	    $("#doSave").on("click",function(){
+	        console.log("doSave");
+	          if(eUtil.ISEmpty($("#title").val())==true){
+	            alert("제목을 입력 하세요.");
+	            $("#title").focus();
+	            return;
+	          }
+	          
+	          if(eUtil.ISEmpty($("#regId").val())==true){
+	            alert("등록자를 입력 하세요.");
+	            $("#regId").focus();
+	            return;
+	          }
+	          if(eUtil.ISEmpty($("#contentstextarea").val())==true){
+	            alert("내용을 입력 하세요.");
+	            $("#contentstextarea").focus();
+	            return;
+	          } 
+	          if(confirm("등록 하시겠습니까?") == false)return;
+	          
+	          let categoryValue = ${categoryValue};
+	          
+	          let method    = "POST";
+	          let url       = "/board/doSave.do";
+	          let async     = true;
+	          let params    = {
+	              category : categoryValue,
+	              title : "["+$("#tag").val()+"] "+$("#title").val(),
+	              nickName : $("#nickName").val(),
+	              contents : $("#contentstextarea").val(),
+	              regId :$("#regId").val()
+	          }
+	          PClass.callAjax(method,url,async,params,function(data){
+	            console.log(data);
+	            
+	            let parsedJson = JSON.parse(data);
+	            
+	            if("1" == parsedJson.msgId){
+	              alert(parsedJson.msgContents);
+	              moveToList();
+	            }else{
+	              alert(parsedJson.msgContents);
+	            }
+	            
+	            
+	          });
+	          
+	      }); 
+ } 
+	//=====================================doSave 끝  
+	//=====================================doSave 다른카테고리
+	function doSaveOtherCategory() {
+	    $("#doSave").on("click",function(){
+	        console.log("doSave");
+	          if(eUtil.ISEmpty($("#title").val())==true){
+	            alert("제목을 입력 하세요.");
+	            $("#title").focus();
+	            return;
+	          }
+	          
+	          if(eUtil.ISEmpty($("#regId").val())==true){
+	            alert("등록자를 입력 하세요.");
+	            $("#regId").focus();
+	            return;
+	          }
+	          if(eUtil.ISEmpty($("#contentstextarea").val())==true){
+	            alert("내용을 입력 하세요.");
+	            $("#contentstextarea").focus();
+	            return;
+	          } 
+	          if(confirm("등록 하시겠습니까?") == false)return;
+	          
+	          let categoryValue = ${categoryValue};
+	          
+	          let method    = "POST";
+	          let url       = "/board/doSave.do";
+	          let async     = true;
+	          let params    = {
+	              category : categoryValue,
+	              title : $("#title").val(),
+	              nickName : $("#nickName").val(),
+	              contents : $("#contentstextarea").val(),
+	              regId :$("#regId").val()
+	          }
+	          PClass.callAjax(method,url,async,params,function(data){
+	            console.log(data);
+	            
+	            let parsedJson = JSON.parse(data);
+	            
+	            if("1" == parsedJson.msgId){
+	              alert(parsedJson.msgContents);
+	              moveToList();
+	            }else{
+	              alert(parsedJson.msgContents);
+	            }
+	            
+	            
+	          });
+	          
+	      });
+ } 
+	//=====================================doSave 다른카테고리
   function moveToList(){
 
     let categoryValue = ${categoryValue};

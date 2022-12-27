@@ -62,9 +62,16 @@
 <script >
   $(document).ready(function(){
 	  
-	  let title = $("#votitle").val().slice(5);
-	  console.log("title: "+title);
-	  $("#title").val(title);
+	  if(${vo.category} == '1') {
+		  let title = $("#votitle").val().slice(5);
+		  console.log("title: "+title);
+		  $("#title").val(title);
+		  doUpdate();
+	  } else {
+		  let title = $("#votitle").val();
+		  $("#title").val(title);
+		  doUpdateOtherCategory();
+	  }
 	  
 	  console.log("document.ready");
 	  ifidsame();
@@ -203,64 +210,124 @@
       }
     });//==============================================삭제 끝
 	
-	
-	 
-   $("#doUpdate").on("click",function(){
-	   if($("#regId").val()==("${sessionScope.userInfo.userId}")) {
-      console.log("doUpdate");
-        //div
-        if(eUtil.ISEmpty( $("#category").val()) == true){
-          alert("구분을 입력하세요.");
-          return;
-        }
-        //제목
-        if(eUtil.ISEmpty( $("#title").val()) == true){
-          alert("제목을 입력하세요.");
-          $("#title").focus();
-          return;
-        }
-        //수정자
-        if(eUtil.ISEmpty( $("#modId").val()) == true){
-          alert("수정자를 입력하세요.");
-          $("#modId").focus();
-          return;
-        }
-        //내용
-        if(eUtil.ISEmpty( $("#contentstextarea").val()) == true){
-          alert("내용을 입력하세요.");
-          $("#contentstextarea").focus();
-          return;
-        }
-        
-        if(confirm("수정하시겠습니까?") == false)return;
-        
-        let method  = "POST";
-        let url     = "/board/doUpdate.do";
-        let async   = true;
-        let params  ={
-            category   : $("#category").val(),
-            bdSeq      : $("#bdSeq").val(),
-            title      : "["+$("#tag").val()+"] "+$("#title").val(),
-            modId      : $("#modId").val(),
-            contents   : $("#contentstextarea").val()
-        };
-        PClass.callAjax(method,url,async,params,function(data){
-          console.log(data);
-          let parsedJson = JSON.parse(data);
-          if("1" == parsedJson.msgId){
-            alert(parsedJson.msgContents);
-            moveToList();
-          }else{
-            alert(parsedJson.msgContents);
-          }
-        });
-        
-		 }else{
-			 alert("본인 계시물이 아닙니다.")
-		 }
-    });//==========================================doUpdate끝
-	
-}
+};
+//==========================================doUpdate시작
+function doUpdate() {
+	   $("#doUpdate").on("click",function(){
+		     if($("#regId").val()==("${sessionScope.userInfo.userId}")) {
+		      console.log("doUpdate");
+		        //div
+		        if(eUtil.ISEmpty( $("#category").val()) == true){
+		          alert("구분을 입력하세요.");
+		          return;
+		        }
+		        //제목
+		        if(eUtil.ISEmpty( $("#title").val()) == true){
+		          alert("제목을 입력하세요.");
+		          $("#title").focus();
+		          return;
+		        }
+		        //수정자
+		        if(eUtil.ISEmpty( $("#modId").val()) == true){
+		          alert("수정자를 입력하세요.");
+		          $("#modId").focus();
+		          return;
+		        }
+		        //내용
+		        if(eUtil.ISEmpty( $("#contentstextarea").val()) == true){
+		          alert("내용을 입력하세요.");
+		          $("#contentstextarea").focus();
+		          return;
+		        }
+		        
+		        if(confirm("수정하시겠습니까?") == false)return;
+		        
+		        let method  = "POST";
+		        let url     = "/board/doUpdate.do";
+		        let async   = true;
+		        let params  ={
+		            category   : $("#category").val(),
+		            bdSeq      : $("#bdSeq").val(),
+		            title      : "["+$("#tag").val()+"] "+$("#title").val(),
+		            modId      : $("#modId").val(),
+		            contents   : $("#contentstextarea").val()
+		        };
+		        PClass.callAjax(method,url,async,params,function(data){
+		          console.log(data);
+		          let parsedJson = JSON.parse(data);
+		          if("1" == parsedJson.msgId){
+		            alert(parsedJson.msgContents);
+		            moveToList();
+		          }else{
+		            alert(parsedJson.msgContents);
+		          }
+		        });
+		        
+		     }else{
+		       alert("본인 계시물이 아닙니다.")
+		     }
+		    });
+};
+//==========================================doUpdate끝
+
+//==========================================doUpdate 다른 카테고리 시작
+function doUpdateOtherCategory() {
+	   $("#doUpdate").on("click",function(){
+		     if($("#regId").val()==("${sessionScope.userInfo.userId}")) {
+		      console.log("doUpdate");
+		        //div
+		        if(eUtil.ISEmpty( $("#category").val()) == true){
+		          alert("구분을 입력하세요.");
+		          return;
+		        }
+		        //제목
+		        if(eUtil.ISEmpty( $("#title").val()) == true){
+		          alert("제목을 입력하세요.");
+		          $("#title").focus();
+		          return;
+		        }
+		        //수정자
+		        if(eUtil.ISEmpty( $("#modId").val()) == true){
+		          alert("수정자를 입력하세요.");
+		          $("#modId").focus();
+		          return;
+		        }
+		        //내용
+		        if(eUtil.ISEmpty( $("#contentstextarea").val()) == true){
+		          alert("내용을 입력하세요.");
+		          $("#contentstextarea").focus();
+		          return;
+		        }
+		        
+		        if(confirm("수정하시겠습니까?") == false)return;
+		        
+		        let method  = "POST";
+		        let url     = "/board/doUpdate.do";
+		        let async   = true;
+		        let params  ={
+		            category   : $("#category").val(),
+		            bdSeq      : $("#bdSeq").val(),
+		            title      : $("#title").val(),
+		            modId      : $("#modId").val(),
+		            contents   : $("#contentstextarea").val()
+		        };
+		        PClass.callAjax(method,url,async,params,function(data){
+		          console.log(data);
+		          let parsedJson = JSON.parse(data);
+		          if("1" == parsedJson.msgId){
+		            alert(parsedJson.msgContents);
+		            moveToList();
+		          }else{
+		            alert(parsedJson.msgContents);
+		          }
+		        });
+		        
+		     }else{
+		       alert("본인 계시물이 아닙니다.")
+		     }
+		    });
+};
+//==========================================doUpdate끝
 	 
 	 
 </script>

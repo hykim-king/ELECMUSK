@@ -58,7 +58,6 @@
   });
   
   function onlyLoginUserUse() {
-    if(${null != sessionScope.userInfo && not empty sessionScope.userInfo}){
        $("#carsData").on("click", function() {
          let link = "${CP}/elecmusk/evcar.do"
          location.href = link;
@@ -111,7 +110,6 @@
          let link = "${CP}/elecmusk/myPage.do";
          location.href = link;
        });
-    }
   } 
 </script>
 <style>

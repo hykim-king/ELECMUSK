@@ -21,6 +21,10 @@
       <mvc:mapping path="/**"/>
       <mvc:exclude-mapping path="/login/**"/>
       <mvc:exclude-mapping path="/elecmusk/view.do"/>
+      <mvc:exclude-mapping path="/elecmusk/doNaverSearch.do"/>
+      <mvc:exclude-mapping path="/elecmusk/pointRank.do"/>
+      <mvc:exclude-mapping path="/elecmusk/chartRetrieve.do"/>
+      <mvc:exclude-mapping path="/board/doRetrieve.do"/>
       <beans:ref bean="loginInterceptor"/>
     </mvc:interceptor>
   </mvc:interceptors>
