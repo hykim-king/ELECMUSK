@@ -94,7 +94,7 @@
        $("#board03").on("click", function() {
          let link = "${CP}/board/boardView.do?category=5"
          location.href = link;
-       });
+       }); 
        $("#news").on("click", function() {
          let link = "${CP}/elecmusk/naverview.do"
          location.href = link;
@@ -104,7 +104,7 @@
          location.href = link;
        });
        $("#doLogout").on("click", function() {
-         let link = "${CP}/elecmusk/doLogout.do";
+         let link = "${CP}/login/doLogout.do";
          location.href = link;
        });
        $("#moveToMyPage").on("click", function() {
@@ -130,7 +130,7 @@
         <a id = "moveToMyPage">[Mypage]</a></p>
       </c:when>
       <c:otherwise>
-        <a href="${CP}/elecmusk/login.do">[Login]</a>
+        <a href="${CP}/login/login.do">[Login]</a>
       </c:otherwise>
     </c:choose>
     </div>

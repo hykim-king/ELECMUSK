@@ -102,7 +102,7 @@ h4{
 	  console.log("엥");
 	  renewSession();
 	  console.log("${session.userInfo.nickname}");
-  });//새로고침 버튼
+  });//새로고침 버튼 
     
   //메인버튼(닉네임 바꾸기) 클릭
     $("#updateNickname").on("click",function(){
@@ -174,7 +174,7 @@ h4{
       
       $.ajax({ 
          type: "GET",
-         url: "/ehr/elecmusk/nicknameCheck.do",
+         url: "/ehr/login/nicknameCheck.do",
          asyn: "true",
          dataType: "html",
          data:{ nickname : $("#nickname").val()},
@@ -226,7 +226,7 @@ h4{
       
       $.ajax({ 
          type: "GET",
-         url: "/ehr/elecmusk/passwordCheck.do",
+         url: "/ehr/login/passwordCheck.do",
          asyn: "true",
          dataType: "html",
          data:{ 
@@ -393,7 +393,7 @@ h4{
            
             if("1" == parsedJson.msgId){
               alert(parsedJson.msgContents);
-              window.location.href="${CP}/elecmusk/doLogout.do";
+              window.location.href="${CP}/login/doLogout.do";
             }else{
               alert(parsedJson.msgContents);
             }
@@ -416,7 +416,7 @@ h4{
   function renewSession(){
 	  $.ajax({ 
 		   type: "GET",
-		   url: "/ehr/elecmusk/renewSession.do",
+		   url: "/ehr/login/renewSession.do",
 		   asyn: "true",
 		   dataType: "html",
 		   data:{
@@ -436,6 +436,7 @@ h4{
 		});
   }//세션 다시만들기 함수 끝
   
+  //세션 확인 로그인으로 튕겨버리는 함수
 </script>
 
 </head>

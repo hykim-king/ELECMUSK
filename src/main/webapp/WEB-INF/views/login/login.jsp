@@ -66,12 +66,12 @@
 
 		//moveToReg 버튼 클릭
 		$("#moveToReg").on("click", function() {
-			window.location.href="${CP}/elecmusk/register.do";  
+			window.location.href="${CP}/login/register.do";  
 		});//moveToReg 버튼 클릭
 
 		//moveToFindIdPw 버튼 클릭
 		$("#moveToFindIdPw").on("click", function() {
-			window.location.href="${CP}/elecmusk/findIdPw.do";
+			window.location.href="${CP}/login/findIdPw.do";
 		});//moveToFindIdPw 버튼 클릭
 		
 		
@@ -84,7 +84,7 @@
 
 	      $.ajax({
 	        type : "POST",
-	        url : "/ehr/elecmusk/doLogin.do",
+	        url : "/ehr/login/doLogin.do",
 	        asyn : "true",
 	        dataType : "html",
 	        data : {

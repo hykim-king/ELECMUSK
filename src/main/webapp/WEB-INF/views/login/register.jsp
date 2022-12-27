@@ -134,7 +134,7 @@ h5{
     	
     	$.ajax({ 
     		   type: "POST",
-    		   url: "/ehr/elecmusk/doRegister.do",
+    		   url: "/ehr/login/doRegister.do",
     		   asyn: "true",
     		   dataType: "html",
     		   data: params,
@@ -149,7 +149,7 @@ h5{
              }else{
                alert(parsedJson.msgContents);
              }
-    		    window.location.href="${CP}/elecmusk/login.do";
+    		    window.location.href="${CP}/login/login.do";
     		   },
     		   error:function(data){//실패
     		   
@@ -174,7 +174,7 @@ h5{
       
       $.ajax({ 
     	   type: "GET",
-    	   url: "/ehr/elecmusk/idCheck.do",
+    	   url: "/ehr/login/idCheck.do",
     	   asyn: "true",
     	   dataType: "html",
     	   data:{ userId : $("#userId").val()},

@@ -95,7 +95,7 @@ h4{
 			
 			$.ajax({
 				type : "GET",
-				url : "/ehr/elecmusk/findIdByEmail.do",
+				url : "/ehr/login/findIdByEmail.do",
 				asyn : "true",
 				dataType : "html",
 				data : {
@@ -158,7 +158,7 @@ h4{
       
       $.ajax({
         type : "GET",
-        url : "/ehr/elecmusk/findIdByNameBirth.do",
+        url : "/ehr/login/findIdByNameBirth.do",
         asyn : "true",
         dataType : "html",
         data : {
@@ -223,7 +223,7 @@ h4{
       
       $.ajax({
         type : "GET",
-        url : "/ehr/elecmusk/findPwByBackup.do",
+        url : "/ehr/login/findPwByBackup.do",
         asyn : "true",
         dataType : "html",
         data : {

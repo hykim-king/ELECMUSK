@@ -17,14 +17,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.pcwk.ehr.cmn.MessageVO;
-import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.code.domain.CodeVO;
 import com.pcwk.ehr.code.service.CodeService;
 import com.pcwk.ehr.user.domain.UserVO;
 import com.pcwk.ehr.user.service.UserService;
 
 @Controller("LoginController")
-@RequestMapping("elecmusk")
+@RequestMapping("login")
 public class LoginController {
 	
 	final Logger LOG = LogManager.getLogger(getClass());

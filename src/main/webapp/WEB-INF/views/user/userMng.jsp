@@ -199,7 +199,7 @@ h4{
       
       $.ajax({ 
          type: "GET",
-         url: "/ehr/elecmusk/idCheck.do",
+         url: "/ehr/login/idCheck.do",
          asyn: "true",
          dataType: "html",
          data:{ userId : $("#userId").val()},
@@ -239,7 +239,7 @@ h4{
       
       $.ajax({ 
          type: "GET",
-         url: "/ehr/elecmusk/nicknameCheck.do",
+         url: "/ehr/login/nicknameCheck.do",
          asyn: "true",
          dataType: "html",
          data:{ nickname : $("#nickname").val()},
