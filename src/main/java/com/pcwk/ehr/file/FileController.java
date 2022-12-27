@@ -11,6 +11,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -111,21 +112,6 @@ public class FileController {
 	   LOG.debug("└──────────────────────────────┘");
 	}
 	
-	@RequestMapping(value = "/viewFile.do")
-	public String viewFile() throws IOException{
-	   LOG.debug("┌──────────────────────────────┐");
-	   LOG.debug("│viewFile = ");
-	   LOG.debug("└──────────────────────────────┘");
-	   
-	   return "file/fileUpload";
-	}
-	
-	/**
-	 * ajax 파일 업로드
-	 * @param mReg
-	 * @return JSON(List<FileVO>)
-	 * @throws IOException
-	 */
 	@RequestMapping(value = "/ajaxUpload.do",method = RequestMethod.POST
 	      ,produces = "application/json;charset=UTF-8")
 	@ResponseBody
@@ -166,6 +152,7 @@ public class FileController {
 	      
 	      //저장경로
 	      String savePath = "";
+	      String savePathThumnail = "";
 	      if("png".equalsIgnoreCase(ext)||
 	         "jpeg".equalsIgnoreCase(ext)||
 	         "jpg".equalsIgnoreCase(ext)||
@@ -175,12 +162,12 @@ public class FileController {
 	         
 		  	   String yyyyFolder = StringUtil.getCurrentDate("yyyy");
 			   String mmFolder = StringUtil.getCurrentDate("MM");
-	         
 	         //Tomact 실제경로
 	         String tomcatRealPath =  req.getServletContext().getRealPath(IMG_VIEW_PATH+"/"+yyyyFolder+"/"+mmFolder);
 	         savePath = tomcatRealPath;
 	         
 	         LOG.debug("│tomcatRealPath: "+tomcatRealPath);
+	         LOG.debug("│savePathThumnail: "+savePathThumnail);
 	         outVO.setImageViewPath(this.IMG_VIEW_PATH+"/"+yyyyFolder+"/"+mmFolder);
 	         LOG.debug("│getImageViewPath: "+outVO.getImageViewPath());
 	         
@@ -203,19 +190,26 @@ public class FileController {
 	      
 	      //image 파일인지 판단.
 	      //s_저장파일명
-	      if(isImageFile(saveFileObj)) {
-	         FileOutputStream thumbnail = new FileOutputStream(new File(
-	               outVO.getSavePath(),"s_"+outVO.getSaveFileName()));
-	         try {
-	            Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
-	         }catch (IOException e) {
-	            LOG.debug(e.getMessage());
-	            throw e;
-	         }
-	         
-	      }
+//	      if(isImageFile(saveFileObj)) {
+//	         FileOutputStream thumbnail = new FileOutputStream(new File(
+//	               outVO.getSavePath(),"s_"+outVO.getSaveFileName()));
+//	         try {
+//	            Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
+//	         }catch (IOException e) {
+//	            LOG.debug(e.getMessage());
+//	            throw e;
+//	         }
+//	         
+//	      }
 	      
 	      list.add(outVO);
+	      String originalFile = "";
+	      String toCopyFile = "";
+	      originalFile = savePath+"\\"+outVO.getSaveFileName();
+	      toCopyFile = IMG_PATH+addYYYYMMPath+"\\"+outVO.getSaveFileName();
+	      LOG.debug("│originalFile: " + originalFile );
+	      LOG.debug("│toCopyFile: " + toCopyFile );
+	      LOG.debug("│copy: " + commonCopy(originalFile, toCopyFile) );
 	   }
 	   
 	   jsonString = new Gson().toJson(list);
@@ -239,23 +233,6 @@ public class FileController {
 	   }
 	   return false;
 	}
-			
-	/**
-	 * 파일이 image인지 판단
-	 * @param file
-	 * @return true / false
-	 */
-	private boolean isImagefile(File file) {
-		try {
-			String contentType = Files.probeContentType(file.toPath());
-			LOG.debug("│=contentType="+contentType);
-			return contentType.startsWith("image");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}		   
-	
 	
 	/**
 	 * 파일 업로드
@@ -329,7 +306,7 @@ public class FileController {
 			multipartFile.transferTo(saveFileObj);
 			//image파일인지 판단
 			//s_저장파일명
-			if(isImagefile(saveFileObj)) {
+			if(isImageFile(saveFileObj)) {
 				FileOutputStream thumbnail = new FileOutputStream(
 											 new File(outVO.getSavePath(),"s_"+outVO.getSaveFileName()));
 				try {
@@ -339,6 +316,7 @@ public class FileController {
 					throw e;
 				}
 			}
+			
 			list.add(outVO);
 			LOG.debug("└──────────────────────────────");
 		}
@@ -346,5 +324,19 @@ public class FileController {
 		modelAndView.addObject("list", list);
 		modelAndView.setViewName("elecmusk/reg_evcar");
 		return modelAndView;
+	}
+	
+	public static boolean commonCopy(String inFilePath, String outFilePath) {
+		File orgFile = new File(inFilePath);
+		File outFile = new File(outFilePath);
+		
+		try {
+			FileUtils.copyFile(orgFile, outFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
 	}
 }

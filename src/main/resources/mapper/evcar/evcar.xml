@@ -122,6 +122,7 @@
                 <include refid="appearanceKeyword"></include>
                 <include refid="modelKeyword"></include>
                 <include refid="batteryTypeKeyword"></include>
+                ORDER BY evcar_seq DESC
             )T1
           <![CDATA[  WHERE ROWNUM <= #{pageSize} * (#{pageNo} -1) + #{pageSize} ]]>
         )TT1

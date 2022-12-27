@@ -39,11 +39,9 @@ public class FileVO extends DTO {
 		return orgFileName;
 	}
 
-
 	public void setOrgFileName(String orgFileName) {
 		this.orgFileName = orgFileName;
 	}
-
 
 	public String getSaveFileName() {
 		return saveFileName;
