@@ -78,8 +78,6 @@
 		    let url = "/subsidy/doRetrieve.do";
 		    let async = true;
 		    let params = {
-		        searchDiv : $('#searchDiv').val(),
-		        searchWord : $('#searchWord').val(),
 		        pageSize : $('#pageSize').val(),
 		        pageNo : page,
 		        submodelKeyword : $('#submodelKeyword').val(),
@@ -89,14 +87,11 @@
 	          
         PClass.callAjax(method,url,async,params,function(data){
           console.log("data:"+data);
-          
           let parsedJson = JSON.parse(data);
-          
           let htmlData = "";
           
           //table 데이터 삭제
           $("#subsidyTable>tbody").empty();
-          
           //총글수
           let totalCnt = 0;
           //총페이지수
@@ -113,7 +108,6 @@
           console.log("-page:"+page);
           console.log("----------------------------");
 
-          
           $.each(parsedJson, function(index,value){
               //console.log(index+","+value.uId);
               htmlData +=" <tr> ";
