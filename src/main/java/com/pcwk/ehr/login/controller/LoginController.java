@@ -1,6 +1,7 @@
 package com.pcwk.ehr.login.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.pcwk.ehr.cmn.MessageVO;
 import com.pcwk.ehr.cmn.StringUtil;
+import com.pcwk.ehr.code.domain.CodeVO;
+import com.pcwk.ehr.code.service.CodeService;
 import com.pcwk.ehr.user.domain.UserVO;
 import com.pcwk.ehr.user.service.UserService;
 
@@ -28,6 +32,9 @@ public class LoginController {
 	@Autowired
 	UserService userService;
 	
+	@Autowired
+	CodeService codeService;
+	
 	public LoginController() {}
 	
 	//화면으로 가는  3개
@@ -38,13 +45,29 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/register.do")
-	public String registerView() {
+	public String registerView(Model model) throws SQLException {
+		
+		//코드 목록 조회
+		List<String> codeList = new ArrayList<String>();
+		codeList.add("USER_BACKUPQUESTION");
+		
+		List<CodeVO> outCodeList = codeService.doRetrive(codeList);
+		
+		model.addAttribute("USER_BACKUPQUESTION", outCodeList);
 		
 		return "login/register";
 	}
 	
 	@RequestMapping(value="/findIdPw.do")
-	public String findIdPwView() {
+	public String findIdPwView(Model model) throws SQLException {
+		
+		//코드 목록 조회
+		List<String> codeList = new ArrayList<String>();
+		codeList.add("USER_BACKUPQUESTION");
+		
+		List<CodeVO> outCodeList = codeService.doRetrive(codeList);
+		
+		model.addAttribute("USER_BACKUPQUESTION", outCodeList);
 		
 		return "login/findIdPw";
 	}

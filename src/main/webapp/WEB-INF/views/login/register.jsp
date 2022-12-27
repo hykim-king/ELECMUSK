@@ -295,10 +295,15 @@ h5{
         <label for="backupQuestion" class="col-sm-3 control-label">본인확인 질문</label>
         <div class="col-sm-6">
           <select  class="form-control" id = "backupQuestion">
-              <option value="">선택안함</option>
-              <option>으겍</option>
-              <option>으갹</option>
-            </select>
+						<option value="">선택안함</option>
+						<c:choose>
+							<c:when test="${USER_BACKUPQUESTION.size()>0}">
+								<c:forEach var="code" items="${USER_BACKUPQUESTION}">
+									<option value='<c:out value="${code.detName}"/>'><c:out value="${code.detName}" /></option>
+								</c:forEach>
+							</c:when>
+						</c:choose>
+					</select>
         </div>
       </div>
       <div class="form-group">

@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.pcwk.ehr.cmn.DTO;
-import com.pcwk.ehr.cmn.SearchVO;
+import com.pcwk.ehr.user.domain.UserSearchVO;
 import com.pcwk.ehr.user.domain.UserVO;
 
 @Repository("userDao")
@@ -77,7 +77,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	public List<UserVO> doRetrieve(DTO inVO) throws SQLException {
-		SearchVO search = (SearchVO) inVO;
+		UserSearchVO search = (UserSearchVO) inVO;
 
 		LOG.debug("inVO: " + inVO);
 

@@ -267,6 +267,7 @@ h4{
       });
       
     });//닉네임 중복확인버튼 클릭    
+    
     //테이블 데이터 click
     $("#userTable>tbody").on("click","tr",function(e){
     	let tdArray = $(this).children();
@@ -324,12 +325,10 @@ h4{
     		     $("#userStatus").val(parsedJson.status);
     		     console.log("켁!");
     		   
-
  		         $("#idCheckYN").val("1");
  		         $("#userId").prop("disabled",true);
  		         $("#nicknameCheckYN").val("1");
  		         $("#nickname").prop("disabled",true);
-    		     //중복확인 하면 잠기는거 풀기
     		     
     		   },
     		   error:function(data){//실패
@@ -338,7 +337,6 @@ h4{
     		   }
 
     		});
-    	
     	
     });//테이블 데이터 click 끝
     
@@ -366,6 +364,7 @@ h4{
      $("#multiBan").on("click",function(){
        let mSeqArray = [];
        
+       
        $("input:checkbox[name=chk]").each(function(i,element){
          
          //체크된것들은 uIdArray추가
@@ -377,6 +376,13 @@ h4{
        
        console.log(mSeqArray);
        
+       let message="정지된 사용자는 다시 복구할 수 있으나 \n";
+       message += "아이디와 닉네임이 수정됩니다.\n";
+       message += "정말로 사용자를 정지시키겠습니까?";
+       if(confirm(message)==false){
+    	   return;
+       }
+       
        let mSeqString = "";
        if(mSeqArray.length>0){
     	   mSeqString = mSeqArray.toString();
@@ -384,7 +390,6 @@ h4{
        }else{
          alert("삭제할 자료를 선택 하세요.");
          return;
-         
        }
        
        $.ajax({ 
@@ -395,8 +400,14 @@ h4{
     	   data:{ mSeqString :  mSeqString},
     	   success:function(data){ //통신 성공
     		   console.log(data);
-    		   alert(data);
-    	   
+    		   let parsedJson = JSON.parse(data);
+    		   
+             if("0" != parsedJson.msgId){
+                 alert(parsedJson.msgContents);
+                 window.location.href="${CP}/elecmusk/userMng.do";
+               }else{
+                 alert(parsedJson.msgContents);
+               }
     		   window.location.href="/ehr/elecmusk/userMng.do";
     	   },
     	   error:function(data){//실패
@@ -478,16 +489,27 @@ h4{
   function doRetrieve(page){
 	  console.log("doRetrieve");
 	  
+	  let userDiv = document.querySelector('input[name="userDiv"]:checked').value;
+	  console.log("userDiv: "+userDiv);
+	  
+	  let searchDivValue = $("#searchDiv").val();
+	  
+	  //혹시모르니 처리
+	  if("ALL"===searchDivValue){
+		  searchDivValue="";
+	  }
+	  
 	  $.ajax({ 
 		   type: "GET",
 		   url: "/ehr/elecmusk/doUserRetrieve.do",
 		   asyn: "true",
 		   dataType: "html",
 		   data:{
-			   searchDiv : $("#searchDiv").val(),
+			   searchDiv : searchDivValue,
          searchWord: $("#searchWord").val(),
 			   pageSize : $("#pageSize").val(),
-			   pageNo : page
+			   pageNo : page,
+			   userDiv : userDiv
 		   },
 		   success:function(data){ //통신 성공
 		    console.log(data);
@@ -613,24 +635,31 @@ h4{
 			<div class="form-group">
 				<input type="button" class="btn btn-primary btn-sm" value="선택 정지" id="multiBan">
 				<select class="form-control input-sm" name="searchDiv" id="searchDiv">
-					<option value="">전체</option>
-					<option value="10">고유번호</option>
-					<option value="20">아이디</option>
-					<option value="30">닉네임</option>
-					<option value="40">이름</option>
+					<c:choose>
+					 <c:when test="${USER_SEARCH.size()>0}">
+					   <c:forEach var="code" items="${USER_SEARCH}">
+					     <option value='<c:out value="${code.detCode}"/>'><c:out value="${code.detName}"/></option>
+					   </c:forEach>
+					 </c:when>
+					</c:choose>
 				</select> <input type="text" class="form-control input-sm" name="searchWord" id="searchWord" placeholder="검색어를 입력하세요"> <select
 					class="form-control input-sm" name="pageSize" id="pageSize">
-					<option value="10">10</option>
-					<option value="20">20</option>
-					<option value="30">30</option>
-					<option value="50">50</option>
-					<option value="100">100</option>
-				</select> <input type="button" class="btn btn-primary btn-sm" value="조회" id="doRetrive"> 
+          <c:choose>
+            <c:when test="${PAGE_SIZE.size()>0}">
+              <c:forEach var="pageSize" items="${PAGE_SIZE}">
+                <option value='<c:out value="${pageSize.detCode }"/>'><c:out value="${pageSize.detName }"/></option>
+              </c:forEach>
+            </c:when>
+            <c:otherwise>
+            </c:otherwise>
+          </c:choose>
+				</select> <input type="button" class="btn btn-primary btn-sm" value="조회" id="doRetrive">
+				    전체<input type="radio" name="userDiv" checked="checked" value="">
+                    일반<input type="radio" name="userDiv" value="10">
+                    탈퇴(정지)<input type="radio" name="userDiv" value="20">
 			</div>
-			<!-- 검색부분 ----------------------------------------->
-
-
 		</form>
+		<!-- 검색부분 ----------------------------------------->
 		<table class="table table-striped table-bordered table-hover" id="userTable">
 			<thead class="bg-primary">
 				<tr>
@@ -758,9 +787,14 @@ h4{
         <label for="backupQuestion" class="col-sm-2 col-md-2 col-lg-2 control-label">본인확인 질문</label>
         <div class="col-sm-6 col-md-6 col-lg-6">
           <select  class="form-control" id = "backupQuestion">
-              <option value="">선택안함</option>
-              <option>으겍</option>
-              <option>으갹</option>
+	            <option value="">선택안함</option>
+	            <c:choose>
+	              <c:when test="${USER_BACKUPQUESTION.size()>0}">
+	                <c:forEach var="code" items="${USER_BACKUPQUESTION}">
+	                  <option value='<c:out value="${code.detName}"/>'><c:out value="${code.detName}" /></option>
+	                </c:forEach>
+	              </c:when>
+	            </c:choose>
             </select>
         </div>
       </div>

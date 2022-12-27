@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.pcwk.ehr.cmn.SearchVO;
 import com.pcwk.ehr.user.dao.UserDao;
+import com.pcwk.ehr.user.domain.UserSearchVO;
 import com.pcwk.ehr.user.domain.UserVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -33,7 +34,7 @@ public class KDJTestDontTouchPleaseThankYou {
 	UserVO userVO2;
 	UserVO userVO3;
 	
-	SearchVO searchVO;
+	UserSearchVO searchVO;
 	
 	@Before
 	public void setUp(){ 
@@ -43,7 +44,7 @@ public class KDJTestDontTouchPleaseThankYou {
 		userVO2 = new UserVO("rlaehdwn60_2", "rlaehdwn60_2", "password", "김동주");
 		userVO3 = new UserVO("rlaehdwn60_3", "rlaehdwn60_3", "password", "김동주");
 	
-		searchVO = new SearchVO(10, 1, "10", "rla");
+		searchVO = new UserSearchVO(10, 1, "20", "rla", "20");
 	}
 
 	@Test
@@ -80,7 +81,6 @@ public class KDJTestDontTouchPleaseThankYou {
 	}
 	
 	@Test
-	@Ignore
 	public void doRetrieve() throws Exception{
 		List<UserVO> list = userDao.doRetrieve(searchVO);
 		
@@ -133,6 +133,7 @@ public class KDJTestDontTouchPleaseThankYou {
 	}
 	
 	@Test
+	@Ignore
 	public void updateThings() throws Exception{
 		userVO1.setmSeq(1000225);
 		userVO1.setNickname("떼잉");

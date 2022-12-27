@@ -45,7 +45,58 @@ h4{
 <script >
   $(document).ready(function(){
     console.log("document.ready");
-   
+    //==================================================================
+    //=헤더부분 스크립트 이부분 꼭 넣으세요
+    //==================================================================
+    
+     $(function() {
+         let didScroll;
+         let lastScrollTop = 0;
+         let navbarHeight = $("header").outerHeight();
+          $(window).scroll(function(event){
+              didScroll = true;
+          });
+          setInterval(function() {
+              if (didScroll) {
+                  hasScrolled();
+                  didScroll = false;
+              }
+          }); // 스크롤이 멈춘 후 동작이 실행되기 까지의 딜레이
+          function hasScrolled() {
+            if($(this).width() > 700) {       
+            let st = $(this).scrollTop(); // 현재 window의 scrollTop 값
+                if ($(window).scrollTop() > 50){
+                    $(".logo-area").slideUp("fast"); // header 숨기기
+                    $(".text-logo-area").addClass("visible");
+                } else {
+                    if($(window).scrollTop() < 200) {
+                        $(".logo-area").slideDown("fast"); // header 보이기
+                        $(".text-logo-area").removeClass("visible");
+                }
+             }
+          }
+       }
+       });
+   //==================================================================
+   //=헤더부분 스크립트 이부분 꼭 넣으세요
+   //==================================================================
+    
+	//회원관리 버튼
+	$("#moveToUserMng").on("click",function(){
+		let userStatus = ${sessionScope.userInfo.status};
+		console.log(userStatus);
+		if(userStatus!=2){
+			alert("관리자만 사용할 수 있습니다.");
+			return; 
+		}
+    let f = document.createElement('form');
+    f.setAttribute('method', 'post');
+    f.setAttribute('action', 'userMng.do');
+    document.body.appendChild(f);
+    f.submit();
+		
+	});//회원관리 버튼
+	   
   //새로고침 버튼 - 뺐음 필요할 수도 있으니 남김
   $("#renew").on("click",function(){
 	  console.log("엥");
@@ -399,30 +450,44 @@ h4{
 		<div class="page-header text-center">
 			<h2>마이 페이지</h2>
 		</div>
-		<div>
+		<div class="text-center">
+			<c:choose>
+				<c:when	test="${2 <= sessionScope.userInfo.status && not empty sessionScope.userInfo}">
+					<div>
+						<h4 class="text-center">회원 관리</h4>
+						<button type="button" class="btn btn-default btn-lg btn-block" id="moveToUserMng">회원 관리</button>
+					</div>
+				</c:when>
+			</c:choose>
 			<h4 class="text-center">닉네임 수정</h4>
 			<form class="form-horizontal">
 				<div class="form-group">
-				  <input type="hidden" name="nicknameCheckYN" id="nicknameCheckYN" value="0">
-					<label for="nickname" class="col-sm-3 control-label">현재 닉네임</label>
+					<input type="hidden" name="nicknameCheckYN" id="nicknameCheckYN"
+						value="0"> <label for="nickname"
+						class="col-sm-3 control-label">현재 닉네임</label>
 					<div class="col-sm-6">
-						<input type="text" class="form-control" id="preNickname" value="${sessionScope.userInfo.nickname }" readonly="readonly">
+						<input type="text" class="form-control" id="preNickname"
+							value="${sessionScope.userInfo.nickname }" readonly="readonly">
 					</div>
-				</div> 
+				</div>
 				<div class="form-group">
 					<label for="nickname" class="col-sm-3 control-label">바꿀 닉네임</label>
 					<div class="col-sm-6">
-						<input type="text" class="form-control" id="nickname"	placeholder="닉네임" maxlength="20">
+						<input type="text" class="form-control" id="nickname"
+							placeholder="닉네임" maxlength="20">
 					</div>
 					<div class="col-sm-2">
-						<input type="button" class="form-control" value="중복확인" id="nicknameCheck">
+						<input type="button" class="form-control" value="중복확인"
+							id="nicknameCheck">
 					</div>
 					<div class="col-sm-1">
-            <input type="button" class="form-control" value="재설정" id="nicknameReset">
-          </div>
+						<input type="button" class="form-control" value="재설정"
+							id="nicknameReset">
+					</div>
 				</div>
 			</form>
-			<button type="button" class="btn btn-default btn-lg btn-block" id="updateNickname">바꾸기</button>
+			<button type="button" class="btn btn-default btn-lg btn-block"
+				id="updateNickname">바꾸기</button>
 		</div>
 		<div>
 			<h4 class="text-center">비밀번호 수정</h4>

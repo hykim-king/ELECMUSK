@@ -89,45 +89,72 @@ FROM member
           </choose>
        </where>  
   </sql>
+  
+    <!-- 목록조회 용 검색조건 -->
+  <sql id="userCondition">
+       <where>
+          <choose>
+             <when test=" '10' == userDiv ">
+                status = 1
+             </when>
+             <when test=" '20' == userDiv">
+                status = 0
+             </when>          
+             <when test=" '30' == userDiv">
+                status != 2
+             </when>          
+          </choose>
+       </where>  
+  </sql>
 
-  <select id="doRetrieve" parameterType="SearchVO" resultType="UserVO">
-	SELECT A.*,B.*
-	FROM
-			(
-					SELECT
-					t2.rnum as num,
-	        t2.member_seq as mSeq,
-	        t2.id as userId,
-	        t2.nickname as nickname,
-	        t2.password as userPw,
-	        t2.name as name,
-	        TO_CHAR(t2.birth,'YYYYMMDD') as birth,
-	        t2.email as email,
-	        t2.backup_question as backupQuestion,
-	        t2.backup_answer as backupAnswer,
-	        t2.point as point,
-	        TO_CHAR(t2.join_date,'YYYYMMDD') as joinDate,
-	        t2.status as status
-					FROM
-					(
-							SELECT ROWNUM as RNUM, T1.*
-							FROM
-							(
-									SELECT *
-									FROM member
-									<include refid="searchCondition"/>
-									ORDER BY join_date DESC
-							)T1
-					    <![CDATA[ WHERE ROWNUM <= #{pageSize} * #{pageNo}]]>
-					)T2
-					<![CDATA[ WHERE RNUM >= #{pageSize} * (#{pageNo} - 1) + 1]]>
-	)A
-	CROSS JOIN
-	(
-			SELECT COUNT(*) as totalCnt
-			FROM member
-			<include refid="searchCondition"/>
-	)B
+  <select id="doRetrieve" parameterType="com.pcwk.ehr.user.domain.UserSearchVO" resultType="UserVO">
+  SELECT A.*,B.*
+  FROM
+      (
+          SELECT
+          t2.rnum as num,
+          t2.member_seq as mSeq,
+          t2.id as userId,
+          t2.nickname as nickname,
+          t2.password as userPw,
+          t2.name as name,
+          TO_CHAR(t2.birth,'YYYYMMDD') as birth,
+          t2.email as email,
+          t2.backup_question as backupQuestion,
+          t2.backup_answer as backupAnswer,
+          t2.point as point,
+          TO_CHAR(t2.join_date,'YYYYMMDD') as joinDate,
+          t2.status as status
+          FROM
+          (
+              SELECT ROWNUM as RNUM, T1.*
+              FROM
+              (
+                  SELECT *
+                  FROM
+                  (
+                      SELECT *
+                      FROM member
+                      <include refid="userCondition"/>
+                  )
+                  <include refid="searchCondition"/>
+                  ORDER BY join_date DESC
+              )T1
+              <![CDATA[ WHERE ROWNUM <= #{pageSize} * #{pageNo}]]>
+          )T2
+          <![CDATA[ WHERE RNUM >= #{pageSize} * (#{pageNo} - 1) + 1]]>
+  )A
+  CROSS JOIN
+  (
+      SELECT COUNT(*) as totalCnt
+      FROM 
+      (
+          SELECT *
+          FROM member
+          <include refid="userCondition"/>
+      )
+      <include refid="searchCondition"/>
+  )B
   </select>
   
   <select id="pointRank" parameterType="SearchVO" resultType="UserVO">
