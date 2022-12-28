@@ -37,4 +37,10 @@ public interface UserDao extends WorkDiv<UserVO> {
 	
 	//포인트랭킹
 	List<UserVO> pointRank(UserVO inVO) throws SQLException;
+	
+	//로그인시 포인트 획득
+	int loginAddPoint(UserVO inVO) throws SQLException;
+	
+	//글 작성시 포인트 획득
+	int postAddPoint(UserVO inVO) throws SQLException;
 }

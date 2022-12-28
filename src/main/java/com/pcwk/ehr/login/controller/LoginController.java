@@ -176,10 +176,17 @@ public class LoginController {
 		String message = "";
 		
 		if(10==loginStatus) {
-			message = inVO.getUserId() + "로그인 되었습니다.";
-			
 			UserVO loginSuccessVO = userService.doSelectOne(userService.passwordCheck(inVO));
-			
+			int flag = userService.loginAddPoint(loginSuccessVO);
+			if(flag == 1) {
+				message = inVO.getUserId() + "로그인 되었습니다.";
+				message += "\n오늘 최초 로그인으로 100포인트 획득했습니다.";
+				
+			}else if(flag == 0) {
+				message = inVO.getUserId() + "로그인 되었습니다.";
+			}else {
+				LOG.debug("어떻게 한거지??");
+			}
 			LOG.debug("loginSuccessVO: "+loginSuccessVO);
 			
 			//탈퇴 회원 로그인 가능하긴함

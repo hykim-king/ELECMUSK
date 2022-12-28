@@ -65,7 +65,9 @@
     backup_answer,
     point,
     join_date,
-    status
+    status,
+    last_login,
+    last_post
 FROM member
    WHERE member_seq = #{mSeq}
   </select>
@@ -209,6 +211,8 @@ FROM member
     <result column="point"            property="point"         />
     <result column="join_date"        property="joinDate"      />
     <result column="status"           property="status"        />
+    <result column="last_login"       property="lastLogin"     />
+    <result column="last_post"        property="lastPost"      /> 
   </resultMap>
   
   <select id="idCheck" parameterType="UserVO" resultType="int">
@@ -271,4 +275,21 @@ FROM member
 		SET email = #{email}
 		WHERE member_seq = #{mSeq}
 	</update>
+
+	<update id="loginAddPoint" parameterType="UserVO">
+		UPDATE member
+		SET point = point+100,
+		LAST_LOGIN = SYSDATE
+		WHERE member_seq = #{mSeq}
+		AND TO_CHAR(SYSDATE,'YYYYMMDD')!=TO_CHAR(LAST_LOGIN,'YYYYMMDD')
+	</update>
+	
+	<update id="postAddPoint" parameterType="UserVO">
+		UPDATE member
+		SET point = point+50,
+		LAST_POST = SYSDATE
+		WHERE member_seq = #{mSeq}
+		AND TO_CHAR(SYSDATE,'YYYYMMDD')!=TO_CHAR(LAST_POST,'YYYYMMDD')
+	</update>
+  
 </mapper>  

@@ -232,4 +232,30 @@ public class UserDaoImpl implements UserDao {
 		
 		return list;
 	}
+	
+	@Override
+	public int loginAddPoint(UserVO inVO) throws SQLException{
+		LOG.debug("param: " + inVO);
+		
+		String statement = NAMESPACE + DOT + "loginAddPoint";
+		LOG.debug("statement: " + statement);
+		
+		int flag = sqlSessionTemplate.update(statement, inVO);
+		LOG.debug("flag: " + flag);
+		
+		return flag;
+	}
+	
+	@Override
+	public int postAddPoint(UserVO inVO) throws SQLException{
+		LOG.debug("param: " + inVO);
+		
+		String statement = NAMESPACE + DOT + "postAddPoint";
+		LOG.debug("statement: " + statement);
+		
+		int flag = sqlSessionTemplate.update(statement, inVO);
+		LOG.debug("flag: " + flag);
+		
+		return flag;
+	}
 }

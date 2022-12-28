@@ -15,6 +15,8 @@ public class UserVO extends DTO {
 	private int point; // 등급용 포인트
 	private String joinDate; // 가입일
 	private int status; // 상태(회원/비활성화/관리자)
+	private String lastLogin;// 마지막 로그인(포인트 용)
+	private String lastPost;// 마지막 글쓰기(포인트 용)
 
 	public UserVO() {
 	}
@@ -39,9 +41,13 @@ public class UserVO extends DTO {
 		this.backupAnswer = "";
 		this.point = 0;
 		this.status = 1;
+		this.lastLogin = "";
+		this.lastPost = "";
 	}
+
 	public UserVO(int mSeq, String userId, String nickname, String userPw, String name, String birth, String email,
-			String backupQuestion, String backupAnswer, int point, String joinDate, int status) {
+			String backupQuestion, String backupAnswer, int point, String joinDate, int status, String lastLogin,
+			String lastPost) {
 		super();
 		this.mSeq = mSeq;
 		this.userId = userId;
@@ -55,6 +61,8 @@ public class UserVO extends DTO {
 		this.point = point;
 		this.joinDate = joinDate;
 		this.status = status;
+		this.lastLogin = lastLogin;
+		this.lastPost = lastPost;
 	}
 
 	public int getmSeq() {
@@ -153,13 +161,29 @@ public class UserVO extends DTO {
 		this.status = status;
 	}
 
+	public String getLastLogin() {
+		return lastLogin;
+	}
+
+	public void setLastLogin(String lastLogin) {
+		this.lastLogin = lastLogin;
+	}
+
+	public String getLastPost() {
+		return lastPost;
+	}
+
+	public void setLastPost(String lastPost) {
+		this.lastPost = lastPost;
+	}
+
 	@Override
 	public String toString() {
 		return "UserVO [mSeq=" + mSeq + ", userId=" + userId + ", nickname=" + nickname + ", userPw=" + userPw
 				+ ", name=" + name + ", birth=" + birth + ", email=" + email + ", backupQuestion=" + backupQuestion
 				+ ", backupAnswer=" + backupAnswer + ", point=" + point + ", joinDate=" + joinDate + ", status="
-				+ status + ", toString()=" + super.toString() + "]";
-	};
+				+ status + ", lastLogin=" + lastLogin + ", lastPost=" + lastPost + ", toString()=" + super.toString()
+				+ "]";
+	}
 
-	
 }

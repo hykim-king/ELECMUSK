@@ -185,6 +185,15 @@ public class UserServiceImpl implements UserService {
 	public List<UserVO> pointRank(UserVO inVO) throws SQLException {
 		return userDao.pointRank(inVO);
 	}
+
+	@Override 
+	public int loginAddPoint (UserVO inVO) throws SQLException{
+		return userDao.loginAddPoint(inVO);
+	}
 	
+	@Override 
+	public int postAddPoint (UserVO inVO) throws SQLException{
+		return userDao.postAddPoint(inVO);
+	}
 	
 }

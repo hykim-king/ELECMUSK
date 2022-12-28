@@ -271,25 +271,21 @@
   
   //=============================doSelectOne함수
   function doSelectOne(boardSeq){
-	  if(${null != sessionScope.userInfo.status && not empty sessionScope.userInfo}){
 		  let url = "${CP}/board/doSelectOne.do";
 	
 	    url = url + "?bdSeq="+boardSeq;
 	    console.log("url : "+url);
 	    location.href = url;
-	  }
   //=============================doSelectOne함수 끝  
   }
   
   //=============================moveToboard함수
   function moveToboard(category){
-	  if(${null != sessionScope.userInfo.status && not empty sessionScope.userInfo}){
 		  let url = "${CP}/board/boardView.do";
 	
 	    url = url + "?category="+category;
 	    console.log("url : "+url);
 	    location.href = url;
-	  }
   //=============================moveToboard함수 끝  
   }
 </script>

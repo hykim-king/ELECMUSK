@@ -81,6 +81,7 @@ public class KDJTestDontTouchPleaseThankYou {
 	}
 	
 	@Test
+	@Ignore
 	public void doRetrieve() throws Exception{
 		List<UserVO> list = userDao.doRetrieve(searchVO);
 		
@@ -142,6 +143,15 @@ public class KDJTestDontTouchPleaseThankYou {
 		userDao.updateNickname(userVO1);
 		userDao.updateEmail(userVO1);
 		userDao.updatePassword(userVO1);
+	}
+	
+	@Test
+	public void loginPostPointAdd() throws Exception{
+		userVO1.setmSeq(3333);
+		userDao.loginAddPoint(userVO1);
+		LOG.debug("point: "+userVO1.getPoint());
+		userDao.postAddPoint(userVO1);
+		LOG.debug("point: "+userVO1.getPoint());
 	}
 	
 	@Test
