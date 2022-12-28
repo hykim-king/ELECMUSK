@@ -54,90 +54,90 @@ width: 100%;
 </style>
 <script >
 
-  $(document).ready(function() {
-    console.log("document.ready");
-    
-    doRetrieve(1);
-    
-    //글자수 200자 제한
-    $('.commentbox').keyup(function() {
-      var content = $(this).val();
+	$(document).ready(function() {
+		console.log("document.ready");
+		
+		doRetrieve(1);
+		
+		//글자수 200자 제한
+		$('.commentbox').keyup(function() {
+			var content = $(this).val();
 
-      //글자수 실시간 카운팅
-      $('#counter').html("(" + content.length + "/최대 200자)");
+			//글자수 실시간 카운팅
+			$('#counter').html("(" + content.length + "/최대 200자)");
 
-      if (content.length > 200) {
-        alert("최대 200자까지 입력 가능합니다.");
-        $(this).val(content.substring(0, 200));
-        $('#counter').html("(200/최대 200자)");
-      }
+			if (content.length > 200) {
+				alert("최대 200자까지 입력 가능합니다.");
+				$(this).val(content.substring(0, 200));
+				$('#counter').html("(200/최대 200자)");
+			}
 
-    });//글자수 200자 제한
+		});//글자수 200자 제한
 
-  });//document.ready
-  
-  function doRetrieve(page){
-    console.log("악");
-    
-    console.log("1: "+$("#bdSeq").val());
-    
-    $.ajax({ 
-         type: "GET",
-         url: "/ehr/boardComment/doRetrieve.do",
-         asyn: "true",
-         dataType: "html",
-         data:{
-           //bdSeq : $("#bdSeq").val(),
-           bdSeq : 401,
-           pageSize : 50,
-           pageNo : page
-         },
-         success:function(data){ //통신 성공
-           console.log(data);
-         
-           let parsedJson = JSON.parse(data);
-           
-           console.log(parsedJson);
-         
-           let htmlData =""; //String str = "";
-           
-           $("#commentTable>tbody").empty();
-           
-           let totalCnt = 0;
-           let pageTotal = 0;
-           
-           //파싱된 데이터 정리
-           if(null != parsedJson && parsedJson.length > 0){
-             
-             totalCnt = parsedJson[0].totalCnt;
-             pageTotal = Math.ceil( totalCnt/$("#pageSize").val());
-             
-             $.each(parsedJson,function(index,value){
-               htmlData += "<tr>";
-               htmlData += "  <td class='text-left col-sm-2 col-dm-2 col-lg-2'>"+<c:out value='value.memberNickname'></c:out>+"</td>";
-               htmlData += "  <td class='text-left col-sm-8 col-dm-8 col-lg-8'>"+<c:out value='value.contents'></c:out>+"</td>";
-               htmlData += "  <td class='text-left col-sm-1 col-dm-1 col-lg-1'>"+<c:out value='value.regDt'></c:out>+"</td>";
-               htmlData += "</tr>";
-               
-             });
-             
-           }else{//파싱된 데이터 정리(if문 끝)
-             
-           
-           }//파싱된 데이터 정리(else문 끝)
-           
-           $("#commentTable>tbody").append(htmlData);
-         },
-         error:function(data){//실패
-         
-         },
-         complete:function(data){//성공, 실패 관계 없이 출력
-         
-         }
+	});//document.ready
+	
+	function doRetrieve(page){
+		console.log("악");
+		
+		console.log("1: "+$("#bdSeq").val());
+		
+		$.ajax({ 
+			   type: "GET",
+			   url: "/ehr/boardComment/doRetrieve.do",
+			   asyn: "true",
+			   dataType: "html",
+			   data:{
+				   //bdSeq : $("#bdSeq").val(),
+				   bdSeq : 401,
+				   pageSize : 50,
+				   pageNo : page
+			   },
+			   success:function(data){ //통신 성공
+				   console.log(data);
+			   
+				   let parsedJson = JSON.parse(data);
+				   
+				   console.log(parsedJson);
+			   
+				   let htmlData =""; //String str = "";
+				   
+				   $("#commentTable>tbody").empty();
+				   
+				   let totalCnt = 0;
+				   let pageTotal = 0;
+				   
+				   //파싱된 데이터 정리
+				   if(null != parsedJson && parsedJson.length > 0){
+					   
+					   totalCnt = parsedJson[0].totalCnt;
+					   pageTotal = Math.ceil( totalCnt/$("#pageSize").val());
+					   
+					   $.each(parsedJson,function(index,value){
+		           htmlData += "<tr>";
+		           htmlData += "  <td class='text-left col-sm-2 col-dm-2 col-lg-2'>"+<c:out value='value.memberNickname'></c:out>+"</td>";
+		           htmlData += "  <td class='text-left col-sm-8 col-dm-8 col-lg-8'>"+<c:out value='value.contents'></c:out>+"</td>";
+		           htmlData += "  <td class='text-left col-sm-1 col-dm-1 col-lg-1'>"+<c:out value='value.regDt'></c:out>+"</td>";
+		           htmlData += "</tr>";
+		           
+		         });
+					   
+				   }else{//파싱된 데이터 정리(if문 끝)
+					   
+				   
+				   }//파싱된 데이터 정리(else문 끝)
+				   
+				   $("#commentTable>tbody").append(htmlData);
+			   },
+			   error:function(data){//실패
+			   
+			   },
+			   complete:function(data){//성공, 실패 관계 없이 출력
+			   
+			   }
 
-   });
-  }
-  
+	 });
+	}
+	
 </script>
 
 </head>

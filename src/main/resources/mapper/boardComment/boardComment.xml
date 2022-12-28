@@ -7,41 +7,40 @@
   <!-- 조회 retrieve-->
   <select id="doRetrieve" resultType="BoardCommentVO" parameterType="com.pcwk.ehr.board.comment.domain.BoardCommentSearchVO">
     --페이징
-    SELECT A.*,B.*
-    FROM (
-        SELECT  tt1.RNUM as num, 
-                tt1.cm_seq as cmSeq,
-                tt1.contents
-                --당일이면 시:분 , 그렇지 않으면 년/월/일
-                DECODE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'), TO_CHAR(TT1.reg_dt, 'YYYY-MM-DD'),--DECODE
-                                                       TO_CHAR(TT1.reg_dt, 'HH24:MI'),--위가 같으면 이걸
-                                                       TO_CHAR(TT1.reg_dt, 'YYYY-MM-DD')) as regDt --다르면 이걸
-        FROM(
-            SELECT  ROWNUM AS RNUM, t1.*
-            FROM (select *
-                  FROM BD_COMMENT
-                  --WHERE 조건 있으면 추가
-                  WHERE bd_seq = #{bdSeq}
-                  ORDER BY reg_dt DESC
-            )T1
-            --종료 번호<![CDATA[
+ SELECT A.*,B.*
+FROM (
+    SELECT  tt1.RNUM as num, 
+            tt1.cm_seq as cmSeq,
+            tt1.contents,
+            tt1.MEMBER_SEQ, 
+            tt1.REG_SEQ,
+            tt1.nickname as "memberNickname",
+            --당일이면 시:분 , 그렇지 않으면 년/월/일
+            DECODE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'), TO_CHAR(TT1.reg_dt, 'YYYY-MM-DD'),--DECODE
+                                                   TO_CHAR(TT1.reg_dt, 'HH24:MI'),--위가 같으면 이걸
+                                                   TO_CHAR(TT1.reg_dt, 'YYYY-MM-DD')) as regDt --다르면 이걸
+    FROM(
+        SELECT  ROWNUM AS RNUM, t1.*
+        FROM (select cm_seq, bd.member_seq, bd_seq, Contents,REG_DT,REG_SEQ, bd.membernickname, m.nickname
+              FROM BD_COMMENT bd, member m
+              --WHERE 조건 있으면 추가
+                  WHERE BD_SEQ = #{bdSeq} 
+                  and bd.member_seq = m.member_seq
+              ORDER BY bd.reg_dt DESC
+        )T1
+            --종료 번호<![CDATA[  
             WHERE ROWNUM <= #{pageSize} * #{pageNo}
-        )TT1
+        ) TT1
         --시작 번호
         WHERE RNUM >= #{pageSize} * (#{pageNo} - 1) +1  ]]>
-    )A
-    CROSS JOIN
-    (
-      SELECT COUNT(*) totalCnt
-      FROM BD_COMMENT
-      WHERE bd_seq = #{bdSeq}
-    )B
-    CROSS JOIN
-    (
-      SELECT NICKNAME
-      FROM MEMBER
-      WHERE TT1.REG_SEQ = 
-    )
+    ) A
+CROSS JOIN
+(
+  SELECT COUNT(*) totalCnt
+  FROM BD_COMMENT bd, member m
+  WHERE bd_seq = #{bdSeq}
+    and bd.member_seq = m.member_seq
+)B
   </select>
   
   
@@ -49,37 +48,57 @@
   
   <select id="doSelectOne" parameterType="BoardCommentVO" resultType="BoardCommentVO">
   <![CDATA[
-    SELECT CM_SEQ as CMSEQ,      
-           contents,            
-           TO_CHAR(reg_dt,'yyyy-mm-dd hh24:mi:ss') AS regDt,
-           nickname
-    FROM BD_COMMENT   
-    WHERE cm_seq = #{cmSeq}
+    SELECT 
+       A.*,B.*
+  FROM (
+          (
+           SELECT 
+              CM_SEQ as CMSEQ,
+              contents,
+              TO_CHAR(reg_dt,'yyyy-mm-dd hh24:mi:ss') AS regDt,
+              MEMBER_SEQ,
+              REG_SEQ
+          FROM 
+              BD_COMMENT
+          WHERE 
+              cm_seq = #{cmSeq}
+          ) TT1
+      )A
+      CROSS JOIN
+      (
+        SELECT M.NICKNAME memberNickname
+        FROM MEMBER M
+        WHERE TT1.MEMBER_SEQ = M.MEMBER_SEQ
+      ) B
   ]]>  
   </select>
   
   <update id="doUpdate" parameterType="BoardCommentVO">
      UPDATE BD_COMMENT     
-     SET contents       = #{contents},     
-         REG_DT         = SYSDATE      
+     SET MEMBER_SEQ     = #{memberSeq},
+         contents       = #{contents},     
+         REG_DT         = SYSDATE,      
+         REG_SEQ        = #{regSeq}
      WHERE cm_seq = #{cmSeq}
   </update>
   
-	<insert id="doSave" parameterType="BoardCommentVO">
+  <insert id="doSave" parameterType="BoardCommentVO">
   INSERT INTO BD_COMMENT (
       BD_SEQ,
-      NICKNAME,              
+      MEMBER_SEQ,              
       CM_SEQ,              
       CONTENTS,            
-      REG_DT                     
+      REG_DT,
+      REG_SEQ                     
   )VALUES (
-			#{bdSeq},
-			#{nickname},
-			COMMENT_SEQ.nextval,
-			#{contents},
-		   SYSDATE
-			)
-	</insert>
+      #{bdSeq},
+      #{memberSeq},
+      COMMENT_SEQ.nextval,
+      #{contents},
+       SYSDATE,
+       #{regSeq}
+      )
+  </insert>
   <delete id="doDelete" parameterType="BoardCommentVO">
     DELETE FROM BD_COMMENT
     WHERE CM_SEQ = #{cmSeq}
