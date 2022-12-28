@@ -48,7 +48,7 @@
         location.href = link;
      });
 
-     $("#mainhome,#logo").on("click", function() {
+     $("#mainhome,#logo,#text-logo").on("click", function() {
        let link = "${CP}/elecmusk/view.do"
        location.href = link;
      });
@@ -145,7 +145,7 @@
   <input type="hidden" id="status" name="status" value="${sessionScope.userInfo.status}">
   
     <div class="text-logo-area">
-      <img src="${CP_RES}/asset/imgs/home_imgs/EVerything_logo_text.png" id="text-logo">
+      <img src="${CP_RES}/asset/imgs/home_imgs/EVerything_logo_text.png" style="cursor: pointer;" id="text-logo">
     </div>
 
     <!-- menu-area -->

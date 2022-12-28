@@ -4,7 +4,7 @@ import com.pcwk.ehr.board.cmn.DTO;
 
 public class BoardCommentSearchVO extends DTO {
 	
-	private int bdSeq;// 게시판글 순번
+	private int bdSeq;// 게시판글 번호 
 	private int pageSize;//페이즈 사이즈(default = 10)
 	private int pageNo;//페이지 번호(default = 1)
 	private String searchDiv;//검색구분(default = "")

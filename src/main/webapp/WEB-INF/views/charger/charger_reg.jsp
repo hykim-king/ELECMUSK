@@ -46,6 +46,29 @@
   $(document).ready(function(){
 	  console.log("document.ready");
 	  
+	  
+	  function readImage(input) {
+	      // 인풋 태그에 파일이 있는 경우
+	      if(input.files && input.files[0]) {
+	          // 이미지 파일인지 검사 (생략)
+	          // FileReader 인스턴스 생성
+	          const reader = new FileReader();
+	          // 이미지가 로드가 된 경우
+	          reader.onload = e => {
+	              const previewImage = document.getElementById("preview-image");
+	              previewImage.src = e.target.result;
+	          }
+	          // reader가 이미지 읽도록 하기
+	          reader.readAsDataURL(input.files[0]);
+	      }
+	  }
+	  // input file에 change 이벤트 부여
+	  const inputImage = document.getElementById("file01");
+	  inputImage.addEventListener("change", e => {
+	      readImage(e.target);
+	  });   
+	  
+	  
 	     //관리자메뉴 이동
       $("#moveToManagerPage").on("click",function(){
         
@@ -138,6 +161,7 @@
 	
 	    $("#doSaveFile").on("click",function(){
 	        console.log("doSaveFile");
+	        $("#preview-image").css("display","block");
 	        
 	        let fileInput = $("#file01")[0];
 	        console.log("fileInput: "+fileInput);
@@ -183,10 +207,8 @@
 	                   $.each(data, function(index, value) {
 	                   ///ehr/resources/asset/imgs/evcar_imgs/G70.png
 	                   imgPath = "/ehr"+value.imageViewPath+"/"+value.saveFileName;
-	                   htmlData += "    <img src='"+imgPath+"' style='width:100%;' '>";
 	                   });
 	             }
-	             $("#imgArea").append(htmlData);  
 	             $("#image").val(imgPath);
 
 	           },
@@ -262,25 +284,35 @@
     </div>
     <!-- 제목 ------------------------------------------------------------------->
     <!--버튼  -->
+
     <div class="row text-right ">
         <label for="inputEmail3" class="col-sm-2 col-md-2 col-lg-2 control-label"></label>
         <div class="col-sm-10 col-md-10 col-lg-10">
           <input type="button" class="btn btn-info btn-sm" value="등록"  id="doSave" >
           <input type="button" class="btn btn-primary btn-sm" value="목록"  id="moveToManagerPage" >
         </div>
-        <div class="form-group">
-          <label for="file01" class="col-sm-2 col-md-2 col-lg-2 control-label">이미지</label>
-          <div class="col-sm-10 col-md-10 col-lg-10">
-          <input type="file" class="form-control" id="file01" name="file01" placeholder="파일을 입력해주세요" maxlength="100">
-          <input type="button" class="btn btn-primary btn-sm" value="사진등록" id="doSaveFile">
-          </div>
-        </div>
+
     </div>
     <!--버튼 -------------------------------------------------------------------->
         <!-- 폼 -->
     <form action="#" class="form-horizontal"> 
     <input type="hidden" id="charger_seq" name="charger_seq" value="${vo.charger_seq}">
-    <input type="hidden" id="image" name="image">   
+    <input type="hidden" id="image" name="image" value="${vo.image}">  
+	      <!-- 이미지 미리보기 -->
+	      <div class="form-group">
+	      <label for="preview-image" class="col-sm-2 col-md-2 col-lg-2 control-label" >미리보기</label>
+	        <div class="col-sm-2 col-md-2 col-lg-2">
+	          <img style="width:100%; display:none;" id="preview-image" src="#">
+	        </div>
+	      </div>
+	      <!-- 이미지 등록하기 -->
+        <div class="form-group">
+          <label for="file01" class="col-sm-2 col-md-2 col-lg-2 control-label" >이미지</label>
+          <div class="col-sm-10 col-md-10 col-lg-10">
+            <input type="file" class="form-control" id="file01" name="file01" placeholder="파일을 입력해주세요" maxlength="100">
+            <input type="button" class="btn btn-primary btn-sm" value="사진등록" id="doSaveFile">
+          </div>
+        </div>
       <div class="form-group">
         <label for="connector" class="col-sm-2 col-md-2 col-lg-2 control-label">충전기명</label>
         <div class="col-sm-10 col-md-10 col-lg-10">

@@ -113,8 +113,8 @@
               //console.log(index+","+value.uId);
               htmlData +=" <tr> ";
               htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+<c:out value='value.num'/>+"</td> "; 
-              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'><img src='"+<c:out value = 'value.image'/>+"' alt='Responsive image' style='width:100%; height:100%;' class='img-rounded img-responsive'></td> "; 
-              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'><a href='#' onClick='doSelectOne("+<c:out value='value.charger_seq '/>+")'>"+<c:out value='value.connector'/>+"</td> "; 
+              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'><a href='#' onClick='doSelectOne("+<c:out value='value.charger_seq '/>+")'><img src='"+<c:out value = 'value.image'/>+"' alt='Responsive image' style='width:100%; height:100%;' class='img-rounded img-responsive'></td> "; 
+              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+<c:out value='value.connector'/>+"</td> "; 
               htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+<c:out value='value.ev_current'/>+"</td> "; 
               htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+<c:out value='value.ev_voltage'/>+"</td> "; 
               htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+<c:out value='value.ev_power'/>+"</td> "; 
@@ -236,7 +236,7 @@
     </div>
     <!-- 제목 ------------------------------------------------------------------->
     <!-- 코멘트 -->
-    <p>수정,삭제를 원하시면 "충전기명"을 클릭하세요</p>
+    <p>수정,삭제를 원하시면 "이미지"를 클릭하세요</p>
     <!-- 코멘트 --------------------------------------------------------------->
   <!---------------------------------------- 검색 : 검색 구분(select) 검색어(input) 페이지 사이즈(select) -->
     <form action="#" class="form-inline text-right">
@@ -258,8 +258,8 @@
       <thead>
         <tr>
           <th class="text-center col-sm-1 col-md-1 col-lg-1">순번</th>        
-          <th class="text-center col-sm-2 col-md-2 col-lg-2">이미지</th>        
-          <th class="text-center col-sm-2 col-md-2 col-lg-2 bg-warning">충전기명</th>        
+          <th class="text-center col-sm-2 col-md-2 col-lg-2 bg-warning">이미지</th>        
+          <th class="text-center col-sm-2 col-md-2 col-lg-2">충전기명</th>        
           <th class="text-center col-sm-2 col-md-2 col-lg-2">충전전류</th>        
           <th class="text-center col-sm-2 col-md-2 col-lg-2">충전전압</th>        
           <th class="text-center col-sm-2 col-md-2 col-lg-2">충전전력</th>        

@@ -99,6 +99,7 @@
               console.log("-page:"+page);
               console.log("----------------------------");
           
+              
           $.each(parsedJson, function(index,value){
               //console.log(index+","+value.uId);
               htmlData +=" <tr> ";
