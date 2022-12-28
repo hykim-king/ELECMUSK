@@ -163,18 +163,9 @@ async function getData(){//전기차 충전소 정보 api 받기
     drawMap(locations);
 }
 function drawMap(locations){
-   
-     
-     
-    //매개변수의 형태
-    //locations=[["충전소명칭",위도,경도],
-    //          ["충전소명칭",위도,경도]
-    //          ]
-    //// 첫 시작 위치 - GPS기능 추가 전
+
+    // 첫 시작 위치 - Geolocation기능 추가 전
     const myLatLng = { lat: 37.554075322663984, lng: 126.93576681191617 }; 
-    
-   
-    
     
     //구글지도 생성
     const map = new google.maps.Map(document.getElementById("map"),{
@@ -183,11 +174,7 @@ function drawMap(locations){
         mapTypeId: google.maps.MapTypeId.ROADMAP,
     });
     
-    
-    
-    
-    
- // 현재 위치 표시
+    //현재 위치 표시
     if(navigator.geolocation){
       navigator.geolocation.getCurrentPosition(function(position){
         let pos = {
@@ -205,12 +192,9 @@ function drawMap(locations){
     function handleLocationError(browerHasGeolocation, infoWindow, pos){
       infoWindow.setPosition(pos);
       infoWindow.setContent(browserHasGeolocation ?
-                            '오류: 지오로케이션 연결 실패' :
-                            '오류: 브라우저에서 지오로케이션을 지원하지 않음');
+                            '오류: Geolocation 연결 실패' :
+                            '오류: 브라우저에서 Geolocation을 지원하지 않음');
     }
-    
-
-    
     
     //마커 클릭시 생성되는 인포윈도우
     const infowindow = new google.maps.InfoWindow({
@@ -221,13 +205,10 @@ function drawMap(locations){
     
     let marker, i;
     
-    //현재 위치 마커 생성
-    
-    
     //마커에 충전소들의 위도, 경도 정보를 담아 표시
     for(i = 0; i < locations.length; i++){
         marker = new google.maps.Marker({
-            position: new google.maps.LatLng(locations[i][8],locations[i][9]), 
+            position: new google.maps.LatLng(locations[i][8],locations[i][9]),//8 : 위도(lat), 9 : 경도(longi) 
             map: map,
         });
         
@@ -242,11 +223,11 @@ function drawMap(locations){
                     });
                     
                     infowindow.setContent("<div>"+
-                                            "<h3 class='StationNm'>"+locations[i][7]+"</h3><br>"+
-                                            "<p class='StationAddr'>주소 : "+locations[i][0]+"</p><br>"+
-                                            "<p>충전기타입 : "+locations[i][3]+"</p><br>"+
-                                            "<p>충전상태 : "+locations[i][4]+"</p><br>"+
-                                            "<p>충전기 : "+locations[i][5]+"</p><br>"+
+                                            "<h3>"+locations[i][7]+"</h3><br>"+             //충전소명(csnm)
+                                            "<p>주소 : "+locations[i][0]+"</p><br>"+          //주소(addr)
+                                            "<p>충전기타입 : "+locations[i][3]+"</p><br>"+      //충전기타입(cptp)
+                                            "<p>충전상태 : "+locations[i][4]+"</p><br>"+       //충전상태(cpstat)
+                                            "<p>충전기 : "+locations[i][5]+"</p><br>"+         //충전방식(cptp)
                                           "</div>"+
                                           "<input type='button' class='btn btn-success btn-sm' value='리뷰보기' onclick='moveToRvList("+"\""+locations[i][7]+"\""+","+"1"+")' style='float:left;'>"+
                                           "<input type='button' class='btn btn-primary btn-sm' value='리뷰쓰기' onclick='doSelectOne("+locations[i][2]+","+locations[i][6]+","+"\""+locations[i][7]+"\""+")' style='float:right;'>"
@@ -298,29 +279,27 @@ getData();
 //=헤더부분 스크립트 이부분 꼭 넣으세요
 //==================================================================
 	
-  //=============================doSelectOne함수
   //리뷰게시판 등록
   function doSelectOne(cpId,csId,csNm){
-     let url = "${CP}/station/stationCheck.do?category=9";
+    let url = "${CP}/station/stationCheck.do?category=9";
      
-     url = url + "&cpId="+cpId+"&csId="+csId+"&csnm="+csNm;
+    url = url + "&cpId="+cpId+"&csId="+csId+"&csnm="+csNm;
     
     console.log("url : "+url);
+    
     location.href = url;
   }
-  //=============================doSelectOne함수 끝  
   
   //리뷰게시판 조회
-    function moveToRvList(csNm,maptoList){
-      let url = "${CP}/review/rvboardView.do?category=9";
-      
-      url = url + "&searchWord="+csNm+"&maptoList="+maptoList;
+  function moveToRvList(csNm,maptoList){
+    let url = "${CP}/review/rvboardView.do?category=9";
+    
+    url = url + "&searchWord="+csNm+"&maptoList="+maptoList;
 
-      
-      console.log("url:"+url);
-      
-      location.href = url;      
-    };
+    console.log("url:"+url);
+    
+    location.href = url;      
+  };
 </script>
 
 </head>
