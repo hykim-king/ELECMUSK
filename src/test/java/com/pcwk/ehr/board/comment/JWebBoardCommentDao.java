@@ -13,13 +13,13 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.pcwk.ehr.board.comment.dao.BoardCommentDao;
+import com.pcwk.ehr.board.comment.domain.BoardCommentSearchVO;
 import com.pcwk.ehr.board.comment.domain.BoardCommentVO;
-import com.pcwk.ehr.board.cmn.SearchVO;
+
 
 @RunWith(SpringJUnit4ClassRunner.class) // spring-test lib에 있음!
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/root-context.xml",
@@ -32,26 +32,24 @@ public class JWebBoardCommentDao {
 
 	BoardCommentVO boardCommentVO1;
 
-	SearchVO searchVO;
+	BoardCommentSearchVO searchVO;
 
 	@Before
 	public void setUp() throws Exception {
-
-		boardCommentVO1 = new BoardCommentVO(99999999, 1, 2, 3, "contents", "사용X");
-
+                                                       //401은 BOARD에 들어가있는 글 번호 ! (부모키)
+		boardCommentVO1 = new BoardCommentVO(99999999, 401, 1, 1000308,"contentsa1", "사용X");
+		                                                   //순번     //1000321이 닉네임을 정해주는 memberseq
+		searchVO = new BoardCommentSearchVO(401,10,1,"","");
 	}
 
-	@Test
-	public void doRetrieve() throws Exception {
-		List<BoardCommentVO> list = dao.doRetrieve(searchVO);
-	}
+	
 
 	@Test
-	@Ignore
+    @Ignore
 	public void doUpdate() throws Exception {
-		boardCommentVO1.setCmSeq(1000002);
-		boardCommentVO1.setContents("ㅋㅋㅄ");
-
+		boardCommentVO1.setCmSeq(1000043);//댓글번호(Cmseq)를 찾아 컨텐츠띄우기 
+		boardCommentVO1.setContents("ㅋㅋㅋㅋㅋ");
+        boardCommentVO1.setMemberSeq(2);
 		dao.doUpdate(boardCommentVO1);
 
 	}
@@ -59,7 +57,7 @@ public class JWebBoardCommentDao {
 	@Test
 	@Ignore
 	public void doDelete() throws Exception {
-		boardCommentVO1.setCmSeq(1000001);
+		boardCommentVO1.setCmSeq(1000308); //댓글번호(Cmseq)를 찾아 삭제 
 		int flag = dao.doDelete(boardCommentVO1);
 
 	}
@@ -70,6 +68,10 @@ public class JWebBoardCommentDao {
 		LOG.debug("doSave");
 		dao.doSave(boardCommentVO1);
 
+	}
+	@Test
+	public void doRetrieve() throws Exception {
+		List<BoardCommentVO> list = dao.doRetrieve(searchVO);
 	}
 
 	@Test
