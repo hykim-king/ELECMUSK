@@ -48,7 +48,7 @@
         location.href = link;
      });
 
-     $("#mainhome,#logo").on("click", function() {
+     $("#mainhome,#logo,#text-logo").on("click", function() {
        let link = "${CP}/elecmusk/view.do"
        location.href = link;
      });

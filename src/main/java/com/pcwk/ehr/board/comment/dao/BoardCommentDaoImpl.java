@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.pcwk.ehr.board.cmn.DTO;
 import com.pcwk.ehr.board.cmn.SearchVO;
+import com.pcwk.ehr.board.comment.domain.BoardCommentSearchVO;
 import com.pcwk.ehr.board.comment.domain.BoardCommentVO;
 
 @Repository("boardCommentDao")
@@ -86,7 +87,7 @@ public class BoardCommentDaoImpl implements BoardCommentDao {
 
 	@Override
 	public List<BoardCommentVO> doRetrieve(DTO inVO) throws SQLException {
-		SearchVO search = (SearchVO)inVO;
+		BoardCommentSearchVO search = (BoardCommentSearchVO)inVO;
 		List<BoardCommentVO> list = new ArrayList<BoardCommentVO>();
 		String statement = NAMESPACE+DOT+"doRetrieve";
 		LOG.debug("┌─────────────────────────┐");
