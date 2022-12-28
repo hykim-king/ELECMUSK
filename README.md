@@ -55,36 +55,68 @@
 
   
 # 5. 기능 시연:sunflower:  
-  ###5.1 메인화면
+  ### 5.1 메인화면
+  <br>
    ![메인화면](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/6.%EB%A9%94%EC%9D%B8%ED%99%94%EB%A9%B4.gif)
-  ###5.2 로그인
+  <br>
+  ### 5.2 로그인
+  <br>
    ![로그인](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/13.%EB%A1%9C%EA%B7%B8%EC%9D%B8_%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85.gif)
-  ###5.3 일반_게시판
+  <br>
+  ### 5.3 일반_게시판
+  <br>
    ![일반_게시판]()
-  ###5.3.1 관리자_게시판
+  <br>
+  ### 5.3.1 관리자_게시판
+  <br>
    ![관리자_게시판]()
-  ###5.4 일반_전기차
+  <br>
+  ### 5.4 일반_전기차
+  <br>
    ![일반_전기차](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/10.%EC%9D%BC%EB%B0%98%EC%9C%A0%EC%A0%80%EC%A0%84%EA%B8%B0%EC%B0%A8%EC%A0%95%EB%B3%B4.gif)
-  ###5.4.1 관리자_전기차
+  <br>
+  ### 5.4.1 관리자_전기차
+  <br>
    ![관리자_전기차](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/2.%EA%B4%80%EB%A6%AC%EC%9E%90%EC%A0%84%EA%B8%B0%EC%B0%A8%EC%A0%95%EB%B3%B4.gif)
-  ###5.5 일반_보조금
+  <br>
+  ### 5.5 일반_보조금
+  <br>
    ![일반_보조금](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/7.%EC%9D%BC%EB%B0%98%EC%9C%A0%EC%A0%80%EB%B3%B4%EC%A1%B0%EA%B8%88.gif)
-  ###5.5.1 관리자_보조금
+  <br>
+  ### 5.5.1 관리자_보조금
+  <br>
    ![관리자_보조금](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/1.%EA%B4%80%EB%A6%AC%EC%9E%90%EB%B3%B4%EC%A1%B0%EA%B8%88.gif)
-  ###5.6 일반_충전기
+  <br>
+  ### 5.6 일반_충전기
+  <br>
    ![일반_충전기](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/9.%EC%9D%BC%EB%B0%98%EC%9C%A0%EC%A0%80%EC%B6%A9%EC%A0%84%EA%B8%B0.gif)
-  ###5.6.1 관리자_충전기
+  <br>
+  ### 5.6.1 관리자_충전기
+  <br>
    ![관리자_충전기](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/3.%EA%B4%80%EB%A6%AC%EC%9E%90%EC%B6%A9%EC%A0%84%EA%B8%B0.gif)
-  ###5.7 일반_충전요금
+  <br>
+  ### 5.7 일반_충전요금
+  <br>
    ![일반_충전요금](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/12.%EC%9D%BC%EB%B0%98%EC%9C%A0%EC%A0%80%EC%B6%A9%EC%A0%84%EC%9A%94%EA%B8%88.gif)
-  ###5.7.1 관리자_충전요금
+  <br>
+  ### 5.7.1 관리자_충전요금
+  <br>
    ![관리자_충전요금](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/5.%EA%B4%80%EB%A6%AC%EC%9E%90%EC%B6%A9%EC%A0%84%EC%9A%94%EA%B8%88.gif)
-  ###5.8 통계정보
+  <br>
+  ### 5.8 통계정보
+  <br>
    ![통계정보](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/14.%ED%86%B5%EA%B3%84%EC%A0%95%EB%B3%B4.gif)
-  ###5.9 일반_충전소
+  <br>
+  ### 5.9 일반_충전소
+  <br>
    ![일반_충전소](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/11.%EC%9D%BC%EB%B0%98%EC%9C%A0%EC%A0%80%EC%B6%A9%EC%A0%84%EC%86%8C%EB%A6%AC%EB%B7%B0.gif)
-  ###5.9.1 관리자_충전소
+  <br>
+  ### 5.9.1 관리자_충전소
+  <br>
    ![관리자_충전소](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/4.%EA%B4%80%EB%A6%AC%EC%9E%90%EC%B6%A9%EC%A0%84%EC%86%8C.gif)
-  ###5.10 뉴스&블로그
+  <br>
+  ### 5.10 뉴스&블로그
+  <br>
    ![뉴스&블로그](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/8.%EC%9D%BC%EB%B0%98%EC%9C%A0%EC%A0%80%EB%89%B4%EC%8A%A4%EB%B8%94%EB%A1%9C%EA%B7%B8.gif)
+  <br>
 </div>
