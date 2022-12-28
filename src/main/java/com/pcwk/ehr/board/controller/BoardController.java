@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ import com.pcwk.ehr.board.domain.BoardVO;
 import com.pcwk.ehr.board.service.BoardService;
 import com.pcwk.ehr.code.domain.CodeVO;
 import com.pcwk.ehr.code.service.CodeService;
+import com.pcwk.ehr.user.domain.UserVO;
+import com.pcwk.ehr.user.service.UserService;
 
 @Controller("boardController")
 @RequestMapping("board")
@@ -30,6 +34,9 @@ public class BoardController {
 	
 	@Autowired
 	BoardService boardService;
+	
+	@Autowired
+	UserService userService;
 	
 	@Autowired
 	CodeService codeservice;
@@ -297,25 +304,31 @@ public class BoardController {
 	@RequestMapping(value = "/doSave.do", method = RequestMethod.POST
 			,produces = "application/json;charset=UTF-8")
 	@ResponseBody //비동기 처리를 하는 경우, HTTP 요청 부분의 body부분이 그대로 브라우저에 전달된다.
-	public String doSave(BoardVO inVO)throws SQLException{
+	public String doSave(HttpServletRequest req)throws SQLException{
 		String jsonString = "";
 		LOG.debug("┌──────────────────────────────┐");
 		
-		MessageVO outMsg = new MessageVO();
+		BoardVO inVO = new BoardVO();
 		
-		if(null!=inVO && inVO.getNickName()==null) {
-			inVO.setNickName("");
-		}
-		if(null!=inVO && inVO.getCsnm()==null) {
-			inVO.setCsnm("");
-		}
-		if(null!=inVO && inVO.getRegId()==null) {
-			inVO.setRegId("");
-		}
-		if(null!=inVO && inVO.getModId()==null) {
-			inVO.setModId("");
-		}
+		String nickName = (String)req.getParameter("nickName");
+		int category = Integer.parseInt((String)req.getParameter("category"));
+		String title = (String)req.getParameter("title");
+		String contents = (String)req.getParameter("contents");
+		String regId = (String)req.getParameter("regId");
+		int mSeq = Integer.parseInt((String)req.getParameter("mSeq"));
 		
+		inVO.setNickName(nickName);
+		inVO.setCategory(category);
+		inVO.setTitle(title);
+		inVO.setContents(contents);
+		inVO.setReadCnt(0);
+		inVO.setRecommendation(0);
+		inVO.setCsnm("");
+		inVO.setCsnm("");
+		inVO.setRegId(regId);
+		inVO.setModId(regId);
+		
+		LOG.debug("mSeq"+mSeq);
 		
 		//제목
 		if(null != inVO && inVO.getTitle() ==null) {
@@ -339,8 +352,19 @@ public class BoardController {
 		
 		String message = "";
 		
-		if(1==flag) { 
-			message = inVO.getTitle()+" 등록 되었습니다.";
+		if(1==flag) {
+			UserVO userVO = new UserVO();
+			userVO.setmSeq(mSeq);
+			int pointFlag = userService.postAddPoint(userVO);
+			
+			if(pointFlag == 1) {
+				message  = inVO.getTitle()+" 등록 되었습니다.";
+				message += "\n금일 최초 글 작성으로 50포인트 획득했습니다.";
+			}else if(pointFlag == 0) {
+				message  = inVO.getTitle()+" 등록 되었습니다.";
+			}else {
+				LOG.debug("띠용~~");
+			}
 		}else {
 			message = inVO.getTitle()+" 등록 실패";
 		}
