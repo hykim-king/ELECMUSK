@@ -13,7 +13,7 @@ import com.pcwk.ehr.board.comment.dao.BoardCommentDao;
 import com.pcwk.ehr.board.comment.domain.BoardCommentVO;
 
 
-@Service("boardCommentService")
+@Service("BCommentService")
 public class BoardCommentServiceImpl implements BoardCommentService {
 	
 	final Logger LOG = LogManager.getLogger(getClass());

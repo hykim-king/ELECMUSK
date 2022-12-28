@@ -260,7 +260,7 @@
     <div class="row text-right">
       <input type="button" class="btn btn-success btn-sm" value="지도" id="moveToMap">
       <c:choose>
-      <c:when test="${sessionScope.userInfo.userId == vo.regId}">
+      <c:when test="${sessionScope.userInfo.userId == vo.regId || sessionScope.userInfo.status >= 2}">
 	      <input type="button" class="btn btn-warning btn-sm" value="수정" id="doUpdate">
 	      <input type="button" class="btn btn-danger btn-sm" value="삭제" id="doDelete">
       </c:when>

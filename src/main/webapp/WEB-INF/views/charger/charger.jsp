@@ -236,12 +236,12 @@
       <div class="form-group">
         <!------------------------------------- 버튼 -->
           <c:choose>
-              <c:when test="${2 <= sessionScope.userInfo.status && not empty sessionScope.userInfo}">
-                <input type="button" class="btn btn-info btn-sm" value="관리자메뉴" id="moveToManagerPage">
-              </c:when>
-              <c:otherwise>
-              </c:otherwise>
-            </c:choose>
+            <c:when test="${2 <= sessionScope.userInfo.status && not empty sessionScope.userInfo}">
+              <input type="button" class="btn btn-info btn-sm" value="관리자메뉴" id="moveToManagerPage">
+            </c:when>
+            <c:otherwise>
+            </c:otherwise>
+          </c:choose>
         <!------------------------------------- 버튼 -->
       </div>
     </form>
