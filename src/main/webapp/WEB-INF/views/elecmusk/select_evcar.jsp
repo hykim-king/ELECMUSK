@@ -165,7 +165,6 @@
             let htmlData = "";
             let imgPath = "";
             
-            $("#imgArea").empty();
             
             if(null != data && data.length > 0) {
                   $.each(data, function(index, value) {
@@ -174,7 +173,6 @@
                   htmlData += "    <img src='"+imgPath+"' style='width:100%;' '>";
                   });
             }
-            $("#imgArea").append(htmlData);  
             $("#imgUrl").val(imgPath);
 
           },

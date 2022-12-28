@@ -108,8 +108,8 @@
               //console.log(index+","+value.uId);
               htmlData +=" <tr> ";
               htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+ value.num +"</td> ";        
-              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'><img src='"+<c:out value = 'value.image'/>+"' alt='image' style='width:50px; height:50px;' class='img-rounded'>"+"</td> ";        
-              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'><a href='#' onClick='doSelectOne("+<c:out value='value.provider_seq '/>+")'>"+ value.enterprenuer +"</td> ";        
+              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'><a href='#' onClick='doSelectOne("+<c:out value='value.provider_seq '/>+")'><img src='"+<c:out value = 'value.image'/>+"' alt='image' style='width:50px; height:50px;' class='img-rounded'>"+"</td> ";        
+              htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+ value.enterprenuer +"</td> ";        
               htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+ value.rapid_above100 +"원</td> ";        
               htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+ value.rapid_below100 +"원</td> ";        
               htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+ value.slow_fee +"원</td> ";        
@@ -225,7 +225,7 @@
     </div>
     <!-- 제목 ------------------------------------------------------------------->
     <!-- 코멘트 -->
-    <p>수정,삭제를 원하시면 "사업자명"을 클릭하세요</p>
+    <p>수정,삭제를 원하시면 "이미지"를 클릭하세요</p>
     <!-- 코멘트 --------------------------------------------------------------->
   <!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select) ---------------------------------------->
     <form action="#" class="form-inline text-right">
@@ -246,8 +246,8 @@
       <thead class="bg-success">
         <tr>
           <th class="text-center col-sm-2 col-md-2 col-lg-2"><strong>순번</strong></th>
-          <th class="text-center col-sm-2 col-md-2 col-lg-2"><strong>이미지</strong></th>
-          <th class="text-center col-sm-2 col-md-2 col-lg-2 bg-warning"><strong>사업자명</strong></th>
+          <th class="text-center col-sm-2 col-md-2 col-lg-2 bg-warning"><strong>이미지</strong></th>
+          <th class="text-center col-sm-2 col-md-2 col-lg-2"><strong>사업자명</strong></th>
           <th class="text-center col-sm-2 col-md-2 col-lg-2"><strong>급속100kW이상요금</strong></th>
           <th class="text-center col-sm-2 col-md-2 col-lg-2"><strong>급속100kW미만요금</strong></th>
           <th class="text-center col-sm-2 col-md-2 col-lg-2"><strong>완속요금</strong></th>

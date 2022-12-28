@@ -46,6 +46,28 @@
   $(document).ready(function(){
 	  console.log("document.ready");
 	  
+	   
+	    function readImage(input) {
+	        // 인풋 태그에 파일이 있는 경우
+	        if(input.files && input.files[0]) {
+	            // 이미지 파일인지 검사 (생략)
+	            // FileReader 인스턴스 생성
+	            const reader = new FileReader();
+	            // 이미지가 로드가 된 경우
+	            reader.onload = e => {
+	                const previewImage = document.getElementById("preview-image");
+	                previewImage.src = e.target.result;
+	            }
+	            // reader가 이미지 읽도록 하기
+	            reader.readAsDataURL(input.files[0]);
+	        }
+	    }
+	    // input file에 change 이벤트 부여
+	    const inputImage = document.getElementById("file01");
+	    inputImage.addEventListener("change", e => {
+	        readImage(e.target);
+	    });   
+	  
 	  
 	     //관리자메뉴 이동
       $("#moveToManagerPage").on("click",function(){
@@ -125,71 +147,70 @@
 	  
 
   
-  $("#doSaveFile").on("click",function(){
-      console.log("doSaveFile");
-      
-      let fileInput = $("#file01")[0];
-      console.log("fileInput: "+fileInput);
-      
-      if(fileInput.files.length === 0){
-        alert("파일을 선택해 주셔요.");
-        return;
-      }
-      
-      console.log("fileInput.files.length: "+fileInput.files.length);
-      
-      //javascript : <form></form>
-      let formData = new FormData();
-      
-      for(let i=0;i<fileInput.files.length;i++){
-        formData.append("image"+i,fileInput.files[i]);
-      }
-      
-      //image란 이름으로, 파일객체 지정
-      
-      
-      //contentType : default값은 "application/x-www-form-urlencoded; charset=UTF-8"
-      //-->multipart/form-data로 전송되도록 false설정
-      //processData : true -> query string으로 데이터 전달! ex)http://localhost:8089?title = 1234
-      
-      console.log("data:formData: "+formData);
-      
-      $.ajax({ 
-         type: "POST",
-         url: "${CP}/file/ajaxUpload.do",
-         processData: false, //
-         contentType: false,
-         asyn: "true",
-         //dataType: "html",
-         data: formData,
-         success:function(data){ //통신 성공
-           console.log(data);
-         
-           let htmlData = "";
-           let imgPath = "";
-           
-           if(null != data && data.length > 0) {
-                 $.each(data, function(index, value) {
-                 ///ehr/resources/asset/imgs/evcar_imgs/G70.png
-                 imgPath = "/ehr"+value.imageViewPath+"/"+value.saveFileName;
-                 htmlData += "    <img src='"+imgPath+"' style='width:100%;' '>";
-                 });
-           }
-           $("#imgArea").append(htmlData);  
-           $("#image").val(imgPath);
+	      $("#doSaveFile").on("click",function(){
+	          console.log("doSaveFile");
+	          $("#preview-image").css("display","block");
+	          
+	          let fileInput = $("#file01")[0];
+	          console.log("fileInput: "+fileInput);
+	          
+	          if(fileInput.files.length === 0){
+	            alert("파일을 선택해 주셔요.");
+	            return;
+	          }
+	          
+	          console.log("fileInput.files.length: "+fileInput.files.length);
+	          
+	          //javascript : <form></form>
+	          let formData = new FormData();
+	          
+	          for(let i=0;i<fileInput.files.length;i++){
+	            formData.append("image"+i,fileInput.files[i]);
+	          }
+	          
+	          //image란 이름으로, 파일객체 지정
+	          
+	          
+	          //contentType : default값은 "application/x-www-form-urlencoded; charset=UTF-8"
+	          //-->multipart/form-data로 전송되도록 false설정
+	          //processData : true -> query string으로 데이터 전달! ex)http://localhost:8089?title = 1234
+	          
+	          console.log("data:formData: "+formData);
+	          
+	          $.ajax({ 
+	             type: "POST",
+	             url: "${CP}/file/ajaxUpload.do",
+	             processData: false, //
+	             contentType: false,
+	             asyn: "true",
+	             //dataType: "html",
+	             data: formData,
+	             success:function(data){ //통신 성공
+	               console.log(data);
+	             
+	               let htmlData = "";
+	               let imgPath = "";
+	               
+	               if(null != data && data.length > 0) {
+	                     $.each(data, function(index, value) {
+	                     ///ehr/resources/asset/imgs/evcar_imgs/G70.png
+	                     imgPath = "/ehr"+value.imageViewPath+"/"+value.saveFileName;
+	                     });
+	               }
+	               $("#image").val(imgPath);
 
-         },
-         error:function(data){//실패
-         
-         },
-         complete:function(data){//성공, 실패 관계 없이 출력
-         
-         }
+	             },
+	             error:function(data){//실패
+	             
+	             },
+	             complete:function(data){//성공, 실패 관계 없이 출력
+	             
+	             }
 
-      });
-      
-      
-    });//-----------------------------doSaveFile 끝  
+	          });
+	          
+	          
+	        });//-----------------------------doSaveFile 끝  
     
   });
     function moveToManagerPage(){
@@ -259,19 +280,26 @@
           <input type="button" class="btn btn-info btn-sm" value="등록"  id="doSave" >
           <input type="button" class="btn btn-primary btn-sm" value="목록"  id="moveToManagerPage" >
         </div>
-        <div class="form-group">
-          <label for="file01" class="col-sm-2 col-md-2 col-lg-2 control-label">이미지</label>
-          <div class="col-sm-10 col-md-10 col-lg-10">
-          <input type="file" class="form-control" id="file01" name="file01" placeholder="파일을 입력해주세요" maxlength="100">
-          <input type="button" class="btn btn-primary btn-sm" value="사진등록" id="doSaveFile">
-          </div>
-        </div>
     </div>
     <!--버튼 -------------------------------------------------------------------->
         <!-- 폼 -->
     <form action="#" class="form-horizontal"> 
     <input type="hidden" id="provider_seq" name="provider_seq" value="${vo.provider_seq}"> 
-    <input type="hidden" id="image" name="image">
+    <input type="hidden" id="image" name="image" value="${vo.image}">
+      <!-- 이미지 미리보기 -->
+      <div class="form-group">
+      <label for="preview-image" class="col-sm-2 col-md-2 col-lg-2 control-label" >미리보기</label>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+          <img style="width:100%; display:none;" id="preview-image" src="#">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="file01" class="col-sm-2 col-md-2 col-lg-2 control-label">이미지</label>
+        <div class="col-sm-10 col-md-10 col-lg-10">
+        <input type="file" class="form-control" id="file01" name="file01" placeholder="파일을 입력해주세요" maxlength="100">
+        <input type="button" class="btn btn-primary btn-sm" value="사진등록" id="doSaveFile">
+        </div>
+      </div>
       <div class="form-group">
         <label for="enterprenuer" class="col-sm-2 col-md-2 col-lg-2 control-label">사업자명</label>
         <div class="col-sm-10 col-md-10 col-lg-10">

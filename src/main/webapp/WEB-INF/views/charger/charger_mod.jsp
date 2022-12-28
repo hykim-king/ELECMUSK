@@ -57,6 +57,27 @@
   $(document).ready(function(){
 	  console.log("document.ready");
 	  
+	    function readImage(input) {
+	        // 인풋 태그에 파일이 있는 경우
+	        if(input.files && input.files[0]) {
+	            // 이미지 파일인지 검사 (생략)
+	            // FileReader 인스턴스 생성
+	            const reader = new FileReader();
+	            // 이미지가 로드가 된 경우
+	            reader.onload = e => {
+	                const previewImage = document.getElementById("preview-image");
+	                previewImage.src = e.target.result;
+	            }
+	            // reader가 이미지 읽도록 하기
+	            reader.readAsDataURL(input.files[0]);
+	        }
+	    }
+	    // input file에 change 이벤트 부여
+	    const inputImage = document.getElementById("file01");
+	    inputImage.addEventListener("change", e => {
+	        readImage(e.target);
+	    });   
+	  
       //관리자메뉴 이동
       $("#moveToManagerPage").on("click",function(){
         
@@ -164,7 +185,71 @@
 	      
 	    });
 	
+	    $("#doSaveFile").on("click",function(){
+	        console.log("doSaveFile");
+	        
+	        let fileInput = $("#file01")[0];
+	        console.log("fileInput: "+fileInput);
+	        
+	        if(fileInput.files.length === 0){
+	          alert("파일을 선택해 주셔요.");
+	          return;
+	        }
+	        
+	        console.log("fileInput.files.length: "+fileInput.files.length);
+	        
+	        //javascript : <form></form>
+	        let formData = new FormData();
+	        
+	        for(let i=0;i<fileInput.files.length;i++){
+	          formData.append("image"+i,fileInput.files[i]);
+	        }
+	        
+	        //image란 이름으로, 파일객체 지정
+	        
+	        
+	        //contentType : default값은 "application/x-www-form-urlencoded; charset=UTF-8"
+	        //-->multipart/form-data로 전송되도록 false설정
+	        //processData : true -> query string으로 데이터 전달! ex)http://localhost:8089?title = 1234
+	        
+	        console.log("data:formData: "+formData);
+	        
+	        $.ajax({ 
+	           type: "POST",
+	           url: "${CP}/file/ajaxUpload.do",
+	           processData: false, //
+	           contentType: false,
+	           asyn: "true",
+	           //dataType: "html",
+	           data: formData,
+	           success:function(data){ //통신 성공
+	             console.log(data);
+	           
+	             let htmlData = "";
+	             let imgPath = "";
+	             
+	             
+	             if(null != data && data.length > 0) {
+	                   $.each(data, function(index, value) {
+	                   ///ehr/resources/asset/imgs/evcar_imgs/G70.png
+	                   imgPath = "/ehr"+value.imageViewPath+"/"+value.saveFileName;
+	                   htmlData += "    <img src='"+imgPath+"' style='width:100%;' '>";
+	                   });
+	             }
+	             $("#image").val(imgPath);
 
+	           },
+	           error:function(data){//실패
+	           
+	           },
+	           complete:function(data){//성공, 실패 관계 없이 출력
+	           
+	           }
+
+	        });
+	        
+	        
+	      });//-----------------------------doSaveFile 끝   
 	    
   });
   
@@ -200,47 +285,68 @@
     <form action="#" class="form-horizontal">   
     <input type="hidden" class="form-control" id="charger_seq" name="charger_seq" value="${vo.charger_seq }">
     <input type="hidden" id="image" name="image" value="${vo.image}">
+      <!-- 이미지 미리보기 -->
       <div class="form-group">
-        <label for="connector" >충전기명</label>
+      <label for="preview-image" class="col-sm-2 col-md-2 col-lg-2 control-label" >미리보기</label>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+          <img style="width:100%; display:display;" id="preview-image" src="<c:out value="${vo.image}"/>">
+        </div>
+      </div>
+      <!-- 이미지 등록하기 -->
+      <div class="form-group">
+        <label for="file01" class="col-sm-2 col-md-2 col-lg-2 control-label" >이미지</label>
+        <div class="col-sm-10 col-md-10 col-lg-10">
+          <input type="file" class="form-control" id="file01" name="file01" placeholder="파일을 입력해주세요" maxlength="100">
+          <input type="button" class="btn btn-primary btn-sm" value="사진등록" id="doSaveFile">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="connector" class="col-sm-2 col-md-2 col-lg-2 control-label">충전기명</label>
+        <div class="col-sm-10 col-md-10 col-lg-10">
         <input type="text" class="form-control" id="connector" name="connector" 
         value="<c:out value='${vo.connector }' />"
         placeholder="충전기명을 입력하세요" maxlength="100">
+        </div>
       </div>
       <div class="form-group">
-        <label for="image" >이미지</label>
-        <input type="text" class="form-control" id="image" name="image" 
-         value="<c:out value='${vo.image}' />" 
-         placeholder="이미지를 추가하세요" maxlength="100">
-      </div>
-      <div class="form-group">
-        <label for="ev_current" >충전전류</label>
+        <label for="ev_current" class="col-sm-2 col-md-2 col-lg-2 control-label">충전전류</label>
+        <div class="col-sm-10 col-md-10 col-lg-10">
         <input type="text" class="form-control" id="ev_current" name="ev_current" 
          value="<c:out value='${vo.ev_current}' />" 
          placeholder="충전전류를 입력하세요" maxlength="100">
+         </div>
       </div>
       <div class="form-group">
-        <label for="ev_voltage" >충전전압</label>
+        <label for="ev_voltage" class="col-sm-2 col-md-2 col-lg-2 control-label">충전전압</label>
+        <div class="col-sm-10 col-md-10 col-lg-10">
         <input type="text" class="form-control" id="ev_voltage" name="ev_voltage" 
          value="<c:out value='${vo.ev_voltage}' />" 
          placeholder="충전전압을 입력하세요" maxlength="100">
+         </div>
       </div>
       <div class="form-group">
-        <label for="ev_power" >충전전력</label>
+        <label for="ev_power" class="col-sm-2 col-md-2 col-lg-2 control-label">충전전력</label>
+        <div class="col-sm-10 col-md-10 col-lg-10">
         <input type="text" class="form-control" id="ev_power" name="ev_power" 
          value="<c:out value='${vo.ev_power}' />" 
          placeholder="충전전력을 입력하세요" maxlength="100">
+         </div>
       </div>
       <div class="form-group">
-        <label for="ev_level" >충전레벨</label>
+        <label for="ev_level" class="col-sm-2 col-md-2 col-lg-2 control-label">충전레벨</label>
+        <div class="col-sm-10 col-md-10 col-lg-10">
         <input type="text" class="form-control" id="ev_level" name="ev_level" 
          value="<c:out value='${vo.ev_level}' />" 
          placeholder="충전레벨을 입력하세요" maxlength="100">
+         </div>
       </div>
       <div class="form-group">
-        <label for="ev_support" >지원차량</label>
+        <label for="ev_support" class="col-sm-2 col-md-2 col-lg-2 control-label">지원차량</label>
+        <div class="col-sm-10 col-md-10 col-lg-10">
         <input type="text" class="form-control" id="ev_support" name="ev_support" 
          value="<c:out value='${vo.ev_support}' />" 
          placeholder="지원차량을 입력하세요" maxlength="100">
+         </div>
       </div>
     </form>
     <!--폼   -------------------------------------------------------------------->
