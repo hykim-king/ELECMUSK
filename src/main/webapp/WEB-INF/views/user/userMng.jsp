@@ -170,7 +170,11 @@ h4{
             if("1" == parsedJson.msgId){
               let message = "성공적으로 수정 되었습니다.\n";
               alert(message);
-              window.location.href="${CP}/elecmusk/userMng.do";
+              let f = document.createElement('form');
+              f.setAttribute('method', 'post');
+              f.setAttribute('action', 'userMng.do');
+              document.body.appendChild(f);
+              f.submit();
             }else{
               alert(parsedJson.msgContents);
             }
@@ -299,11 +303,15 @@ h4{
 	    		     if(birthMonth.substr(0,1)==="0"){
 	    		    	 birthMonth = birthMonth.substr(1,1);
 	    		     }
-	    		     birthDay = ((String)(parsedJson.birth)).substr(5, 2);
+	    		     birthDay = ((String)(parsedJson.birth)).substr(6, 2);
 	    		     if(birthDay.substr(0,1)==="0"){
 	    		    	 birthDay = birthDay.substr(1,1);
 	             }
     		     }
+    		     
+    		     console.log("birthYear: "+birthYear);
+    		     console.log("birthMonth: "+birthMonth);
+    		     console.log("birthDay: "+birthDay);
     		     
     		      let status = "";
     		      console.log("status: "+parsedJson.status);
@@ -404,11 +412,19 @@ h4{
     		   
              if("0" != parsedJson.msgId){
                  alert(parsedJson.msgContents);
-                 window.location.href="${CP}/elecmusk/userMng.do";
+                 let f = document.createElement('form');
+                 f.setAttribute('method', 'post');
+                 f.setAttribute('action', 'userMng.do');
+                 document.body.appendChild(f);
+                 f.submit();
                }else{
                  alert(parsedJson.msgContents);
                }
-    		   window.location.href="/ehr/elecmusk/userMng.do";
+             let f = document.createElement('form');
+             f.setAttribute('method', 'post');
+             f.setAttribute('action', 'userMng.do');
+             document.body.appendChild(f);
+             f.submit();
     	   },
     	   error:function(data){//실패
     	   

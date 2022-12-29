@@ -275,7 +275,7 @@ h4{
     </div>
 		<div>
 			<h4 class="text-center">이메일로 아이디 찾기</h4>
-			<form class="form-horizontal">
+			<form class="form-horizontal" action="#">
 				<div class="form-group">
 					<label for="email" class="col-sm-3 control-label">이메일</label>
 					<div class="col-sm-6">
@@ -287,7 +287,7 @@ h4{
 		</div>
 		<div>
 			<h4 class="text-center">생년월일로 아이디 찾기</h4>
-			<form class="form-horizontal">
+			<form class="form-horizontal" action="#">
 				<div class="form-group">
 					<label for="name" class="col-sm-3 control-label">이름</label>
 					<div class="col-sm-6">

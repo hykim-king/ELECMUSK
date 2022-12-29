@@ -155,7 +155,7 @@ public class LoginController {
 		
 		LOG.debug("inVO: "+inVO);
 		
-		//10 성공, 20 아이디 존재X ,30 아이디 입력X, 40 비밀번호 틀림, 50 비밀번호 입력X, 60 : 상태값 0
+		//10 성공, 20 아이디 존재X ,30 아이디 입력X, 40 비밀번호 틀림, 50 비밀번호 입력X, 60 : 상태값 0(탈퇴/정지 회원)
 
 		MessageVO outMessage = new MessageVO();
 		
@@ -185,7 +185,7 @@ public class LoginController {
 			}else if(flag == 0) {
 				message = inVO.getUserId() + "로그인 되었습니다.";
 			}else {
-				LOG.debug("어떻게 한거지??");
+				LOG.debug("알 수 없는 오류.");
 			}
 			LOG.debug("loginSuccessVO: "+loginSuccessVO);
 			
