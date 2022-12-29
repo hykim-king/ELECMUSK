@@ -93,7 +93,7 @@
   
   ### 5.6.1 관리자_충전기
   
-   ![관리자_충전기](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/3.%EA%B4%80%EB%A6%AC%EC%9E%90%EC%B6%A9%EC%A0%84%EA%B8%B0.gif)
+   ![관리자_충전기](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/3.%EA%B4%80%EB%A6%AC%EC%9E%90_%EC%B6%A9%EC%A0%84%EA%B8%B0.gif)
   
   ### 5.7 일반_충전요금
   
@@ -101,7 +101,7 @@
   
   ### 5.7.1 관리자_충전요금
   
-   ![관리자_충전요금](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/5.%EA%B4%80%EB%A6%AC%EC%9E%90%EC%B6%A9%EC%A0%84%EC%9A%94%EA%B8%88.gif)
+   ![관리자_충전요금](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/5.%EA%B4%80%EB%A6%AC%EC%9E%90_%EC%B6%A9%EC%A0%84%EC%9A%94%EA%B8%88.gif)
   
   ### 5.8 통계정보
   
