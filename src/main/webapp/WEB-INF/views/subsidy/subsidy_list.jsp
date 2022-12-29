@@ -300,7 +300,6 @@
               <option value="3001">3000만원이상</option>
             </select>
           </td>
-
           <td>
             <input type="button" class="btn btn-primary btn-sm" value="조회" id="keywordRetrieve">
           </td>
