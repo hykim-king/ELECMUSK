@@ -1,15 +1,11 @@
-<!-- 상단으로 이동하기 버튼 -->
-<a href="#" class="btn_gotop">
-  <span class="glyphicon glyphicon-chevron-up">
-  </span>
-</a>
+
 
 <style>
 .btn_gotop {
   display:none;
   position:fixed;
-  bottom:30px;
-  right:30px;
+  bottom:150px;
+  right:100px;
   z-index:999;
   border:1px solid #ccc;
   outline:none;
@@ -34,6 +30,13 @@ $('.btn_gotop').click(function(){
   return false;
 });
 </script>
+
+<!-- 상단으로 이동하기 버튼 -->
+<a href="#" class="btn_gotop">
+  <span class="glyphicon glyphicon-chevron-up">
+  </span>
+</a>
+
 <footer style="margin-top: 100px; bottom:0; width: 100%; border: 1px solid; background-color: #eee; text-align: center;">
     <p>&nbsp;</p>
     <p>&nbsp;</p>
