@@ -188,20 +188,6 @@ public class FileController {
 	
 	      multipartFile.transferTo(saveFileObj);
 	      
-	      //image 파일인지 판단.
-	      //s_저장파일명
-//	      if(isImageFile(saveFileObj)) {
-//	         FileOutputStream thumbnail = new FileOutputStream(new File(
-//	               outVO.getSavePath(),"s_"+outVO.getSaveFileName()));
-//	         try {
-//	            Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
-//	         }catch (IOException e) {
-//	            LOG.debug(e.getMessage());
-//	            throw e;
-//	         }
-//	         
-//	      }
-	      
 	      list.add(outVO);
 	      String originalFile = "";
 	      String toCopyFile = "";
