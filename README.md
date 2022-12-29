@@ -65,11 +65,11 @@
   
   ### 5.3 일반_게시판
   
-   ![일반_게시판]()
+   ![일반_게시판](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/16.%EC%9D%BC%EB%B0%98%EC%9C%A0%EC%A0%80%EA%B2%8C%EC%8B%9C%ED%8C%90.gif)
   
   ### 5.3.1 관리자_게시판
   
-   ![관리자_게시판]()
+   ![관리자_게시판](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/15.%EA%B4%80%EB%A6%AC%EC%9E%90%20%EA%B2%8C%EC%8B%9C%ED%8C%90.gif)
   
   ### 5.4 일반_전기차
   
