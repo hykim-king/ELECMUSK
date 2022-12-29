@@ -60,7 +60,6 @@
 <title>제목</title>
 <script >
   $(document).ready(function(){
-	  console.log("document.ready");
 	  doRetrieve(1);
 	  
 	  
@@ -79,7 +78,6 @@
 
 	//========================================한건조회(상세조회) 테이블 클릭 끝  
 	  $("#doRetrieve").on("click",function(){
-		  console.log("doRetrieve");
 		  doRetrieve(1);
 	  });
 	  
