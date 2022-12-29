@@ -21,7 +21,6 @@
 }
 </style>
 
-
 <script>
 $(window).scroll(function(){
   if ($(this).scrollTop() > 300){
