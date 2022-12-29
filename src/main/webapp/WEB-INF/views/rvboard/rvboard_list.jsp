@@ -330,7 +330,7 @@ request.setAttribute("maptoList", maptoList);
 					</select> 
 					<input type="button" class="btn btn-success btn-sm" value="지도" id="moveToMap"> 
 					<input type="button" class="btn btn-primary btn-sm" value="조회" id="doRetrive">
-					<input type="button" class="btn btn-info btn-sm" value="등록" id="moveToReg">
+					<!-- <input type="button" class="btn btn-info btn-sm" value="등록" id="moveToReg"> -->
 				</div>
 			</form>
 			<!-- 검색 ------------------------------------------------------------------->

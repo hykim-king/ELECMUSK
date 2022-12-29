@@ -253,7 +253,7 @@
 	    </div>
       <div class="form-group">
         <label for="csnm" >충전소명</label>
-        <input type="text" class="form-control" id="csnm" name="csnm" value="${csnm}" read maxlength="100">
+        <input type="text" class="form-control" id="csnm" name="csnm" value="${csnm}" readonly="readonly"  read maxlength="100">
       </div>
 <%--       <div class="form-group">
         <label for="csId" >충전소ID</label>
