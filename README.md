@@ -59,10 +59,18 @@
   
    ![메인화면](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/6.%EB%A9%94%EC%9D%B8%ED%99%94%EB%A9%B4.gif)
   
-  ### 5.2 로그인
+  ### 5.2 회원가입/로그인
   
-   ![로그인](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/13.%EB%A1%9C%EA%B7%B8%EC%9D%B8_%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85.gif)
+   ![로그인](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/17.%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%EB%A1%9C%EA%B7%B8%EC%9D%B8.gif)
   
+  ### 5.2.1 마이페이지
+
+   ![마이페이지](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/18.%EB%A7%88%EC%9D%B4%ED%8E%98%EC%9D%B4%EC%A7%80.gif)
+
+  ### 5.2.2 관리자_회원관리
+
+   ![관리자_회원관리](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/19.%EA%B4%80%EB%A6%AC%EC%9E%90-%ED%9A%8C%EC%9B%90%EA%B4%80%EB%A6%AC.gif)
+
   ### 5.3 일반_게시판
   
    ![일반_게시판](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/16.%EC%9D%BC%EB%B0%98%EC%9C%A0%EC%A0%80%EA%B2%8C%EC%8B%9C%ED%8C%90.gif)
