@@ -277,11 +277,14 @@
       </div>
     </form>
     <!------------------------------------- 관리자 버튼 --------------------------------------------------->
+    
+    <!-------------------------------------  버튼 --------------------------------------------------->
     <form action="#" class="form-inline text-left">
-      <input type="hidden" id="pageSize" name="pageSize" value="20">
+      <input type="hidden" id="pageSize" name="pageSize" value="10">
       <input type="button" class="btn btn-success btn-sm" value="급속요금" id="showRapid" style="margin:0px 0px 5px 5px; font-weight: bold;">
       <input type="button" class="btn btn-success btn-sm" value="완속요금" id="showSlow" style="margin:0px 0px 5px 5px; font-weight: bold;">
     </form>
+    <!-------------------------------------  버튼 --------------------------------------------------->
   <div>
   <!-- 충전기 테이블 목록 ---------------------------------------------------------------------------->
     <div class="table-responsive" id="showRapidFee">

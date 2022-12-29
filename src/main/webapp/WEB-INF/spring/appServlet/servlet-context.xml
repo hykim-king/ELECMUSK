@@ -25,6 +25,7 @@
       <mvc:exclude-mapping path="/elecmusk/pointRank.do"/>
       <mvc:exclude-mapping path="/elecmusk/chartRetrieve.do"/>
       <mvc:exclude-mapping path="/board/doRetrieve.do"/>
+      <mvc:exclude-mapping path="/station/stationapi.do"/>
       <beans:ref bean="loginInterceptor"/>
     </mvc:interceptor>
   </mvc:interceptors>

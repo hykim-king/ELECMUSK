@@ -41,16 +41,16 @@
     <sql id="subsidyKeyword">
       <choose>
         <when test=" '1000' == subsidyKeyword">
-          <![CDATA[ AND subsidy BETWEEN 0 AND #{subsidyKeyword} ]]>
+          <![CDATA[ AND subsidy > 0 AND subsidy <= #{subsidyKeyword} ]]>
         </when>
         <when test=" '2000' == subsidyKeyword">
-          <![CDATA[ AND subsidy BETWEEN 1001 AND #{subsidyKeyword} ]]>
+          <![CDATA[ AND subsidy > 1000 AND subsidy <= #{subsidyKeyword} ]]>
         </when>
         <when test=" '3000' == subsidyKeyword">
-          <![CDATA[ AND subsidy BETWEEN 2001 AND #{subsidyKeyword} ]]>
+          <![CDATA[ AND subsidy > 2000 AND subsidy <= #{subsidyKeyword} ]]>
         </when>
-        <when test=" '15000' == subsidyKeyword">
-          <![CDATA[ AND subsidy BETWEEN 3001 AND #{subsidyKeyword}  ]]>
+        <when test=" '3001' == subsidyKeyword">
+          <![CDATA[ AND subsidy >= #{subsidyKeyword}  ]]>
         </when>
       </choose>
     </sql>
