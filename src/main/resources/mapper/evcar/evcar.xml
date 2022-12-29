@@ -197,8 +197,7 @@
   
   <update id="evCarUpdate" parameterType="com.pcwk.ehr.evcar.domain.EvCarVO">
 		UPDATE evcar
-		SET
-		    name             = #{carName},
+		SET name             = #{carName},
 		    image            = #{imgUrl},
 		    price            = #{carPrice},
 		    manufacture      = #{manufacture},
