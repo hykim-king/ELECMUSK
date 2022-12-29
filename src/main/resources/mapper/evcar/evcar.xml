@@ -131,6 +131,11 @@
     CROSS JOIN (
     SELECT COUNT(*) totalCnt
     FROM EVCAR
+    <![CDATA[WHERE evcar_seq >= 0]]>
+    <include refid="manufactureKeyword"></include>
+    <include refid="appearanceKeyword"></include>
+    <include refid="modelKeyword"></include>
+    <include refid="batteryTypeKeyword"></include>    
     )B
   </select>
   
