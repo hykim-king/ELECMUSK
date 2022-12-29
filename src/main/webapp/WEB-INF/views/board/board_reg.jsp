@@ -220,7 +220,8 @@
 	              title : $("#title").val(),
 	              nickName : $("#nickName").val(),
 	              contents : $("#contentstextarea").val(),
-	              regId :$("#regId").val()
+	              regId :$("#regId").val(),
+	              mSeq : ${sessionScope.userInfo.mSeq}
 	          }
 	          PClass.callAjax(method,url,async,params,function(data){
 	            console.log(data);
