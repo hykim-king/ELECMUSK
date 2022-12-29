@@ -75,8 +75,6 @@
   });
   
   function doRetrieve(page) {
-    console.log("doRetrieve");
-    
     let method = "GET";
     let url    = "/elecmusk/doRetrieve.do";
     let async  = true;
@@ -89,7 +87,6 @@
         pageNo: page
     };
     PClass.callAjax(method,url,async,params,function(data){
-      console.log("data: "+data);
         let parsedJson = JSON.parse(data);
             
         let htmlData = "";
@@ -102,12 +99,6 @@
           
           totalCnt=parsedJson[0].totalCnt;
           pageTotal = Math.ceil( totalCnt/$("#pageSize").val() );
-          console.log("================");
-          console.log("=totalCnt="+totalCnt);
-          console.log("=pageSize="+$("#pageSize").val());
-          console.log("=pageTotal="+pageTotal);          
-          console.log("=page="+page);
-          console.log("================");      
           
           $.each(parsedJson, function(index, value) {
              htmlData += "<tr>";
@@ -169,9 +160,6 @@
   }
   
   function renderingPage(pageTotal, page){
-      console.log("pageTotal:"+pageTotal);
-      console.log("page:"+page);
-      
       pageTotal=parseInt(pageTotal);
       
       //연결된 EventHandler제거
@@ -193,17 +181,15 @@
             lastClass: 'last',
             firstClass: 'first'
         }).on("page", function(event, num){
-            console.log("num:"+num);
             doRetrieve(num);
         });
     }
   
     function evCarSelectOne(carNo){
-      if(${2 <= sessionScope.userInfo.status && not empty sessionScope.userInfo}) {
+      if(${2 <= sessionScope.userInfo.status}) {
         let url = "${CP}/elecmusk/evCarSelectOne.do";
   
         url = url + "?carNo="+carNo;
-        console.log("url : "+url);
         location.href = url;
       } 
     }
