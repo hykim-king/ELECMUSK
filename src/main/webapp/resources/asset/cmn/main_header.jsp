@@ -152,27 +152,25 @@
     <div id="menu-area" class="container-fluid text-center">
       <ul class="menu-bar nav text-center" style="font-weight: bold;">
         <li id="main_home" name="main_home" style="cursor:pointer;"><span class="glyphicon glyphicon-home"></span></li>
-        <li style="cursor:pointer;" class="menu-open" id="menu-bar">BOARD
+        <li style="cursor:pointer;" class="menu-open" id="menu-bar">게시판
           <ul class="sub-menu nav" id="sub-menu">
             <li><a id="board01">자유게시판</a></li>
             <li><a id="board02">결함 게시판</a></li>
             <li><a id="board03">공지사항</a></li>
           </ul>
         </li>
-        <li style="cursor:pointer;" class="menu-open" id="menu-bar">EVCARS
+        <li style="cursor:pointer;" class="menu-open" id="menu-bar">EV데이터
           <ul class="sub-menu nav" id="sub-menu">
-            <li><a id="carsData" name="carsData">Cars data</a></li>
-            <li><a id="subsidyData" name="subsidyData">Subsidy
-                data</a></li>
-            <li><a id="chargerData" name="chargerData">Charger
-                data</a></li>
-            <li><a id="feeData" name="feeData">Charging Fee</a></li>
+            <li><a id="carsData" name="carsData">전기차정보</a></li>
+            <li><a id="subsidyData" name="subsidyData">보조금정보</a></li>
+            <li><a id="chargerData" name="chargerData">충전기정보</a></li>
+            <li><a id="feeData" name="feeData">충전요금정보</a></li>
           </ul>
         </li>
-        <li style="cursor:pointer;" class="menu-open" id="menu-bar">STATION
+        <li style="cursor:pointer;" class="menu-open" id="menu-bar">충전소
           <ul class="sub-menu nav" id="sub-menu">
-            <li><a id="stationSearch" name="stationSearch">Station</a></li>
-            <li><a id="rvboard" name="rvboard">Review board</a></li>
+            <li><a id="stationSearch" name="stationSearch">충전소찾기</a></li>
+            <li><a id="rvboard" name="rvboard">리뷰게시판</a></li>
           </ul>
         </li>
         <li style="cursor:pointer;" class="menu-open" id="menu-bar">정보글

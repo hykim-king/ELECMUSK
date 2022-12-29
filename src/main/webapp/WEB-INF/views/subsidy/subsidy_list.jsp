@@ -297,10 +297,9 @@
               <option value="1000">1000만원이하</option>
               <option value="2000">1000~2000만원</option>
               <option value="3000">2000~3000만원</option>
-              <option value="15000">3000만원이상</option>
+              <option value="3001">3000만원이상</option>
             </select>
           </td>
-
           <td>
             <input type="button" class="btn btn-primary btn-sm" value="조회" id="keywordRetrieve">
           </td>
