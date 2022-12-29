@@ -217,40 +217,50 @@
           </td>
           <td>
             <select id="manufactureKeyword" name="manufactureKeyword">
-              <option value="">전체</option>
-              <option value="현대">현대</option>
-              <option value="기아">기아</option>
-              <option value="쌍용">쌍용</option>
-              <option value="르노삼성">르노삼성</option>
-              <option value="쉐보레">쉐보레</option>
-              <option value="대창모터스">대창모터스</option>
-              <option value="벤츠">벤츠</option>
-              <option value="테슬라">테슬라</option>
+            <option value="">전체</option>
+		          <c:choose>
+		           <c:when test="${MANUFACTURE_KEYWORD.size()>0}">
+		             <c:forEach var="code" items="${MANUFACTURE_KEYWORD}">
+		               <option value='<c:out value="${code.detCode}"/>'><c:out value="${code.detName}"/></option>
+		             </c:forEach>
+		           </c:when>
+		          </c:choose>            
             </select>
           </td>
           <td>
             <select id="appearanceKeyword" name="appearanceKeyword">
-              <option value="">전체</option>
-              <option value="세단">세단</option>
-              <option value="SUV">SUV</option>
-              <option value="해치백">해치백</option>
+            <option value="">전체</option>
+              <c:choose>
+               <c:when test="${APPEARANCE_KEYWORD.size()>0}">
+                 <c:forEach var="code" items="${APPEARANCE_KEYWORD}">
+                   <option value='<c:out value="${code.detCode}"/>'><c:out value="${code.detName}"/></option>
+                 </c:forEach>
+               </c:when>
+              </c:choose>
             </select>
           </td>
           <td>
             <select id="modelKeyword" name="modelKeyword">
-              <option value="">전체</option>
-              <option value="경형">경형</option>
-              <option value="소형">소형</option>
-              <option value="준중형">준중형</option>
-              <option value="중형">중형</option>
-              <option value="준대형">준대형</option>
+            <option value="">전체</option>
+              <c:choose>
+               <c:when test="${MODEL_KEYWORD.size()>0}">
+                 <c:forEach var="code" items="${MODEL_KEYWORD}">
+                   <option value='<c:out value="${code.detCode}"/>'><c:out value="${code.detName}"/></option>
+                 </c:forEach>
+               </c:when>
+              </c:choose>
             </select>
           </td>
           <td>
             <select id="batteryTypeKeyword" name="batteryTypeKeyword">
-              <option value="">전체</option>
-              <option value="리튬이온">리튬이온</option>
-              <option value="리튬이온폴리머">리튬이온폴리머</option>
+            <option value="">전체</option>
+              <c:choose>
+               <c:when test="${BATTERYTYPE_KEYWORD.size()>0}">
+                 <c:forEach var="code" items="${BATTERYTYPE_KEYWORD}">
+                   <option value='<c:out value="${code.detCode}"/>'><c:out value="${code.detName}"/></option>
+                 </c:forEach>
+               </c:when>
+              </c:choose>
             </select>
           </td>
           <td>

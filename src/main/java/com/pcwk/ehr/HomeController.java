@@ -1,6 +1,7 @@
 package com.pcwk.ehr;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +21,8 @@ import com.pcwk.ehr.chart.domain.evChartVO;
 import com.pcwk.ehr.chart.service.evChartService;
 import com.pcwk.ehr.cmn.MessageVO;
 import com.pcwk.ehr.cmn.StringUtil;
+import com.pcwk.ehr.code.domain.CodeVO;
+import com.pcwk.ehr.code.service.CodeService;
 import com.pcwk.ehr.evcar.cmn.evSearchVO;
 import com.pcwk.ehr.evcar.domain.EvCarVO;
 import com.pcwk.ehr.evcar.service.evCarService;
@@ -39,6 +43,9 @@ public class HomeController {
 	evCarService evCarService;
 	
 	@Autowired
+	CodeService codeService;	
+	
+	@Autowired
 	evChartService evChartService;
 	
 	public HomeController() {}
@@ -52,12 +59,41 @@ public class HomeController {
 		return VIEW_NAME;
 	}
 	
-	@RequestMapping(value = "/evcar.do", method = RequestMethod.GET)
-	public String evCar() {
-		LOG.debug("┌───────────────────────────────────────────┐");
-		LOG.debug("│                   evCar                   │");
-		LOG.debug("└───────────────────────────────────────────┘");		
-		
+	@PostMapping(value="evcar.do")
+	@RequestMapping(value = "/evcar.do",method = RequestMethod.GET)
+	public String userMng(Model model) throws SQLException {
+
+		// 코드 목록 조회
+		List<String> codeList = new ArrayList<String>();
+		codeList.add("MANUFACTURE_KEYWORD");
+		codeList.add("APPEARANCE_KEYWORD");
+		codeList.add("MODEL_KEYWORD");
+		codeList.add("BATTERYTYPE_KEYWORD");
+
+		List<CodeVO> outCodeList = codeService.doRetrive(codeList);
+
+		List<CodeVO> manufactureKeyword = new ArrayList<CodeVO>();
+		List<CodeVO> appearanceKeyword = new ArrayList<CodeVO>();
+		List<CodeVO> modelKeyword = new ArrayList<CodeVO>();
+		List<CodeVO> batteryTypeKeyword = new ArrayList<CodeVO>();
+
+		for (CodeVO vo : outCodeList) {
+			if (vo.getMstCode().equalsIgnoreCase("MANUFACTURE_KEYWORD")) {
+				manufactureKeyword.add(vo);
+			}else if(vo.getMstCode().equalsIgnoreCase("APPEARANCE_KEYWORD")) {
+				appearanceKeyword.add(vo);
+			}else if(vo.getMstCode().equalsIgnoreCase("MODEL_KEYWORD")) {
+				modelKeyword.add(vo);
+			}else if(vo.getMstCode().equalsIgnoreCase("BATTERYTYPE_KEYWORD")) {
+				batteryTypeKeyword.add(vo);
+			}
+		}
+
+		model.addAttribute("MANUFACTURE_KEYWORD", manufactureKeyword);
+		model.addAttribute("APPEARANCE_KEYWORD", appearanceKeyword);
+		model.addAttribute("MODEL_KEYWORD", modelKeyword);
+		model.addAttribute("BATTERYTYPE_KEYWORD", batteryTypeKeyword);
+
 		return "elecmusk/evCar";
 	}
 	
