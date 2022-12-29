@@ -158,6 +158,7 @@
 	          if(confirm("등록 하시겠습니까?") == false)return;
 	          
 	          let categoryValue = ${categoryValue};
+	          let mSeq = ${sessionScope.userInfo.mSeq};
 	          
 	          let method    = "POST";
 	          let url       = "/board/doSave.do";
@@ -168,7 +169,7 @@
 	              nickName : $("#nickName").val(),
 	              contents : $("#contentstextarea").val(),
 	              regId :$("#regId").val(),
-	              mSeq : ${sessionScope.userInfo.mSeq}
+	              mSeq : mSeq
 	          }
 	          PClass.callAjax(method,url,async,params,function(data){
 	            console.log(data);
@@ -211,6 +212,7 @@
 	          if(confirm("등록 하시겠습니까?") == false)return;
 	          
 	          let categoryValue = ${categoryValue};
+	          let mSeq = ${sessionScope.userInfo.mSeq};
 	          
 	          let method    = "POST";
 	          let url       = "/board/doSave.do";
@@ -221,7 +223,7 @@
 	              nickName : $("#nickName").val(),
 	              contents : $("#contentstextarea").val(),
 	              regId :$("#regId").val(),
-	              mSeq : ${sessionScope.userInfo.mSeq}
+	              mSeq : mSeq
 	          }
 	          PClass.callAjax(method,url,async,params,function(data){
 	            console.log(data);
