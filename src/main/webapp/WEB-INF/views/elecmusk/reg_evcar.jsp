@@ -88,7 +88,6 @@
   //==================================================================
 		
 		$("#evCarSave").on("click",function(){
-			console.log("등록");
 			checkText();
 			
 			if(confirm("등록 하시겠습니까?") == false) return;
@@ -110,7 +109,6 @@
 		      outPut   : $("#outPut").val()
 		  };
 		  PClass.callAjax(method,url,async,params,function(data){
-			  console.log(data);
 			  
 	      let parsedJson = JSON.parse(data);
 	      
@@ -129,18 +127,14 @@
 		});
 		
 		$("#doSaveFile").on("click",function(){
-	    console.log("doSaveFile");
 	    $("#preview-image").css("display","block");
 	    
 	    let fileInput = $("#file01")[0];
-	    console.log("fileInput: "+fileInput);
 	    
 	    if(fileInput.files.length === 0){
 	      alert("파일을 선택해 주셔요.");
 	      return;
 	    }
-	    
-	    console.log("fileInput.files.length: "+fileInput.files.length);
 	    
 	    //javascript : <form></form>
 	    let formData = new FormData();
@@ -156,8 +150,6 @@
 	    //-->multipart/form-data로 전송되도록 false설정
 	    //processData : true -> query string으로 데이터 전달! ex)http://localhost:8089?title = 1234
 	    
-	    console.log("data:formData: "+formData);
-	    
 	    $.ajax({ 
 	       type: "POST",
 	       url: "${CP}/file/ajaxUpload.do",
@@ -167,8 +159,6 @@
 	       //dataType: "html",
 	       data: formData,
 	       success:function(data){ //통신 성공
-	         console.log(data);
-	       
 	         let htmlData = "";
 	         let imgPath = "";
 	         
