@@ -137,7 +137,6 @@ $("#commentTable").on("click", ".doCommentDelete", function() {
  
     $("#doCommentSave").on("click",function(){
     	
-    	alert("악");
     	console.log("doSave");
         if(eUtil.ISEmpty($("#Com_Content").val())==true){
          alert("내용을 입력하세요");
@@ -188,7 +187,6 @@ $("#commentTable").on("click", ".doCommentDelete", function() {
 
     ////////////////////댓글 뿌리는 함수/////////////////////////////
     function doRetrieve(page){
-      console.log("악");
       
       console.log("1: "+$("#bdSeq").val());
       
