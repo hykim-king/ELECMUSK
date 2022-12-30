@@ -5,7 +5,6 @@ import com.pcwk.ehr.board.cmn.DTO;
 public class BoardCommentVO extends DTO {
 	private int cmSeq;// 댓글순번
 	private int bdSeq;// 게시판글 순번
-	private int regSeq; // 댓글 작성자 순번 (검색에 필요)
 	private int  memberSeq;// 작성자  닉네임 
 	private String  memberNickname;// 작성자  닉네임 
 	private String contents;// 댓글내용
@@ -13,12 +12,11 @@ public class BoardCommentVO extends DTO {
 
 	public BoardCommentVO() {}
 
-	public BoardCommentVO(int cmSeq, int bdSeq, int regSeq, int memberSeq, String contents,
+	public BoardCommentVO(int cmSeq, int bdSeq, int memberSeq, String contents,
 			String regDt) {
 		super();
 		this.cmSeq = cmSeq;
 		this.bdSeq = bdSeq;
-		this.regSeq = regSeq;
 		this.memberSeq = memberSeq;
 		this.contents = contents;
 		this.regDt = regDt;
@@ -38,14 +36,6 @@ public class BoardCommentVO extends DTO {
 
 	public void setBdSeq(int bdSeq) {
 		this.bdSeq = bdSeq;
-	}
-
-	public int getRegSeq() {
-		return regSeq;
-	}
-
-	public void setRegSeq(int regSeq) {
-		this.regSeq = regSeq;
 	}
 
 	public int getMemberSeq() {
@@ -82,11 +72,11 @@ public class BoardCommentVO extends DTO {
 
 	@Override
 	public String toString() {
-		return "BoardCommentVO [cmSeq=" + cmSeq + ", bdSeq=" + bdSeq + ", regSeq=" + regSeq + ", memberSeq=" + memberSeq
-				+ ", memberNickname=" + memberNickname + ", contents=" + contents + ", regDt=" + regDt + ", toString()="
-				+ super.toString() + "]";
+		return "BoardCommentVO [cmSeq=" + cmSeq + ", bdSeq=" + bdSeq + ", memberSeq=" + memberSeq + ", memberNickname="
+				+ memberNickname + ", contents=" + contents + ", regDt=" + regDt + ", toString()=" + super.toString()
+				+ "]";
 	}
-	
+
 	
 	
 }

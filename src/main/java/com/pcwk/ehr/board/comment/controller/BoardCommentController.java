@@ -275,9 +275,6 @@ public class BoardCommentController {
 		if (null != inVO && inVO.getBdSeq() == 0) {
 			inVO.setBdSeq(0);
 		}
-		if (null != inVO && inVO.getRegSeq() == 0) {
-			inVO.setRegSeq(0);
-		}
 		if (null != inVO && inVO.getMemberSeq() == 0) { 
 			inVO.setMemberSeq(0);
 		}

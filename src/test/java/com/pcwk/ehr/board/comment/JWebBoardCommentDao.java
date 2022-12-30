@@ -37,7 +37,7 @@ public class JWebBoardCommentDao {
 	@Before
 	public void setUp() throws Exception {
                                                        //401은 BOARD에 들어가있는 글 번호 ! (부모키)
-		boardCommentVO1 = new BoardCommentVO(99999999, 401, 1, 1000308,"contentsa1", "사용X");
+		boardCommentVO1 = new BoardCommentVO(99999999, 401, 1000308,"contentsa1", "사용X");
 		                                                   //순번     //1000321이 닉네임을 정해주는 memberseq
 		searchVO = new BoardCommentSearchVO(401,10,1,"","");
 	}

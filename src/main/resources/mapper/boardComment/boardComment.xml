@@ -12,8 +12,7 @@ FROM (
     SELECT  tt1.RNUM as num, 
             tt1.cm_seq as cmSeq,
             tt1.contents,
-            tt1.MEMBER_SEQ, 
-            tt1.REG_SEQ,
+            tt1.MEMBER_SEQ as memberSeq,
             tt1.nickname as "memberNickname",
             --당일이면 시:분 , 그렇지 않으면 년/월/일
             DECODE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'), TO_CHAR(TT1.reg_dt, 'YYYY-MM-DD'),--DECODE
@@ -21,7 +20,7 @@ FROM (
                                                    TO_CHAR(TT1.reg_dt, 'YYYY-MM-DD')) as regDt --다르면 이걸
     FROM(
         SELECT  ROWNUM AS RNUM, t1.*
-        FROM (select cm_seq, bd.member_seq, bd_seq, Contents,REG_DT,REG_SEQ, bd.membernickname, m.nickname
+        FROM (select cm_seq, bd.member_seq, bd_seq, Contents,REG_DT, bd.membernickname, m.nickname
               FROM BD_COMMENT bd, member m
               --WHERE 조건 있으면 추가
                   WHERE BD_SEQ = #{bdSeq} 
@@ -56,8 +55,7 @@ CROSS JOIN
               CM_SEQ as CMSEQ,
               contents,
               TO_CHAR(reg_dt,'yyyy-mm-dd hh24:mi:ss') AS regDt,
-              MEMBER_SEQ,
-              REG_SEQ
+              MEMBER_SEQ
           FROM 
               BD_COMMENT
           WHERE 
@@ -75,10 +73,8 @@ CROSS JOIN
   
   <update id="doUpdate" parameterType="BoardCommentVO">
      UPDATE BD_COMMENT     
-     SET MEMBER_SEQ     = #{memberSeq},
-         contents       = #{contents},     
-         REG_DT         = SYSDATE,      
-         REG_SEQ        = #{regSeq}
+     SET contents       = #{contents},     
+         REG_DT         = SYSDATE
      WHERE cm_seq = #{cmSeq}
   </update>
   
@@ -88,15 +84,13 @@ CROSS JOIN
       MEMBER_SEQ,              
       CM_SEQ,              
       CONTENTS,            
-      REG_DT,
-      REG_SEQ                     
+      REG_DT                   
   )VALUES (
       #{bdSeq},
       #{memberSeq},
       COMMENT_SEQ.nextval,
       #{contents},
-       SYSDATE,
-       #{regSeq}
+       SYSDATE
       )
   </insert>
   <delete id="doDelete" parameterType="BoardCommentVO">
