@@ -121,7 +121,7 @@
   
   ### 5.9.1 관리자_충전소
   
-   ![관리자_충전소](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/4.%EA%B4%80%EB%A6%AC%EC%9E%90%EC%B6%A9%EC%A0%84%EC%86%8C.gif)
+   ![관리자_충전소](https://github.com/hykim-king/ELECMUSK/blob/main/doc/videos/4.%EA%B4%80%EB%A6%AC%EC%9E%90_%EC%B6%A9%EC%A0%84%EC%86%8C.gif)
   
   ### 5.10 뉴스&블로그
   
